@@ -71,7 +71,8 @@ $szemely=new szemely(1,"Szabolcs","alma@alkma.hu","valamiJelszi","__1");
 $alma=new aru(1,"alma",100,"Nagy szemu alma");
 $korte=new aru(2,"korte",200,"birsKorte");
 */
+/*
 $szabi=new szemely(1,"Szabolcs","szabolcs@gmail.com","jelszo","__1");
-echo $szabi->kilepett();
+echo $szabi->kilepett();*/
  
 ?>
