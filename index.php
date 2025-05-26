@@ -1,26 +1,23 @@
 <?php
-require_once("csatlakozas.php");
-require_once("tablazat.php");
+define('SERVER_ROOT', $_SERVER['DOCUMENT_ROOT'].'/Szakdolgozat/');
+define('SITE_ROOT', 'http://localhost/Szakdolgozat/');
+include_once(SERVER_ROOT."server/Request.php");
+use Server\Request;
 
-$csat=new csatlakozas();
-/*$lekerdez=$csat->lekerdezMenu();
-if ($lekerdez!=-1) {
-    foreach ($lekerdez as $key => $value) {
-        echo $value;
-     }
+Request::AutoLoader();
+echo Request::GetKeres();
+/*use Server\Model\Aruoop;
+
+$ar=new aruoop(1,"kug",3,"lgjg");
+echo $ar->__toString();*/
+$indexFajl=SERVER_ROOT."client/index.php";
+$requestFajl=SERVER_ROOT."server/request.php"; 
+
+if (file_exists($indexFajl)) {
+    include_once($indexFajl);
 }else{
-    echo "ures";
+    print("<br>Felhasznaloi home nem talalhato! ");
 }
-*/
+
+
 ?>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    
-</body>
-</html>
