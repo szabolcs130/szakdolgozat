@@ -19,5 +19,9 @@ if (file_exists($indexFajl)) {
     print("<br>Felhasznaloi home nem talalhato! ");
 }
 
-
+/*
+a client index.php nal kell meghivni pl az alap alkotoreszeket, pl menu resz, lablec, 
+es kozepre rakni a ker oldal tartalmat, maskepp a request.php mindig felulre rakja a 
+view tartalmat es a menu lentebb lesz.
+*/
 ?>
