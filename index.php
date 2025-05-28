@@ -1,11 +1,6 @@
 <?php
 define('SERVER_ROOT', $_SERVER['DOCUMENT_ROOT'].'/Szakdolgozat/');
 define('SITE_ROOT', 'http://localhost/Szakdolgozat/');
-include_once(SERVER_ROOT."server/Request.php");
-use Server\Request;
-
-Request::AutoLoader();
-echo Request::GetKeres();
 /*use Server\Model\Aruoop;
 
 $ar=new aruoop(1,"kug",3,"lgjg");
