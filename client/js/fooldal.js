@@ -1,1 +1,0 @@
-alert("Fooldal js elindult");
