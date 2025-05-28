@@ -1,11 +1,6 @@
 <?php
 define('SERVER_ROOT', $_SERVER['DOCUMENT_ROOT'].'/Szakdolgozat/');
 define('SITE_ROOT', 'http://localhost/Szakdolgozat/');
-include_once(SERVER_ROOT."server/Request.php");
-use Server\Request;
-
-Request::AutoLoader();
-echo Request::GetKeres();
 /*use Server\Model\Aruoop;
 
 $ar=new aruoop(1,"kug",3,"lgjg");
@@ -19,5 +14,9 @@ if (file_exists($indexFajl)) {
     print("<br>Felhasznaloi home nem talalhato! ");
 }
 
-
+/*
+a client index.php nal kell meghivni pl az alap alkotoreszeket, pl menu resz, lablec, 
+es kozepre rakni a ker oldal tartalmat, maskepp a request.php mindig felulre rakja a 
+view tartalmat es a menu lentebb lesz.
+*/
 ?>

@@ -9,16 +9,17 @@ class Request{
         });
     }
     public static function GetKeres(){
-        if (isset($_SERVER['REQUEST_URI'])) {
+       /* if (isset($_SERVER['REQUEST_URI'])) {
           if (is_dir("http://localhost/Szakdolgozat/server/")) {
             echo $_SERVER['REQUEST_URI']." <br>";
           }
             
-        }
+        }*/
         if (isset($_GET["oldal"])) {
             
             switch (htmlspecialchars($_GET["oldal"])) {
                 case 'fooldal':
+                   // self::SetCssFajl("fooldal");
                     Controller\FooldalController::main();
                     break;
                 case 'rolunk':
@@ -31,5 +32,10 @@ class Request{
         }
         return null;
     }
+  /* public static function SetCssFajl($fajl){ ?>
+                <link rel="stylesheet" href="./client/css/<?php echo $fajl;?>.css?v=1">
+
+        <?php
+    }*/
 }
 ?>

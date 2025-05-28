@@ -1,14 +1,16 @@
 <?php
+namespace Server\Model;
+/*
 require_once "szemely.php";
 require_once "aruoop.php";
 require_once "menu.php";
 require_once "tablazat.php";
 require_once "fajlkezeles.php";
-
-
+*/
 //FONTOS!!! FETCH CLASS NEM hivja neg az osztaly konstruktorat, igy a statikus tombok nem toltodnek fel!!! csak az osztalyok tagvaltozoi, mig egy peldany nem lesz vagy valami hasonlo megfogalmazas
-class csatlakozas{
-    private $host;
+class Csatlakozas{
+    
+   /* private $host;
     private $dbname;
     private $charset;
     private $alma;
@@ -34,9 +36,21 @@ class csatlakozas{
         } catch (PDOException $e) {
             fajl::hibaKiir("Adatbazis eleres hiba: alap eleresi adatok--> ".$e->getMessage());
         }
+    }*/
+    public static function GetConnection(){
+      try {
+            $conn = new \PDO('mysql:host=localhost;dbname=szakdolgozatproba;charset=utf8','root','');
+            $conn->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
+            $conn->exec("SET NAMES utf8 COLLATE utf8_hungarian_ci");
+          //  fajl::muveletKiir("Adatbazis muvelet: alap eleresi adatok sikeres");
+            return $conn;
+        } catch (\PDOException $e) {
+           // fajl::hibaKiir("Adatbazis eleres hiba: alap eleresi adatok--> ".$e->getMessage());
+           return -1;
+        }
     }
-   
-    public function lekerdezAru(){
+   /*
+    public static function lekerdezAru(){
         if ($this->eleresiAdatokJok) {
             try {
                 $sql = "select * from aru";
@@ -56,7 +70,7 @@ class csatlakozas{
             }
         }
     }
-    public function lekerdezSzemely(){
+    public static function lekerdezSzemely(){
         if ($this->eleresiAdatokJok) {
             try {
                 $sql = "select * from szemely";
@@ -76,7 +90,7 @@ class csatlakozas{
             }
         }
     }
-    public function lekerdezMenu(){
+    public static function lekerdezMenu(){
         if ($this->eleresiAdatokJok) {
             try {
                 $sql = "select * from menu";
@@ -101,7 +115,7 @@ class csatlakozas{
         }
     }
     
-    public function torolAru($id){
+    public static function torolAru($id){
         if($this->eleresiAdatokJok){        
             try{
                 $sql = "DELETE FROM `aru` WHERE id_aru=:id_aru";
@@ -120,7 +134,7 @@ class csatlakozas{
             }
         }
     }
-    public function torolSzemely($id){
+    public static function torolSzemely($id){
         if($this->eleresiAdatokJok){        
             try{
                 $sql = "DELETE FROM `szemely` WHERE id_szemely=:id_szemely";
@@ -139,7 +153,7 @@ class csatlakozas{
             }
         }
     }
-    public function torolMenu($id){
+    public static function torolMenu($id){
         if($this->eleresiAdatokJok){        
             try{
                 $sql = "DELETE FROM `menu` WHERE id_menu=:id_menu";
@@ -158,7 +172,7 @@ class csatlakozas{
             }
         }
     }
-    public function hozzaadAru($nev,$ar,$leiras){
+    public static function hozzaadAru($nev,$ar,$leiras){
         if($this->eleresiAdatokJok){        
             try{
                 $sql = "INSERT INTO `aru` (`nev_aru`, `ar`, `leiras`) VALUES (:nev_aru, :ar, :leiras)";
@@ -177,7 +191,7 @@ class csatlakozas{
             }
         }
     }
-    public function hozzaadSzemely($nev,$email,$jelszo,$rang){
+    public static function hozzaadSzemely($nev,$email,$jelszo,$rang){
         if($this->eleresiAdatokJok){        
             try{
                 $sql = "INSERT INTO `szemely` (`nev_szemely`, `email`, `jelszo`,`rang`) VALUES (:nev_szemely, :email, :jelszo,:rang)";
@@ -196,7 +210,7 @@ class csatlakozas{
             }
         }
     }
-    public function hozzaadMenu($nev,$rang){
+    public static function hozzaadMenu($nev,$rang){
         if($this->eleresiAdatokJok){        
             try{
                 $sql = "INSERT INTO `menu` (`nev_menu`, `rang`) VALUES (:nev_menu, :rang)";
@@ -215,7 +229,7 @@ class csatlakozas{
             }
         }
     }
-    public function szerkesztAru($id,$nev,$ar,$leiras){
+    public static function szerkesztAru($id,$nev,$ar,$leiras){
         if($this->eleresiAdatokJok){        
             try{
                 $sql = "UPDATE `aru` SET `nev_aru`=:nev_aru,`ar`=:ar,`leiras`=:leiras WHERE id_aru=:id_aru";
@@ -234,7 +248,7 @@ class csatlakozas{
             }
         }
     }
-    public function szerkesztSzemely($id,$nev,$email,$jelszo,$rang){
+    public static function szerkesztSzemely($id,$nev,$email,$jelszo,$rang){
         if($this->eleresiAdatokJok){        
             try{
                 $sql = "UPDATE `szemely` SET `nev_szemely`=:nev_szemely,`email`=:email,`jelszo`=:jelszo,`rang`=:rang WHERE id_szemely=:id_szemely";
@@ -253,7 +267,7 @@ class csatlakozas{
             }
         }
     }
-    public function szerkesztMenu($id,$nev,$rang){
+    public static function szerkesztMenu($id,$nev,$rang){
         if($this->eleresiAdatokJok){        
             try{
                 $sql = "UPDATE `menu` SET `nev_menu`=:nev_menu,`rang`=:rang WHERE id_menu=:id_menu";
@@ -271,7 +285,7 @@ class csatlakozas{
                 return -1;
             }
         }
-    }
+    }*/
 }
 
 ?>
