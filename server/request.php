@@ -19,7 +19,8 @@ class Request{
             
             switch (htmlspecialchars($_GET["oldal"])) {
                 case 'fooldal':
-                   // self::SetCssFajl("fooldal");
+                    self::SetCssFajl("fooldal");
+                    self::SetJsFajl("fooldal");
                     Controller\FooldalController::main();
                     break;
                 case 'rolunk':
@@ -32,10 +33,14 @@ class Request{
         }
         return null;
     }
-  /* public static function SetCssFajl($fajl){ ?>
+    public static function SetCssFajl($fajl){ ?>
                 <link rel="stylesheet" href="./client/css/<?php echo $fajl;?>.css?v=1">
-
         <?php
-    }*/
+    }
+    public static function SetJsFajl($fajl){ ?>
+            <script src="./client/js/<?php echo $fajl;?>.js?v=1"></script>
+        <?php
+    }
+
 }
 ?>
