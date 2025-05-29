@@ -26,17 +26,6 @@ if (file_exists($url)) {
     <?php
     MenuController::Main();
     Request::GetKeres();
-
- /*   $lekerdez=$csat->lekerdezMenu();
-    if ($lekerdez!=-1) {
-        foreach ($lekerdez as $key => $value) {
-            echo $value;
-        }
-    }else{
-        echo "ures";
-    }
-    ./css/<?php echo "fooldal"; ?>.css    
-    */
     ?>
  
 </body>
