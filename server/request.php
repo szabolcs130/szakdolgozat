@@ -14,14 +14,6 @@ class Request{
         });
     }
     public static function GetKeres(){
-       /* if (isset($_SERVER['REQUEST_URI'])) {
-          if (is_dir("http://localhost/Szakdolgozat/server/")) {
-            echo $_SERVER['REQUEST_URI']." <br>";
-          }
-            
-        }*/
-       
-        
         if (isset($_GET["oldal"])) {
             foreach ( MenuModel::GetMenu() as $ertek) {
                 if (htmlspecialchars($_GET["oldal"])==$ertek["nev_menu"]) {
@@ -32,7 +24,7 @@ class Request{
                         self::SetJsFajl($ertek["nev_menu"]);
                         $controller::main();
                     }else{
-                        echo "A kert tartalom nem elerheto!";
+                        echo "<h1>A kert tartalom nem elerheto!</h1>";
                         //logolni:kert osztaly vagy metodus nem elerheto!!!
                     }
                     break;
@@ -56,7 +48,6 @@ class Request{
             <script src="./client/js/<?php echo $fajl;?>.js?v=1"></script>
         <?php
         }else{
-            echo "nincs js";
             //logolni:kert js nem elerheto!!!
         }
     }
