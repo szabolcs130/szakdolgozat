@@ -26,8 +26,10 @@ class Request{
                 case 'rolunk':
                     Controller\RolunkController::main();
                     break;
+                case 'menu':
+                    Controller\MenuController::main();
+                    break;
                 default:
-                    
                     break;
             }
         }
