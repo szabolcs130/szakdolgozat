@@ -5,7 +5,7 @@ use Server\Model\MenuModel;
 class MenuController{
     public static function Main(){
 
-        $menu=MenuModel::lekerdezMenu();
+        $menu=MenuModel::GetMenu();
         MenuView::ShowMenu($menu);
     }
 }

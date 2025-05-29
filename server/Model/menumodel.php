@@ -7,7 +7,7 @@ class MenuModel{
     public static function Connection() {
         return csatlakozas::GetConnection();
     }
-    public static function lekerdezMenu(){
+    public static function GetMenu(){
         try {
             $db = self::Connection();
             $sql = "SELECT * FROM menu";

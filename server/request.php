@@ -1,5 +1,6 @@
 <?php
 namespace Server;
+use Server\Model\MenuModel;
 class Request{
     public static function AutoLoader(){
         spl_autoload_register(function ($osztaly){
@@ -15,22 +16,22 @@ class Request{
           }
             
         }*/
+       
+        
         if (isset($_GET["oldal"])) {
-            
-            switch (htmlspecialchars($_GET["oldal"])) {
-                case 'fooldal':
-                    self::SetCssFajl("fooldal");
-                    self::SetJsFajl("fooldal");
-                    Controller\FooldalController::main();
+            foreach ( MenuModel::GetMenu() as $ertek) {
+                if (htmlspecialchars($_GET["oldal"])==$ertek["nev_menu"]) {
+                    $controller='Server\\Controller\\'.$ertek["nev_menu"].'Controller';
+                    if (class_exists($controller) && method_exists($controller,"main")) {
+                        self::SetCssFajl($ertek["nev_menu"]);
+                        self::SetJsFajl($ertek["nev_menu"]);
+                        $controller::main();
+                    }else{
+                        echo "A kert tartalom nem elerheto!";
+                        //logolni, ha osztaly vagy metodus nem elerheto!!
+                    }
                     break;
-                case 'rolunk':
-                    Controller\RolunkController::main();
-                    break;
-                case 'menu':
-                    Controller\MenuController::main();
-                    break;
-                default:
-                    break;
+                }
             }
         }
         return null;
