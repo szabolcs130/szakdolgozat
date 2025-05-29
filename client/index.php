@@ -26,6 +26,7 @@ if (file_exists($url)) {
     <li><a href="?oldal=rolunk">about</a></li>
     <li><a href="?oldal=webshop">webshop</a></li>
     <li><a href="?oldal=menu">menu</a></li>
+    <li><a href="./proba/index.html">HTML</a></li>
     <?php
 echo Request::GetKeres();
 
