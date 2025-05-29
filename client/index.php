@@ -2,7 +2,7 @@
 session_start();
 include_once(SERVER_ROOT."server/Request.php");
 use Server\Request;
-
+use Server\Controller\MenuController;
 Request::AutoLoader();
 /*$url= __DIR__;
 $url=str_replace("\\","/",$url);
@@ -22,22 +22,10 @@ if (file_exists($url)) {
 
 </head>
 <body>
-    <li><a href="?oldal=fooldal">home</a></li>
-    <li><a href="?oldal=rolunk">about</a></li>
-    <li><a href="?oldal=webshop">webshop</a></li>
+   
     <?php
-echo Request::GetKeres();
-
- /*   $lekerdez=$csat->lekerdezMenu();
-    if ($lekerdez!=-1) {
-        foreach ($lekerdez as $key => $value) {
-            echo $value;
-        }
-    }else{
-        echo "ures";
-    }
-    ./css/<?php echo "fooldal"; ?>.css    
-    */
+    MenuController::Main();
+    Request::GetKeres();
     ?>
  
 </body>
