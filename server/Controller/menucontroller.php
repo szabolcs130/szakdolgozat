@@ -6,7 +6,12 @@ class MenuController{
     public static function Main(){
 
         $menu=MenuModel::GetMenu();
-        MenuView::ShowMenu($menu);
+        if ($menu!=-1) {
+            MenuView::ShowMenu($menu);
+        }else{
+            MenuView::ShowMenu("Menu nem elerheto!");
+        }
+        
     }
 }
 ?>

@@ -18,15 +18,11 @@ if (file_exists($url)) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-       
-
 </head>
 <body>
-   
     <?php
     MenuController::Main();
     Request::GetKeres();
     ?>
- 
 </body>
 </html>

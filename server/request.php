@@ -15,20 +15,26 @@ class Request{
     }
     public static function GetKeres(){
         if (isset($_GET["oldal"])) {
-            foreach ( MenuModel::GetMenu() as $ertek) {
-                if (htmlspecialchars($_GET["oldal"])==$ertek["nev_menu"]) {
-                    $controller='Server\\Controller\\'.$ertek["nev_menu"].'Controller';
-                    if (class_exists($controller) && method_exists($controller,"main")) {
-                        self::SetCssFajl($ertek["nev_menu"]);
-                        self::SetCssFajl("menu");
-                        self::SetJsFajl($ertek["nev_menu"]);
-                        $controller::main();
-                    }else{
-                        echo "<h1>A kert tartalom nem elerheto!</h1>";
-                        //logolni:kert osztaly vagy metodus nem elerheto!!!
+            if (is_array(MenuModel::GetMenu())) {
+                foreach ( MenuModel::GetMenu() as $ertek) {
+                    if (htmlspecialchars($_GET["oldal"])==$ertek["nev_menu"]) {
+                        $controller='Server\\Controller\\'.$ertek["nev_menu"].'Controller';
+                        if (class_exists($controller) && method_exists($controller,"main")) {
+                            self::SetCssFajl($ertek["nev_menu"]);
+                            self::SetCssFajl("menu");
+                            self::SetJsFajl($ertek["nev_menu"]);
+                            $controller::main();
+                        }else{
+                            echo "<h1>A kert tartalom nem elerheto!</h1>";
+                            //logolni:kert osztaly vagy metodus nem elerheto!!!
+                        }
+                        break;
                     }
-                    break;
                 }
+            }else{
+                header('Location: ./client/error/error.php');
+                exit();
+               //Menu nem elerheto!
             }
         }
         return null;
