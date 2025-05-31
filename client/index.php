@@ -2,7 +2,6 @@
 session_start();
 include_once(SERVER_ROOT."server/Request.php");
 use Server\Request;
-use Server\Controller\MenuController;
 Request::AutoLoader();
 ?>
 <!DOCTYPE html>
@@ -14,7 +13,6 @@ Request::AutoLoader();
 </head>
 <body>
     <?php
-    MenuController::Main();
     Request::GetKeres();
     ?>
 </body>
