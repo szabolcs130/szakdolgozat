@@ -4,13 +4,6 @@ include_once(SERVER_ROOT."server/Request.php");
 use Server\Request;
 use Server\Controller\MenuController;
 Request::AutoLoader();
-/*$url= __DIR__;
-$url=str_replace("\\","/",$url);
-echo $url."/css/fooldal.css";
-if (file_exists($url)) {
-    echo " letezik";
-}
- <link rel="stylesheet" href="./client/css/fooldal.css?v=1"> */
 ?>
 <!DOCTYPE html>
 <html lang="en">

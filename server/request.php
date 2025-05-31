@@ -14,6 +14,7 @@ class Request{
         });
     }
     public static function GetKeres(){
+        self::SetCssFajl("menu");
         if (isset($_GET["oldal"])) {
             if (is_array(MenuModel::GetMenu())) {
                 foreach ( MenuModel::GetMenu() as $ertek) {
@@ -36,14 +37,23 @@ class Request{
                 exit();
                //Menu nem elerheto!
             }
-        }
+        }else{
+            if (is_array(MenuModel::GetMenu()) && isset(MenuModel::GetMenu()[0]["nev_menu"])) {//Elso fooldal legyen!!
+                $controller='Server\\Controller\\'.MenuModel::GetMenu()[0]["nev_menu"].'Controller';
+                if (class_exists($controller) && method_exists($controller,"main")) {
+                    self::SetCssFajl(MenuModel::GetMenu()[0]["nev_menu"]);
+                    self::SetJsFajl(MenuModel::GetMenu()[0]["nev_menu"]);
+                    $controller::main();
+                }
+            }    
+        }   
         return null;
     }
     public static function SetCssFajl($fajl){ 
         if (file_exists('./client/css/'.$fajl.'.css')) {
             ?>
                 <link rel="stylesheet" href="./client/css/<?php echo $fajl;?>.css?v=1">
-            <?php
+            <?php 
         }else{
             //logolni:kert css nem elerheto!!!
         }
