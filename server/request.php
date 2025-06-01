@@ -14,7 +14,7 @@ class Request{
     }
     public static function GetKeres(){
         if (self::MeghivMVCMetodus(self::MVCFajlEsMetodusLetezikE("Menu","Main","Controller"),true)==-1) {
-            self::ErrorFajlMeghiv("mmmmm");
+            self::ErrorFajlMeghiv();
         }
         $talaltKeres=false;
         $oldal=$_GET["oldal"] ?? "Fooldal";
@@ -33,8 +33,7 @@ class Request{
                     echo "<h1>Kert tartalom nem elerheto!</h1>";
                 }
             }else{
-                echo "itt baj";
-                self::ErrorFajlMeghiv("ittbajvan");
+                self::ErrorFajlMeghiv();
             }
     }
     public static function SetCssFajl($fajl){ 
@@ -51,8 +50,8 @@ class Request{
         <?php
         }
     }
-    public static function ErrorFajlMeghiv($a){
-        header('Location: ./client/error/error.php?alma=0'.$a);
+    public static function ErrorFajlMeghiv(){
+        header('Location: ./client/error/error.php');
         exit();
     }
     public static function MVCFajlEsMetodusLetezikE($nev,$metodus,$mvcTipus){
