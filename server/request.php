@@ -62,7 +62,7 @@ class Request{
         }else if($array!=-1){
             return call_user_func([$array[0],$array[1]]);
         }
-        return -1;
+        return -1;//
     }
 }
 ?>
