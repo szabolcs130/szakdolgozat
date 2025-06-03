@@ -18,7 +18,7 @@ class Request{
         }
         $talaltKeres=false;
         $oldal=$_GET["oldal"] ?? "Fooldal";
-            if ($_GET["oldal"]=="Bejelentkezes/auth") {
+            if ($oldal=="Bejelentkezes/auth") {
                 self::MeghivMVCMetodus(self::MVCFajlEsMetodusLetezikE("Bejelentkezes","EllenorizBejelentkezes","Controller"),false);
                 $oldal=str_replace("/auth","",$oldal);
             }
