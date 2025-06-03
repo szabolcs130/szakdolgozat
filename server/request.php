@@ -1,6 +1,7 @@
 <?php
 namespace Server;
 use Server\Model\MenuModel;
+use Server\Controller\MenuController;
 class Request{
     public static function AutoLoader(){
         spl_autoload_register(function ($osztaly){
@@ -8,38 +9,42 @@ class Request{
             $osztaly=str_replace("\\","/",$osztaly);
             if (file_exists($osztaly.".php")) {
                 require_once($osztaly.".php");
-            }else{
-                //logolni:nem elerheto a kert fajl!!!;
             }
         });
     }
     public static function GetKeres(){
-        if (isset($_GET["oldal"])) {
-            foreach ( MenuModel::GetMenu() as $ertek) {
-                if (htmlspecialchars($_GET["oldal"])==$ertek["nev_menu"]) {
-                    $controller='Server\\Controller\\'.$ertek["nev_menu"].'Controller';
-                    if (class_exists($controller) && method_exists($controller,"main")) {
-                        self::SetCssFajl($ertek["nev_menu"]);
-                        self::SetCssFajl("menu");
-                        self::SetJsFajl($ertek["nev_menu"]);
-                        $controller::main();
-                    }else{
-                        echo "<h1>A kert tartalom nem elerheto!</h1>";
-                        //logolni:kert osztaly vagy metodus nem elerheto!!!
-                    }
-                    break;
-                }
-            }
+        if (self::MeghivMVCMetodus(self::MVCFajlEsMetodusLetezikE("Menu","Main","Controller"),true)==-1) {
+            self::ErrorFajlMeghiv();
         }
-        return null;
+        $talaltKeres=false;
+        $oldal=$_GET["oldal"] ?? "Fooldal";
+            if ($_GET["oldal"]=="Bejelentkezes/auth") {
+                self::MeghivMVCMetodus(self::MVCFajlEsMetodusLetezikE("Bejelentkezes","EllenorizBejelentkezes","Controller"),false);
+                $oldal=str_replace("/auth","",$oldal);
+            }
+            $menu=self::MeghivMVCMetodus(self::MVCFajlEsMetodusLetezikE("Menu","GetMenu","Model"),false);
+            if ($menu!=-1) {
+                foreach ($menu as $ertek) {
+                    if (htmlspecialchars($oldal)==$ertek["nev_menu"]) {
+                        if(self::MeghivMVCMetodus(self::MVCFajlEsMetodusLetezikE($ertek["nev_menu"],"Main","Controller"),true)==-1){
+                           echo "<h1>Kert tartalom nem elerheto!</h1>";
+                        }
+                        $talaltKeres=true;
+                        break;
+                    }
+                }
+                if ($talaltKeres==false) {
+                    echo "<h1>Kert tartalom nem elerheto!</h1>";
+                }
+            }else{
+                self::ErrorFajlMeghiv();
+            }
     }
     public static function SetCssFajl($fajl){ 
         if (file_exists('./client/css/'.$fajl.'.css')) {
             ?>
                 <link rel="stylesheet" href="./client/css/<?php echo $fajl;?>.css?v=1">
-            <?php
-        }else{
-            //logolni:kert css nem elerheto!!!
+            <?php 
         }
     }
     public static function SetJsFajl($fajl){
@@ -47,10 +52,29 @@ class Request{
             ?>
             <script src="./client/js/<?php echo $fajl;?>.js?v=1"></script>
         <?php
-        }else{
-            //logolni:kert js nem elerheto!!!
         }
     }
-
+    public static function ErrorFajlMeghiv(){
+        header('Location: ./client/error/error.php');
+        exit();
+    }
+    public static function MVCFajlEsMetodusLetezikE($nev,$metodus,$mvcTipus){
+        $fajlEleres='Server\\'.$mvcTipus.'\\'.$nev.''.$mvcTipus;
+        if (class_exists($fajlEleres) && method_exists($fajlEleres,$metodus)) {
+           return [$fajlEleres,$metodus,$nev];
+        }
+       return -1;
+    }
+    public static function MeghivMVCMetodus($array,$include){//meghivja a metodust, de elotte MVCFajlEsMetodusLetezikE fv -vel ellenorizzuk leteznek e, amikkel dolgozni akarunk
+        if ($array!=-1 && $include==true) {//oldalhivasra
+            self::SetCssFajl($array[2]);
+            self::SetJsFajl($array[2]);
+            call_user_func([$array[0],$array[1]]);
+        }else if($array!=-1 && $include==false){//olyat hivunk meg, amitol varunk adatot
+            return call_user_func([$array[0],$array[1]]);
+        }else{
+        return -1;
+        }
+    }
 }
 ?>

@@ -1,8 +1,3 @@
-<?php
-include_once(SERVER_ROOT."server/Request.php");
-use Server\Request;
-Request::AutoLoader();
-?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,8 +6,6 @@ Request::AutoLoader();
     <title>Document</title>
 </head>
 <body>
-    <?php
-    Request::GetKeres();//
-    ?>
+    <h1>Hiba: jelenleg nem elerheto az oldal!</h1>
 </body>
 </html>
