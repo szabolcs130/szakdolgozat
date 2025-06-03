@@ -18,6 +18,10 @@ class Request{
         }
         $talaltKeres=false;
         $oldal=$_GET["oldal"] ?? "Fooldal";
+            if ($_GET["oldal"]=="Bejelentkezes/auth") {
+                self::MeghivMVCMetodus(self::MVCFajlEsMetodusLetezikE("Bejelentkezes","EllenorizBejelentkezes","Controller"),false);
+                $oldal=str_replace("/auth","",$oldal);
+            }
             $menu=self::MeghivMVCMetodus(self::MVCFajlEsMetodusLetezikE("Menu","GetMenu","Model"),false);
             if ($menu!=-1) {
                 foreach ($menu as $ertek) {

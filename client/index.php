@@ -1,5 +1,4 @@
 <?php
-session_start();
 include_once(SERVER_ROOT."server/Request.php");
 use Server\Request;
 Request::AutoLoader();
@@ -13,7 +12,7 @@ Request::AutoLoader();
 </head>
 <body>
     <?php
-    Request::GetKeres();
+    Request::GetKeres();//
     ?>
 </body>
 </html>
