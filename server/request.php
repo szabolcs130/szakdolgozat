@@ -1,5 +1,8 @@
 <?php
 namespace Server;
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 use Server\Model\MenuModel;
 use Server\Controller\MenuController;
 class Request{
@@ -13,24 +16,25 @@ class Request{
         });
     }
     public static function GetKeres(){
-        if (self::MeghivMVCMetodus(self::MVCFajlEsMetodusLetezikE("Menu","Main","Controller"),true)==-1) {
+        //echo "Keres rang:".$_SESSION["rang"]."<br>";
+        if (self::MeghivMVCMetodus(self::MVCFajlEsMetodusLetezikE("Menu","Main","Controller"),false,true)==-1) {
             self::ErrorFajlMeghiv();
         }
         $talaltKeres=false;
         $oldal=$_GET["oldal"] ?? "Fooldal";
-            if ($oldal=="Bejelentkezes/auth") {
-                self::MeghivMVCMetodus(self::MVCFajlEsMetodusLetezikE("Bejelentkezes","EllenorizBejelentkezes","Controller"),false);
+            if ($oldal=="Bejelentkezes/auth") {//echo "bejelentkezes benyomva ".$_SESSION["rang"]."<br>";
+                self::MeghivMVCMetodus(self::MVCFajlEsMetodusLetezikE("Bejelentkezes","EllenorizBejelentkezes","Controller"),false,false);
                 $oldal=str_replace("/auth","",$oldal);
             }
             if ($oldal=="Regisztracio/log") {
-                self::MeghivMVCMetodus(self::MVCFajlEsMetodusLetezikE("Regisztracio","EllenorizRegisztracio","Controller"),false);
+                self::MeghivMVCMetodus(self::MVCFajlEsMetodusLetezikE("Regisztracio","EllenorizRegisztracio","Controller"),false,false);
                 $oldal=str_replace("/log","",$oldal);
             }
-            $menu=self::MeghivMVCMetodus(self::MVCFajlEsMetodusLetezikE("Menu","GetMenu","Model"),false);
+            $menu=self::MeghivMVCMetodus(self::MVCFajlEsMetodusLetezikE("Menu","GetMenuByRang","Model"),$_SESSION["rang"],false);
             if ($menu!=-1) {
                 foreach ($menu as $ertek) {
                     if (htmlspecialchars($oldal)==$ertek["nev_menu"]) {
-                        if(self::MeghivMVCMetodus(self::MVCFajlEsMetodusLetezikE($ertek["nev_menu"],"Main","Controller"),true)==-1){
+                        if(self::MeghivMVCMetodus(self::MVCFajlEsMetodusLetezikE($ertek["nev_menu"],"Main","Controller"),false,true)==-1){
                            echo "<h1>Kert tartalom nem elerheto!</h1>";
                         }
                         $talaltKeres=true;
@@ -69,13 +73,17 @@ class Request{
         }
        return -1;
     }
-    public static function MeghivMVCMetodus($array,$include){//meghivja a metodust, de elotte MVCFajlEsMetodusLetezikE fv -vel ellenorizzuk leteznek e, amikkel dolgozni akarunk
+    public static function MeghivMVCMetodus($array,$param,$include){//meghivja a metodust, de elotte MVCFajlEsMetodusLetezikE fv -vel ellenorizzuk leteznek e, amikkel dolgozni akarunk
         if ($array!=-1 && $include==true) {//oldalhivasra
             self::SetCssFajl($array[2]);
             self::SetJsFajl($array[2]);
             call_user_func([$array[0],$array[1]]);
         }else if($array!=-1 && $include==false){//olyat hivunk meg, amitol varunk adatot
-            return call_user_func([$array[0],$array[1]]);
+            if (is_numeric($param)) {
+                return call_user_func([$array[0],$array[1]],$param);
+            }else{
+                return call_user_func([$array[0],$array[1]]);
+            }
         }else{
         return -1;
         }
