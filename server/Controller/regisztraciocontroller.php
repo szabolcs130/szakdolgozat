@@ -17,6 +17,8 @@ class RegisztracioController{
             }else{
                 if (BejelentkezesModel::hozzaadSzemely($username,$email,$password,1)!=-1) {
                     RegisztracioView::SikeresRegisztracio();
+                    header('Location: ?oldal=Fooldal');
+                    exit();
                 }else{
                     RegisztracioView::SikeresRegisztracio();
                 }
