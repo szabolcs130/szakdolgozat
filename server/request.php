@@ -16,7 +16,6 @@ class Request{
         });
     }
     public static function GetKeres(){
-        //echo "Keres rang:".$_SESSION["rang"]."<br>";
         if (self::MeghivMVCMetodus(self::MVCFajlEsMetodusLetezikE("Menu","Main","Controller"),false,true)==-1) {
             self::ErrorFajlMeghiv();
         }
