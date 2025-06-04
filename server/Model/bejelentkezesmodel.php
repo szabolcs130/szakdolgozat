@@ -31,5 +31,20 @@ class BejelentkezesModel{
             return -1;
         }
     }
+    public static function hozzaadSzemely($nev,$email,$jelszo,$rang){
+        try{
+            $db = self::Connection();
+            $sql = "INSERT INTO `szemely` (`nev_szemely`, `email`, `jelszo`,`rang`) VALUES (:nev_szemely, :email, :jelszo,:rang)";
+            $sth = $db->prepare($sql);
+            $sth->execute(array(":nev_szemely"=>$nev,":email"=>$email,":jelszo"=>password_hash($jelszo, PASSWORD_DEFAULT),":rang"=>$rang));
+            if ($sth->rowCount()) {
+                return 1;
+            }else{
+                return -1;
+            }
+        } catch (PDOException $e) {
+            return -1;
+        }
+    }
 }
 ?>

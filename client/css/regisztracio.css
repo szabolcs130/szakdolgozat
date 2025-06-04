@@ -1,0 +1,9 @@
+#regisztracioForm{
+       width: 100%;
+       display: flex;
+       justify-content: center;
+       align-items: center;
+       flex-wrap: wrap;
+       border: 1px solid black;
+       padding-top: calc(3%);
+ }

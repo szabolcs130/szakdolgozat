@@ -22,6 +22,10 @@ class Request{
                 self::MeghivMVCMetodus(self::MVCFajlEsMetodusLetezikE("Bejelentkezes","EllenorizBejelentkezes","Controller"),false);
                 $oldal=str_replace("/auth","",$oldal);
             }
+            if ($oldal=="Regisztracio/log") {
+                self::MeghivMVCMetodus(self::MVCFajlEsMetodusLetezikE("Regisztracio","EllenorizRegisztracio","Controller"),false);
+                $oldal=str_replace("/log","",$oldal);
+            }
             $menu=self::MeghivMVCMetodus(self::MVCFajlEsMetodusLetezikE("Menu","GetMenu","Model"),false);
             if ($menu!=-1) {
                 foreach ($menu as $ertek) {
