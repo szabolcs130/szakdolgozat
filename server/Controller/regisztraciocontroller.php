@@ -15,7 +15,7 @@ class RegisztracioController{
             if ($user){
                 RegisztracioView::SikertelenRegisztracio();
             }else{
-                if (BejelentkezesModel::hozzaadSzemely($username,$email,$password,"1__")!=-1) {
+                if (BejelentkezesModel::hozzaadSzemely($username,$email,$password,1)!=-1) {
                     RegisztracioView::SikeresRegisztracio();
                 }else{
                     RegisztracioView::SikeresRegisztracio();

@@ -49,14 +49,14 @@ class Request{
             }
     }
     public static function SetCssFajl($fajl){ 
-        if (file_exists('./client/css/'.$fajl.'.css')) {
+        if (file_exists(__DIR__.'/../client/css/'.$fajl.'.css')) {
             ?>
                 <link rel="stylesheet" href="./client/css/<?php echo $fajl;?>.css?v=1">
             <?php 
         }
     }
     public static function SetJsFajl($fajl){
-        if (file_exists('./client/js/'.$fajl.'.js')) {
+        if (file_exists(__DIR__.'/../client/js/'.$fajl.'.js')) {
             ?>
             <script src="./client/js/<?php echo $fajl;?>.js?v=1"></script>
         <?php

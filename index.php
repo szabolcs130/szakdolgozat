@@ -10,11 +10,7 @@ if (!isset($_SESSION["rang"])) {
 //echo "Elso rang:".$_SESSION["rang"]."<br>";
 
 }
-
-define('SERVER_ROOT', $_SERVER['DOCUMENT_ROOT'].'/Szakdolgozat/');
-define('SITE_ROOT', 'http://localhost/Szakdolgozat/');
-$indexFajl=SERVER_ROOT."client/index.php";
-$requestFajl=SERVER_ROOT."server/request.php"; 
+$indexFajl=__DIR__."/client/index.php";
 if (file_exists($indexFajl)) {
     include_once($indexFajl);
 }else{
