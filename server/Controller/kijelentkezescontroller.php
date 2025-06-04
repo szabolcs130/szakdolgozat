@@ -9,6 +9,8 @@ class KijelentkezesController{
             session_unset();
             session_destroy();
             KijelentkezesView::SikeresKijelentkezes();
+            header('Location: ?oldal=Fooldal');
+            exit();
         }else{
             KijelentkezesView::SikertelenKijelentkezes();
         }
