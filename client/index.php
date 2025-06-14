@@ -2,7 +2,6 @@
 include_once(__DIR__."/../server/Request.php");
 //include_once('./server/Request.php');
 use Server\Request;
-Request::AutoLoader();
 ?>
 <!DOCTYPE html>
 <html lang="en">
