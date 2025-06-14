@@ -23,7 +23,10 @@ class BejelentkezesController{
                 exit();
             }else{
                 BejelentkezesView::SikertelenBejelentkezes();
+                self::Main();
+                return 1;
             }
+            return 0;
         }
     }
 }
