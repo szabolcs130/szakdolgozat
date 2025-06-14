@@ -16,7 +16,7 @@ class KijelentkezesController{
         }else{
             KijelentkezesView::SikertelenKijelentkezes();
         }
-        
+        return 1;
     }
 }
 ?>
