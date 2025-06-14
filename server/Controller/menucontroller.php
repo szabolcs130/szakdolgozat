@@ -13,9 +13,8 @@ class MenuController{
             $menu=MenuModel::GetMenuByRang(0);
         }
         if ($menu) {
-            if (MenuView::ShowMenu($menu)) {
-                return 1;
-            }
+            MenuView::ShowMenu($menu);
+            return 1;
         }
             return 0;
     }

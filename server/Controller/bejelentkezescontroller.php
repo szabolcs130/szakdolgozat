@@ -8,6 +8,7 @@ use Server\Model\BejelentkezesModel;
 class BejelentkezesController{
     public static function Main(){
         BejelentkezesView::ShowBejelentkezes();
+        return 1;
     }
     public static function EllenorizBejelentkezes(){
         if (!isset($_SESSION["username"]) && isset($_POST["username"]) && isset($_POST["p"])) {
