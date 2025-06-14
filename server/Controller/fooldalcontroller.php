@@ -6,7 +6,11 @@ class FooldalController{
     public static function Main(){
 
         $aru=FooldalModel::lekerdezAru();
-        FooldalView::ShowAru($aru);
+        if ($aru) {
+            FooldalView::ShowAru($aru);
+            return 1;
+        }
+        return 0;
     }
 }
 ?>
