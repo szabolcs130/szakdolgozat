@@ -21,13 +21,11 @@ class BejelentkezesController{
                 $_SESSION["rang"]=$user[0]["rang"];
                 header('Location: ?oldal=Fooldal');
                 exit();
-            }else{
-                BejelentkezesView::SikertelenBejelentkezes();
-                self::Main();
-                return 1;
             }
-            return 0;
         }
+        BejelentkezesView::SikertelenBejelentkezes();
+        self::Main();
+        return 1;
     }
 }
 ?>

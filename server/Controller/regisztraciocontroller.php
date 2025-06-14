@@ -20,11 +20,10 @@ class RegisztracioController{
                     exit();
                 }
             }
-            RegisztracioView::SikertelenRegisztracio();
-            self::Main();
-            return 1;
         }
-        return 0;
+        RegisztracioView::SikertelenRegisztracio();
+        self::Main();
+        return 1;
     }
 }
 ?>
