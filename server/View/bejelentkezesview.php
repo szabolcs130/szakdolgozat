@@ -5,7 +5,7 @@ class BejelentkezesView{
     public static function ShowBejelentkezes(){
       $html="";
       $html.= '<div id="bejelentkezesForm">'.
-                '<form method="post" action="?oldal=Bejelentkezes/auth">'.
+                '<form method="post" action="?oldal=Bejelentkezes/EllenorizBejelentkezes">'.
                   '<input type="text" name="username" placeholder="Felhasznalonev"><br><br>'.
                   '<input type="password" name="p" placeholder="Jelszo"><br><br>'.
                   '<button type="submit">Bejelentkezes</button>'.

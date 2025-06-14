@@ -13,18 +13,18 @@ class RegisztracioController{
             $email=$_POST["email"];
             $password=$_POST["p"];
             $user=BejelentkezesModel::GetSzemelyByName($username);
-            if ($user){
-                RegisztracioView::SikertelenRegisztracio();
-            }else{
+            if (!count($user)){
                 if (BejelentkezesModel::hozzaadSzemely($username,$email,$password,1)!=0) {
                     RegisztracioView::SikeresRegisztracio();
                     header('Location: ?oldal=Fooldal');
                     exit();
-                }else{
-                    RegisztracioView::SikeresRegisztracio();
                 }
             }
+            RegisztracioView::SikertelenRegisztracio();
+            self::Main();
+            return 1;
         }
+        return 0;
     }
 }
 ?>

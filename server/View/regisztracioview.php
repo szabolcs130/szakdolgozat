@@ -5,7 +5,7 @@ class RegisztracioView{
     public static function ShowRegisztracio(){
       $html="";
       $html.= '<div id="regisztracioForm">'.
-                '<form method="post" action="?oldal=Regisztracio/log">'.
+                '<form method="post" action="?oldal=Regisztracio/EllenorizRegisztracio">'.
                   '<input type="text" name="username" placeholder="Felhasznalonev"><br><br>'.
                   '<input type="text" name="email" placeholder="Email"><br><br>'.
                   '<input type="password" name="p" placeholder="Jelszo"><br><br>'.
