@@ -34,14 +34,14 @@ class Request{
                 foreach ($menu as $ertek) {
                     if (htmlspecialchars($oldal)==$ertek["nev_menu"]) {
                         if(self::MeghivMVCMetodus(self::MVCFajlEsMetodusLetezikE($ertek["nev_menu"],"Main","Controller"),false,true)==0){
-                           echo "<h1>Kert tartalom nem elerheto!elso</h1>";
+                           echo "<h1>Kert tartalom nem elerheto!</h1>";
                         }
                         $talaltKeres=true;
                         break;
                     }
                 }
                 if ($talaltKeres==false) {
-                    echo "<h1>Kert tartalom nem elerheto!masodik</h1>";
+                    echo "<h1>Kert tartalom nem elerheto!</h1>";
                 }
             }else{
                 self::ErrorFajlMeghiv();
