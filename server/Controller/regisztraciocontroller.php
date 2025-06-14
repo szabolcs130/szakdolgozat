@@ -5,6 +5,7 @@ use Server\Model\BejelentkezesModel;
 class RegisztracioController{
     public static function Main(){
         RegisztracioView::ShowRegisztracio();
+        return 1;
     }
     public static function EllenorizRegisztracio(){
         if (!isset($_SESSION["username"]) &&isset($_POST["username"]) && isset($_POST["p"]) && isset($_POST["email"])) {//!isset($_SESSION["username"]) && 
@@ -12,10 +13,10 @@ class RegisztracioController{
             $email=$_POST["email"];
             $password=$_POST["p"];
             $user=BejelentkezesModel::GetSzemelyByName($username);
-            if (is_numeric($user)){
+            if ($user){
                 RegisztracioView::SikertelenRegisztracio();
             }else{
-                if (BejelentkezesModel::hozzaadSzemely($username,$email,$password,1)!=-1) {
+                if (BejelentkezesModel::hozzaadSzemely($username,$email,$password,1)!=0) {
                     RegisztracioView::SikeresRegisztracio();
                     header('Location: ?oldal=Fooldal');
                     exit();

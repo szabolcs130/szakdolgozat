@@ -15,7 +15,7 @@ class BejelentkezesModel{
             $eredmeny = $sth->fetchAll(\PDO::FETCH_ASSOC);
             return $eredmeny;
         }catch (\PDOException $e) {
-            return -1;
+            return 0;
         }
     }
     public static function GetSzemelyByName($nev){
@@ -27,7 +27,7 @@ class BejelentkezesModel{
             $eredmeny = $sth->fetchAll(\PDO::FETCH_ASSOC);
             return $eredmeny;
         }catch (\PDOException $e) {
-            return -1;
+            return 0;
         }
     }
     public static function hozzaadSzemely($nev,$email,$jelszo,$rang){
@@ -38,11 +38,10 @@ class BejelentkezesModel{
             $sth->execute(array(":nev_szemely"=>$nev,":email"=>$email,":jelszo"=>password_hash($jelszo, PASSWORD_DEFAULT),":rang"=>$rang));
             if ($sth->rowCount()) {
                 return 1;
-            }else{
-                return -1;
             }
+            return 0;
         } catch (PDOException $e) {
-            return -1;
+            return 0;
         }
     }
 }

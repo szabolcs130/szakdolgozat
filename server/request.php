@@ -16,7 +16,7 @@ class Request{
         });
     }
     public static function GetKeres(){
-        if (self::MeghivMVCMetodus(self::MVCFajlEsMetodusLetezikE("Menu","Main","Controller"),false,true)==-1) {
+        if (self::MeghivMVCMetodus(self::MVCFajlEsMetodusLetezikE("Menu","Main","Controller"),false,true)==0) {
             self::ErrorFajlMeghiv();
         }
         $talaltKeres=false;
@@ -30,10 +30,10 @@ class Request{
                 $oldal=str_replace("/log","",$oldal);
             }
             $menu=self::MeghivMVCMetodus(self::MVCFajlEsMetodusLetezikE("Menu","GetMenuByRang","Model"),$_SESSION["rang"],false);
-            if ($menu!=-1) {
+            if ($menu!=0) {
                 foreach ($menu as $ertek) {
                     if (htmlspecialchars($oldal)==$ertek["nev_menu"]) {
-                        if(self::MeghivMVCMetodus(self::MVCFajlEsMetodusLetezikE($ertek["nev_menu"],"Main","Controller"),false,true)==-1){
+                        if(self::MeghivMVCMetodus(self::MVCFajlEsMetodusLetezikE($ertek["nev_menu"],"Main","Controller"),false,true)==0){
                            echo "<h1>Kert tartalom nem elerheto!</h1>";
                         }
                         $talaltKeres=true;
@@ -70,21 +70,21 @@ class Request{
         if (class_exists($fajlEleres) && method_exists($fajlEleres,$metodus)) {
            return [$fajlEleres,$metodus,$nev];
         }
-       return -1;
+       return 0;
     }
     public static function MeghivMVCMetodus($array,$param,$include){//meghivja a metodust, de elotte MVCFajlEsMetodusLetezikE fv -vel ellenorizzuk leteznek e, amikkel dolgozni akarunk
-        if ($array!=-1 && $include==true) {//oldalhivasra
+        if ($array && $include==true) {//oldalhivasra
             self::SetCssFajl($array[2]);
             self::SetJsFajl($array[2]);
-            call_user_func([$array[0],$array[1]]);
-        }else if($array!=-1 && $include==false){//olyat hivunk meg, amitol varunk adatot
+            return call_user_func([$array[0],$array[1]]);
+        }else if($array && $include==false){//olyat hivunk meg, amitol varunk adatot
             if (is_numeric($param)) {
                 return call_user_func([$array[0],$array[1]],$param);
             }else{
                 return call_user_func([$array[0],$array[1]]);
             }
         }else{
-        return -1;
+            return 0;
         }
     }
 }

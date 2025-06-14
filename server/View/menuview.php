@@ -13,10 +13,10 @@ class MenuView{
             }
             echo '</ul>';
             echo '</nav>';
-        }else{
-            return -1;
-            //Menu nem elerheto, hiba uzenetet kaptunk
+            return 1;
         }
+        return 0;
+        //Menu nem elerheto, hiba uzenetet kaptunk
     }
 }
 ?>

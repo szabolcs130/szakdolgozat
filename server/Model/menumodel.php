@@ -16,7 +16,7 @@ class MenuModel{
             $eredmeny = $sth->fetchAll(\PDO::FETCH_ASSOC);
             return $eredmeny;
         }catch (\PDOException $e) {
-            return -1;
+            return 0;
         }
     }
     public static function GetMenuByRang($rang){
@@ -32,7 +32,7 @@ class MenuModel{
             $eredmeny = $sth->fetchAll(\PDO::FETCH_ASSOC);
             return $eredmeny;
         }catch (\PDOException $e) {
-            return -1;
+            return 0;
         }
     }
 }

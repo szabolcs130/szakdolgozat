@@ -12,13 +12,11 @@ class MenuController{
         }else{
             $menu=MenuModel::GetMenuByRang(0);
         }
-        if ($menu!=-1) {
-            if (MenuView::ShowMenu($menu)==-1) {
-                return -1;
-            }
-        }else{
-            return -1;
+        if ($menu) {
+            MenuView::ShowMenu($menu);
+            return 1;
         }
+            return 0;
     }
 }
 ?>
