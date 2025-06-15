@@ -8,6 +8,7 @@ class FiokView{
                 echo $f["nev_szemely"]." ".$f["email"];
             }
             echo '</div>';
+            return 1;
         }else{
             return 0;
         } 
