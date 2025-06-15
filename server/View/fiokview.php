@@ -3,6 +3,7 @@ namespace Server\View;
 class FiokView{
 //
     public static function ShowFiok($fiok){
+        $fiok=0;
         if (is_array($fiok)) {
             echo '<div id="fiokAdat">';
             foreach ($fiok as $f) {
@@ -10,7 +11,7 @@ class FiokView{
             }
             echo '</div>';
         }else{
-            return -1;
+            return 0;
         } 
     }
 }
