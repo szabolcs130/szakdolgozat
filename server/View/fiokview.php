@@ -1,7 +1,6 @@
 <?php
 namespace Server\View;
 class FiokView{
-//
     public static function ShowFiok($fiok){
         if (is_array($fiok)) {
             echo '<div id="fiokAdat">';
@@ -9,8 +8,9 @@ class FiokView{
                 echo $f["nev_szemely"]." ".$f["email"];
             }
             echo '</div>';
+            return 1;
         }else{
-            return -1;
+            return 0;
         } 
     }
 }
