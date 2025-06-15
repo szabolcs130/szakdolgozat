@@ -15,7 +15,7 @@ class BejelentkezesController{
             $username=$_POST["username"];
             $password=$_POST["p"];
             $user=BejelentkezesModel::GetSzemelyByName($username);
-            if (!is_numeric($user) && isset($user[0]['jelszo']) && password_verify($password,$user[0]['jelszo'])){
+            if ($user && isset($user[0]['jelszo']) && password_verify($password,$user[0]['jelszo'])){
                 BejelentkezesView::SikeresBejelentkezes($user[0]["nev_szemely"]);
                 $_SESSION["username"]=$user[0]["nev_szemely"];
                 $_SESSION["rang"]=$user[0]["rang"];
