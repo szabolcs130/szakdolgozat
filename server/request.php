@@ -15,8 +15,8 @@ class Request{
             MeghivasEllenorzo::ErrorFajlMeghiv();
         }
         $meghiv=0;
-        $darabol=explode("/",$_GET["oldal"]);
-        $oldal= array_shift($darabol) ?? "Fooldal";
+        $darabol=explode("/",($_GET["oldal"] ?? "Fooldal"));
+        $oldal= array_shift($darabol);
         $metodus="Main";
         if (count($darabol)>=1) {
             $metodus=array_shift($darabol);
