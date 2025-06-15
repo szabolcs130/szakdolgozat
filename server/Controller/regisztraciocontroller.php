@@ -13,7 +13,7 @@ class RegisztracioController{
             $email=$_POST["email"];
             $password=$_POST["p"];
             $user=BejelentkezesModel::GetSzemelyByName($username);
-            if (!count($user)){
+            if ($user!=0 && !$user){
                 if (BejelentkezesModel::hozzaadSzemely($username,$email,$password,1)!=0) {
                     RegisztracioView::SikeresRegisztracio();
                     header('Location: ?oldal=Fooldal');
