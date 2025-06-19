@@ -8,7 +8,7 @@ class MenuView{
             echo '<ul id="menuUl">';
             foreach ($menu as $ertek) {
                 ?>
-                    <li class="menuLi"><a class="menuA" href="?oldal=<?php echo $ertek['nev_menu'];?>"><?php echo $ertek['nev_menu'];?></a></li>
+                    <li class="menuLi"><a class="menuA" href="?oldal=<?php echo $ertek['nev_menu'];?>/Main"><?php echo $ertek['nev_menu'];?></a></li>
                 <?php  
             }
             echo '</ul>';
