@@ -1,0 +1,30 @@
+html{
+    font-size: 16px;
+ }
+ #aruk{
+       width: 100%;
+       display: flex;
+       justify-content: center;
+       align-items: center;
+       flex-wrap: wrap;
+       border: 1px solid black;
+       padding-top: calc(3%);
+ }
+ .aru{
+    width: calc(30%);
+    min-width: 150px;
+    max-width: 500px;
+    border: 1px solid black;
+    margin-left: calc(1.4%);
+    margin-right: calc(1.4%);
+    margin-bottom: calc(3%);
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    word-break: break-word;
+    min-height: 40vh;
+    height: auto;
+ }
+.aru_nev{
+    font-size: 1.2rem;
+}

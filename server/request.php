@@ -11,21 +11,19 @@ use Server\AutoLoader;
 class Request{
     public static function GetKeres(){
         AutoLoader::Main();
-        if (MeghivasEllenorzo::MeghivMVCMetodus(MeghivasEllenorzo::MVCFajlEsMetodusLetezikE("Menu","Main","Controller"),false,true)==0) {
-            MeghivasEllenorzo::ErrorFajlMeghiv();
-        }
         $meghiv=0;
         $darabol=explode("/",($_GET["oldal"] ?? "Fooldal"));
-        $oldal= array_shift($darabol);
-        $metodus="Main";
-        if (count($darabol)>=1) {
-            $metodus=array_shift($darabol);
+        $oldal= $darabol[0];
+        $metodus=$darabol[1] ?? "Main";
+        $parameter=array($darabol[2] ?? null);
+        if (MeghivasEllenorzo::MeghivMVCMetodus(MeghivasEllenorzo::MVCFajlEsMetodusLetezikE("Menu","Main","Controller"),$parameter,true)==0) {
+            MeghivasEllenorzo::ErrorFajlMeghiv();
         }
-        $menu=MeghivasEllenorzo::MeghivMVCMetodus(MeghivasEllenorzo::MVCFajlEsMetodusLetezikE("Menu","GetMenuByRang","Model"),$_SESSION["rang"],false);
+        $menu=MeghivasEllenorzo::MeghivMVCMetodus(MeghivasEllenorzo::MVCFajlEsMetodusLetezikE("Menu","GetMenuByRang","Model"),$rang=array($_SESSION["rang"]),false);
         if ($menu!=0) {
             foreach ($menu as $ertek) {
                 if (htmlspecialchars($oldal)==$ertek["nev_menu"]) {
-                    $meghiv=MeghivasEllenorzo::MeghivMVCMetodus(MeghivasEllenorzo::MVCFajlEsMetodusLetezikE($ertek["nev_menu"],$metodus,"Controller"),false,true);
+                    $meghiv=MeghivasEllenorzo::MeghivMVCMetodus(MeghivasEllenorzo::MVCFajlEsMetodusLetezikE($ertek["nev_menu"],$metodus,"Controller"),$parameter,true);
                     break;
                 }
             }

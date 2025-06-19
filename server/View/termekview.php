@@ -1,7 +1,6 @@
 <?php
 namespace Server\View;
-class FooldalView{
-
+class TermekView{
     public static function ShowAru($aru){
        echo '<div id="aruk">';
        foreach ($aru as $ertek) {
@@ -9,10 +8,12 @@ class FooldalView{
                 echo '<div class="aru_nev">'.$ertek['nev_aru'].'</div>';
                 echo '<div class="aru_ar">'.$ertek['ar'].'</div>';
                 echo '<div class="aru_leiras">'.$ertek['leiras'].'</div>';
-                echo '<li><a href="?oldal=Termek/Main/'.$ertek['id_aru'].'">Megnéz</a></li>';
             echo '</div>';
        }
        echo '</div>';
+    }
+    public static function TermekNemTalalhato(){
+        echo "<h1>A keresett termek nem talalhato!</h1>";
     }
 }
 ?>
