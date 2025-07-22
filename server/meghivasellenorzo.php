@@ -11,7 +11,7 @@ class MeghivasEllenorzo{
     public static function SetJsFajl($fajl){
         if (file_exists(__DIR__.'/../client/js/'.$fajl.'.js')) {
             ?>
-            <script src="./client/js/<?php echo $fajl;?>.js?v=1"></script>
+            <script type="module" src="./client/js/<?php echo $fajl;?>.js?v=1"></script>
         <?php
         }
     }
@@ -49,11 +49,11 @@ class MeghivasEllenorzo{
                 self::SetJsFajl($array[2]);
             }
             $rm=new \ReflectionMethod($array[0],$array[1]);
-            if (count($param) && count($param)>=$rm->getNumberOfRequiredParameters()) {
+            if ($param!=null && count($param)>=$rm->getNumberOfRequiredParameters()) {
                 return call_user_func([$array[0],$array[1]],$param[0]);
-            }else{
+            }/*else{
                 return 0;
-            }
+            }*/
             return call_user_func([$array[0],$array[1]]);
         }
         return 0;
