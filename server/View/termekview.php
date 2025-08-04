@@ -3,7 +3,7 @@ namespace Server\View;
 class TermekView{
     public static function ShowAru($aru){
        echo '<div id="aruk">';
-       echo '<form id="termekForm" method="POST" action="?oldal=Kosar/Hozzaad">';
+       echo '<form id="termekForm">';
        foreach ($aru as $ertek) {
             echo '<div id="aru">';
             echo '<input type="hidden" name="aruId" value='.$ertek["id_aru"].'>';
