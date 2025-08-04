@@ -19,6 +19,7 @@ class BejelentkezesController{
                 BejelentkezesView::SikeresBejelentkezes($user[0]["nev_szemely"]);
                 $_SESSION["username"]=$user[0]["nev_szemely"];
                 $_SESSION["rang"]=$user[0]["rang"];
+                $_SESSION["kosar"]=[];
                 header('Location: ?oldal=Fooldal');
                 exit();
             }

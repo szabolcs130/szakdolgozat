@@ -49,7 +49,7 @@ class MeghivasEllenorzo{
                 self::SetJsFajl($array[2]);
             }
             $rm=new \ReflectionMethod($array[0],$array[1]);
-            if ($param!=null && count($param)>=$rm->getNumberOfRequiredParameters()) {
+            if ($param!=null && count($param)>=$rm->getNumberOfRequiredParameters()) {//esetleg ha tobb parameter kellene akkor $param[0] helyett az egesz tombot kuldjuk, illetve ahol fogadjuk ott $param[0...x] hazsnalata
                 return call_user_func([$array[0],$array[1]],$param[0]);
             }/*else{
                 return 0;
