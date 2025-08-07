@@ -19,17 +19,17 @@ class KosarController{
             KosarView::ShowKosar("ures");
             return 1;  
         }
-        return 0;
+        return 1;
     }
     public static function Hozzaad(){
-        if (isset($_SESSION["username"]) && isset($_POST["aruId"])) {
-            if (is_numeric($id=$_POST["aruId"])) {
+        if (isset($_SESSION["username"]) && isset($_POST["aruId"]) && isset($_POST["me"])) {
+            if (is_numeric($id=$_POST["aruId"]) && is_numeric($me=$_POST["me"])) {
                 $aru=TermekekModel::lekerdezAruById($id);
-                KosarModel::hozzaadAru($aru[0]['id_aru'],$aru[0]['nev_aru'],$aru[0]['ar']);
+                KosarModel::hozzaadAru($aru[0]['id_aru'],$aru[0]['nev_aru'],$aru[0]['ar'],$me);
                 return 1;
             }
             
-        } 
+        }
         return 0;
     }
 }

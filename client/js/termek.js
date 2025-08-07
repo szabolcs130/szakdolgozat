@@ -9,7 +9,7 @@ function Elkuld(e) {
     })
     .then(res=>res.text())
     .then(data=>{
-        document.getElementById("elkuldGomb").style.display='none';
+        //document.getElementById("elkuldGomb").style.display='none';
         const sikeresenAKosarba=document.createElement('p');
         sikeresenAKosarba.id='sikeresenAKosarba';
         sikeresenAKosarba.textContent="Sikeresen a kosarba rakva";

@@ -1,5 +1,8 @@
 <?php
 namespace Server\View;
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 class TermekView{
     public static function ShowAru($aru){
        echo '<div id="aruk">';
@@ -10,7 +13,13 @@ class TermekView{
             echo '<div class="aru_nev">'.$ertek['nev_aru'].'</div>';
             echo '<div class="aru_ar">'.$ertek['ar'].'</div>';
             echo '<div class="aru_leiras">'.$ertek['leiras'].'</div>';
-            echo '<button id="elkuldGomb" type="submit">Kosarba</button>';
+            if (isset($_SESSION["username"])) {
+                echo '<input type="number" id="me" name="me" min="1" max="90" value="1">';
+                echo '<button id="elkuldGomb" type="submit">Kosarba</button>';    
+            }else{
+                echo "<p>Kosar hasznalathoz bejelentkezeshez szukseges!</p>";
+            }
+            
             echo '</div>';
        }
        echo '</div>';
