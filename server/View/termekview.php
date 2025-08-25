@@ -22,6 +22,7 @@ class TermekView{
             
             echo '</div>';
        }
+       echo '</form>';
        echo '</div>';
     }
     public static function TermekNemTalalhato(){
