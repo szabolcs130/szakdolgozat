@@ -10,20 +10,32 @@ class KosarModel{
     public static function hozzaadAru($id,$nev,$ar,$me){//esetleg ha mar raktunk bele ugyan olyat, akkor ne egyet hanem novelje a szamat
         //controllerbe vizsgaljuk, hogy tenylegesen letezik e a kapott termek es minden adata megfelelo!!!
         if (is_numeric($me)) {
-            if (isset($_SESSION['kosar'][$id])) {
-               $regiMe=$_SESSION['kosar'][$id]['me'] ?? 0;
+            if ($me>0) {
+                $_SESSION['kosar'][$id]= [
+                    'nev' => $nev,
+                    'ar' => $ar,
+                    'me' => ($me)
+                ];
+            }else{
+                self::torolAru($id);
             }
-            $_SESSION['kosar'][$id]= [
-                'nev' => $nev,
-                'ar' => $ar,
-                'me' => ($regiMe+$me)
-            ];
         }
     }
     public static function torolAru($id){
         if(isset($_SESSION['kosar'][$id])){
             unset($_SESSION['kosar'][$id]);
         }
+    }
+    public static function getAruById($id){
+        if (is_numeric($id)) {
+            foreach ($_SESSION['kosar'] as $key => $value) {
+                if ($key==$id) {
+                    $aru=$_SESSION["kosar"][$id];
+                    return $aru;
+                }
+            }
+        }
+        return 0;
     }
 }
 ?>

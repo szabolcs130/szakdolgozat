@@ -4,7 +4,7 @@ if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 class TermekView{
-    public static function ShowAru($aru){
+    public static function ShowAru($aru,$kosarban){
        echo '<div id="aruk">';
        echo '<form id="termekForm">';
        foreach ($aru as $ertek) {
@@ -14,8 +14,14 @@ class TermekView{
             echo '<div class="aru_ar">'.$ertek['ar'].'</div>';
             echo '<div class="aru_leiras">'.$ertek['leiras'].'</div>';
             if (isset($_SESSION["username"])) {
-                echo '<input type="number" id="me" name="me" min="1" max="90" value="1">';
-                echo '<button id="elkuldGomb" type="submit">Kosarba</button>';    
+                if ($kosarban) {
+                    echo '<abel for="me">Kosarban: </label>';
+                    echo '<input type="number" id="me" name="me" min="1" max="90" value="'.$kosarban["me"].'">';
+                    echo '<button id="elkuldGomb" type="submit">Valtoztat</button>';
+                }else{
+                    echo '<input type="number" id="me" name="me" min="1" max="90" value="1">';
+                    echo '<button id="elkuldGomb" type="submit">Kosarba</button>';
+                }
             }else{
                 echo "<p>Kosar hasznalathoz bejelentkezeshez szukseges!</p>";
             }
