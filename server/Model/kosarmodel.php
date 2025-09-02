@@ -37,5 +37,12 @@ class KosarModel{
         }
         return 0;
     }
+    public static function getOsszAr(){
+        $osszAr=0;
+        foreach ($_SESSION['kosar'] as $key => $value) {
+            $osszAr+=$value["ar"]*$value["me"];
+        }
+        return $osszAr;
+    }
 }
 ?>

@@ -1,7 +1,7 @@
 <?php
 namespace Server\View;
 class KosarView{
-    public static function ShowKosar($kosar){
+    public static function ShowKosar($kosar,$osszAr){
         if ($kosar!="ures") {
             echo '<div id="aruk">';
             foreach ($kosar as $key => $value) {
@@ -12,6 +12,7 @@ class KosarView{
                 echo '<button type="submit">Valtoztat</button>';  
                 echo '</form>';
             }
+            echo '<div>Összesen: '.$osszAr.'</div>';
             echo '</div>';
         }else{
             echo "Kosar tartalma ures";

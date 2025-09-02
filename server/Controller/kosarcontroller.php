@@ -9,8 +9,9 @@ use Server\View\KosarView;
 class KosarController{
     public static function Main(){
         $kosar=KosarModel::getKosar();
+        $osszAr=KosarModel::getOsszAr();
         if ($kosar!==[]) {
-            KosarView::ShowKosar($kosar);
+            KosarView::ShowKosar($kosar,$osszAr);
             return 1;
         }else{
             KosarView::ShowKosar("ures");
