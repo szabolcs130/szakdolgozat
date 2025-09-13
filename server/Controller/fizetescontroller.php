@@ -47,6 +47,12 @@ class FizetesController{
             header('Content-Type: application/json');ob_clean();
             try {
                 $captureResponse = FizetesModel::captureOrder($orderID);
+                $order=$captureResponse['jsonResponse'];
+                $orderStatus=$order->getStatus();
+                $h=fopen("a.txt","w");
+                fwrite($h,$orderStatus);
+                fclose($h);ob_clean();
+                //echo "ALMA ".$orderStatus; //ha netan sikeres a tranzakcio
                 echo json_encode($captureResponse['jsonResponse']);exit;
             } catch (Exception $e) {
                 echo json_encode(['error' => $e->getMessage()]);
