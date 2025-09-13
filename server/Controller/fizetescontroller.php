@@ -14,7 +14,6 @@ class FizetesController{
     }
     public static function FizetesKeres(){
         $endpoint=$_GET["oldal"];// echo "elso ".$e."<br>";
-        echo $endpoint;
         $endpoint=str_replace("Fizetes/FizetesKeres","",$endpoint);//echo "masodik ".$e."<br>";
         if ($endpoint === '/') { 
             try {
@@ -51,8 +50,18 @@ class FizetesController{
                 $orderStatus=$order->getStatus();
                 $h=fopen("a.txt","w");
                 fwrite($h,$orderStatus);
+                
+                //adatbazisba ir
+                foreach (KosarModel::getKosar() as $key => $value) {
+                fwrite($h,$key." ");
+                fwrite($h,$value["nev"]." ");
+                fwrite($h,($value["ar"]*$value["me"])." Forint");
+                }
                 fclose($h);ob_clean();
                 //echo "ALMA ".$orderStatus; //ha netan sikeres a tranzakcio
+
+                KosarModel::Urit();
+
                 echo json_encode($captureResponse['jsonResponse']);exit;
             } catch (Exception $e) {
                 echo json_encode(['error' => $e->getMessage()]);

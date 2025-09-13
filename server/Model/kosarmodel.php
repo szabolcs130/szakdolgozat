@@ -44,5 +44,10 @@ class KosarModel{
         }
         return $osszAr;
     }
+    public static function Urit(){
+        if (isset($_SESSION['kosar'])) {
+            $_SESSION['kosar']=[];
+        }
+    }
 }
 ?>

@@ -1,6 +1,11 @@
 <?php
 namespace Server\Model;
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 use Server\Model\csatlakozas;
+use Server\Model\KosarModel;
+
 require __DIR__ . '/../../vendor/autoload.php';
 
 use PaypalServerSdkLib\Authentication\ClientCredentialsAuthCredentialsBuilder;
@@ -42,16 +47,18 @@ class FizetesModel{
          */
         public static function createOrder()//$cart)
         {
-            
-
+            $osszeg=KosarModel::getOsszAr();
+            if ($osszeg<=0) {
+                $osszeg=0;
+            }
             $orderBody = [
                 'body' => OrderRequestBuilder::init(
                     CheckoutPaymentIntent::CAPTURE,
                     [
                         PurchaseUnitRequestBuilder::init(
                             AmountWithBreakdownBuilder::init(
-                                'USD',
-                                '10.00'
+                                'HUF',
+                                $osszeg
                             )->build()
                         )->build()
                     ]
