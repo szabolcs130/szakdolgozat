@@ -12,11 +12,13 @@ class KosarView{
                 echo '<button type="submit">Valtoztat</button>';  
                 echo '</form>';
             }
-            echo '<div>Összesen: '.$osszAr.'</div>';
+            echo '<div>Összesen: '.$osszAr.' Forint</div>';
+            echo '<li><a href="?oldal=Fizetes/Main">Fizetes</a></li';
             echo '</div>';
-        }else{
+           }else{
             echo "Kosar tartalma ures";
         }
+        
     }
 }
 ?>
