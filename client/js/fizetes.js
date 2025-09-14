@@ -5,10 +5,7 @@ window.paypal
       layout: "vertical",
       color: "gold",
       label: "paypal",
-    }/*,
-    message: {
-      amount: 100,
-    }*/,
+    },
 
     async createOrder() {
       try {
@@ -41,7 +38,6 @@ window.paypal
 
         throw new Error(errorMessage);
       } catch (error) {
-        //console.error(error);
         resultMessage(`Could not initiate PayPal Checkout...<br><br>${error}`);
       }
     },
@@ -76,13 +72,13 @@ window.paypal
         } else {
           // (3) Successful transaction -> Show confirmation or thank you message
           // Or go to another URL:  actions.redirect('thank_you.html');
-          const transaction =
+          /*const transaction =
             orderData?.purchase_units?.[0]?.payments?.captures?.[0] ||
-            orderData?.purchase_units?.[0]?.payments?.authorizations?.[0];
-          /*resultMessage(
-            `Transaction ${transaction.status}: ${transaction.id}<br>
-          <br>See console for all available details`
-          );*/
+            orderData?.purchase_units?.[0]?.payments?.authorizations?.[0];*/
+          resultMessage(
+           // `Transaction ${transaction.status}: ${transaction.id}<br>
+          '<br>Succesfull! See console for all available details'
+          );
           /*console.log(
             "Capture result",
             orderData,

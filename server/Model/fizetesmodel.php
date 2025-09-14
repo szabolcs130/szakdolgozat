@@ -48,9 +48,6 @@ class FizetesModel{
         public static function createOrder()//$cart)
         {
             $osszeg=KosarModel::getOsszAr();
-            if ($osszeg<=0) {
-                $osszeg=0;
-            }
             $orderBody = [
                 'body' => OrderRequestBuilder::init(
                     CheckoutPaymentIntent::CAPTURE,
