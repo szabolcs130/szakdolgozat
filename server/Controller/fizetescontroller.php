@@ -6,6 +6,9 @@ if (session_status() === PHP_SESSION_NONE) {
 use Server\View\FizetesView;
 use Server\Model\FizetesModel;
 use Server\Model\KosarModel;
+use Server\Model\RendelesModel;
+use Server\Model\FizetesEredmenyModel;
+use Server\Model\RendelesTartalmaModel;
 class FizetesController{
     
     public static function Main(){
@@ -17,8 +20,8 @@ class FizetesController{
     }
     public static function FizetesKeres(){
         if (KosarModel::getOsszAr()>0) {
-            $endpoint=$_GET["oldal"];// echo "elso ".$e."<br>";
-            $endpoint=str_replace("Fizetes/FizetesKeres","",$endpoint);//echo "masodik ".$e."<br>";
+            $endpoint=$_GET["oldal"];
+            $endpoint=str_replace("Fizetes/FizetesKeres","",$endpoint);
             if ($endpoint === '/') { 
                 try {
                     $response = [
@@ -53,7 +56,7 @@ class FizetesController{
             }
             if (str_ends_with($endpoint, '/capture')) { 
                 $urlSegments = explode('/', $endpoint);
-                end($urlSegments); // Will set the pointer to the end of array
+                end($urlSegments);
                 $orderID = prev($urlSegments);
                 header('Content-Type: application/json');ob_clean();
                 try {
@@ -64,12 +67,16 @@ class FizetesController{
                         fwrite($h,$orderStatus);
                         
                         //adatbazisba ir
-                        foreach (KosarModel::getKosar() as $key => $value) {
+
+                        RendelesModel::hozzaadRendeles(1);
+                        RendelesTartalmaModel::hozzaadRendelesTartalma(1,1,1,1);
+                        FizetesEredmenyModel::hozzaadFizetesEredmeny(1,100,100,"ok");
+                        /*foreach (KosarModel::getKosar() as $key => $value) {
                         fwrite($h,$key." ");
                         fwrite($h,$value["nev"]." ");
                         fwrite($h,($value["ar"]*$value["me"])." Forint");
                         }
-                        fclose($h);ob_clean();
+                        fclose($h);ob_clean();*/
                         //echo "ALMA ".$orderStatus; //ha netan sikeres a tranzakcio
 
                         KosarModel::Urit();
