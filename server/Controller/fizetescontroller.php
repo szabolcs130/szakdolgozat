@@ -62,25 +62,32 @@ class FizetesController{
                 try {
                     $captureResponse = FizetesModel::captureOrder($orderID);
                     if (is_object($order=$captureResponse['jsonResponse'])) {
-                        $orderStatus=$order->getId();
-                        $h=fopen("a.txt","w");
-                        fwrite($h,$orderStatus);
-                        
                         //adatbazisba ir
-
-                        RendelesModel::hozzaadRendeles(1);
-                        RendelesTartalmaModel::hozzaadRendelesTartalma(1,1,1,1);
-                        FizetesEredmenyModel::hozzaadFizetesEredmeny(1,100,100,"ok");
-                        /*foreach (KosarModel::getKosar() as $key => $value) {
-                        fwrite($h,$key." ");
-                        fwrite($h,$value["nev"]." ");
-                        fwrite($h,($value["ar"]*$value["me"])." Forint");
+                        $fizetetlenRendelesVanE=FizetesEredmenyModel::GetFizetetlenEredmeny($_SESSION["userId"]);
+                        if ($fizetetlenRendelesVanE===0) {//adatbazis hiba
+                             echo json_encode(['status' => 'error', 'message' => 'Adatbázis hiba történt']);
+                             exit;
                         }
-                        fclose($h);ob_clean();*/
-                        //echo "ALMA ".$orderStatus; //ha netan sikeres a tranzakcio
-
+                        $ujrendeles=false;
+                        if ($fizetetlenRendelesVanE===false) {//uj rendeles , minden kifizetve elozoleg
+                            RendelesModel::hozzaadRendeles($_SESSION["userId"],date('Y-m-d H:i:s'));
+                            $ujrendeles=true;
+                        }
+                        //vagy epp mar meglevo
+                        $fizetendoOsszeg=0;
+                        foreach (KosarModel::getKosar() as $key => $value) {
+                            $rendelesId=FizetesEredmenyModel::GetFizetetlenEredmeny($_SESSION["userId"])['id_rendeles'];
+                            if ($ujrendeles) {//ha uj akkor hoizzaadom
+                                RendelesTartalmaModel::hozzaadRendelesTartalma($rendelesId,$key,$value["ar"],$value["me"]);
+                            }  
+                            $fizetendoOsszeg+=$value["ar"]*$value["me"];
+                        }
+                        $ujrendeles=false;
+                        $datum=(new \DateTime($order->getPurchaseUnits()[0]->getPayments()->getCaptures()[0]->getCreateTime()));
+                        $datumKonvertalva=$datum->format('Y-m-d H:i:s');
+                        FizetesEredmenyModel::hozzaadFizetesEredmeny($rendelesId,$datumKonvertalva,$fizetendoOsszeg,$order->getId(),$captureResponse['jsonResponse']->getStatus());//,$captureResponse['jsonResponse']->getId()
+                        //FizetesEredmenyModel::hozzaadFizetesEredmeny($rendelesId,$fizetendoOsszeg,$order->getPurchaseUnits()[0]->getPayments()->getCaptures()[0]->getCreateTime(),$captureResponse['jsonResponse']->getStatus());//,$captureResponse['jsonResponse']->getId()
                         KosarModel::Urit();
-
                         echo json_encode([
 
                             'id'=>$captureResponse['jsonResponse']->getId(),
