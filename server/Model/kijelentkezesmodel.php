@@ -1,11 +1,11 @@
 <?php
 namespace Server\Model;
-    use Server\Model\csatlakozas;
+    use Server\ModelCsatlakozas;
 
 class KijelentkezesModel{
   //
     public static function Connection() {
-        return csatlakozas::GetConnection();
+        return Csatlakozas::GetConnection();
     }
 }
 ?>

@@ -1,10 +1,10 @@
 <?php
 namespace Server\Model;
-    use Server\Model\csatlakozas;
+    use Server\Model\Csatlakozas;
 
 class BejelentkezesModel{
     public static function Connection() {
-        return csatlakozas::GetConnection();
+        return Csatlakozas::GetConnection();
     }
     public static function GetSzemely(){
         try {
@@ -40,7 +40,7 @@ class BejelentkezesModel{
                 return 1;
             }
             return 0;
-        } catch (PDOException $e) {
+        } catch (\PDOException $e) {
             return 0;
         }
     }

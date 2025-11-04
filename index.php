@@ -10,7 +10,7 @@ if (!isset($_SESSION["rang"])) {
 //echo "Elso rang:".$_SESSION["rang"]."<br>";
 
 }
-$indexFajl=__DIR__."/client/index.php";
+$indexFajl=__DIR__."/Client/index.php";
 if (file_exists($indexFajl)) {
     include_once($indexFajl);
 }else{

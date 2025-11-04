@@ -1,10 +1,10 @@
 <?php
 namespace Server\Model;
-    use Server\Model\csatlakozas;
+    use Server\Model\Csatlakozas;
 
 class RendelesTartalmaModel{
     public static function Connection() {
-        return csatlakozas::GetConnection();
+        return Csatlakozas::GetConnection();
     }
     public static function hozzaadRendelesTartalma($rendeles,$aruIdf,$me,$egysegar){
         try{
@@ -16,7 +16,7 @@ class RendelesTartalmaModel{
                 return 1;
             }
             return 0;
-        } catch (PDOException $e) {
+        } catch (\PDOException $e) {
             return 0;
         }
     }

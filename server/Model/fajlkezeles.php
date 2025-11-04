@@ -1,5 +1,5 @@
 <?php
-class fajl{
+class Fajl{
     public static function hibaKiir($szoveg){ 
        //date("Y-m-d H:i:s")
        $fajl="hiba.txt";
@@ -11,7 +11,7 @@ class fajl{
             }
             fwrite($fajl,date("Y-m-d H:i:s")."-->Hiba: ".$szoveg."\n");
             fclose($fajl);
-       } catch (Exception $e) {
+       } catch (\Exception $e) {
         echo "hiba leiras hiba".$e->getMessage();
        }
     }
@@ -26,7 +26,7 @@ class fajl{
              }
              fwrite($fajl,date("Y-m-d H:i:s")."-->Muvelet: ".$szoveg."\n");
              fclose($fajl);
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
          echo "hiba leiras muvelet".$e->getMessage();
         }
      }

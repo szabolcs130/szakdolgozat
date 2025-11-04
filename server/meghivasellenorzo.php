@@ -2,21 +2,21 @@
 namespace Server;
 class MeghivasEllenorzo{
     public static function SetCssFajl($fajl){ 
-        if (file_exists(__DIR__.'/../client/css/'.$fajl.'.css')) {
+        if (file_exists(__DIR__.'/../Client/css/'.$fajl.'.css')) {
             ?>
-                <link rel="stylesheet" href="./client/css/<?php echo $fajl;?>.css?v=1">
+                <link rel="stylesheet" href="./Client/css/<?php echo $fajl;?>.css?v=1">
             <?php 
         }
     }
     public static function SetJsFajl($fajl){
-        if (file_exists(__DIR__.'/../client/js/'.$fajl.'.js')) {
+        if (file_exists(__DIR__.'/../Client/js/'.$fajl.'.js')) {
             ?>
-            <script type="module" src="./client/js/<?php echo $fajl;?>.js?v=1"></script>
+            <script type="module" src="./Client/js/<?php echo $fajl;?>.js?v=1"></script>
         <?php
         }
     }
     public static function ErrorFajlMeghiv(){
-        header('Location: ./client/error/error.php');
+        header('Location: ./Client/error/error.php');
         exit();
     }
     public static function MVCFajlEsMetodusLetezikE($nev,$metodus,$mvcTipus){

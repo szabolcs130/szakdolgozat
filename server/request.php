@@ -1,6 +1,6 @@
 <?php
 namespace Server;
-include_once(__DIR__."/autoloader.php");
+include_once(__DIR__."/Autoloader.php");
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
