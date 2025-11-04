@@ -1,5 +1,5 @@
 const termekForm=document.getElementById("termekForm");
-if (document.getElementById("termekForm")) {
+if (termekForm) {
   termekForm.addEventListener('submit',Elkuld);  
 }
 function Elkuld(e) {

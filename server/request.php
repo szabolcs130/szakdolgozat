@@ -5,6 +5,7 @@ if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 use Server\Model\MenuModel;
+use Server\Model\RendelesModel;
 use Server\Controller\MenuController;
 use Server\MeghivasEllenorzo;
 use Server\AutoLoader;

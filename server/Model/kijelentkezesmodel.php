@@ -1,6 +1,6 @@
 <?php
 namespace Server\Model;
-    use Server\ModelCsatlakozas;
+    use Server\Model\Csatlakozas;
 
 class KijelentkezesModel{
   //

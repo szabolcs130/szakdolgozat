@@ -1,7 +1,7 @@
 <?php
 namespace Server;
 class MeghivasEllenorzo{
-    public static function SetCssFajl($fajl){ 
+    public static function SetCssFajl($fajl){
         if (file_exists(__DIR__.'/../Client/css/'.$fajl.'.css')) {
             ?>
                 <link rel="stylesheet" href="./Client/css/<?php echo $fajl;?>.css?v=1">
