@@ -1,5 +1,5 @@
 <?php
-include_once(__DIR__."/../server/Request.php");
+include_once(__DIR__."/../Server/Request.php");
 //include_once('./server/Request.php');
 use Server\Request;
 ?>

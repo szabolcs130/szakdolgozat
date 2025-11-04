@@ -29,7 +29,7 @@ class FizetesController{
                     ];
                     header('Content-Type: application/json');ob_clean();
                     echo json_encode($response);exit;
-                } catch (Exception $e) {
+                } catch (\Exception $e) {
                     echo json_encode(['error' => "Server not running"]);
                     http_response_code(500);exit;
                 }
@@ -49,7 +49,7 @@ class FizetesController{
                                 'debug_id'=>$orderResponse['jsonResponse']['debug_id'] ?? null]);
                     }
                     exit;
-                } catch (Exception $e) {
+                } catch (\Exception $e) {
                     echo json_encode(['error' => "Fizetes keszites hiba!"]);
                     http_response_code(500);exit;
                 }
@@ -106,7 +106,7 @@ class FizetesController{
                                 'debug_id'=>$captureResponse['jsonResponse']['debug_id'] ?? null]);exit;
                     }
                     
-                } catch (Exception $e) {
+                } catch (\Exception $e) {
                     echo json_encode(['error' => "Fizetes jovahagyas hiba!"]);
                     http_response_code(500);
                     exit;

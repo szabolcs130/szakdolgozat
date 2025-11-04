@@ -1,11 +1,11 @@
 <?php
 namespace Server\Model;
-    use Server\Model\csatlakozas;
+    use Server\Model\Csatlakozas;
 
 class FooldalModel{
   
     public static function Connection() {
-        return csatlakozas::GetConnection();
+        return Csatlakozas::GetConnection();
     }
     public static function lekerdezAru(){
         try {

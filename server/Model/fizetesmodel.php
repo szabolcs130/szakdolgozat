@@ -3,7 +3,7 @@ namespace Server\Model;
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
-use Server\Model\csatlakozas;
+use Server\Model\Csatlakozas;
 use Server\Model\KosarModel;
 
 require __DIR__ . '/../../vendor/autoload.php';

@@ -1,7 +1,7 @@
 <?php
 namespace Server\Controller;
 use Server\Model\FooldalModel;
-class ApiTermekekController{
+class ApitermekekController{
     public static function Main(){
         header('Content-Type: application/json; charset=utf-8');
         ob_clean(); 

@@ -1,4 +1,7 @@
-document.getElementById("termekForm").addEventListener('submit',Elkuld);
+const termekForm=document.getElementById("termekForm");
+if (termekForm) {
+  termekForm.addEventListener('submit',Elkuld);  
+}
 function Elkuld(e) {
     e.preventDefault();
     const termek = new FormData(this);
