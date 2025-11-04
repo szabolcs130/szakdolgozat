@@ -1,7 +1,7 @@
 //import { Listazo } from './aruListazo.js';
 
 window.onload = async function() {
-    let response= await fetch("?oldal=ApiTermekek/Main");
+    let response= await fetch("?oldal=Apitermekek/Main");
     let data = await response.json();
     //Listazo(data);
     //console.log(data);
