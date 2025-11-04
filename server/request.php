@@ -39,6 +39,6 @@ class Request{
             MeghivasEllenorzo::ErrorFajlMeghiv();
         }
     }
-    
+
 }
 ?>

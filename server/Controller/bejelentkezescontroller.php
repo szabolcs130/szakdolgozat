@@ -17,8 +17,10 @@ class BejelentkezesController{
             $user=BejelentkezesModel::GetSzemelyByName($username);
             if ($user && isset($user[0]['jelszo']) && password_verify($password,$user[0]['jelszo'])){
                 BejelentkezesView::SikeresBejelentkezes($user[0]["nev_szemely"]);
+                $_SESSION["userId"]=$user[0]["id_szemely"];
                 $_SESSION["username"]=$user[0]["nev_szemely"];
                 $_SESSION["rang"]=$user[0]["rang"];
+                $_SESSION["kosar"]=[];
                 header('Location: ?oldal=Fooldal');
                 exit();
             }
