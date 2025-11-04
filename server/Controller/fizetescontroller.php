@@ -83,7 +83,8 @@ class FizetesController{
                             $fizetendoOsszeg+=$value["ar"]*$value["me"];
                         }
                         $ujrendeles=false;
-                        $datum=(new \DateTime($order->getPurchaseUnits()[0]->getPayments()->getCaptures()[0]->getCreateTime()));
+                        $datum=(new \DateTime($order->getPurchaseUnits()[0]->getPayments()->getCaptures()[0]->getCreateTime(), new \DateTimeZone('UTC')));
+                        $datum->setTimezone(new \DateTimezone('Europe/Budapest'));
                         $datumKonvertalva=$datum->format('Y-m-d H:i:s');
                         FizetesEredmenyModel::hozzaadFizetesEredmeny($rendelesId,$datumKonvertalva,$fizetendoOsszeg,$order->getId(),$captureResponse['jsonResponse']->getStatus());//,$captureResponse['jsonResponse']->getId()
                         //FizetesEredmenyModel::hozzaadFizetesEredmeny($rendelesId,$fizetendoOsszeg,$order->getPurchaseUnits()[0]->getPayments()->getCaptures()[0]->getCreateTime(),$captureResponse['jsonResponse']->getStatus());//,$captureResponse['jsonResponse']->getId()
