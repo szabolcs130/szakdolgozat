@@ -1,7 +1,6 @@
 <?php
 namespace Server\Model;
     use Server\Model\Csatlakozas;
-
 class BejelentkezesModel{
     public static function Connection() {
         return Csatlakozas::GetConnection();
