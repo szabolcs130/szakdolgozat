@@ -27,7 +27,7 @@ class KosarModel{
         }
     }
     public static function getAruById($id){
-        if (is_numeric($id)) {
+        if (isset($_SESSION['kosar'][$id]) && is_numeric($id)) {
             foreach ($_SESSION['kosar'] as $key => $value) {
                 if ($key==$id) {
                     $aru=$_SESSION["kosar"][$id];
