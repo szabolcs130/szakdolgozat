@@ -33,5 +33,20 @@ class FizetesEredmenyModel{
             return 0;
         }
     }
+    public static function GetMegvasaroltAruE($aru,$szemely){
+        try {
+            $db = self::Connection();
+            $sql = "SELECT * FROM fizeteseredmeny INNER JOIN rendeles ON fizeteseredmeny.idf_rendeles=rendeles.id_rendeles INNER JOIN rendelestartalma ON rendelestartalma.idf_rendeles=rendeles.id_rendeles WHERE (rendeles.idf_szemely=:idf_szemely AND rendelestartalma.idf_aru=:idf_aru) AND fizeteseredmeny.allapot='COMPLETED'";
+            $sth = $db->prepare($sql);
+            $sth->execute(array(':idf_szemely'=>$szemely, ':idf_aru'=>$aru));
+            $eredmeny = $sth->fetch(\PDO::FETCH_ASSOC);
+            return $eredmeny;
+        }catch (\PDOException $e) {
+            return 0;
+        }
+    }
+    /*
+    
+    */
 }
 ?>
