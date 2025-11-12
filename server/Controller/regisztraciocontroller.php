@@ -8,7 +8,7 @@ class RegisztracioController{
         return 1;
     }
     public static function EllenorizRegisztracio(){
-        if (!isset($_SESSION["username"]) &&isset($_POST["username"]) && isset($_POST["p"]) && isset($_POST["email"])) {//!isset($_SESSION["username"]) && 
+        if (!isset($_SESSION["username"]) && isset($_POST["username"]) && isset($_POST["p"]) && isset($_POST["email"])) {//!isset($_SESSION["username"]) && 
             $username=$_POST["username"];
             $email=$_POST["email"];
             $password=$_POST["p"];

@@ -1,0 +1,36 @@
+#velemenyIrasaTarolo{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    border: 1px solid yellow;
+}
+#VelemenyForm{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+#velemenyekTarolo{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    border: 1px solid black;
+}
+#velemenyInput{
+    display: flex;
+    width: 70vw;
+    height: 20vh;
+}
+.velemenyegy{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    /*border: 1px solid red;*/
+}

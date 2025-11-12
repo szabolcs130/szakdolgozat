@@ -34,5 +34,6 @@ class TermekView{
     public static function TermekNemTalalhato(){
         echo "<h1>A keresett termek nem talalhato!</h1>";
     }
+    
 }
 ?>
