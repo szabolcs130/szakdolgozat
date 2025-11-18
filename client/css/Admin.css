@@ -1,0 +1,28 @@
+#kontener{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid black;
+}
+#kismenuk{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.AruSzerkeszt{
+cursor: pointer;
+}
+a{
+    text-decoration: none;
+    color: black
+
+}
+li{
+    list-style: none;
+}
+#tablazatTarolo{
+    border: 1px solid black;
+}

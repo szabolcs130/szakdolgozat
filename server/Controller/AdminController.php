@@ -9,12 +9,29 @@ use Server\Model\AruModel;
 class AdminController{
     public static function Main(){
         AdminView::Main();
-        //AdminView::ShowAruCRUD(AruModel::lekerdezAru());
         return 1;
     }
     public static function AruTorol($id){
         AruModel::AruTorol($id);
+        self::Main();
         return 1;
+    }
+    public static function AruSzerkeszt(){
+        if ((isset($_SESSION["username"]) && $_SESSION['rang']==3) && isset($_POST["idaru"]) && isset($_POST["nev"]) && isset($_POST["ar"]) && isset($_POST["leiras"])) {
+        $id=$_POST["idaru"];
+        $nev=$_POST["nev"];
+        $ar=$_POST["ar"];
+        $leiras=$_POST["leiras"];
+        if (is_numeric($id)) {
+            $aru=Arumodel::lekerdezAruById($id);
+        }
+        if (is_array($aru) && !empty($aru)){ 
+            AruModel::AruSzerkeszt($id,$nev,$ar,$leiras);
+            self::Main();
+            return 1;
+            }
+        }
+        return 0;
     }
 }
 ?>

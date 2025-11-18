@@ -5,12 +5,11 @@ class AdminView{
         echo '<div id="kontener">';
         echo '<nav id="kismenuk">';
         echo '<ul id="menuUl">';
-        echo '<li id="adminFooldal" class="menuLi"><a class="menuA" href="#">Admin Fooldal</a></li>';//?oldal=Admin/Fooldal
+        echo '<li id="adminFooldal" class="menuLi"><a class="menuA" href="?oldal=Admin/AdminFooldal">Admin Fooldal</a></li>';//?oldal=Admin/Fooldal
         echo '<li id="adminTermek" class="menuLi"><a class="menuA" href="#">Termek lista</a></li>';//?oldal=Apitermekek/Main
         echo '<li id="admintermekUj" class="menuLi"><a class="menuA" href="#">Termek uj</a></li>';//?oldal=Admin/TermekUj
         echo '</ul>';
         echo '</nav>';
-        echo '</div>';
         echo '<div id="adminTartalom">';
         echo '<h1>Udv az admin oldalon!</h1>';
         echo '</div>';

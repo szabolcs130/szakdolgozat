@@ -13,8 +13,5 @@ class ApiadminController{
         echo json_encode([]);
         exit;
     }
-    public static function AruTorol(){
-        
-    }
 }
 ?>

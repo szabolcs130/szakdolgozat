@@ -18,6 +18,17 @@ class AruModel{
         }catch (\PDOException $e) {
             return 0;
         }
+    }public static function lekerdezAruById($id){
+        try {
+            $db = self::Connection();
+            $sql = "SELECT * FROM aru WHERE id_aru=:id_aru";
+            $sth = $db->prepare($sql);
+            $sth->execute(array(":id_aru"=>$id));
+            $eredmeny = $sth->fetchAll(\PDO::FETCH_ASSOC);
+            return $eredmeny;
+        }catch (\PDOException $e) {
+            return 0;
+        }
     }
     public static function AruTorol($aruId){
         try{
@@ -33,13 +44,12 @@ class AruModel{
             return 0;
         }
     }
-
-    /*
-    try{
+    public static function AruSzerkeszt($id,$nev,$ar,$leiras){
+        try{
             $db = self::Connection();
-            $sql = "INSERT INTO `velemenyek` (`idf_szemely`, `idf_aru` ,`velemenyszoveg`) VALUES (:idf_szemely , :idf_aru , :velemenyszoveg)";
+            $sql = "UPDATE `aru` SET nev_aru = :nev_aru, ar = :ar, leiras = :leiras WHERE id_aru = :id_aru";
             $sth = $db->prepare($sql);
-            $sth->execute(array(":idf_szemely"=>$szemely,":idf_aru"=>$aruIdf,":velemenyszoveg"=>$velemenyszoveg));
+            $sth->execute(array(":id_aru"=>$id, ":nev_aru"=>$nev, ":ar"=>$ar, ":leiras"=>$leiras));
             if ($sth->rowCount()) {
                 return 1;
             }
@@ -47,6 +57,7 @@ class AruModel{
         } catch (\PDOException $e) {
             return 0;
         }
-    */
+    }
+
 }
 ?>
