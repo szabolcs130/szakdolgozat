@@ -23,6 +23,17 @@ a{
 li{
     list-style: none;
 }
+#adminTartalma{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 #tablazatTarolo{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
     border: 1px solid black;
 }

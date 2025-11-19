@@ -6,7 +6,7 @@ class AdminView{
         echo '<nav id="kismenuk">';
         echo '<ul id="menuUl">';
         echo '<li id="adminFooldal" class="menuLi"><a class="menuA" href="?oldal=Admin/Main">Admin Fooldal</a></li>';//?oldal=Admin/Fooldal
-        echo '<li id="adminTermek" class="menuLi"><a class="menuA" href="#">Termek Kezeles</a></li>';//?oldal=Apitermekek/Main
+        echo '<li id="adminTermek" class="menuLi"><a class="menuA" href="?oldal=Admin/TermekKezeles">Termek Kezeles</a></li>';//?oldal=Apitermekek/Main
         echo '</ul>';
         echo '</nav>';
         echo '<div id="adminTartalom">';

@@ -58,6 +58,20 @@ class AruModel{
             return 0;
         }
     }
+        public static function hozzaadAru($nev,$ar,$leiras){
+        try{
+            $db = self::Connection();
+            $sql = "INSERT INTO `aru` (`nev_aru`, `ar`,`leiras`) VALUES (:nev_aru, :ar,:leiras)";
+            $sth = $db->prepare($sql);
+            $sth->execute(array(":nev_aru"=>$nev,":ar"=>$ar,":leiras"=>$leiras));
+            if ($sth->rowCount()) {
+                return 1;
+            }
+            return 0;
+        } catch (\PDOException $e) {
+            return 0;
+        }
+    }
 
 }
 ?>

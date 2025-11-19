@@ -1,14 +1,29 @@
 window.onload = function() {
-    const termekLi=document.getElementById("adminTermek");
-    termekLi.addEventListener("click",()=>AruListaz());
+   /* const termekLi=document.getElementById("adminTermek");
+    termekLi.addEventListener("click",()=>AruListaz());*/
+    if (document.getElementById('tablazatTarolo')) {
+        AruListaz();
+    }
 }
 async function AruListaz() {
     let response= await fetch("?oldal=Apitermekek/Main");
     let data = await response.json();
     
-    const aruLista=document.createElement('div');
-    aruLista.id='tablazatTarolo';
-    
+    const liTagAruUj=document.createElement('li');
+
+    const aTagAruUj=document.createElement('a');
+    aTagAruUj.href='#';
+    aTagAruUj.textContent="Uj Aru";
+    liTagAruUj.appendChild(aTagAruUj);
+
+    liTagAruUj.addEventListener("click",()=>FormAru("","?oldal=Admin/AruUj","Hozzaad"));//AruUjForm()
+
+    //const aruLista=document.createElement('div');//eredeti
+    //aruLista.id='tablazatTarolo';//eredeti
+    const aruLista=document.getElementById('tablazatTarolo');//uj
+
+    aruLista.appendChild(liTagAruUj);
+
     const aruTable=document.createElement('table');
     aruTable.id='tablazat';
         
@@ -124,11 +139,26 @@ async function AruListaz() {
     adminTartalma.innerHTML="";
     adminTartalma.appendChild(aruLista);
     document.querySelectorAll("#tablazat tbody tr td:last-child").forEach(adatsor=>{
-        adatsor.addEventListener("click",()=>FormAruSzerkeszt(adatsor.parentElement));
+        adatsor.addEventListener("click",()=>FormAru(adatsor.parentElement,"?oldal=Admin/AruSzerkeszt","Szerkeszt"));
     })
 }
-function FormAruSzerkeszt(params) {
 
+function VisszaAruListahoz() {
+    
+    const formTarolo=document.getElementById("formTarolo");
+    formTarolo.style.display="none"; 
+    const tablazatTarolo=document.getElementById("tablazatTarolo");
+    tablazatTarolo.style.display="block";
+}
+function AruUjForm() {
+    const tablazatTarolo=document.getElementById("tablazatTarolo");
+    tablazatTarolo.style.display="none";
+    const formAruUj=document.createElement('div');
+    formAruUj.id="formAruUj";
+    const adminTartalom=document.getElementById("adminTartalom");
+    adminTartalom.appendChild(formAruUj);
+}
+function FormAru(params,actionParam,gombFelirat) {
     const tablazatTarolo=document.getElementById("tablazatTarolo");
     tablazatTarolo.style.display="none";
 
@@ -148,48 +178,39 @@ function FormAruSzerkeszt(params) {
 
     const form=document.createElement('Form');
     form.method="post";
-    form.action="?oldal=Admin/AruSzerkeszt";
+    form.action=actionParam;
 
     const aruIdInput=document.createElement("input");
     aruIdInput.type="hidden";
     aruIdInput.name="idaru";
-    aruIdInput.value=params.cells[0].textContent;
+    aruIdInput.value=params?.cells?.[0]?.textContent || "";
     form.appendChild(aruIdInput);
 
     const aruNevInput=document.createElement("input");
     aruNevInput.type="text";
     aruNevInput.name="nev";
-    aruNevInput.value=params.cells[1].textContent;
+    aruNevInput.value=params?.cells?.[1]?.textContent || "";
     aruNevInput.placeholder="Aru neve";
     form.appendChild(aruNevInput);
 
     const aruArInput=document.createElement("input");
     aruArInput.type="number";
     aruArInput.name="ar";
-    aruArInput.value=params.cells[2].textContent;
+    aruArInput.value=params?.cells?.[2]?.textContent || "";
     aruArInput.placeholder="Aru ara";
     form.appendChild(aruArInput);
 
     const aruLeirasInput=document.createElement("input");
     aruLeirasInput.type="text";
     aruLeirasInput.name="leiras";
-    aruLeirasInput.value=params.cells[3].textContent;
+    aruLeirasInput.value=params?.cells?.[3]?.textContent || "";
     aruLeirasInput.placeholder="Aru leiras";
     form.appendChild(aruLeirasInput);
 
     const aruBekuldGomb=document.createElement('button');
     aruBekuldGomb.type="submit";
-    aruBekuldGomb.textContent="Szerkeszt";
+    aruBekuldGomb.textContent=gombFelirat || "Oke" ;
     form.appendChild(aruBekuldGomb);
     formTarolo.appendChild(form);
     document.getElementById("adminTartalom").appendChild(formTarolo);
-    //console.log(params);
-    
-}
-function VisszaAruListahoz() {
-    
-    const formTarolo=document.getElementById("formTarolo");
-    formTarolo.style.display="none"; 
-    const tablazatTarolo=document.getElementById("tablazatTarolo");
-    tablazatTarolo.style.display="block";
 }
