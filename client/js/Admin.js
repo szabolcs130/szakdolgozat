@@ -1,52 +1,47 @@
-window.onload = async function() {
+window.onload = function() {
+    const termekLi=document.getElementById("adminTermek");
+    termekLi.addEventListener("click",()=>AruListaz());
+}
+async function AruListaz() {
     let response= await fetch("?oldal=Apitermekek/Main");
     let data = await response.json();
-    //Listazo(data);
-    //console.log(data);
-
-
     
-
     const aruLista=document.createElement('div');
     aruLista.id='tablazatTarolo';
     
     const aruTable=document.createElement('table');
     aruTable.id='tablazat';
-    //aruTable.classList.add('table');
-    //aruTable.classList.add('table-striped');
-    //aruTable.classList.add('table-bordered');
-    //aruTable.classList.add('table-hover');
         
-    const thead=this.document.createElement('thead');
+    const thead=document.createElement('thead');
         
-    const thR=this.document.createElement('tr');
+    const thR=document.createElement('tr');
     
-    const thHId=this.document.createElement('th');
+    const thHId=document.createElement('th');
     //thHId.scope="row";
     thHId.textContent="Id";
     thR.appendChild(thHId);
 
-    const thHNev=this.document.createElement('th');
+    const thHNev=document.createElement('th');
     //thHNev.scope="row";
     thHNev.textContent="Nev";
     thR.appendChild(thHNev);
 
-    const thHAr=this.document.createElement('th');
+    const thHAr=document.createElement('th');
     //thHAr.scope="row";
     thHAr.textContent="Ar";
     thR.appendChild(thHAr);
 
-    const thHLeiras=this.document.createElement('th');
+    const thHLeiras=document.createElement('th');
     //thHLeiras.scope="row";
     thHLeiras.textContent="Leiras";
     thR.appendChild(thHLeiras);
  
-    const thHTorol=this.document.createElement('th');
+    const thHTorol=document.createElement('th');
     //thHTorol.scope="row";
     thHTorol.textContent="Torol";
     thR.appendChild(thHTorol);
 
-    const thHSzerkeszt=this.document.createElement('th');
+    const thHSzerkeszt=document.createElement('th');
     //thHSzerkeszt.scope="row";
     thHSzerkeszt.textContent="Szerkeszt";
     thR.appendChild(thHSzerkeszt);
@@ -59,34 +54,34 @@ window.onload = async function() {
     thead.appendChild(thHSzerkeszt);
     aruTable.appendChild(thead);
 
-    const tbody=this.document.createElement('tbody');
+    const tbody=document.createElement('tbody');
 
     data.forEach(element => {
     
-        const tbRId=this.document.createElement('tr');
+        const tbRId=document.createElement('tr');
         
-        const tbDId=this.document.createElement('td');
+        const tbDId=document.createElement('td');
         tbDId.classList.add('id_aru');
         tbDId.textContent=element.id_aru;
 
-        const tbDNev=this.document.createElement('td');
+        const tbDNev=document.createElement('td');
         tbDNev.classList.add('nev');
         tbDNev.textContent=element.nev_aru;
 
-        const tbDAr=this.document.createElement('td');
+        const tbDAr=document.createElement('td');
         tbDAr.classList.add('ar');
         tbDAr.textContent=element.ar;
 
-        const tbDLeiras=this.document.createElement('td');
+        const tbDLeiras=document.createElement('td');
         tbDLeiras.classList.add('leiras');
         tbDLeiras.textContent=element.leiras;
 
-        const tbDKep=this.document.createElement('td');
+        const tbDKep=document.createElement('td');
         tbDKep.classList.add('kep');
         tbDKep.textContent="Adatbazisba csinaljam meg";
 
         //Torol
-        const tbDTorol=this.document.createElement('td');
+        const tbDTorol=document.createElement('td');
         tbDTorol.classList.add('AruTorles');
 
         const liTagTorol=document.createElement('li');
@@ -100,7 +95,7 @@ window.onload = async function() {
         //TOROL V E G E
 
         //Szerkeszt
-        const tbDSzerkeszt=this.document.createElement('td');
+        const tbDSzerkeszt=document.createElement('td');
         tbDSzerkeszt.classList.add('AruSzerkeszt');
 
         const liTagSzerkeszt=document.createElement('li');
@@ -124,30 +119,32 @@ window.onload = async function() {
     });
     aruTable.append(tbody);
     aruLista.appendChild(aruTable);
-
-    document.getElementById("adminTartalom").appendChild(aruLista);
-
+    
+    const adminTartalma=document.getElementById("adminTartalom");
+    adminTartalma.innerHTML="";
+    adminTartalma.appendChild(aruLista);
     document.querySelectorAll("#tablazat tbody tr td:last-child").forEach(adatsor=>{
         adatsor.addEventListener("click",()=>FormAruSzerkeszt(adatsor.parentElement));
     })
-
-    //document.body.appendChild(aruLista);
 }
 function FormAruSzerkeszt(params) {
 
     const tablazatTarolo=document.getElementById("tablazatTarolo");
     tablazatTarolo.style.display="none";
 
-    const liTagTorol=document.createElement('li');
+    const liTagVissza=document.createElement('li');
 
     const aTagVissza=document.createElement('a');
     aTagVissza.href='#';
     aTagVissza.textContent="Vissza";
-    liTagTorol.appendChild(aTagVissza);
+    liTagVissza.appendChild(aTagVissza);
 
+    liTagVissza.addEventListener("click",()=>VisszaAruListahoz());
 
     const formTarolo=document.createElement('div');
     formTarolo.id="formTarolo";
+
+    formTarolo.appendChild(liTagVissza);
 
     const form=document.createElement('Form');
     form.method="post";
@@ -186,6 +183,13 @@ function FormAruSzerkeszt(params) {
     form.appendChild(aruBekuldGomb);
     formTarolo.appendChild(form);
     document.getElementById("adminTartalom").appendChild(formTarolo);
-    console.log(params);
+    //console.log(params);
     
+}
+function VisszaAruListahoz() {
+    
+    const formTarolo=document.getElementById("formTarolo");
+    formTarolo.style.display="none"; 
+    const tablazatTarolo=document.getElementById("tablazatTarolo");
+    tablazatTarolo.style.display="block";
 }
