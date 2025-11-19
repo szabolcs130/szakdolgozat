@@ -144,20 +144,14 @@ async function AruListaz() {
 }
 
 function VisszaAruListahoz() {
-    
     const formTarolo=document.getElementById("formTarolo");
-    formTarolo.style.display="none"; 
+    if (formTarolo) {
+        formTarolo.remove();
+    }
     const tablazatTarolo=document.getElementById("tablazatTarolo");
     tablazatTarolo.style.display="block";
 }
-function AruUjForm() {
-    const tablazatTarolo=document.getElementById("tablazatTarolo");
-    tablazatTarolo.style.display="none";
-    const formAruUj=document.createElement('div');
-    formAruUj.id="formAruUj";
-    const adminTartalom=document.getElementById("adminTartalom");
-    adminTartalom.appendChild(formAruUj);
-}
+
 function FormAru(params,actionParam,gombFelirat) {
     const tablazatTarolo=document.getElementById("tablazatTarolo");
     tablazatTarolo.style.display="none";
