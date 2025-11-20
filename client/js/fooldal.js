@@ -1,19 +1,18 @@
 window.onload = async function() {
-    let responseAruOssuOldalSzam= await fetch("?oldal=Apitermekek/AruOsszSor");
-    let AruOssuOldalSzam = await responseAruOssuOldalSzam.json();
+    let responseAruOsszOldalSzam= await fetch("?oldal=Apitermekek/AruOsszSor");
+    let AruOsszOldalSzam = await responseAruOsszOldalSzam.json();
 
     const oldalValaszto=document.getElementById("oldalValaszto");
     oldalValaszto.addEventListener("change",e=>Lapoz(e.target.value));
-    if (oldalValaszto.childElementCount==0) {//elso latogatas
-        const option=this.document.createElement('option');
-        option.value=0;
-        option.textContent="1. oldal";
-        const option2=this.document.createElement('option');
-        option2.value=10;
-        option2.textContent="2. oldal";
-
-        oldalValaszto.appendChild(option);
-        oldalValaszto.appendChild(option2);
+    if (oldalValaszto.childElementCount==0) {
+        const ellenorzottOsszAru=AruOsszOldalSzam?.[0]?.osszes || 0;
+        const oldalSzamok=Math.floor(ellenorzottOsszAru/10);
+        for (let i = 0; i < oldalSzamok; i++) {
+            const option=this.document.createElement('option');
+            option.value=(i*10);
+            option.textContent=(i+1)+". oldal";
+            oldalValaszto.appendChild(option);
+        }
         Lapoz(0);
     }
 }
