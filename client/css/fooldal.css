@@ -28,3 +28,13 @@ html{
 .aru_nev{
     font-size: 1.2rem;
 }
+#lapozo{
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;   
+}
+#lapozo>li{
+    list-style: none;
+    cursor: pointer;
+}

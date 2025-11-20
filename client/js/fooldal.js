@@ -1,12 +1,29 @@
-//import { Listazo } from './aruListazo.js';
-
 window.onload = async function() {
-    let response= await fetch("?oldal=Apitermekek/Main");
+    let responseAruOssuOldalSzam= await fetch("?oldal=Apitermekek/AruOsszSor");
+    let AruOssuOldalSzam = await responseAruOssuOldalSzam.json();
+
+    const oldalValaszto=document.getElementById("oldalValaszto");
+    oldalValaszto.addEventListener("change",e=>Lapoz(e.target.value));
+    if (oldalValaszto.childElementCount==0) {//elso latogatas
+        const option=this.document.createElement('option');
+        option.value=0;
+        option.textContent="1. oldal";
+        const option2=this.document.createElement('option');
+        option2.value=10;
+        option2.textContent="2. oldal";
+
+        oldalValaszto.appendChild(option);
+        oldalValaszto.appendChild(option2);
+        Lapoz(0);
+    }
+}
+async function Lapoz(oldalSzama) {
+    console.log("oldal: "+oldalSzama)
+    let response= await fetch("?oldal=Apitermekek/lekerdezAruLapozo&oldalSzam="+oldalSzama);
     let data = await response.json();
-    //Listazo(data);
-    //console.log(data);
-    const aruk=document.createElement('div');
-    aruk.id='aruk';
+    console.log(data);
+    const aruk=document.getElementById('aruk');
+    aruk.innerHTML="";
     data.forEach(element => {
 
         const aru=document.createElement('div');
@@ -23,8 +40,6 @@ window.onload = async function() {
         const aru_leiras=document.createElement('div');
         aru_leiras.classList.add('aru_leiras');
         aru_leiras.textContent=element.leiras;
-        
-        //        echo '<li><a href="?oldal=Termek/Main/'.$ertek['id_aru'].'">Megnéz</a></li>';
         
         const liTag=document.createElement('li');
 
@@ -44,15 +59,3 @@ window.onload = async function() {
     });
     document.body.appendChild(aruk);
 }
-/*
-echo '<div id="aruk">';
-       foreach ($aru as $ertek) {
-            echo '<div class="aru">';
-                echo '<div class="aru_nev">'.$ertek['nev_aru'].'</div>';
-                echo '<div class="aru_ar">'.$ertek['ar'].'</div>';
-                echo '<div class="aru_leiras">'.$ertek['leiras'].'</div>';
-                echo '<li><a href="?oldal=Termek/Main/'.$ertek['id_aru'].'">Megnéz</a></li>';
-            echo '</div>';
-       }
-       echo '</div>';
-*/

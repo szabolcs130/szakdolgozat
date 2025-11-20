@@ -1,11 +1,24 @@
 <?php
 namespace Server\Controller;
-use Server\Model\FooldalModel;
+use Server\Model\AruModel;
 class ApitermekekController{
-    public static function Main(){
+    public static function Main(){//$szam
         header('Content-Type: application/json; charset=utf-8');
         ob_clean(); 
-        $aru=FooldalModel::lekerdezAru();
+        //if (is_numeric($szam)) {
+            $aru=AruModel::lekerdezAru();//$szam
+            if ($aru) {
+            echo json_encode($aru);
+            exit;
+            }
+        //}
+        echo json_encode([]);
+        exit;
+    }
+    public static function AruOsszSor(){
+        header('Content-Type: application/json; charset=utf-8');
+        ob_clean(); 
+        $aru=AruModel::lekerdezAruOsszSor();
         if ($aru) {
             echo json_encode($aru);
             exit;
@@ -13,6 +26,21 @@ class ApitermekekController{
         echo json_encode([]);
         exit;
     }
-   
+    public static function lekerdezAruLapozo(){
+        header('Content-Type: application/json; charset=utf-8');
+        ob_clean(); 
+        //if (isset($_GET['oldalSzam'])) {
+            //$oldalSzam=$_GET['oldalSzam'];
+            //if (is_numeric($oldalSzam)) {
+                $aru=AruModel::lekerdezAruLapozo($_GET['oldalSzam']);
+                if ($aru) {
+                    echo json_encode($aru);
+                    exit;
+                }
+           // }
+        //}
+        echo json_encode([]);
+        exit;
+    }
 }
 ?>

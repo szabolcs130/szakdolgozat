@@ -18,7 +18,33 @@ class AruModel{
         }catch (\PDOException $e) {
             return 0;
         }
-    }public static function lekerdezAruById($id){
+    }
+    public static function lekerdezAruLapozo($oldalSzam){
+        try {
+            $db = self::Connection();
+            $sql = "SELECT * FROM aru LIMIT 10 OFFSET :oldalSzam";
+            $sth = $db->prepare($sql);
+            $sth->bindValue(':oldalSzam',(int)$oldalSzam,\PDO::PARAM_INT);
+            $sth->execute();
+            $eredmeny = $sth->fetchAll(\PDO::FETCH_ASSOC);
+            return $eredmeny;
+        }catch (\PDOException $e) {
+            return 0;
+        }
+    }
+    public static function lekerdezAruOsszSor(){
+        try {
+            $db = self::Connection();
+            $sql = "SELECT COUNT(*) AS osszes FROM aru";
+            $sth = $db->prepare($sql);
+            $sth->execute();
+            $eredmeny = $sth->fetchAll(\PDO::FETCH_ASSOC);
+            return $eredmeny;
+        }catch (\PDOException $e) {
+            return 0;
+        }
+    }
+    public static function lekerdezAruById($id){
         try {
             $db = self::Connection();
             $sql = "SELECT * FROM aru WHERE id_aru=:id_aru";

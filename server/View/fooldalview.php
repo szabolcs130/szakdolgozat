@@ -2,7 +2,7 @@
 namespace Server\View;
 class FooldalView{
 
-    public static function ShowAru($aru){
+    public static function Main(){
        /*echo '<div id="aruk">';
        foreach ($aru as $ertek) {
             echo '<div class="aru">';
@@ -11,8 +11,14 @@ class FooldalView{
                 echo '<div class="aru_leiras">'.$ertek['leiras'].'</div>';
                 echo '<li><a href="?oldal=Termek/Main/'.$ertek['id_aru'].'">Megnéz</a></li>';
             echo '</div>';
-       }
-       echo '</div>';*/
+        }
+        echo '</div>';*/
+        echo '<div id="aruk"></div>';
+        echo '<div id="lapozo">';
+        echo '<li>Elozo</li>';
+        echo '<select id="oldalValaszto"></select>';
+        echo '<li>Kovetkezo</li>';
+        echo '</div>';
     }
 }
 ?>
