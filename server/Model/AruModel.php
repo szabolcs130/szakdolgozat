@@ -1,0 +1,103 @@
+<?php
+namespace Server\Model;
+    use Server\Model\Csatlakozas;
+
+class AruModel{
+  
+    public static function Connection() {
+        return Csatlakozas::GetConnection();
+    }
+    public static function lekerdezAru(){
+        try {
+            $db = self::Connection();
+            $sql = "SELECT * FROM aru";
+            $sth = $db->prepare($sql);
+            $sth->execute();
+            $eredmeny = $sth->fetchAll(\PDO::FETCH_ASSOC);
+            return $eredmeny;
+        }catch (\PDOException $e) {
+            return 0;
+        }
+    }
+    public static function lekerdezAruLapozo($oldalSzam){
+        try {
+            $db = self::Connection();
+            $sql = "SELECT * FROM aru LIMIT 10 OFFSET :oldalSzam";
+            $sth = $db->prepare($sql);
+            $sth->bindValue(':oldalSzam',(int)$oldalSzam,\PDO::PARAM_INT);
+            $sth->execute();
+            $eredmeny = $sth->fetchAll(\PDO::FETCH_ASSOC);
+            return $eredmeny;
+        }catch (\PDOException $e) {
+            return 0;
+        }
+    }
+    public static function lekerdezAruOsszSor(){
+        try {
+            $db = self::Connection();
+            $sql = "SELECT COUNT(*) AS osszes FROM aru";
+            $sth = $db->prepare($sql);
+            $sth->execute();
+            $eredmeny = $sth->fetchAll(\PDO::FETCH_ASSOC);
+            return $eredmeny;
+        }catch (\PDOException $e) {
+            return 0;
+        }
+    }
+    public static function lekerdezAruById($id){
+        try {
+            $db = self::Connection();
+            $sql = "SELECT * FROM aru WHERE id_aru=:id_aru";
+            $sth = $db->prepare($sql);
+            $sth->execute(array(":id_aru"=>$id));
+            $eredmeny = $sth->fetchAll(\PDO::FETCH_ASSOC);
+            return $eredmeny;
+        }catch (\PDOException $e) {
+            return 0;
+        }
+    }
+    public static function AruTorol($aruId){
+        try{
+            $db = self::Connection();
+            $sql = "DELETE FROM  `aru` WHERE id_aru=:id_aru";
+            $sth = $db->prepare($sql);
+            $sth->execute(array(":id_aru"=>$aruId));
+            if ($sth->rowCount()) {
+                return 1;
+            }
+            return 0;
+        } catch (\PDOException $e) {
+            return 0;
+        }
+    }
+    public static function AruSzerkeszt($id,$nev,$ar,$leiras){
+        try{
+            $db = self::Connection();
+            $sql = "UPDATE `aru` SET nev_aru = :nev_aru, ar = :ar, leiras = :leiras WHERE id_aru = :id_aru";
+            $sth = $db->prepare($sql);
+            $sth->execute(array(":id_aru"=>$id, ":nev_aru"=>$nev, ":ar"=>$ar, ":leiras"=>$leiras));
+            if ($sth->rowCount()) {
+                return 1;
+            }
+            return 0;
+        } catch (\PDOException $e) {
+            return 0;
+        }
+    }
+        public static function hozzaadAru($nev,$ar,$leiras){
+        try{
+            $db = self::Connection();
+            $sql = "INSERT INTO `aru` (`nev_aru`, `ar`,`leiras`) VALUES (:nev_aru, :ar,:leiras)";
+            $sth = $db->prepare($sql);
+            $sth->execute(array(":nev_aru"=>$nev,":ar"=>$ar,":leiras"=>$leiras));
+            if ($sth->rowCount()) {
+                return 1;
+            }
+            return 0;
+        } catch (\PDOException $e) {
+            return 0;
+        }
+    }
+
+}
+?>

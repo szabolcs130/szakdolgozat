@@ -5,12 +5,13 @@ use Server\Model\FooldalModel;
 class FooldalController{
     public static function Main(){
 
-        $aru=FooldalModel::lekerdezAru();
+       /* $aru=FooldalModel::lekerdezAru();
         if ($aru) {
             FooldalView::ShowAru($aru);
             return 1;
-        }
-        return 0;
+        }*/
+        FooldalView::Main();
+        return 1;
     }
 }
 ?>

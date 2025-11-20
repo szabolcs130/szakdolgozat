@@ -15,6 +15,5 @@ use Server\Request;
     <?php
     Request::GetKeres();
     ?>
-    <!--</div>-->
 </body>
 </html>
