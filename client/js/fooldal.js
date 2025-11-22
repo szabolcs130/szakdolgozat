@@ -15,7 +15,6 @@ window.onload = async function() {
             oldalValaszto.appendChild(option);
         }
         Lapoz(0);
-        //elozoLapozo.style.visibility="hidden";
     }
     kovetkezoLapozo.addEventListener("click",()=>{
         if ((oldalValaszto.childElementCount-1)>=(oldalValaszto.selectedIndex+1)) {
@@ -31,7 +30,21 @@ window.onload = async function() {
         
     });
 }
-
+function ElozoKovetkezoLapozoMegjelenitese() {
+    const elozoLapozo=document.getElementById("elozo");
+    const kovetkezoLapozo=document.getElementById("kovetkezo");
+    
+    if (oldalValaszto.selectedIndex==0) {
+        elozoLapozo.style.visibility="hidden";
+    }else{
+        elozoLapozo.style.visibility="visible";
+    }
+    if ((oldalValaszto.selectedIndex+1)==(oldalValaszto.childElementCount)) {
+        kovetkezoLapozo.style.visibility="hidden";
+    }else{
+        kovetkezoLapozo.style.visibility="visible";
+    }
+}
 async function Lapoz(oldalSzama) {
     let response= await fetch("?oldal=Apitermekek/lekerdezAruLapozo&oldalSzam="+oldalSzama);
     let data = await response.json();
@@ -70,4 +83,6 @@ async function Lapoz(oldalSzama) {
         aruk.appendChild(aru);
 
     });
+    window.scrollTo(0,0);
+    ElozoKovetkezoLapozoMegjelenitese();
 }
