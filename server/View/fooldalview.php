@@ -15,9 +15,9 @@ class FooldalView{
         echo '</div>';*/
         echo '<div id="aruk"></div>';
         echo '<div id="lapozo">';
-        echo '<li>Elozo</li>';
+        echo '<li id="elozo">Elozo</li>';
         echo '<select id="oldalValaszto"></select>';
-        echo '<li>Kovetkezo</li>';
+        echo '<li id="kovetkezo">Kovetkezo</li>';
         echo '</div>';
     }
 }

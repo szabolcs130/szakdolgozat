@@ -1,12 +1,13 @@
 window.onload = async function() {
-    let responseAruOsszOldalSzam= await fetch("?oldal=Apitermekek/AruOsszSor");
-    let AruOsszOldalSzam = await responseAruOsszOldalSzam.json();
-
+    const responseAruOsszOldalSzam= await fetch("?oldal=Apitermekek/AruOsszSor");
+    const AruOsszOldalSzam = await responseAruOsszOldalSzam.json();
+    const ellenorzottOsszAru=AruOsszOldalSzam?.[0]?.osszes || 0;
+    const oldalSzamok=Math.floor(ellenorzottOsszAru/10);
+    const elozoLapozo=document.getElementById("elozo");
+    const kovetkezoLapozo=document.getElementById("kovetkezo");
     const oldalValaszto=document.getElementById("oldalValaszto");
     oldalValaszto.addEventListener("change",e=>Lapoz(e.target.value));
     if (oldalValaszto.childElementCount==0) {
-        const ellenorzottOsszAru=AruOsszOldalSzam?.[0]?.osszes || 0;
-        const oldalSzamok=Math.floor(ellenorzottOsszAru/10);
         for (let i = 0; i < oldalSzamok; i++) {
             const option=this.document.createElement('option');
             option.value=(i*10);
@@ -14,13 +15,26 @@ window.onload = async function() {
             oldalValaszto.appendChild(option);
         }
         Lapoz(0);
+        //elozoLapozo.style.visibility="hidden";
     }
+    kovetkezoLapozo.addEventListener("click",()=>{
+        if ((oldalValaszto.childElementCount-1)>=(oldalValaszto.selectedIndex+1)) {
+            oldalValaszto.selectedIndex=(oldalValaszto.selectedIndex+1);
+            oldalValaszto.dispatchEvent(new Event("change"));
+        }
+    });
+    elozoLapozo.addEventListener("click",()=>{
+        if ((oldalValaszto.selectedIndex-1)>=0) {
+            oldalValaszto.selectedIndex=(oldalValaszto.selectedIndex-1);
+            oldalValaszto.dispatchEvent(new Event("change"));
+        }
+        
+    });
 }
+
 async function Lapoz(oldalSzama) {
-    console.log("oldal: "+oldalSzama)
     let response= await fetch("?oldal=Apitermekek/lekerdezAruLapozo&oldalSzam="+oldalSzama);
     let data = await response.json();
-    console.log(data);
     const aruk=document.getElementById('aruk');
     aruk.innerHTML="";
     data.forEach(element => {
@@ -56,5 +70,4 @@ async function Lapoz(oldalSzama) {
         aruk.appendChild(aru);
 
     });
-    document.body.appendChild(aruk);
 }
