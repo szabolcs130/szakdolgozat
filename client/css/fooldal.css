@@ -38,3 +38,6 @@ html{
     list-style: none;
     cursor: pointer;
 }
+#elozo{
+    visibility: hidden;
+}

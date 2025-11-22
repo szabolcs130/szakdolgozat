@@ -1,27 +1,54 @@
 window.onload = async function() {
-    let responseAruOssuOldalSzam= await fetch("?oldal=Apitermekek/AruOsszSor");
-    let AruOssuOldalSzam = await responseAruOssuOldalSzam.json();
-
+    const responseAruOsszOldalSzam= await fetch("?oldal=Apitermekek/AruOsszSor");
+    const AruOsszOldalSzam = await responseAruOsszOldalSzam.json();
+    const ellenorzottOsszAru=AruOsszOldalSzam?.[0]?.osszes || 0;
+    const oldalSzamok=Math.floor(ellenorzottOsszAru/10)==0 ? 1 : (Math.floor(ellenorzottOsszAru/10));
+    const elozoLapozo=document.getElementById("elozo");
+    const kovetkezoLapozo=document.getElementById("kovetkezo");
     const oldalValaszto=document.getElementById("oldalValaszto");
     oldalValaszto.addEventListener("change",e=>Lapoz(e.target.value));
-    if (oldalValaszto.childElementCount==0) {//elso latogatas
-        const option=this.document.createElement('option');
-        option.value=0;
-        option.textContent="1. oldal";
-        const option2=this.document.createElement('option');
-        option2.value=10;
-        option2.textContent="2. oldal";
-
-        oldalValaszto.appendChild(option);
-        oldalValaszto.appendChild(option2);
-        Lapoz(0);
+    if (oldalValaszto.childElementCount==0) {
+        for (let i = 0; i < oldalSzamok; i++) {
+            const option=this.document.createElement('option');
+            option.value=(i*10);
+            option.textContent=(i+1)+". oldal";
+            oldalValaszto.appendChild(option);
+        }
+        oldalValaszto.selectedIndex=0;
+        oldalValaszto.dispatchEvent(new Event("change"));
+    }
+    kovetkezoLapozo.addEventListener("click",()=>{
+        if ((oldalValaszto.childElementCount-1)>=(oldalValaszto.selectedIndex+1)) {
+            oldalValaszto.selectedIndex=(oldalValaszto.selectedIndex+1);
+            oldalValaszto.dispatchEvent(new Event("change"));
+        }
+    });
+    elozoLapozo.addEventListener("click",()=>{
+        if ((oldalValaszto.selectedIndex-1)>=0) {
+            oldalValaszto.selectedIndex=(oldalValaszto.selectedIndex-1);
+            oldalValaszto.dispatchEvent(new Event("change"));
+        }
+        
+    });
+}
+function ElozoKovetkezoLapozoMegjelenitese() {
+    const elozoLapozo=document.getElementById("elozo");
+    const kovetkezoLapozo=document.getElementById("kovetkezo");
+    
+    if (oldalValaszto.selectedIndex==0) {
+        elozoLapozo.style.visibility="hidden";
+    }else{
+        elozoLapozo.style.visibility="visible";
+    }
+    if ((oldalValaszto.selectedIndex+1)==(oldalValaszto.childElementCount)) {
+        kovetkezoLapozo.style.visibility="hidden";
+    }else{
+        kovetkezoLapozo.style.visibility="visible";
     }
 }
 async function Lapoz(oldalSzama) {
-    console.log("oldal: "+oldalSzama)
     let response= await fetch("?oldal=Apitermekek/lekerdezAruLapozo&oldalSzam="+oldalSzama);
     let data = await response.json();
-    console.log(data);
     const aruk=document.getElementById('aruk');
     aruk.innerHTML="";
     data.forEach(element => {
@@ -57,5 +84,6 @@ async function Lapoz(oldalSzama) {
         aruk.appendChild(aru);
 
     });
-    document.body.appendChild(aruk);
+    window.scrollTo(0,0);
+    ElozoKovetkezoLapozoMegjelenitese();
 }
