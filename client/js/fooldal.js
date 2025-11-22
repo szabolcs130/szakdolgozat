@@ -2,7 +2,7 @@ window.onload = async function() {
     const responseAruOsszOldalSzam= await fetch("?oldal=Apitermekek/AruOsszSor");
     const AruOsszOldalSzam = await responseAruOsszOldalSzam.json();
     const ellenorzottOsszAru=AruOsszOldalSzam?.[0]?.osszes || 0;
-    const oldalSzamok=Math.floor(ellenorzottOsszAru/10);
+    const oldalSzamok=Math.floor(ellenorzottOsszAru/10)==0 ? 1 : (Math.floor(ellenorzottOsszAru/10));
     const elozoLapozo=document.getElementById("elozo");
     const kovetkezoLapozo=document.getElementById("kovetkezo");
     const oldalValaszto=document.getElementById("oldalValaszto");
@@ -14,7 +14,8 @@ window.onload = async function() {
             option.textContent=(i+1)+". oldal";
             oldalValaszto.appendChild(option);
         }
-        Lapoz(0);
+        oldalValaszto.selectedIndex=0;
+        oldalValaszto.dispatchEvent(new Event("change"));
     }
     kovetkezoLapozo.addEventListener("click",()=>{
         if ((oldalValaszto.childElementCount-1)>=(oldalValaszto.selectedIndex+1)) {
