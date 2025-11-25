@@ -9,7 +9,7 @@ html{
        border: 1px solid red;
 }
 #aru{
-    width: calc(80%);
+    width: calc(100%);
     min-width: 150px;
     max-width: 500px;
     border: 1px solid black;
@@ -20,6 +20,12 @@ html{
     word-break: break-word;
     min-height: 40vh;
     height: auto;
+ }
+ #termekForm{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
  }
 .aru_nev{
     font-size: 1.2rem;
@@ -36,4 +42,10 @@ html{
     align-items: center;
     justify-content: center;
     flex-direction: column;
+}
+#kosarDiv{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
 }
