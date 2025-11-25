@@ -26,7 +26,7 @@ class ApitermekekController{
         echo json_encode([]);
         exit;
     }
-    public static function lekerdezAruLapozo(){
+    /*public static function lekerdezAruLapozo(){
         header('Content-Type: application/json; charset=utf-8');
         ob_clean(); 
         //if (isset($_GET['oldalSzam'])) {
@@ -39,6 +39,38 @@ class ApitermekekController{
                 }
            // }
         //}
+        echo json_encode([]);
+        exit;
+    }*/
+    public static function lekerdezAruSzures(){
+        header('Content-Type: application/json; charset=utf-8');
+        ob_clean(); 
+        //if (isset($_GET['oldalSzam'])) {
+            //$oldalSzam=$_GET['oldalSzam'];
+            //if (is_numeric($oldalSzam)) {
+                $oldalSzam=$_GET['oldalSzam'] ?? null;
+                $nev=$_GET['nev'] ?? null;
+                $minAr=$_GET['minAr'] ?? null;
+                $maxAr=$_GET['maxAr'] ?? null;
+                $osszesDarab=isset($_GET['osszesDarab']) ? $_GET['osszesDarab'] : null;
+                $aru=AruModel::lekerdezAruSzures($oldalSzam,$osszesDarab,$nev,$minAr,$maxAr);
+                if ($aru) {
+                    echo json_encode($aru);
+                    exit;
+                }
+           // }
+        //}
+        echo json_encode([]);
+        exit;
+    }
+    public static function lekerdezAruMaxAr(){
+        header('Content-Type: application/json; charset=utf-8');
+        ob_clean(); 
+        $aru=AruModel::lekerdezAruMaxAr();
+        if ($aru) {
+            echo json_encode($aru);
+            exit;
+        }
         echo json_encode([]);
         exit;
     }

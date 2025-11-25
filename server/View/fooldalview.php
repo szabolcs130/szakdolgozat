@@ -13,12 +13,20 @@ class FooldalView{
             echo '</div>';
         }
         echo '</div>';*/
+        echo '<div id="szuroTarolo">';
+        echo '</div>';
         echo '<div id="aruk"></div>';
         echo '<div id="lapozo">';
         echo '<li id="elozo">Elozo</li>';
         echo '<select id="oldalValaszto"></select>';
         echo '<li id="kovetkezo">Kovetkezo</li>';
         echo '</div>';
+        
+        //echo '<details>';
+        //echo '<summary><input type="range" step="10" min=0 max=10000>';
+        //echo '</summary>';
+        //echo '</details>';
+
     }
 }
 ?>

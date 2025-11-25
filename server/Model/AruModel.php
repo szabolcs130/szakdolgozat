@@ -19,12 +19,24 @@ class AruModel{
             return 0;
         }
     }
-    public static function lekerdezAruLapozo($oldalSzam){
+    /*public static function lekerdezAruLapozo($oldalSzam){
         try {
             $db = self::Connection();
             $sql = "SELECT * FROM aru LIMIT 10 OFFSET :oldalSzam";
             $sth = $db->prepare($sql);
             $sth->bindValue(':oldalSzam',(int)$oldalSzam,\PDO::PARAM_INT);
+            $sth->execute();
+            $eredmeny = $sth->fetchAll(\PDO::FETCH_ASSOC);
+            return $eredmeny;
+        }catch (\PDOException $e) {
+            return 0;
+        }
+    }*/
+    public static function lekerdezAruMaxAr(){
+        try {
+            $db = self::Connection();
+            $sql = "SELECT MAX(ar) AS max FROM aru";
+            $sth = $db->prepare($sql);
             $sth->execute();
             $eredmeny = $sth->fetchAll(\PDO::FETCH_ASSOC);
             return $eredmeny;
@@ -95,6 +107,43 @@ class AruModel{
             }
             return 0;
         } catch (\PDOException $e) {
+            return 0;
+        }
+    }
+    public static function lekerdezAruSzures($oldalSzam=null,$osszesDarab=null,$nev=null,$minAr=null,$maxAr=null){
+        try {
+            $db = self::Connection();
+            $sql =$osszesDarab==null ? "SELECT * FROM aru" : "SELECT COUNT(*) AS osszes FROM aru";
+            if (!empty($nev)) {
+                $sql.=" WHERE lower(nev_aru) LIKE :nev";
+                if (!empty($minAr)) {
+                    $sql.=" AND ar>=:minAr";
+                }
+                if (!empty($maxAr)) {
+                    $sql.=" AND ar<=:maxAr";
+                }
+            }
+            if (!$osszesDarab) {
+                $sql.=" LIMIT 10 OFFSET :oldalSzam";
+            }
+            
+            $sth = $db->prepare($sql);
+            if (!empty($nev)) {
+                $sth->bindValue(':nev','%'.strtolower($nev).'%');
+                if (!empty($minAr)) {
+                $sth->bindValue(':minAr',$minAr);
+                }
+                if (!empty($maxAr)) {
+                $sth->bindValue(':maxAr',$maxAr);
+                }
+            }
+            if (!$osszesDarab) {
+                $sth->bindValue(':oldalSzam',(int)$oldalSzam,\PDO::PARAM_INT);
+            }
+            $sth->execute();
+            $eredmeny = $sth->fetchAll(\PDO::FETCH_ASSOC);
+            return $eredmeny;
+        }catch (\PDOException $e) {
             return 0;
         }
     }

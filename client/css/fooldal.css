@@ -1,14 +1,21 @@
 html{
     font-size: 16px;
  }
- #aruk{
-       width: 100%;
-       display: flex;
-       justify-content: center;
-       align-items: center;
-       flex-wrap: wrap;
-       border: 1px solid black;
-       padding-top: calc(3%);
+#aruk{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    border: 1px solid black;
+    padding-top: calc(3%);
+ }
+ #szuroTarolo{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid black;
  }
  .aru{
     width: calc(30%);
