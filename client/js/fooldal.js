@@ -159,7 +159,11 @@ async function Lapoz(data) {
 
         const aru_ar=document.createElement('div');
         aru_ar.classList.add('aru_ar');
-        aru_ar.textContent=element.ar;
+        aru_ar.textContent=element.ar+" Forint";
+
+        const aru_mennyiseg=document.createElement('div');
+        aru_mennyiseg.classList.add('aru_mennyiseg');
+        aru_mennyiseg.textContent=element.mennyiseg ? "Raktáron: "+element.mennyiseg+"db" : "Elfogyott";
 
         const aru_leiras=document.createElement('div');
         aru_leiras.classList.add('aru_leiras');
@@ -177,6 +181,7 @@ async function Lapoz(data) {
         aru.appendChild(aru_kep);
         aru.appendChild(aru_ar);
         aru.appendChild(aru_leiras);
+        aru.appendChild(aru_mennyiseg);
         aru.appendChild(liTag);
 
         aruk.appendChild(aru);
