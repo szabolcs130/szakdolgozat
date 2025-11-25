@@ -1,26 +1,27 @@
 window.onload = async function() {
     const data=await FetchMeghiv("lekerdezAruSzures",null,true);
-    SzuroFelepit();
+    const data2=await FetchMeghiv("lekerdezAruMaxAr");
+    SzuroFelepit(data2);
     LapozashozElozoKovekezoEsemenyek();
     LapozashozSelectEsemeny();
     LapozashozLegorduloMenu(data);
 }
 
-async function SzuroFelepit() {
+async function SzuroFelepit(maximumAr) {
     let szuroTarolo=document.getElementById("szuroTarolo");
 
     const minArLabel=document.createElement("label");
-    minArLabel.textContent="Min";
+    minArLabel.textContent="Min: 0";
 
     const maxArLabel=document.createElement("label");
-    maxArLabel.textContent="Max";
+    maxArLabel.textContent="Max: "+maximumAr?.[0]?.max;
 
     const minArInput=document.createElement("input");
     minArInput.type="range";
     minArInput.id="minAr";
     minArInput.min=0;
     minArInput.value=0;
-    minArInput.max=1000;
+    minArInput.max=maximumAr?.[0]?.max;
     minArInput.type="range";
 
     let maxArInput=document.createElement("input");
@@ -28,8 +29,8 @@ async function SzuroFelepit() {
     maxArInput.id="maxAr";
     maxArInput.type="range";
     maxArInput.min=0;
-    maxArInput.max=1000;
-    maxArInput.value=0;
+    maxArInput.max=maximumAr?.[0]?.max;
+    maxArInput.value=maximumAr?.[0]?.max;
 
     let nevKeresInput=document.createElement("input");
     nevKeresInput.type="text";
@@ -38,6 +39,12 @@ async function SzuroFelepit() {
     let szuresBekuldGomb=document.createElement('button');
     szuresBekuldGomb.type="submit";
     szuresBekuldGomb.textContent="Keres";
+    minArInput.addEventListener("input",(e)=>{
+        minArLabel.textContent="Min: "+e.target.value;
+    });
+    maxArInput.addEventListener("input",(e)=>{
+        maxArLabel.textContent="Max: "+e.target.value;
+    });
     szuresBekuldGomb.addEventListener("click",async function(){
         console.log(nevKeresInput.value+"  min "+minArInput.value+"  max "+maxArInput.value);
         const data1=await FetchMeghiv("lekerdezAruSzures",0,null,nevKeresInput.value || null,minArInput.value || null,maxArInput.value || null);

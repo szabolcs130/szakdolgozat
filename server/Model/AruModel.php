@@ -19,12 +19,24 @@ class AruModel{
             return 0;
         }
     }
-    public static function lekerdezAruLapozo($oldalSzam){
+    /*public static function lekerdezAruLapozo($oldalSzam){
         try {
             $db = self::Connection();
             $sql = "SELECT * FROM aru LIMIT 10 OFFSET :oldalSzam";
             $sth = $db->prepare($sql);
             $sth->bindValue(':oldalSzam',(int)$oldalSzam,\PDO::PARAM_INT);
+            $sth->execute();
+            $eredmeny = $sth->fetchAll(\PDO::FETCH_ASSOC);
+            return $eredmeny;
+        }catch (\PDOException $e) {
+            return 0;
+        }
+    }*/
+    public static function lekerdezAruMaxAr(){
+        try {
+            $db = self::Connection();
+            $sql = "SELECT MAX(ar) AS max FROM aru";
+            $sth = $db->prepare($sql);
             $sth->execute();
             $eredmeny = $sth->fetchAll(\PDO::FETCH_ASSOC);
             return $eredmeny;
