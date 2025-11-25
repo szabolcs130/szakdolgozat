@@ -7,7 +7,7 @@ window.onload = async function() {
 }
 
 async function SzuroFelepit() {
-    const szuroTarolo=document.getElementById("szuroTarolo");
+    let szuroTarolo=document.getElementById("szuroTarolo");
 
     const minArLabel=document.createElement("label");
     minArLabel.textContent="Min";
@@ -20,26 +20,29 @@ async function SzuroFelepit() {
     minArInput.id="minAr";
     minArInput.min=0;
     minArInput.value=0;
+    minArInput.max=1000;
     minArInput.type="range";
 
-    const maxArInput=document.createElement("input");
+    let maxArInput=document.createElement("input");
     maxArInput.type="range";
     maxArInput.id="maxAr";
     maxArInput.type="range";
+    maxArInput.min=0;
     maxArInput.max=1000;
-    maxArInput.value=1000;
+    maxArInput.value=0;
 
-    const nevKeresInput=document.createElement("input");
+    let nevKeresInput=document.createElement("input");
     nevKeresInput.type="text";
     nevKeresInput.placeholder="Kulcsszo"
     nevKeresInput.id="nevKeres"
-    const szuresBekuldGomb=document.createElement('button');
+    let szuresBekuldGomb=document.createElement('button');
     szuresBekuldGomb.type="submit";
     szuresBekuldGomb.textContent="Keres";
     szuresBekuldGomb.addEventListener("click",async function(){
-        const data1=await FetchMeghiv("lekerdezAruSzures",0,null,nevKeresInput?.value || null,minArInput?.value || null, maxArInput?.value || null);
+        console.log(nevKeresInput.value+"  min "+minArInput.value+"  max "+maxArInput.value);
+        const data1=await FetchMeghiv("lekerdezAruSzures",0,null,nevKeresInput.value || null,minArInput.value || null,maxArInput.value || null);
         Lapoz(data1);
-        const data2=await FetchMeghiv("lekerdezAruSzures",null,true,nevKeresInput?.value || null,minArInput?.value || null, maxArInput?.value || null);
+        const data2=await FetchMeghiv("lekerdezAruSzures",null,true,nevKeresInput.value || null,minArInput.value || null, maxArInput.value || null);
         LapozashozLegorduloMenu(data2);
     });
 
@@ -57,13 +60,14 @@ async function FetchMeghiv(param,oldalSzam=null,osszesDarab=null,nev=null,minAr=
     }
     if (nev) {
         url=url+"&nev="+nev;
-    }
-    if (minAr) {
+        if (minAr) {
         url=url+"&minAr="+minAr;
+        }
+        if (maxAr) {
+            url=url+"&maxAr="+maxAr;
+        }
     }
-    if (maxAr) {
-        url=url+"&maxAr="+maxAr;
-    }
+    console.log(url);
     const response= await fetch(url);
     const data = await response.json();
     return data;
@@ -74,7 +78,7 @@ function LapozashozSelectEsemeny() {
         const minArInput=document.getElementById("minAr");
         const maxArInput=document.getElementById("maxAr");
         const nevKeresInput=document.getElementById("nevKeres");
-        const data1=await FetchMeghiv("lekerdezAruSzures",e.target.value,null,nevKeresInput.value || null,minArInput || null,maxArInput.value || null);
+        const data1=await FetchMeghiv("lekerdezAruSzures",e.target.value,null,nevKeresInput.value || null,minArInput.value || null,maxArInput.value || null);
         Lapoz(data1);
         //const data2=await FetchMeghiv("lekerdezAruSzures",null,true,nevKeresInput.value || null,minArInput.value || null,maxArInput.value || null);
        // LapozashozLegorduloMenu(data2);
@@ -101,7 +105,6 @@ const elozoLapozo=document.getElementById("elozo");
     });
 }
 async function LapozashozLegorduloMenu(param){
-    //console.log(param[0].osszes+" lapoz legordulo");
     const AruOsszOldalSzam=param; 
     const ellenorzottOsszAru=AruOsszOldalSzam?.[0]?.osszes || 0;
     const oldalSzamok=Math.ceil(ellenorzottOsszAru/10)==0 ? 1 : (Math.ceil(ellenorzottOsszAru/10));
@@ -135,7 +138,7 @@ function ElozoKovetkezoLapozoMegjelenitese() {
     }
 }
 async function Lapoz(data) {
-    //console.log("lapoz");
+    //óconsole.log("lapoz");
    // let response= await fetch("?oldal=Apitermekek/lekerdezAruLapozo&oldalSzam="+oldalSzama);
     //let data = await response.json();
     const aruk=document.getElementById('aruk');
