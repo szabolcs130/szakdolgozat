@@ -151,6 +151,12 @@ async function Lapoz(data) {
         aru_nev.classList.add('aru_nev');
         aru_nev.textContent=element.nev_aru;
 
+        const aru_kep=document.createElement('img');
+        aru_kep.classList.add('aru_kep');
+        const kepUrl=new URL('../image/'+element.kep+'.png', import.meta.url).href;
+        aru_kep.src=kepUrl;
+        aru_kep.alt="Nem sikerult a kep betoltes!";
+
         const aru_ar=document.createElement('div');
         aru_ar.classList.add('aru_ar');
         aru_ar.textContent=element.ar;
@@ -168,6 +174,7 @@ async function Lapoz(data) {
         liTag.appendChild(aTag);
         
         aru.appendChild(aru_nev);
+        aru.appendChild(aru_kep);
         aru.appendChild(aru_ar);
         aru.appendChild(aru_leiras);
         aru.appendChild(liTag);

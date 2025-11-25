@@ -48,3 +48,8 @@ html{
 #elozo{
     visibility: hidden;
 }
+.aru_kep{
+    width: calc(80%);
+    min-width: 150px;
+    max-width: 500px;
+}
