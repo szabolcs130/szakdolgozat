@@ -50,9 +50,17 @@ async function SzuroFelepit(maximumAr) {
     szuresBekuldGomb.textContent="Keres";
     minArInput.addEventListener("input",(e)=>{
         minArLabel.textContent="Min: "+e.target.value;
+        if (parseInt(e.target.value)>=parseInt(maxArInput.value)) {
+            maxArInput.value=(parseInt(e.target.value)+100);
+            maxArLabel.textContent="Max: "+maxArInput.value;
+        }
     });
     maxArInput.addEventListener("input",(e)=>{
         maxArLabel.textContent="Max: "+e.target.value;
+        if (parseInt(e.target.value)<=parseInt(minArInput.value)) {
+            minArInput.value=(parseInt(e.target.value)-100);
+            minArLabel.textContent="Max: "+minArInput.value;
+        }
     });
     szuresBekuldGomb.addEventListener("click",async function(){
         const data1=await FetchMeghiv("lekerdezAruSzures",0,null,nevKeresInput.value || null,minArInput.value || null,maxArInput.value || null);
