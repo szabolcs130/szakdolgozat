@@ -1,30 +1,51 @@
 html{
     font-size: 16px;
  }
- #aruk{
+#aruk{
        width: 100%;
        display: flex;
        justify-content: center;
        align-items: center;
-       flex-wrap: wrap;
-       border: 1px solid black;
-       padding-top: calc(3%);
- }
- .aru{
-    width: calc(30%);
+       border: 1px solid red;
+}
+#aru{
+    width: calc(100%);
     min-width: 150px;
     max-width: 500px;
     border: 1px solid black;
-    margin-left: calc(1.4%);
-    margin-right: calc(1.4%);
-    margin-bottom: calc(3%);
     display: flex;
     align-items: center;
+    justify-content: center;
     flex-direction: column;
     word-break: break-word;
     min-height: 40vh;
     height: auto;
  }
+ #termekForm{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+ }
 .aru_nev{
     font-size: 1.2rem;
+}
+.aruKepImg{
+    width: calc(80%);
+    min-width: 150px;
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+}
+#aru_kep{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+#kosarDiv{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
 }

@@ -31,6 +31,16 @@ async function SzuroFelepit(maximumAr) {
     maxArInput.max=maximumAr?.[0]?.max;
     maxArInput.value=maximumAr?.[0]?.max;
 
+    const maxArDiv=document.createElement("div");
+    maxArDiv.id="maxArDiv";
+    maxArDiv.appendChild(maxArLabel);
+    maxArDiv.appendChild(maxArInput);
+
+    const minArDiv=document.createElement("div");
+    minArDiv.id="maxArDiv";
+    minArDiv.appendChild(minArLabel);
+    minArDiv.appendChild(minArInput);
+
     let nevKeresInput=document.createElement("input");
     nevKeresInput.type="text";
     nevKeresInput.placeholder="Kulcsszo"
@@ -45,7 +55,6 @@ async function SzuroFelepit(maximumAr) {
         maxArLabel.textContent="Max: "+e.target.value;
     });
     szuresBekuldGomb.addEventListener("click",async function(){
-        console.log(nevKeresInput.value+"  min "+minArInput.value+"  max "+maxArInput.value);
         const data1=await FetchMeghiv("lekerdezAruSzures",0,null,nevKeresInput.value || null,minArInput.value || null,maxArInput.value || null);
         Lapoz(data1);
         const data2=await FetchMeghiv("lekerdezAruSzures",null,true,nevKeresInput.value || null,minArInput.value || null, maxArInput.value || null);
@@ -53,10 +62,12 @@ async function SzuroFelepit(maximumAr) {
     });
 
     szuroTarolo.appendChild(nevKeresInput);
-    szuroTarolo.appendChild(minArLabel);
-    szuroTarolo.appendChild(minArInput);
-    szuroTarolo.appendChild(maxArLabel);
-    szuroTarolo.appendChild(maxArInput);
+    //szuroTarolo.appendChild(minArLabel);
+    //szuroTarolo.appendChild(minArInput);
+    //szuroTarolo.appendChild(maxArLabel);
+    //szuroTarolo.appendChild(maxArInput);
+    szuroTarolo.appendChild(minArDiv);
+    szuroTarolo.appendChild(maxArDiv);
     szuroTarolo.appendChild(szuresBekuldGomb);
 }
 async function FetchMeghiv(param,oldalSzam=null,osszesDarab=null,nev=null,minAr=null,maxAr=null){
@@ -73,7 +84,6 @@ async function FetchMeghiv(param,oldalSzam=null,osszesDarab=null,nev=null,minAr=
             url=url+"&maxAr="+maxAr;
         }
     }
-    console.log(url);
     const response= await fetch(url);
     const data = await response.json();
     return data;
@@ -151,9 +161,19 @@ async function Lapoz(data) {
         aru_nev.classList.add('aru_nev');
         aru_nev.textContent=element.nev_aru;
 
+        const aru_kep=document.createElement('img');
+        aru_kep.classList.add('aru_kep');
+        const kepUrl=new URL('../image/'+element.kep+'.png', import.meta.url).href;
+        aru_kep.src=kepUrl;
+        aru_kep.alt="Nem sikerult a kep betoltes!";
+
         const aru_ar=document.createElement('div');
         aru_ar.classList.add('aru_ar');
-        aru_ar.textContent=element.ar;
+        aru_ar.textContent=element.ar+" Forint";
+
+        const aru_mennyiseg=document.createElement('div');
+        aru_mennyiseg.classList.add('aru_mennyiseg');
+        aru_mennyiseg.textContent=element.mennyiseg ? "Raktáron: "+element.mennyiseg+"db" : "Elfogyott";
 
         const aru_leiras=document.createElement('div');
         aru_leiras.classList.add('aru_leiras');
@@ -168,8 +188,10 @@ async function Lapoz(data) {
         liTag.appendChild(aTag);
         
         aru.appendChild(aru_nev);
+        aru.appendChild(aru_kep);
         aru.appendChild(aru_ar);
         aru.appendChild(aru_leiras);
+        aru.appendChild(aru_mennyiseg);
         aru.appendChild(liTag);
 
         aruk.appendChild(aru);

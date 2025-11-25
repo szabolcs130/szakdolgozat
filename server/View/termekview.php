@@ -9,27 +9,37 @@ class TermekView{
        echo '<form id="termekForm">';
        foreach ($aru as $ertek) {
             echo '<div id="aru">';
-            echo '<input type="hidden" name="aruId" value='.$ertek["id_aru"].'>';
-            echo '<div class="aru_nev">'.$ertek['nev_aru'].'</div>';
-            echo '<div class="aru_ar">'.$ertek['ar'].'</div>';
-            echo '<div class="aru_leiras">'.$ertek['leiras'].'</div>';
+            echo '<input type="hidden" name="aruId" id="aruId" value='.$ertek["id_aru"].'>';
+            echo '<div id="aru_nev">'.$ertek['nev_aru'].'</div>';
+            echo '<div id="aru_kep"></div>';
+            echo '<div id="aru_ar">'.$ertek['ar'].' Forint</div>';
+            echo '<div id="aru_leiras">'.$ertek['leiras'].'</div>';
+            echo '<div>'.$ertek['mennyiseg']<=0 ? "Elfogyott" : "Raktarban: ".$ertek['mennyiseg']."db".'</div>';
             if (isset($_SESSION["username"])) {
                 if ($kosarban) {
-                    echo '<abel for="me">Kosarban: </label>';
-                    echo '<input type="number" id="me" name="me" min="1" max="90" value="'.$kosarban["me"].'">';
-                    echo '<button id="elkuldGomb" type="submit">Valtoztat</button>';
+                    if ($ertek['mennyiseg']>0) {
+                        echo '<div id="kosarDiv">';
+                        echo '<label for="me">Kosarban: </label>';
+                        echo '<input type="number" id="me" name="me" min="1" value="'.$kosarban["me"].'">';
+                        echo '<button id="elkuldGomb" type="submit">Kosarba</button>';
+                        echo '</div>';
+                    }
                 }else{
-                    echo '<input type="number" id="me" name="me" min="1" max="90" value="1">';
-                    echo '<button id="elkuldGomb" type="submit">Kosarba</button>';
+                    if ($ertek['mennyiseg']>0) {
+                        echo '<div id="kosarDiv">';
+                        echo '<input type="number" id="me" name="me" min="1" value="1">';
+                        echo '<button id="elkuldGomb" type="submit">Kosarba</button>';
+                        echo '</div>';
+                    }
                 }
             }else{
                 echo "<p>Kosar hasznalathoz bejelentkezeshez szukseges!</p>";
             }
             
-            echo '</div>';
+            echo '</div>';//aru
        }
        echo '</form>';
-       echo '</div>';
+       echo '</div>';//aruk
     }
     public static function TermekNemTalalhato(){
         echo "<h1>A keresett termek nem talalhato!</h1>";
