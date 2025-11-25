@@ -31,6 +31,16 @@ async function SzuroFelepit(maximumAr) {
     maxArInput.max=maximumAr?.[0]?.max;
     maxArInput.value=maximumAr?.[0]?.max;
 
+    const maxArDiv=document.createElement("div");
+    maxArDiv.id="maxArDiv";
+    maxArDiv.appendChild(maxArLabel);
+    maxArDiv.appendChild(maxArInput);
+
+    const minArDiv=document.createElement("div");
+    minArDiv.id="maxArDiv";
+    minArDiv.appendChild(minArLabel);
+    minArDiv.appendChild(minArInput);
+
     let nevKeresInput=document.createElement("input");
     nevKeresInput.type="text";
     nevKeresInput.placeholder="Kulcsszo"
@@ -52,10 +62,12 @@ async function SzuroFelepit(maximumAr) {
     });
 
     szuroTarolo.appendChild(nevKeresInput);
-    szuroTarolo.appendChild(minArLabel);
-    szuroTarolo.appendChild(minArInput);
-    szuroTarolo.appendChild(maxArLabel);
-    szuroTarolo.appendChild(maxArInput);
+    //szuroTarolo.appendChild(minArLabel);
+    //szuroTarolo.appendChild(minArInput);
+    //szuroTarolo.appendChild(maxArLabel);
+    //szuroTarolo.appendChild(maxArInput);
+    szuroTarolo.appendChild(minArDiv);
+    szuroTarolo.appendChild(maxArDiv);
     szuroTarolo.appendChild(szuresBekuldGomb);
 }
 async function FetchMeghiv(param,oldalSzam=null,osszesDarab=null,nev=null,minAr=null,maxAr=null){
