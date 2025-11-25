@@ -6,6 +6,7 @@ if (session_status() === PHP_SESSION_NONE) {
 use Server\View\FizetesView;
 use Server\Model\FizetesModel;
 use Server\Model\KosarModel;
+use Server\Model\AruModel;
 use Server\Model\RendelesModel;
 use Server\Model\FizetesEredmenyModel;
 use Server\Model\RendelesTartalmaModel;
@@ -88,6 +89,13 @@ class FizetesController{
                         $datumKonvertalva=$datum->format('Y-m-d H:i:s');
                         FizetesEredmenyModel::hozzaadFizetesEredmeny($rendelesId,$datumKonvertalva,$fizetendoOsszeg,$order->getId(),$captureResponse['jsonResponse']->getStatus());//,$captureResponse['jsonResponse']->getId()
                         //FizetesEredmenyModel::hozzaadFizetesEredmeny($rendelesId,$fizetendoOsszeg,$order->getPurchaseUnits()[0]->getPayments()->getCaptures()[0]->getCreateTime(),$captureResponse['jsonResponse']->getStatus());//,$captureResponse['jsonResponse']->getId()
+                        
+                        //esetleg fizetes utan rakjuk adatbazisba a rendelest
+
+                        foreach (KosarModel::getKosar() as $key => $value) {
+                            Arumodel::AruSzerkesztMennyiseg($key,$value["me"]);
+                        }
+
                         KosarModel::Urit();
                         echo json_encode([
 

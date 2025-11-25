@@ -14,11 +14,10 @@ class TermekView{
             echo '<div id="aru_kep"></div>';
             echo '<div id="aru_ar">'.$ertek['ar'].' Forint</div>';
             echo '<div id="aru_leiras">'.$ertek['leiras'].'</div>';
+            echo '<div>'.$ertek['mennyiseg']<=0 ? "Elfogyott" : "Raktarban: ".$ertek['mennyiseg']."db".'</div>';
             if (isset($_SESSION["username"])) {
                 if ($kosarban) {
-                    if ($ertek['mennyiseg']<=0) {
-                        echo '<div>Elfogyott</div>';
-                    }else{
+                    if ($ertek['mennyiseg']>0) {
                         echo '<div id="kosarDiv">';
                         echo '<label for="me">Kosarban: </label>';
                         echo '<input type="number" id="me" name="me" min="1" value="'.$kosarban["me"].'">';
@@ -26,9 +25,7 @@ class TermekView{
                         echo '</div>';
                     }
                 }else{
-                    if ($ertek['mennyiseg']<=0) {
-                        echo '<div>Elfogyott</div>';
-                    }else{
+                    if ($ertek['mennyiseg']>0) {
                         echo '<div id="kosarDiv">';
                         echo '<input type="number" id="me" name="me" min="1" value="1">';
                         echo '<button id="elkuldGomb" type="submit">Kosarba</button>';

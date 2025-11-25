@@ -82,12 +82,12 @@ class AruModel{
             return 0;
         }
     }
-    public static function AruSzerkeszt($id,$nev,$ar,$leiras){
+    public static function AruSzerkeszt($id,$nev,$ar,$leiras,$mennyiseg,$kep){
         try{
             $db = self::Connection();
-            $sql = "UPDATE `aru` SET nev_aru = :nev_aru, ar = :ar, leiras = :leiras WHERE id_aru = :id_aru";
+            $sql = "UPDATE `aru` SET nev_aru = :nev_aru, ar = :ar, leiras = :leiras, mennyiseg = :mennyiseg, kep = :kep WHERE id_aru = :id_aru";
             $sth = $db->prepare($sql);
-            $sth->execute(array(":id_aru"=>$id, ":nev_aru"=>$nev, ":ar"=>$ar, ":leiras"=>$leiras));
+            $sth->execute(array(":id_aru"=>$id, ":nev_aru"=>$nev, ":ar"=>$ar, ":leiras"=>$leiras, ":mennyiseg"=>$mennyiseg, ":kep"=>$kep));
             if ($sth->rowCount()) {
                 return 1;
             }
@@ -96,12 +96,26 @@ class AruModel{
             return 0;
         }
     }
-        public static function hozzaadAru($nev,$ar,$leiras){
+    public static function AruSzerkesztMennyiseg($id,$mennyiseg){
         try{
             $db = self::Connection();
-            $sql = "INSERT INTO `aru` (`nev_aru`, `ar`,`leiras`) VALUES (:nev_aru, :ar,:leiras)";
+            $sql = "UPDATE `aru` SET mennyiseg = mennyiseg - :mennyiseg WHERE id_aru = :id_aru";
             $sth = $db->prepare($sql);
-            $sth->execute(array(":nev_aru"=>$nev,":ar"=>$ar,":leiras"=>$leiras));
+            $sth->execute(array(":mennyiseg"=>$mennyiseg,":id_aru"=>$id));
+            if ($sth->rowCount()) {
+                return 1;
+            }
+            return 0;
+        } catch (\PDOException $e) {
+            return 0;
+        }
+    }
+        public static function hozzaadAru($nev,$ar,$leiras,$mennyiseg,$kep){
+        try{
+            $db = self::Connection();
+            $sql = "INSERT INTO `aru` (`nev_aru`, `ar`,`leiras`,`mennyiseg`,`leiras`,`mennyiseg`,`kep`) VALUES (:nev_aru, :ar, :leiras, :mennyiseg, :kep)";
+            $sth = $db->prepare($sql);
+            $sth->execute(array(":nev_aru"=>$nev,":ar"=>$ar,":leiras"=>$leiras,":mennyiseg"=>$mennyiseg,":kep"=>$kep));
             if ($sth->rowCount()) {
                 return 1;
             }
