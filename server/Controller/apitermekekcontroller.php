@@ -74,5 +74,20 @@ class ApitermekekController{
         echo json_encode([]);
         exit;
     }
+    public static function lekerdezAruById(){
+        header('Content-Type: application/json; charset=utf-8');
+        ob_clean(); 
+        
+        $aruId=$_GET['aruId'] ?? null;
+        if ($aruId) {
+            $aru=AruModel::lekerdezAruById($aruId);
+            if ($aru) {
+                echo json_encode($aru);
+                exit;
+            }
+        }
+        echo json_encode([]);
+        exit;
+    }
 }
 ?>

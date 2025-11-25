@@ -45,7 +45,6 @@ async function SzuroFelepit(maximumAr) {
         maxArLabel.textContent="Max: "+e.target.value;
     });
     szuresBekuldGomb.addEventListener("click",async function(){
-        console.log(nevKeresInput.value+"  min "+minArInput.value+"  max "+maxArInput.value);
         const data1=await FetchMeghiv("lekerdezAruSzures",0,null,nevKeresInput.value || null,minArInput.value || null,maxArInput.value || null);
         Lapoz(data1);
         const data2=await FetchMeghiv("lekerdezAruSzures",null,true,nevKeresInput.value || null,minArInput.value || null, maxArInput.value || null);
@@ -73,7 +72,6 @@ async function FetchMeghiv(param,oldalSzam=null,osszesDarab=null,nev=null,minAr=
             url=url+"&maxAr="+maxAr;
         }
     }
-    console.log(url);
     const response= await fetch(url);
     const data = await response.json();
     return data;
