@@ -3,7 +3,10 @@ window.onload=async function() {
     const response= await fetch("?oldal=Apitermekek/lekerdezAruById&aruId="+aruId.value);
     const data = await response.json();
     const aruMe=document.getElementById("me");
-    aruMe.max=data?.[0]?.mennyiseg;
+    if (aruMe) {
+        aruMe.max=data?.[0]?.mennyiseg;
+    }
+    
     const aruKepDiv=document.getElementById("aru_kep");
 
     const aru_kep=document.createElement('img');

@@ -16,14 +16,24 @@ class TermekView{
             echo '<div id="aru_leiras">'.$ertek['leiras'].'</div>';
             if (isset($_SESSION["username"])) {
                 if ($kosarban) {
-                    echo '<div>'.$ertek['mennyiseg']>0 ? "Raktaron: ".$ertek['mennyiseg']."db" : "Elfogyott".'</div>';
-                    echo '<div id="kosarDiv"><label for="me">Kosarban: </label>';
-                    echo '<input type="number" id="me" name="me" min="1"  value="'.$kosarban["me"].'">';
-                    echo '<button id="elkuldGomb" type="submit">Valtoztat</button></div>';
+                    if ($ertek['mennyiseg']<=0) {
+                        echo '<div>Elfogyott</div>';
+                    }else{
+                        echo '<div id="kosarDiv">';
+                        echo '<label for="me">Kosarban: </label>';
+                        echo '<input type="number" id="me" name="me" min="1" value="'.$kosarban["me"].'">';
+                        echo '<button id="elkuldGomb" type="submit">Kosarba</button>';
+                        echo '</div>';
+                    }
                 }else{
-                    echo '<div>'.$ertek['mennyiseg']>0 ? "Raktaron: ".$ertek['mennyiseg']."db" : "Elfogyott".'</div>';
-                    echo '<div id="kosarDiv"><input type="number" id="me" name="me" min="1" value="1">';
-                    echo '<button id="elkuldGomb" type="submit">Kosarba</button></div>';
+                    if ($ertek['mennyiseg']<=0) {
+                        echo '<div>Elfogyott</div>';
+                    }else{
+                        echo '<div id="kosarDiv">';
+                        echo '<input type="number" id="me" name="me" min="1" value="1">';
+                        echo '<button id="elkuldGomb" type="submit">Kosarba</button>';
+                        echo '</div>';
+                    }
                 }
             }else{
                 echo "<p>Kosar hasznalathoz bejelentkezeshez szukseges!</p>";
