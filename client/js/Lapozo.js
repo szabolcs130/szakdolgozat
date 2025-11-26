@@ -29,7 +29,6 @@ export async function SzuroFelepit(maximumAr,callback) {
     maxArInput.min=0;
     maxArInput.max=maximumAr?.[0]?.max;
     maxArInput.value=maximumAr?.[0]?.max;
-    console.log(maximumAr?.[0]?.max);
     const maxArDiv=document.createElement("div");
     maxArDiv.id="maxArDiv";
     maxArDiv.appendChild(maxArLabel);
@@ -141,7 +140,6 @@ export async function LapozashozLegorduloMenu(param){//kell
 export function ElozoKovetkezoLapozoMegjelenitese() {//kell
     const elozoLapozo=document.getElementById("elozo");
     const kovetkezoLapozo=document.getElementById("kovetkezo");
-    console.log(oldalValaszto.selectedIndex+" alma");
     if (oldalValaszto.selectedIndex==0) {
         elozoLapozo.style.visibility="hidden";
     }else{
