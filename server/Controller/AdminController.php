@@ -17,16 +17,18 @@ class AdminController{
         return 1;
     }
     public static function AruSzerkeszt(){
-        if ((isset($_SESSION["username"]) && $_SESSION['rang']==3) && isset($_POST["idaru"]) && isset($_POST["nev"]) && isset($_POST["ar"]) && isset($_POST["leiras"])) {
+        if ((isset($_SESSION["username"]) && $_SESSION['rang']==3) && isset($_POST["idaru"]) && isset($_POST["nev"]) && isset($_POST["ar"]) && isset($_POST["leiras"]) && isset($_POST["mennyiseg"]) && isset($_POST["kep"])) {
         $id=$_POST["idaru"];
         $nev=$_POST["nev"];
         $ar=$_POST["ar"];
         $leiras=$_POST["leiras"];
+        $mennyiseg=$_POST["mennyiseg"];
+        $kep=$_POST["kep"];
         if (is_numeric($id)) {
             $aru=Arumodel::lekerdezAruById($id);
         }
         if (is_array($aru) && !empty($aru)){ 
-            AruModel::AruSzerkeszt($id,$nev,$ar,$leiras);
+            AruModel::AruSzerkeszt($id,$nev,$ar,$leiras,$mennyiseg,$kep);
             self::TermekKezeles();
             return 1;
             }
@@ -39,12 +41,14 @@ class AdminController{
         return 1;
     }
     public static function AruUj(){
-        if ((isset($_SESSION["username"]) && $_SESSION['rang']==3) &&  isset($_POST["nev"]) && isset($_POST["ar"]) && isset($_POST["leiras"])) {//isset($_POST["idaru"]) &&
+        if ((isset($_SESSION["username"]) && $_SESSION['rang']==3) &&  isset($_POST["nev"]) && isset($_POST["ar"]) && isset($_POST["leiras"]) && isset($_POST["mennyiseg"]) && isset($_POST["kep"])) {//isset($_POST["idaru"]) &&
             $nev=$_POST["nev"];
             $ar=$_POST["ar"];
             $leiras=$_POST["leiras"];
+            $mennyiseg=$_POST["mennyiseg"];
+            $kep=$_POST["kep"];
             if (is_numeric($ar)) {
-                AruModel::hozzaadAru($nev,$ar,$leiras);
+                AruModel::hozzaadAru($nev,$ar,$leiras,$mennyiseg,$kep);
                 self::TermekKezeles();
                 return 1;
             }

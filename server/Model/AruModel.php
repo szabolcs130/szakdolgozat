@@ -113,7 +113,7 @@ class AruModel{
         public static function hozzaadAru($nev,$ar,$leiras,$mennyiseg,$kep){
         try{
             $db = self::Connection();
-            $sql = "INSERT INTO `aru` (`nev_aru`, `ar`,`leiras`,`mennyiseg`,`leiras`,`mennyiseg`,`kep`) VALUES (:nev_aru, :ar, :leiras, :mennyiseg, :kep)";
+            $sql = "INSERT INTO `aru` (`nev_aru`, `ar`,`leiras`,`mennyiseg`,`kep`) VALUES (:nev_aru, :ar, :leiras, :mennyiseg, :kep)";
             $sth = $db->prepare($sql);
             $sth->execute(array(":nev_aru"=>$nev,":ar"=>$ar,":leiras"=>$leiras,":mennyiseg"=>$mennyiseg,":kep"=>$kep));
             if ($sth->rowCount()) {

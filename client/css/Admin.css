@@ -37,3 +37,23 @@ li{
     flex-direction: column;
     border: 1px solid black;
 }
+#szuroTarolo{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid black;
+ }
+ #lapozo{
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;   
+}
+#lapozo>li{
+    list-style: none;
+    cursor: pointer;
+}
+#elozo{
+    visibility: hidden;
+}
