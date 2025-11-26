@@ -212,7 +212,7 @@ function VisszaAruListahoz() {
         formTarolo.remove();
     }
     const tablazatTarolo=document.getElementById("tablazatTarolo");
-    tablazatTarolo.style.display="block";
+    tablazatTarolo.style.display="flex";
 
     const szuroatTarolo=document.getElementById("szuroTarolo");
     szuroatTarolo.style.display="flex";
