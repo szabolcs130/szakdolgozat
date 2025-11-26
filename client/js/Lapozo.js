@@ -1,14 +1,16 @@
-window.onload = async function() {
+/*window.onload = async function() {
     const data=await FetchMeghiv("?oldal=Apitermekek/lekerdezAruSzures",null,true);
     const data2=await FetchMeghiv("?oldal=Apitermekek/lekerdezAruMaxAr");
-    SzuroFelepit(data2);
-    LapozashozElozoKovekezoEsemenyek();
-    LapozashozSelectEsemeny();
-    LapozashozLegorduloMenu(data);
+    SzuroFelepit(data2); ok
+    LapozashozElozoKovekezoEsemenyek(); ok
+    LapozashozSelectEsemeny(); 
+    LapozashozLegorduloMenu(data); ok
+}*/
+export function alma(){
+    alert("eper");
 }
-async function SzuroFelepit(maximumAr) {
-    let szuroTarolo=document.getElementById("szuroTarolo");
-
+export async function SzuroFelepit(maximumAr,callback) {
+    const szuroTarolo=document.getElementById("szuroTarolo");
     const minArLabel=document.createElement("label");
     minArLabel.textContent="Min: 0";
 
@@ -30,6 +32,7 @@ async function SzuroFelepit(maximumAr) {
     maxArInput.min=0;
     maxArInput.max=maximumAr?.[0]?.max;
     maxArInput.value=maximumAr?.[0]?.max;
+    console.log(maximumAr?.[0]?.max);
     const maxArDiv=document.createElement("div");
     maxArDiv.id="maxArDiv";
     maxArDiv.appendChild(maxArLabel);
@@ -63,7 +66,8 @@ async function SzuroFelepit(maximumAr) {
     });
     szuresBekuldGomb.addEventListener("click",async function(){
         const data1=await FetchMeghiv("?oldal=Apitermekek/lekerdezAruSzures",0,null,nevKeresInput.value || null,minArInput.value || null,maxArInput.value || null);
-        Lapoz(data1);
+        //Lapoz(data1);
+        callback(data1);
         const data2=await FetchMeghiv("?oldal=Apitermekek/lekerdezAruSzures",null,true,nevKeresInput.value || null,minArInput.value || null, maxArInput.value || null);
         LapozashozLegorduloMenu(data2);
     });
@@ -73,7 +77,7 @@ async function SzuroFelepit(maximumAr) {
     szuroTarolo.appendChild(maxArDiv);
     szuroTarolo.appendChild(szuresBekuldGomb);
 }
-async function FetchMeghiv(param,oldalSzam=null,osszesDarab=null,nev=null,minAr=null,maxAr=null){
+export async function FetchMeghiv(param,oldalSzam=null,osszesDarab=null,nev=null,minAr=null,maxAr=null){//kell
     let url=param+"&oldalSzam="+oldalSzam;
     if (osszesDarab) {
         url=url+"&osszesDarab="+osszesDarab;
@@ -91,17 +95,17 @@ async function FetchMeghiv(param,oldalSzam=null,osszesDarab=null,nev=null,minAr=
     const data = await response.json();
     return data;
 }
-function LapozashozSelectEsemeny() {
+export function LapozashozSelectEsemeny(url,callback) {///kell //"?oldal=Apitermekek/lekerdezAruSzures"
     const oldalValaszto=document.getElementById("oldalValaszto");
     oldalValaszto.addEventListener("change",async function(e){
         const minArInput=document.getElementById("minAr");
         const maxArInput=document.getElementById("maxAr");
         const nevKeresInput=document.getElementById("nevKeres");
-        const data1=await FetchMeghiv("?oldal=Apitermekek/lekerdezAruSzures",e.target.value,null,nevKeresInput.value || null,minArInput.value || null,maxArInput.value || null);
-        Lapoz(data1);
+        const data1=await FetchMeghiv(url,e.target.value,null,nevKeresInput.value || null,minArInput.value || null,maxArInput.value || null);
+        callback(data1);
     });
 }
-function LapozashozElozoKovekezoEsemenyek(){
+export function LapozashozElozoKovekezoEsemenyek(){//kell
 const elozoLapozo=document.getElementById("elozo");
     const kovetkezoLapozo=document.getElementById("kovetkezo");
     const oldalValaszto=document.getElementById("oldalValaszto");
@@ -120,7 +124,7 @@ const elozoLapozo=document.getElementById("elozo");
         
     });
 }
-async function LapozashozLegorduloMenu(param){
+export async function LapozashozLegorduloMenu(param){//kell
     const AruOsszOldalSzam=param; 
     const ellenorzottOsszAru=AruOsszOldalSzam?.[0]?.osszes || 0;
     const oldalSzamok=Math.ceil(ellenorzottOsszAru/10)==0 ? 1 : (Math.ceil(ellenorzottOsszAru/10));
@@ -137,7 +141,7 @@ async function LapozashozLegorduloMenu(param){
     }
     return;
 }
-function ElozoKovetkezoLapozoMegjelenitese() {
+export function ElozoKovetkezoLapozoMegjelenitese() {//kell
     const elozoLapozo=document.getElementById("elozo");
     const kovetkezoLapozo=document.getElementById("kovetkezo");
     
@@ -152,52 +156,12 @@ function ElozoKovetkezoLapozoMegjelenitese() {
         kovetkezoLapozo.style.visibility="visible";
     }
 }
-async function Lapoz(data) {
+export async function Lapoz(data) {//adminba megvan
     const aruk=document.getElementById('aruk');
     aruk.innerHTML="";
     data.forEach(element => {
 
-        const aru=document.createElement('div');
-        aru.classList.add('aru');
-
-        const aru_nev=document.createElement('div');
-        aru_nev.classList.add('aru_nev');
-        aru_nev.textContent=element.nev_aru;
-
-        const aru_kep=document.createElement('img');
-        aru_kep.classList.add('aru_kep');
-        const kepUrl=new URL('../image/'+element.kep+'.png', import.meta.url).href;
-        aru_kep.src=kepUrl;
-        aru_kep.alt="Nem sikerult a kep betoltes!";
-
-        const aru_ar=document.createElement('div');
-        aru_ar.classList.add('aru_ar');
-        aru_ar.textContent=element.ar+" Forint";
-
-        const aru_mennyiseg=document.createElement('div');
-        aru_mennyiseg.classList.add('aru_mennyiseg');
-        aru_mennyiseg.textContent=element.mennyiseg ? "Raktáron: "+element.mennyiseg+"db" : "Elfogyott";
-
-        const aru_leiras=document.createElement('div');
-        aru_leiras.classList.add('aru_leiras');
-        aru_leiras.textContent=element.leiras;
         
-        const liTag=document.createElement('li');
-
-        const aTag=document.createElement('a');
-        aTag.href='?oldal=Termek/Main/'+element.id_aru;
-        aTag.textContent="Megnéz";
-
-        liTag.appendChild(aTag);
-        
-        aru.appendChild(aru_nev);
-        aru.appendChild(aru_kep);
-        aru.appendChild(aru_ar);
-        aru.appendChild(aru_leiras);
-        aru.appendChild(aru_mennyiseg);
-        aru.appendChild(liTag);
-
-        aruk.appendChild(aru);
 
     });
     window.scrollTo(0,0);
