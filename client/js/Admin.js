@@ -6,8 +6,6 @@ window.onload = async function() {
 }
 
 async function AruListaz(data) {
-    //let response= await fetch("?oldal=Apitermekek/Main");
-    //let data = await response.json();
     const tablazatTarolo=document.getElementById("tablazatTarolo");
     tablazatTarolo.innerHTML="";
     const liTagAruUj=document.createElement('li');
@@ -215,11 +213,23 @@ function VisszaAruListahoz() {
     }
     const tablazatTarolo=document.getElementById("tablazatTarolo");
     tablazatTarolo.style.display="block";
+
+    const szuroatTarolo=document.getElementById("szuroTarolo");
+    szuroatTarolo.style.display="flex";
+
+    const lapozo=document.getElementById("lapozo");
+    lapozo.style.display="flex";
 }
 
 function FormAru(params,actionParam,gombFelirat) {
     const tablazatTarolo=document.getElementById("tablazatTarolo");
     tablazatTarolo.style.display="none";
+
+    const szuroatTarolo=document.getElementById("szuroTarolo");
+    szuroatTarolo.style.display="none";
+
+    const lapozo=document.getElementById("lapozo");
+    lapozo.style.display="none";
 
     const liTagVissza=document.createElement('li');
 
