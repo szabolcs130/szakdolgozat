@@ -1,12 +1,17 @@
+import { SzuroFelepit,FetchMeghiv,LapozashozSelectEsemeny,LapozashozElozoKovekezoEsemenyek,LapozashozLegorduloMenu,ElozoKovetkezoLapozoMegjelenitese } from './Lapozo.js';
 window.onload = async function() {
-    const data=await FetchMeghiv("?oldal=Apitermekek/lekerdezAruSzures",null,true);
     const data2=await FetchMeghiv("?oldal=Apitermekek/lekerdezAruMaxAr");
-    SzuroFelepit(data2);
+    SzuroFelepit(data2,(eredmeny)=>{
+        Lapoz(eredmeny);
+    });
     LapozashozElozoKovekezoEsemenyek();
-    LapozashozSelectEsemeny();
-    LapozashozLegorduloMenu(data);
+    const a=await LapozashozSelectEsemeny("?oldal=Apitermekek/lekerdezAruSzures",(eredmeny)=>{
+        Lapoz(eredmeny)
+    });
+    const data=await FetchMeghiv("?oldal=Apitermekek/lekerdezAruSzures",null,true);
+    LapozashozLegorduloMenu(data);;
 }
-async function SzuroFelepit(maximumAr) {
+/*async function SzuroFelepit(maximumAr) {
     let szuroTarolo=document.getElementById("szuroTarolo");
 
     const minArLabel=document.createElement("label");
@@ -72,8 +77,8 @@ async function SzuroFelepit(maximumAr) {
     szuroTarolo.appendChild(minArDiv);
     szuroTarolo.appendChild(maxArDiv);
     szuroTarolo.appendChild(szuresBekuldGomb);
-}
-async function FetchMeghiv(param,oldalSzam=null,osszesDarab=null,nev=null,minAr=null,maxAr=null){
+}*/
+/*async function FetchMeghiv(param,oldalSzam=null,osszesDarab=null,nev=null,minAr=null,maxAr=null){
     let url=param+"&oldalSzam="+oldalSzam;
     if (osszesDarab) {
         url=url+"&osszesDarab="+osszesDarab;
@@ -90,8 +95,8 @@ async function FetchMeghiv(param,oldalSzam=null,osszesDarab=null,nev=null,minAr=
     const response= await fetch(url);
     const data = await response.json();
     return data;
-}
-function LapozashozSelectEsemeny() {
+}*/
+/*function LapozashozSelectEsemeny() {
     const oldalValaszto=document.getElementById("oldalValaszto");
     oldalValaszto.addEventListener("change",async function(e){
         const minArInput=document.getElementById("minAr");
@@ -100,8 +105,8 @@ function LapozashozSelectEsemeny() {
         const data1=await FetchMeghiv("?oldal=Apitermekek/lekerdezAruSzures",e.target.value,null,nevKeresInput.value || null,minArInput.value || null,maxArInput.value || null);
         Lapoz(data1);
     });
-}
-function LapozashozElozoKovekezoEsemenyek(){
+}*/
+/*function LapozashozElozoKovekezoEsemenyek(){
 const elozoLapozo=document.getElementById("elozo");
     const kovetkezoLapozo=document.getElementById("kovetkezo");
     const oldalValaszto=document.getElementById("oldalValaszto");
@@ -119,8 +124,8 @@ const elozoLapozo=document.getElementById("elozo");
         }
         
     });
-}
-async function LapozashozLegorduloMenu(param){
+}*/
+/*async function LapozashozLegorduloMenu(param){
     const AruOsszOldalSzam=param; 
     const ellenorzottOsszAru=AruOsszOldalSzam?.[0]?.osszes || 0;
     const oldalSzamok=Math.ceil(ellenorzottOsszAru/10)==0 ? 1 : (Math.ceil(ellenorzottOsszAru/10));
@@ -136,8 +141,8 @@ async function LapozashozLegorduloMenu(param){
         oldalValaszto.dispatchEvent(new Event("change"));
     }
     return;
-}
-function ElozoKovetkezoLapozoMegjelenitese() {
+}*/
+/*function ElozoKovetkezoLapozoMegjelenitese() {
     const elozoLapozo=document.getElementById("elozo");
     const kovetkezoLapozo=document.getElementById("kovetkezo");
     
@@ -151,7 +156,7 @@ function ElozoKovetkezoLapozoMegjelenitese() {
     }else{
         kovetkezoLapozo.style.visibility="visible";
     }
-}
+}*/
 async function Lapoz(data) {
     const aruk=document.getElementById('aruk');
     aruk.innerHTML="";
