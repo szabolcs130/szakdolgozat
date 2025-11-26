@@ -1,8 +1,8 @@
-import { alma,SzuroFelepit,FetchMeghiv,LapozashozSelectEsemeny,LapozashozElozoKovekezoEsemenyek,LapozashozLegorduloMenu,ElozoKovetkezoLapozoMegjelenitese } from './Lapozo.js';
+import { SzuroFelepit,FetchMeghiv,LapozashozSelectEsemeny,LapozashozElozoKovekezoEsemenyek,LapozashozLegorduloMenu,ElozoKovetkezoLapozoMegjelenitese } from './Lapozo.js';
 window.onload = async function() {
-
+    if (document.getElementById("tablazatTarolo")) {
         SzuroAlapok();
-
+    }
 }
 
 async function AruListaz(data) {
@@ -83,9 +83,7 @@ async function AruListaz(data) {
     aruTable.appendChild(thead);
 
     const tbody=document.createElement('tbody');
-    console.log(data);
-    console.log(Array.isArray(data));
-    console.log(typeof data);
+
     data.forEach(element => {
     
         const tbRId=document.createElement('tr');
@@ -124,6 +122,13 @@ async function AruListaz(data) {
         aTagTorol.href='?oldal=Admin/AruTorol/'+element.id_aru;
         aTagTorol.textContent="Torol";
 
+        aTagTorol.addEventListener("click",(e)=>{
+            e.preventDefault();
+            if (confirm("Biztosan torlod?")) {
+                window.location.href=aTagTorol.href;
+            }
+        });
+
         liTagTorol.appendChild(aTagTorol);
         tbDTorol.appendChild(liTagTorol);
         //TOROL V E G E
@@ -161,6 +166,8 @@ async function AruListaz(data) {
     document.querySelectorAll("#tablazat tbody tr td:last-child").forEach(adatsor=>{
         adatsor.addEventListener("click",()=>FormAru(adatsor.parentElement,"?oldal=Admin/AruSzerkeszt","Szerkeszt"));
     })
+    window.scrollTo(0,0);
+    ElozoKovetkezoLapozoMegjelenitese();
 }
 async function SzuroAlapok() {
     const adminTartalom=document.getElementById("adminTartalom");
@@ -176,17 +183,19 @@ async function SzuroAlapok() {
         
         const elozo=document.createElement('li');
         elozo.id="elozo";
+        elozo.textContent="Elozo";
 
         const kovetkezo=document.createElement('li');
         kovetkezo.id="kovetkezo";
+        kovetkezo.textContent="Kovetkezo"
+
         lapozo.appendChild(elozo);
-        lapozo.appendChild(kovetkezo);
         lapozo.appendChild(oldalValaszto);
-        //szuroTarolo.appendChild(lapozo);
+        lapozo.appendChild(kovetkezo);
+        
         adminTartalom.appendChild(szuroTarolo);
         adminTartalom.appendChild(lapozo);
     }
-    //if (document.getElementById("szuroTarolo")) {
         const data1=await FetchMeghiv("?oldal=Apitermekek/lekerdezAruMaxAr");
         SzuroFelepit(data1,(eredmeny)=>{
             AruListaz(eredmeny);
@@ -198,8 +207,6 @@ async function SzuroAlapok() {
         const data=await FetchMeghiv("?oldal=Apitermekek/lekerdezAruSzures",null,true);
 
         LapozashozLegorduloMenu(data);
-
-    //}
 }
 function VisszaAruListahoz() {
     const formTarolo=document.getElementById("formTarolo");
@@ -221,7 +228,11 @@ function FormAru(params,actionParam,gombFelirat) {
     aTagVissza.textContent="Vissza";
     liTagVissza.appendChild(aTagVissza);
 
-    liTagVissza.addEventListener("click",()=>VisszaAruListahoz());
+    aTagVissza.addEventListener("click",()=>{
+        if (confirm("Biztos kilepsz?")) {
+            VisszaAruListahoz()
+        }
+    });
 
     const formTarolo=document.createElement('div');
     formTarolo.id="formTarolo";
@@ -276,6 +287,11 @@ function FormAru(params,actionParam,gombFelirat) {
     const aruBekuldGomb=document.createElement('button');
     aruBekuldGomb.type="submit";
     aruBekuldGomb.textContent=gombFelirat || "Oke" ;
+    aruBekuldGomb.addEventListener("click",(e)=>{
+            if (!confirm("Biztosan Szerkeszted?")) {
+                e.preventDefault();
+            }
+        });
     form.appendChild(aruBekuldGomb);
     formTarolo.appendChild(form);
     document.getElementById("adminTartalom").appendChild(formTarolo);

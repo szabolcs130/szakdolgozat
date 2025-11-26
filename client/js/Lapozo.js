@@ -6,9 +6,6 @@
     LapozashozSelectEsemeny(); 
     LapozashozLegorduloMenu(data); ok
 }*/
-export function alma(){
-    alert("eper");
-}
 export async function SzuroFelepit(maximumAr,callback) {
     const szuroTarolo=document.getElementById("szuroTarolo");
     const minArLabel=document.createElement("label");
@@ -144,7 +141,7 @@ export async function LapozashozLegorduloMenu(param){//kell
 export function ElozoKovetkezoLapozoMegjelenitese() {//kell
     const elozoLapozo=document.getElementById("elozo");
     const kovetkezoLapozo=document.getElementById("kovetkezo");
-    
+    console.log(oldalValaszto.selectedIndex+" alma");
     if (oldalValaszto.selectedIndex==0) {
         elozoLapozo.style.visibility="hidden";
     }else{
