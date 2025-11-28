@@ -5,12 +5,22 @@ if (session_status() === PHP_SESSION_NONE) {
 }
 class VelemenyView{
       public static function ShowVelemeny($aruVelemenyek){
+        //var_dump($aruVelemenyek);
+        //echo $aruVelemenyek[0]['id_szemely'];
         echo '<div id="velemenyekTarolo">';
         echo "<br>Velemenyek:<br><br>";
         foreach ($aruVelemenyek as $ertek) {
             echo "<div class='velemenyegy'>";
-                echo '<div class="szemely">'."Felhasznalo: ".$ertek['nev_szemely']." ".'</div>';
-                echo '<div class="velemenyszoveg">'."Velemenye: ".$ertek['velemenyszoveg']." ".'</div>';
+            if ($ertek['id_szemely']==$_SESSION['userId']) {
+                echo '<form id="velemenyForm" method="post" action="?oldal=Velemeny/VelemenyTorles">';
+                echo '<input type="hidden" name="vId" value="'.$ertek['id_velemeny'].'">';
+            }
+            echo '<div class="szemely">'."Felhasznalo: ".$ertek['nev_szemely']." ".'</div>';
+            echo '<div class="velemenyszoveg">'."Velemenye: ".$ertek['velemenyszoveg']." ".'</div>';
+            if ($ertek['id_szemely']==$_SESSION['userId']) {
+                echo '<button type="submit">Torles</button>';
+                echo '</form>';
+            }
             echo "</div>";
        }
        echo '</div>';

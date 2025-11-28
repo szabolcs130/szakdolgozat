@@ -30,6 +30,10 @@ class Request{
             foreach ($menu as $ertek) {
                 if (htmlspecialchars($oldal)==$ertek["nev_menu"]) {
                     $meghiv=MeghivasEllenorzo::MeghivMVCMetodus(MeghivasEllenorzo::MVCFajlEsMetodusLetezikE($ertek["nev_menu"],$metodus,"Controller"),$parameter,true);
+                    $_SESSION["keres"]='?oldal='.$oldal.'/'.$metodus;
+                    if (is_array($parameter) && isset($parameter[0])) {
+                        $_SESSION["keres"].="/".$parameter[0];
+                    }
                     break;
                 }
             }
