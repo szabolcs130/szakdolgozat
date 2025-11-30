@@ -12,7 +12,7 @@ class RegisztracioController{
             $username=$_POST["username"];
             $email=$_POST["email"];
             $password=$_POST["p"];
-            $user=BejelentkezesModel::GetSzemelyByName($username);
+            $user=BejelentkezesModel::GetSzemelyByName($email);
             if ($user!=0 && !$user){
                 if (BejelentkezesModel::hozzaadSzemely($username,$email,$password,1)!=0) {
                     RegisztracioView::SikeresRegisztracio();
