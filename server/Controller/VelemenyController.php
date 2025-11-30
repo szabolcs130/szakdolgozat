@@ -8,8 +8,8 @@ class VelemenyController{
             if (is_numeric($_POST["aruId"])){
                 $velemenyVanE=VelemenyModel::lekerdezVelemenyByAruIdSajat($_POST["aruId"],$_SESSION['userId']);
                 if (empty($velemenyVanE) && VelemenyModel::hozzaadVelemeny($_SESSION["userId"],$_POST["aruId"],$_POST["velemenyInput"])!=0) {
-                    if (isset($_SESSION['keres'])) {
-                        header('Location: '.$_SESSION['keres']);
+                    if (isset($_SESSION['teljeskeres'])) {
+                        header('Location: '.$_SESSION['teljeskeres']);
                         exit();
                     }
                     header('Location: ?oldal=Fooldal');
@@ -26,8 +26,8 @@ class VelemenyController{
             $userId=$_SESSION['userId'] ?? null;
             if (is_numeric($vId) && $aruId!=null && $aruId!=null) {
                 if (VelemenyModel::VelemenyTorol($aruId,$userId,$vId)!=0) {
-                    if (isset($_SESSION['keres'])) {
-                        header('Location: '.$_SESSION['keres']);
+                    if (isset($_SESSION['teljeskeres'])) {
+                        header('Location: '.$_SESSION['teljeskeres']);
                         exit();
                     }
                     header('Location: ?oldal=Fooldal');
