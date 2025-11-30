@@ -19,11 +19,11 @@ class TermekController{
             if (isset($_SESSION['userId']) && FizetesEredmenyModel::GetMegvasaroltAruE($aruId,$_SESSION['userId'])) {
                 VelemenyView::ShowVelemenyIras($aruId);
             }
-            if (isset($_SESSION['userId'])) {
+            //if (isset($_SESSION['userId'])) {
                 VelemenyView::ShowVelemeny(VelemenyModel::lekerdezVelemenyByAruId($aruId));
                 MeghivasEllenorzo::SetCssFajl("Velemeny");
                 MeghivasEllenorzo::SetJsFajl("Velemeny");
-            }
+            //}
             
             return 1;
         }

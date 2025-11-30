@@ -69,41 +69,51 @@ function SajatVelemeny(data) {
         VelemenyEgy.appendChild(velemenyTorlesFormTarolo);
         sajatVelemeny.appendChild(VelemenyEgy);
         return true;
+    }else{
+        const sajatVelemenyH3Nincs=document.createElement("h3");
+        sajatVelemenyH3Nincs.textContent="Nincs megjelenitheto sajat velemenye! ";
+        sajatVelemeny.appendChild(sajatVelemenyH3Nincs);
     }
     return false;
 }
 function LapozNemSajatVelemeny(data) {
-const masVelemeny=document.getElementById("masVelemeny");
+    const masVelemeny=document.getElementById("masVelemeny");
     masVelemeny.innerHTML="";
-    const masVelemenyH3=document.createElement("h3");
-    masVelemenyH3.textContent="Masok Velemenye: ";
+    if (data.length) {
+        const masVelemenyH3=document.createElement("h3");
+        masVelemenyH3.textContent="Masok Velemenye: ";
 
-    masVelemeny.appendChild(masVelemenyH3);
-
+        masVelemeny.appendChild(masVelemenyH3);
         data.forEach(element => {
-        const VelemenyEgy=document.createElement("div");
-        VelemenyEgy.id="VelemenyEgy";
+            const VelemenyEgy=document.createElement("div");
+            VelemenyEgy.id="VelemenyEgy";
 
-        const VelemenyEgyFejlec=document.createElement("div");
-        VelemenyEgyFejlec.id="VelemenyEgyFejlec";
-        
-        const VelemenyEgyTorzs=document.createElement("div");
-        VelemenyEgyTorzs.id="VelemenyEgyTorzs";
+            const VelemenyEgyFejlec=document.createElement("div");
+            VelemenyEgyFejlec.id="VelemenyEgyFejlec";
+            
+            const VelemenyEgyTorzs=document.createElement("div");
+            VelemenyEgyTorzs.id="VelemenyEgyTorzs";
 
-        const VelemenyEgyFelhasznalo=document.createElement("div");
-        VelemenyEgyFelhasznalo.id="VelemenyEgyFelhasznalo";
-        VelemenyEgyFelhasznalo.textContent=element.nev_szemely;
+            const VelemenyEgyFelhasznalo=document.createElement("div");
+            VelemenyEgyFelhasznalo.id="VelemenyEgyFelhasznalo";
+            VelemenyEgyFelhasznalo.textContent=element.nev_szemely;
 
-        const VelemenyEgySzoveg=document.createElement("div");
-        VelemenyEgySzoveg.id="VelemenyEgySzoveg";
-        VelemenyEgySzoveg.textContent=element.velemenyszoveg;
+            const VelemenyEgySzoveg=document.createElement("div");
+            VelemenyEgySzoveg.id="VelemenyEgySzoveg";
+            VelemenyEgySzoveg.textContent=element.velemenyszoveg;
 
-        VelemenyEgyFejlec.appendChild(VelemenyEgyFelhasznalo);
-        VelemenyEgyTorzs.appendChild(VelemenyEgySzoveg);
-        VelemenyEgy.appendChild(VelemenyEgyFejlec);
-        VelemenyEgy.appendChild(VelemenyEgyTorzs);
-        masVelemeny.appendChild(VelemenyEgy);
+            VelemenyEgyFejlec.appendChild(VelemenyEgyFelhasznalo);
+            VelemenyEgyTorzs.appendChild(VelemenyEgySzoveg);
+            VelemenyEgy.appendChild(VelemenyEgyFejlec);
+            VelemenyEgy.appendChild(VelemenyEgyTorzs);
+            masVelemeny.appendChild(VelemenyEgy);
 
-    });
-    ElozoKovetkezoLapozoMegjelenitese();
+        });
+        ElozoKovetkezoLapozoMegjelenitese();
+    }else{
+        const masVelemenyH3Nincs=document.createElement("h3");
+        masVelemenyH3Nincs.textContent="Nincs megjelenitheto velemeny! ";
+        masVelemeny.appendChild(masVelemenyH3Nincs);
+        document.getElementById("lapozo").style.display="none";
+    }
 }
