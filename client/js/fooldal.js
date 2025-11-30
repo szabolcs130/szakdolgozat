@@ -1,7 +1,7 @@
 import { SzuroFelepit,FetchMeghiv,LapozashozSelectEsemeny,LapozashozElozoKovekezoEsemenyek,LapozashozLegorduloMenu,ElozoKovetkezoLapozoMegjelenitese } from './Lapozo.js';
 window.onload = async function() {
     const data2=await FetchMeghiv("?oldal=Apitermekek/lekerdezAruMaxAr");
-    SzuroFelepit(data2,(eredmeny)=>{
+    SzuroFelepit("?oldal=Apitermekek/lekerdezAruSzures",data2,(eredmeny)=>{
         Lapoz(eredmeny);
     });
     LapozashozElozoKovekezoEsemenyek();

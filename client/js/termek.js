@@ -1,4 +1,4 @@
-window.onload=async function() {
+window.addEventListener("load",async function() {
     const aruId=document.getElementById("aruId");
     const response= await fetch("?oldal=Apitermekek/lekerdezAruById&aruId="+aruId.value);
     const data = await response.json();
@@ -15,7 +15,7 @@ window.onload=async function() {
     aru_kep.src=kepUrl;
     aru_kep.alt="Nem sikerult a kep betoltes!";
     aruKepDiv.appendChild(aru_kep);
-}
+});
 const termekForm=document.getElementById("termekForm");
 if (termekForm) {
   termekForm.addEventListener('submit',Elkuld);  

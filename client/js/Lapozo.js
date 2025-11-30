@@ -1,4 +1,4 @@
-export async function SzuroFelepit(maximumAr,callback) {
+export async function SzuroFelepit(param,maximumAr,callback) {
     const szuroTarolo=document.getElementById("szuroTarolo");
     const minArLabel=document.createElement("label");
     minArLabel.textContent="Min: 0";
@@ -58,9 +58,9 @@ export async function SzuroFelepit(maximumAr,callback) {
         }
     });
     szuresBekuldGomb.addEventListener("click",async function(){
-        const data1=await FetchMeghiv("?oldal=Apitermekek/lekerdezAruSzures",0,null,nevKeresInput.value || null,minArInput.value || null,maxArInput.value || null);
+        const data1=await FetchMeghiv(param,0,null,nevKeresInput.value || null,minArInput.value || null,maxArInput.value || null);
         callback(data1);
-        const data2=await FetchMeghiv("?oldal=Apitermekek/lekerdezAruSzures",null,true,nevKeresInput.value || null,minArInput.value || null, maxArInput.value || null);
+        const data2=await FetchMeghiv(param,null,true,nevKeresInput.value || null,minArInput.value || null, maxArInput.value || null);
         LapozashozLegorduloMenu(data2);
     });
     nevKeresInput.addEventListener("input",(e)=>{
@@ -101,7 +101,7 @@ export function LapozashozSelectEsemeny(url,callback) {
         const minArInput=document.getElementById("minAr");
         const maxArInput=document.getElementById("maxAr");
         const nevKeresInput=document.getElementById("nevKeres");
-        const data1=await FetchMeghiv(url,e.target.value,null,nevKeresInput.value || null,minArInput.value || null,maxArInput.value || null);
+        const data1=await FetchMeghiv(url,e.target.value,null,nevKeresInput?.value || null,minArInput?.value || null,maxArInput?.value || null);
         callback(data1);
     });
 }
