@@ -21,6 +21,10 @@ async function Lapoz(data) {
             const aru=document.createElement('div');
             aru.classList.add('aru');
 
+            aru.addEventListener("click",()=>{
+                '?oldal=Termek/Main/'+element.id_aru
+            });
+
             const aru_nev=document.createElement('div');
             aru_nev.classList.add('aru_nev');
             aru_nev.textContent=element.nev_aru;
