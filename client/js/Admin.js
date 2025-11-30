@@ -195,7 +195,7 @@ async function SzuroAlapok() {
         adminTartalom.appendChild(lapozo);
     }
         const data1=await FetchMeghiv("?oldal=Apitermekek/lekerdezAruMaxAr");
-        SzuroFelepit(data1,(eredmeny)=>{
+        SzuroFelepit("?oldal=Apitermekek/lekerdezAruSzures",data1,(eredmeny)=>{
             AruListaz(eredmeny);
         });
         LapozashozElozoKovekezoEsemenyek();
