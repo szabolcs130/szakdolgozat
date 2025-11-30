@@ -17,12 +17,24 @@ class BejelentkezesModel{
             return 0;
         }
     }
-    public static function GetSzemelyByName($nev){
+    public static function GetSzemelyById($id){
         try {
             $db = self::Connection();
-            $sql = "SELECT * FROM szemely WHERE nev_szemely=:nevSzemely";
+            $sql = "SELECT * FROM szemely WHERE id_szemely=:id_szemely";
             $sth = $db->prepare($sql);
-            $sth->execute(array(':nevSzemely'=> $nev));
+            $sth->execute(array(':id_szemely'=>$id));
+            $eredmeny = $sth->fetchAll(\PDO::FETCH_ASSOC);
+            return $eredmeny;
+        }catch (\PDOException $e) {
+            return 0;
+        }
+    }
+    public static function GetSzemelyByEmail($email){
+        try {
+            $db = self::Connection();
+            $sql = "SELECT * FROM szemely WHERE email=:email";
+            $sth = $db->prepare($sql);
+            $sth->execute(array(':email'=> $email));
             $eredmeny = $sth->fetchAll(\PDO::FETCH_ASSOC);
             return $eredmeny;
         }catch (\PDOException $e) {

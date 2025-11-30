@@ -11,10 +11,10 @@ class BejelentkezesController{
         return 1;
     }
     public static function EllenorizBejelentkezes(){
-        if (!isset($_SESSION["username"]) && isset($_POST["username"]) && isset($_POST["p"])) {
-            $username=$_POST["username"];
+        if (!isset($_SESSION["username"]) && isset($_POST["email"]) && isset($_POST["p"])) {
+            $username=$_POST["email"];
             $password=$_POST["p"];
-            $user=BejelentkezesModel::GetSzemelyByName($username);
+            $user=BejelentkezesModel::GetSzemelyByEmail($username);
             if ($user && isset($user[0]['jelszo']) && password_verify($password,$user[0]['jelszo'])){
                 BejelentkezesView::SikeresBejelentkezes($user[0]["nev_szemely"]);
                 $_SESSION["userId"]=$user[0]["id_szemely"];
