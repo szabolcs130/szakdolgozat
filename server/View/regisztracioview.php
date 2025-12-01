@@ -6,10 +6,19 @@ class RegisztracioView{
       $html="";
       $html.= '<div id="regisztracioForm">'.
                 '<form method="post" action="?oldal=Regisztracio/EllenorizRegisztracio">'.
-                  '<input type="text" name="username" placeholder="Felhasznalonev"><br><br>'.
-                  '<input type="text" name="email" placeholder="Email"><br><br>'.
-                  '<input type="password" name="p" placeholder="Jelszo"><br><br>'.
-                  '<button type="submit">Regisztracio</button>'.
+                  '<div class="ErrorDiv">'.
+                  '<input type="text" name="username" id="username" placeholder="Felhasznalonev"><br><br>'.
+                  '<p id="errorUsernameP"></p>'.
+                  '</div>'.
+                  '<div class="ErrorDiv">'.
+                  '<input type="text" name="email" id="email" placeholder="Email"><br><br>'.
+                  '<p id="errorEmailP"></p>'.
+                  '</div>'.
+                  '<div class="ErrorDiv">'.
+                  '<input type="password" name="p" id="p" placeholder="Jelszo"><br><br>'.
+                  '<p id="errorPasswordP"></p>'.
+                  '</div>'.
+                  '<button id="regisztracioBekuldGomb" type="submit">Regisztracio</button>'.
                 '</form>'.
               '</div>';
       echo $html; 

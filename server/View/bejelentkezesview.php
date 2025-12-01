@@ -6,8 +6,8 @@ class BejelentkezesView{
       $html="";
       $html.= '<div id="bejelentkezesForm">'.
                 '<form method="post" action="?oldal=Bejelentkezes/EllenorizBejelentkezes">'.
-                  '<input type="text" name="email" placeholder="Email"><br><br>'.
-                  '<input type="password" name="p" placeholder="Jelszo"><br><br>'.
+                  '<input type="text" name="email" id="email" placeholder="Email"><br><br>'.
+                  '<input type="password" name="p" id="p" placeholder="Jelszo"><br><br>'.
                   '<button type="submit">Bejelentkezes</button>'.
                 '</form>'.
               '</div>';
