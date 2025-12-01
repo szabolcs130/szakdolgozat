@@ -23,7 +23,6 @@ export function EllenorizElsoResz(keresoGomb,error,adat,lehetUres,minta,min,max)
 }
 export function szovegEllenorzo(error,adat,min,max,minta,lehetUres) {
     var rendben=true;
-    //const b=adat.value;
     error.textContent="";
     error.style.color="red";
     error.textContent="";

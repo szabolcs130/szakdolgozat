@@ -23,11 +23,19 @@ a{
 li{
     list-style: none;
 }
-#adminTartalma{
+#adminTartalom{
     width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-direction: column;
+}
+#tablazat{
+   width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center; 
+    flex-direction: column;
 }
 #tablazatTarolo{
     width: 100%;
@@ -57,3 +65,10 @@ li{
 #elozo{
     visibility: hidden;
 }
+ #nevErrorDiv{
+   width: 30%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+ }

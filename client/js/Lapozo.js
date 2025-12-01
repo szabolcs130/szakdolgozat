@@ -1,4 +1,4 @@
-import { EllenorizElsoResz,szovegEllenorzo } from './Ellenorzo.js';;
+import { EllenorizElsoResz} from './Ellenorzo.js';
 export async function SzuroFelepit(param,maximumAr,callback) {
     const szuroTarolo=document.getElementById("szuroTarolo");
     const minArLabel=document.createElement("label");
@@ -35,14 +35,17 @@ export async function SzuroFelepit(param,maximumAr,callback) {
     minArDiv.appendChild(minArLabel);
     minArDiv.appendChild(minArInput);
     
+    const minSzoveg=0;
+    const maxSzoveg=50;
+
     let nevKeresInput=document.createElement("input");
     nevKeresInput.type="text";
     nevKeresInput.placeholder="Kulcsszo";
     nevKeresInput.id="nevKeres";
-    nevKeresInput.minLength=0;
-    nevKeresInput.maxLength=10;
+    nevKeresInput.minLength=minSzoveg;
+    nevKeresInput.maxLength=maxSzoveg;
     nevKeresInput.addEventListener("input",(e)=>{
-        EllenorizElsoResz(szuresBekuldGomb,errorP,nevKeresInput,true,/^[A-Za-z ]+$/,0,3);
+        EllenorizElsoResz(szuresBekuldGomb,errorP,nevKeresInput,true,/^[A-Za-z ]+$/,minSzoveg,maxSzoveg);
     });
 
     const errorP=document.createElement("p");
