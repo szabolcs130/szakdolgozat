@@ -1,3 +1,4 @@
+import { EllenorizElsoResz} from './Ellenorzo.js';
 export async function SzuroFelepit(param,maximumAr,callback) {
     const szuroTarolo=document.getElementById("szuroTarolo");
     const minArLabel=document.createElement("label");
@@ -33,15 +34,30 @@ export async function SzuroFelepit(param,maximumAr,callback) {
     minArDiv.id="minArDiv";
     minArDiv.appendChild(minArLabel);
     minArDiv.appendChild(minArInput);
+    
+    const minSzoveg=0;
+    const maxSzoveg=50;
 
     let nevKeresInput=document.createElement("input");
     nevKeresInput.type="text";
-    nevKeresInput.placeholder="Kulcsszo"
-    nevKeresInput.id="nevKeres"
+    nevKeresInput.placeholder="Kulcsszo";
+    nevKeresInput.id="nevKeres";
+    nevKeresInput.minLength=minSzoveg;
+    nevKeresInput.maxLength=maxSzoveg;
+    nevKeresInput.addEventListener("input",(e)=>{
+        EllenorizElsoResz(szuresBekuldGomb,errorP,nevKeresInput,true,/^[A-Za-z ]+$/,minSzoveg,maxSzoveg);
+    });
+
+    const errorP=document.createElement("p");
+    errorP.style.display="none";
+    const nevErrorDiv=document.createElement("div");
+    nevErrorDiv.id="nevErrorDiv";
+    nevErrorDiv.appendChild(nevKeresInput);
+    nevErrorDiv.appendChild(errorP);
+
     let szuresBekuldGomb=document.createElement('button');
     szuresBekuldGomb.type="submit";
     szuresBekuldGomb.textContent="Keres";
-
 
     minArInput.addEventListener("input",(e)=>{
         minArLabel.textContent="Min: "+e.target.value;
@@ -72,7 +88,9 @@ export async function SzuroFelepit(param,maximumAr,callback) {
             minArInput.disabled=false;
         }
     });
-    szuroTarolo.appendChild(nevKeresInput);
+    //szuroTarolo.appendChild(nevKeresInput);
+    //szuroTarolo.appendChild(errorP);
+    szuroTarolo.appendChild(nevErrorDiv);
     szuroTarolo.appendChild(minArDiv);
     szuroTarolo.appendChild(maxArDiv);
     szuroTarolo.appendChild(szuresBekuldGomb);

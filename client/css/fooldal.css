@@ -17,6 +17,13 @@ html{
     align-items: center;
     border: 1px solid black;
  }
+ #nevErrorDiv{
+   width: 30%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+ }
  .aru{
     width: calc(30%);
     min-width: 150px;
