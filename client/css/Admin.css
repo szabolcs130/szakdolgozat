@@ -72,3 +72,10 @@ li{
     align-items: center;
     flex-direction: column;
  }
+ .ErrorDiv{
+        width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+ }

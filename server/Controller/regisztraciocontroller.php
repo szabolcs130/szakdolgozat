@@ -16,6 +16,7 @@ class RegisztracioController{
             if ($user!=0 && !$user){
                 if (BejelentkezesModel::hozzaadSzemely($username,$email,$password,1)!=0) {
                     //RegisztracioView::SikeresRegisztracio();
+                    $_SESSION["uzenet"]="Sikeres regisztracio!";
                     header('Location: ?oldal=Bejelentkezes');
                     exit();
                 }

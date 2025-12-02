@@ -44,7 +44,7 @@ window.onload=function () {
     });
 
     email.addEventListener("input",(e)=>{
-        EllenorizElsoResz(regisztracioBekuldGomb,erroremailP,email,false,emailPattern,emailMin,usernameMax);
+        EllenorizElsoResz(regisztracioBekuldGomb,erroremailP,email,false,emailPattern,emailMin,emailMax);
     });
 
     p.addEventListener("input",(e)=>{

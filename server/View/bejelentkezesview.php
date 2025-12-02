@@ -4,11 +4,21 @@ class BejelentkezesView{
 //
     public static function ShowBejelentkezes(){
       $html="";
+      if (isset($_SESSION['uzenet'])) {
+        $html.='<h3>'.$_SESSION['uzenet'].'</h3>';
+        unset($_SESSION['uzenet']);
+      }
       $html.= '<div id="bejelentkezesForm">'.
                 '<form method="post" action="?oldal=Bejelentkezes/EllenorizBejelentkezes">'.
+                  '<div class="ErrorDiv">'.
                   '<input type="text" name="email" id="email" placeholder="Email"><br><br>'.
+                  '<p id="errorEmailP"></p>'.
+                  '</div>'.
+                  '<div class="ErrorDiv">'.
                   '<input type="password" name="p" id="p" placeholder="Jelszo"><br><br>'.
-                  '<button type="submit">Bejelentkezes</button>'.
+                  '<p id="errorPasswordP"></p>'.
+                  '</div>'.
+                  '<button id="bejelentkezesBekuldGomb" type="submit">Bejelentkezes</button>'.
                 '</form>'.
               '</div>';
       echo $html; 

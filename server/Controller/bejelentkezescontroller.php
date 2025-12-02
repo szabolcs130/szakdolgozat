@@ -16,12 +16,13 @@ class BejelentkezesController{
             $password=$_POST["p"];
             $user=BejelentkezesModel::GetSzemelyByEmail($username);
             if ($user && isset($user[0]['jelszo']) && password_verify($password,$user[0]['jelszo'])){
-                BejelentkezesView::SikeresBejelentkezes($user[0]["nev_szemely"]);
+                //BejelentkezesView::SikeresBejelentkezes($user[0]["nev_szemely"]);
                 $_SESSION["userId"]=$user[0]["id_szemely"];
                 $_SESSION["username"]=$user[0]["nev_szemely"];
                 $_SESSION["rang"]=$user[0]["rang"];
                 $_SESSION["kosar"]=[];
-                header('Location: ?oldal=Fooldal');
+                $_SESSION["uzenet"]="Sikeres bejelentkezes!";
+                header('Location: ?oldal=Fiok');
                 exit();
             }
             BejelentkezesView::SikertelenBejelentkezes();
