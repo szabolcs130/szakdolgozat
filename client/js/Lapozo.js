@@ -2,10 +2,10 @@ import { EllenorizElsoResz, htmlEllenorrzo} from './Ellenorzo.js';
 export async function SzuroFelepit(param,maximumAr,callback) {
     const szuroTarolo=document.getElementById("szuroTarolo");
     const minArLabel=document.createElement("label");
-    minArLabel.textContent="Min: 0";
+    minArLabel.textContent="Min: ";
 
     const maxArLabel=document.createElement("label");
-    maxArLabel.textContent="Max: "+maximumAr?.[0]?.max;
+    maxArLabel.textContent="Max: ";
 
     const minArInput=document.createElement("input");
     minArInput.type="range";
@@ -16,7 +16,12 @@ export async function SzuroFelepit(param,maximumAr,callback) {
     minArInput.type="range";
     minArInput.disabled=true;
 
-    let maxArInput=document.createElement("input");
+    const errorMinArP=document.createElement("p");
+    errorMinArP.style.display="none";
+    const MinArErtekeP=document.createElement("p");
+    //MinArErtekeP.style.display="none";
+    MinArErtekeP.textContent=0+" Forint";
+    const maxArInput=document.createElement("input");
     maxArInput.type="range";
     maxArInput.id="maxAr";
     maxArInput.type="range";
@@ -25,20 +30,30 @@ export async function SzuroFelepit(param,maximumAr,callback) {
     maxArInput.value=maximumAr?.[0]?.max;
     maxArInput.disabled=true;
 
+    const errorMaxArP=document.createElement("p");
+    errorMaxArP.style.display="none";
+    const MaxArErtekeP=document.createElement("p");
+    //MaxArErtekeP.style.display="none";
+    MaxArErtekeP.textContent=+maximumAr?.[0]?.max+" Forint";
+
     const maxArDiv=document.createElement("div");
     maxArDiv.id="maxArDiv";
     maxArDiv.appendChild(maxArLabel);
     maxArDiv.appendChild(maxArInput);
+    maxArDiv.appendChild(MaxArErtekeP);
+    maxArDiv.appendChild(errorMaxArP);
 
     const minArDiv=document.createElement("div");
     minArDiv.id="minArDiv";
     minArDiv.appendChild(minArLabel);
     minArDiv.appendChild(minArInput);
+    minArDiv.appendChild(MinArErtekeP);
+    minArDiv.appendChild(errorMinArP);
     
     const minSzoveg=0;
     const maxSzoveg=50;
     const patternSzoveg=/^[A-Za-z ]+$/;
-    let nevKeresInput=document.createElement("input");
+    const nevKeresInput=document.createElement("input");
     nevKeresInput.type="text";
     nevKeresInput.placeholder="Kulcsszo";
     nevKeresInput.id="nevKeres";
@@ -53,29 +68,34 @@ export async function SzuroFelepit(param,maximumAr,callback) {
     nevErrorDiv.appendChild(nevKeresInput);
     nevErrorDiv.appendChild(errorP);
 
-    let szuresBekuldGomb=document.createElement('button');
+    const szuresBekuldGomb=document.createElement('button');
     szuresBekuldGomb.type="submit";
     szuresBekuldGomb.textContent="Keres";
 
     minArInput.addEventListener("input",(e)=>{
-        minArLabel.textContent="Min: "+e.target.value;
+        MinArErtekeP.textContent=e.target.value+" Forint";
         if (parseInt(e.target.value)>=parseInt(maxArInput.value)) {
             maxArInput.value=(parseInt(e.target.value)+100);
-            maxArLabel.textContent="Max: "+maxArInput.value;
+            MaxArErtekeP.textContent=maxArInput.value+" Forint";
         }
     });
     maxArInput.addEventListener("input",(e)=>{
-        maxArLabel.textContent="Max: "+e.target.value;
+        MaxArErtekeP.textContent=e.target.value+" Forint";
         if (parseInt(e.target.value)<=parseInt(minArInput.value)) {
             minArInput.value=(parseInt(e.target.value)-100);
-            minArLabel.textContent="Max: "+minArInput.value;
+            MinArErtekeP.textContent=minArInput.value+" Forint";
         }
     });
     szuresBekuldGomb.addEventListener("click",async function(){
-        const data1=await FetchMeghiv(param,0,null,nevKeresInput.value || null,minArInput.value || null,maxArInput.value || null);
-        callback(data1);
-        const data2=await FetchMeghiv(param,null,true,nevKeresInput.value || null,minArInput.value || null, maxArInput.value || null);
-        LapozashozLegorduloMenu(data2);
+        var nevResult=EllenorizElsoResz(szuresBekuldGomb,errorP,nevKeresInput,true,patternSzoveg,minSzoveg,maxSzoveg,true);
+        var minArResult=EllenorizElsoResz(szuresBekuldGomb,errorMinArP,minArInput,true,/^[0-9]{0,8}$/,0,9,true);
+        var maxArResult=EllenorizElsoResz(szuresBekuldGomb,errorMaxArP,maxArInput,true,/^[0-9]{0,8}$/,0,9,true);
+        if (nevResult && minArResult && maxArResult) {
+            const data1=await FetchMeghiv(param,0,null,nevKeresInput.value || null,minArInput.value || null,maxArInput.value || null);
+            callback(data1);
+            const data2=await FetchMeghiv(param,null,true,nevKeresInput.value || null,minArInput.value || null, maxArInput.value || null);
+            LapozashozLegorduloMenu(data2);
+        }
     });
     nevKeresInput.addEventListener("input",(e)=>{
         if (e.target.value.length==0) {

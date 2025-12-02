@@ -10,20 +10,6 @@ html{
     border: 1px solid black;
     padding-top: calc(3%);
  }
- #szuroTarolo{
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border: 1px solid black;
- }
- #nevErrorDiv{
-   width: 30%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
- }
  .aru{
     width: calc(30%);
     min-width: 150px;
@@ -67,3 +53,26 @@ html{
     align-items: center;
     flex-wrap: wrap;
 }
+#szuroTarolo>*{
+margin-left: calc(1%);
+margin-right: calc(1%);
+}
+#maxArDiv{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+#minArDiv{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+ #nevErrorDiv{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+ }
