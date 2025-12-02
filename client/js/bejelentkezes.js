@@ -1,24 +1,17 @@
-import { EllenorizElsoResz} from './Ellenorzo.js';
+import { EllenorizElsoResz,htmlEllenorrzo} from './Ellenorzo.js';
 window.onload=function () {
     const email=document.getElementById("email");
     const p=document.getElementById("p");
 
     const emailMin=11;
     const emailMax=254;
-    const emailPattern=/^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$/;
-    email.minLength=emailMin;
-    email.maxLength=emailMax;
-    email.required=true;
-    email.pattern=emailPattern.source;
-
+    const emailPattern=/^[a-z0-9._%+\-]+@[a-z0-9.\-]+\.[a-z]{2,3}$/;
+    htmlEllenorrzo(email,emailPattern,emailMin,emailMax,true);
 
     const pMin=12;
     const pMax=64;
     const pPattern=/^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[^A-Za-z0-9]).{12,64}$/;
-    p.minLength=pMin;
-    p.maxLength=pMax;
-    p.required=true;
-    p.pattern=pPattern.source;
+    htmlEllenorrzo(p,pPattern,pMin,pMax,true);
 
     const erroremailP=document.getElementById("errorEmailP");
     const errorPasswordP=document.getElementById("errorPasswordP");

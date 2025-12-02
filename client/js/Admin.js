@@ -1,5 +1,5 @@
 import { SzuroFelepit,FetchMeghiv,LapozashozSelectEsemeny,LapozashozElozoKovekezoEsemenyek,LapozashozLegorduloMenu,ElozoKovetkezoLapozoMegjelenitese } from './Lapozo.js';
-import { EllenorizElsoResz} from './Ellenorzo.js';
+import { EllenorizElsoResz,htmlEllenorrzo} from './Ellenorzo.js';
 window.onload = async function() {
     if (document.getElementById("tablazatTarolo")) {
         SzuroAlapok();
@@ -288,10 +288,7 @@ function FormAru(params,actionParam,gombFelirat) {
     const aruNevMin=5;
     const aruNevMax=20;
     const aruNevPattern=/^[A-Za-z0-9]+$/;
-    aruNevInput.minLength=aruNevMin;
-    aruNevInput.maxLength=aruNevMax;
-    aruNevInput.required=true;
-    aruNevInput.pattern=aruNevPattern.source;
+    htmlEllenorrzo(aruNevInput,aruNevPattern,aruNevMin,aruNevMax,true);
 
     ErrorDivAruNev.appendChild(aruNevInput);
     ErrorDivAruNev.appendChild(errorAruNev);
@@ -329,6 +326,12 @@ function FormAru(params,actionParam,gombFelirat) {
     errorAruLeiras.id="errorAruLeiras";
     const ErrorDivAruLeiras=document.createElement("div");
     ErrorDivAruLeiras.classList.add("ErrorDiv");
+
+    const aruLeirasMin=5;
+    const aruLeirasMax=254;
+    const aruLeirasPattern=/^[A-Za-z0-9]+$/;
+    htmlEllenorrzo(aruLeirasInput,aruLeirasPattern,aruLeirasMin,aruLeirasMax,true);
+
     ErrorDivAruLeiras.appendChild(aruLeirasInput);
     ErrorDivAruLeiras.appendChild(errorAruLeiras);
     form.appendChild(ErrorDivAruLeiras);
@@ -336,7 +339,7 @@ function FormAru(params,actionParam,gombFelirat) {
 
 //mennyiseg
     const aruMennyisegInput=document.createElement("input");
-    aruMennyisegInput.type="text";
+    aruMennyisegInput.type="number";
     aruMennyisegInput.name="mennyiseg";
     aruMennyisegInput.value=params?.cells?.[4]?.textContent || "";
     aruMennyisegInput.placeholder="Aru mennyisege";
@@ -365,6 +368,12 @@ function FormAru(params,actionParam,gombFelirat) {
     errorAruKep.id="errorAruKep";
     const ErrorDivAruKep=document.createElement("div");
     ErrorDivAruKep.classList.add("ErrorDiv");
+
+    const aruKepMin=5;
+    const aruKepMax=20;
+    const aruKepPattern=/^[A-Za-z0-9]+$/;
+    htmlEllenorrzo(aruKepInput,aruKepPattern,aruKepMin,aruKepMax,true);
+
     ErrorDivAruKep.appendChild(aruKepInput);
     ErrorDivAruKep.appendChild(errorAruKep);
     form.appendChild(ErrorDivAruKep);
@@ -379,6 +388,12 @@ function FormAru(params,actionParam,gombFelirat) {
         });
     aruNevInput.addEventListener("input",(e)=>{
             EllenorizElsoResz(aruBekuldGomb,errorAruNev,aruNevInput,false,aruNevPattern,aruNevMin,aruNevMax);
+    });
+    aruLeirasInput.addEventListener("input",(e)=>{
+            EllenorizElsoResz(aruBekuldGomb,errorAruLeiras,aruLeirasInput,false,aruLeirasPattern,aruLeirasMin,aruLeirasMax);
+    });
+    aruKepInput.addEventListener("input",(e)=>{
+            EllenorizElsoResz(aruBekuldGomb,errorAruKep,aruKepInput,false,aruKepPattern,aruKepMin,aruKepMax);
     });
     form.appendChild(aruBekuldGomb);
     formTarolo.appendChild(form);

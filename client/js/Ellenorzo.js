@@ -66,3 +66,9 @@ export function szovegEllenorzo(error,adat,min,max,minta,lehetUres) {
     }
     return rendben;
 }
+export function htmlEllenorrzo(adat,minta,min,max,szukseges) {
+    adat.minLength=min;
+    adat.maxLength=max;
+    adat.required=szukseges;
+    adat.pattern=minta.source;
+}
