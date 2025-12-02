@@ -1,4 +1,4 @@
-export function EllenorizElsoResz(keresoGomb,error,adat,lehetUres,minta,min,max) {
+export function EllenorizElsoResz(keresoGomb,error,adat,lehetUres,minta,min,max,visszateres) {
     if (keresoGomb) {
         keresoGomb.disabled=true;
     }
@@ -8,17 +8,20 @@ export function EllenorizElsoResz(keresoGomb,error,adat,lehetUres,minta,min,max)
             adat.style.background='#9f9';
             error.style.display='none';
             error.textContent="";
+            if (visszateres) return true;
         }else{
             const eredmeny=szovegEllenorzo(error,adat,min,max,minta,lehetUres);
             if (eredmeny) {
                 keresoGomb.disabled=!eredmeny;
             }
+            if (visszateres) return eredmeny;
         }
     }else{
        const eredmeny=szovegEllenorzo(error,adat,min,max,minta,lehetUres);
         if (eredmeny) {
             keresoGomb.disabled=!eredmeny;
         }
+        if (visszateres) return eredmeny;
     }
 }
 export function szovegEllenorzo(error,adat,min,max,minta,lehetUres) {

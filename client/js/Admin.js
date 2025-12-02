@@ -267,8 +267,23 @@ function FormAru(params,actionParam,gombFelirat) {
     const aruIdInput=document.createElement("input");
     aruIdInput.type="hidden";
     aruIdInput.name="idaru";
-    aruIdInput.value=params?.cells?.[0]?.textContent || "";
-    form.appendChild(aruIdInput);
+    aruIdInput.value=params?.cells?.[0]?.textContent || "1";
+    //form.appendChild(aruIdInput);
+
+    const errorAruId=document.createElement("p");
+    errorAruId.style.display="none";
+    errorAruId.id="errorAruId";
+    const ErrorDivAruId=document.createElement("div");
+    ErrorDivAruId.classList.add("ErrorDiv");
+
+    const aruIdMin=1;
+    const aruIdMax=9;
+    const aruIdPattern=/^[1-9][0-9]{0,8}$/;
+    htmlEllenorrzo(aruIdInput,aruIdPattern,aruIdMin,aruIdMax,true);
+
+    ErrorDivAruId.appendChild(aruIdInput);
+    ErrorDivAruId.appendChild(errorAruId);
+    form.appendChild(ErrorDivAruId);
 //id v e g e
 
 //nev
@@ -308,6 +323,12 @@ function FormAru(params,actionParam,gombFelirat) {
     errorAruAr.id="errorAruAr";
     const ErrorDivAruAr=document.createElement("div");
     ErrorDivAruAr.classList.add("ErrorDiv");
+
+    const aruArMin=1;
+    const aruArMax=9;
+    const aruArPattern=/^[1-9][0-9]{0,8}$/;
+    htmlEllenorrzo(aruArInput,aruArPattern,aruArMin,aruArMax,true);
+
     ErrorDivAruAr.appendChild(aruArInput);
     ErrorDivAruAr.appendChild(errorAruAr);
     form.appendChild(ErrorDivAruAr);
@@ -350,6 +371,12 @@ function FormAru(params,actionParam,gombFelirat) {
     errorAruMennyiseg.id="errorAruMennyiseg";
     const ErrorDivAruMennyiseg=document.createElement("div");
     ErrorDivAruMennyiseg.classList.add("ErrorDiv");
+
+    const aruMennyisegMin=1;
+    const aruMennyisegMax=9;
+    const aruMennyisegPattern=/^[1-9][0-9]{0,8}$/;
+    htmlEllenorrzo(aruMennyisegInput,aruMennyisegPattern,aruMennyisegMin,aruMennyisegMax,true);
+
     ErrorDivAruMennyiseg.appendChild(aruMennyisegInput);
     ErrorDivAruMennyiseg.appendChild(errorAruMennyiseg);
     form.appendChild(ErrorDivAruMennyiseg);
@@ -382,18 +409,37 @@ function FormAru(params,actionParam,gombFelirat) {
     aruBekuldGomb.type="submit";
     aruBekuldGomb.textContent=gombFelirat || "Oke" ;
     aruBekuldGomb.addEventListener("click",(e)=>{
+        var aruIdReturn=EllenorizElsoResz(aruBekuldGomb,errorAruId,aruIdInput,false,aruIdPattern,aruIdMin,aruIdMax,true);
+        var aruNevReturn=EllenorizElsoResz(aruBekuldGomb,errorAruNev,aruNevInput,false,aruNevPattern,aruNevMin,aruNevMax,true);
+        var aruArReturn=EllenorizElsoResz(aruBekuldGomb,errorAruAr,aruArInput,false,aruArPattern,aruArMin,aruArMax,true);
+        var aruLeirasReturn=EllenorizElsoResz(aruBekuldGomb,errorAruLeiras,aruLeirasInput,false,aruLeirasPattern,aruLeirasMin,aruLeirasMax,true);
+        var aruMennyisegReturn=EllenorizElsoResz(aruBekuldGomb,errorAruMennyiseg,aruMennyisegInput,false,aruMennyisegPattern,aruMennyisegMin,aruMennyisegMax,true);
+        var aruKepReturn=EllenorizElsoResz(aruBekuldGomb,errorAruKep,aruKepInput,false,aruKepPattern,aruKepMin,aruKepMax,true);
+        if (!aruIdReturn || !aruNevReturn || !aruArReturn || !aruLeirasReturn || !aruMennyisegReturn || !aruKepReturn) {
+            e.preventDefault();
+        }else{
             if (!confirm("Biztosan "+(gombFelirat ? gombFelirat+"?" :"?"))) {
                 e.preventDefault();
             }
-        });
+        }
+    });
+    aruIdInput.addEventListener("input",(e)=>{
+            EllenorizElsoResz(aruBekuldGomb,errorAruId,aruIdInput,false,aruIdPattern,aruIdMin,aruIdMax,false);
+    });
     aruNevInput.addEventListener("input",(e)=>{
-            EllenorizElsoResz(aruBekuldGomb,errorAruNev,aruNevInput,false,aruNevPattern,aruNevMin,aruNevMax);
+            EllenorizElsoResz(aruBekuldGomb,errorAruNev,aruNevInput,false,aruNevPattern,aruNevMin,aruNevMax,false);
+    });
+    aruArInput.addEventListener("input",(e)=>{
+        EllenorizElsoResz(aruBekuldGomb,errorAruAr,aruArInput,false,aruArPattern,aruArMin,aruArMax,false);
     });
     aruLeirasInput.addEventListener("input",(e)=>{
-            EllenorizElsoResz(aruBekuldGomb,errorAruLeiras,aruLeirasInput,false,aruLeirasPattern,aruLeirasMin,aruLeirasMax);
+            EllenorizElsoResz(aruBekuldGomb,errorAruLeiras,aruLeirasInput,false,aruLeirasPattern,aruLeirasMin,aruLeirasMax,false);
+    });
+    aruMennyisegInput.addEventListener("input",(e)=>{
+            EllenorizElsoResz(aruBekuldGomb,errorAruMennyiseg,aruMennyisegInput,false,aruMennyisegPattern,aruMennyisegMin,aruMennyisegMax,false);
     });
     aruKepInput.addEventListener("input",(e)=>{
-            EllenorizElsoResz(aruBekuldGomb,errorAruKep,aruKepInput,false,aruKepPattern,aruKepMin,aruKepMax);
+            EllenorizElsoResz(aruBekuldGomb,errorAruKep,aruKepInput,false,aruKepPattern,aruKepMin,aruKepMax,false);
     });
     form.appendChild(aruBekuldGomb);
     formTarolo.appendChild(form);

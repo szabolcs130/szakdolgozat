@@ -43,9 +43,9 @@ export async function SzuroFelepit(param,maximumAr,callback) {
     nevKeresInput.placeholder="Kulcsszo";
     nevKeresInput.id="nevKeres";
     nevKeresInput.addEventListener("input",(e)=>{
-        EllenorizElsoResz(szuresBekuldGomb,errorP,nevKeresInput,true,patternSzoveg,minSzoveg,maxSzoveg);
+        EllenorizElsoResz(szuresBekuldGomb,errorP,nevKeresInput,true,patternSzoveg,minSzoveg,maxSzoveg,false);
     });
-    htmlEllenorrzo(nevKeresInput,patternSzoveg,minSzoveg,maxSzoveg,false);
+    htmlEllenorrzo(nevKeresInput,patternSzoveg,minSzoveg,maxSzoveg,true);
     const errorP=document.createElement("p");
     errorP.style.display="none";
     const nevErrorDiv=document.createElement("div");
