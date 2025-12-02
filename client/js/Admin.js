@@ -423,22 +423,22 @@ function FormAru(params,actionParam,gombFelirat) {
             }
         }
     });
-    aruIdInput.addEventListener("input",(e)=>{
+    aruIdInput.addEventListener("input",()=>{
             EllenorizElsoResz(aruBekuldGomb,errorAruId,aruIdInput,false,aruIdPattern,aruIdMin,aruIdMax,false);
     });
-    aruNevInput.addEventListener("input",(e)=>{
+    aruNevInput.addEventListener("input",()=>{
             EllenorizElsoResz(aruBekuldGomb,errorAruNev,aruNevInput,false,aruNevPattern,aruNevMin,aruNevMax,false);
     });
-    aruArInput.addEventListener("input",(e)=>{
+    aruArInput.addEventListener("input",()=>{
         EllenorizElsoResz(aruBekuldGomb,errorAruAr,aruArInput,false,aruArPattern,aruArMin,aruArMax,false);
     });
-    aruLeirasInput.addEventListener("input",(e)=>{
+    aruLeirasInput.addEventListener("input",()=>{
             EllenorizElsoResz(aruBekuldGomb,errorAruLeiras,aruLeirasInput,false,aruLeirasPattern,aruLeirasMin,aruLeirasMax,false);
     });
-    aruMennyisegInput.addEventListener("input",(e)=>{
+    aruMennyisegInput.addEventListener("input",()=>{
             EllenorizElsoResz(aruBekuldGomb,errorAruMennyiseg,aruMennyisegInput,false,aruMennyisegPattern,aruMennyisegMin,aruMennyisegMax,false);
     });
-    aruKepInput.addEventListener("input",(e)=>{
+    aruKepInput.addEventListener("input",()=>{
             EllenorizElsoResz(aruBekuldGomb,errorAruKep,aruKepInput,false,aruKepPattern,aruKepMin,aruKepMax,false);
     });
     form.appendChild(aruBekuldGomb);

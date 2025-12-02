@@ -20,18 +20,18 @@ window.onload=function () {
     errorPasswordP.style.display="none";
 
     const bejelentkezesBekuldGomb=document.getElementById("bejelentkezesBekuldGomb");
-    bejelentkezesBekuldGomb.addEventListener("click",()=>{
+    bejelentkezesBekuldGomb.addEventListener("click",(e)=>{
         const emailReturn=EllenorizElsoResz(bejelentkezesBekuldGomb,erroremailP,email,false,emailPattern,emailMin,emailMax,true);
         const pReturn=EllenorizElsoResz(bejelentkezesBekuldGomb,errorPasswordP,p,false,pPattern,pMin,pMax,true);
         if (!emailReturn || !pReturn) {
             e.preventDefault();
         }
     });
-    email.addEventListener("input",(e)=>{
+    email.addEventListener("input",()=>{
         EllenorizElsoResz(bejelentkezesBekuldGomb,erroremailP,email,false,emailPattern,emailMin,emailMax,false);
     });
 
-    p.addEventListener("input",(e)=>{
+    p.addEventListener("input",()=>{
         EllenorizElsoResz(bejelentkezesBekuldGomb,errorPasswordP,p,false,pPattern,pMin,pMax,false);
     });
 }

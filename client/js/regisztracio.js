@@ -29,7 +29,7 @@ window.onload=function () {
 
     const regisztracioBekuldGomb=document.getElementById("regisztracioBekuldGomb");
     
-    regisztracioBekuldGomb.addEventListener("click",()=>{
+    regisztracioBekuldGomb.addEventListener("click",(e)=>{
         const emailReturn=EllenorizElsoResz(regisztracioBekuldGomb,erroremailP,email,false,emailPattern,emailMin,emailMax,true);
         const pReturn=EllenorizElsoResz(regisztracioBekuldGomb,errorPasswordP,p,false,pPattern,pMin,pMax,true);
         const usernameReturn=EllenorizElsoResz(regisztracioBekuldGomb,errorUsernameP,username,false,usernamePattern,usernameMin,usernameMax,true);
@@ -38,15 +38,15 @@ window.onload=function () {
         }
     });
 
-    username.addEventListener("input",(e)=>{
+    username.addEventListener("input",()=>{
         EllenorizElsoResz(regisztracioBekuldGomb,errorUsernameP,username,false,usernamePattern,usernameMin,usernameMax,false);
     });
 
-    email.addEventListener("input",(e)=>{
+    email.addEventListener("input",()=>{
         EllenorizElsoResz(regisztracioBekuldGomb,erroremailP,email,false,emailPattern,emailMin,emailMax,false);
     });
 
-    p.addEventListener("input",(e)=>{
+    p.addEventListener("input",()=>{
         EllenorizElsoResz(regisztracioBekuldGomb,errorPasswordP,p,false,pPattern,pMin,pMax,false);
     });
 }
