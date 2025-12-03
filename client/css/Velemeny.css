@@ -1,55 +1,38 @@
 #velemenyIrasaTarolo{
     width: 100%;
+    border: 1px solid black;
+}
+#VelemenyEgy,
+#sajatVelemeny,
+#masVelemeny,
+#velemenyekTarolo,
+#VelemenyForm,
+#velemenyIrasaTarolo{
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    border: 1px solid black;
 }
 #VelemenyForm{
     width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
 }
 #velemenyekTarolo{
     width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
     border: 1px solid black;
 }
 #masVelemeny{
     width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
 }
 #sajatVelemeny{
     width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
 }
 #VelemenyEgy{
     width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
     border-bottom: 1px solid black;
 }
-#VelemenyEgyFejlec{
-    width: 100%;
-    display: flex;
-    justify-content: left;
-    align-items: center;
-    flex-direction: row;
-}
+#velemenyForm,
+.velemenyegy,
+#VelemenyEgyFejlec,
 #VelemenyEgyTorzs{
     width: 100%;
     display: flex;
@@ -61,21 +44,6 @@
     display: flex;
     width: 70vw;
     height: 20vh;
-}
-.velemenyegy{
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: row;
-    /*border: 1px solid red;*/
-}
-#velemenyForm{
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: row;
 }
 #lapozo{
     width: 100%;

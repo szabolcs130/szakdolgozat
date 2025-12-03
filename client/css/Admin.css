@@ -1,9 +1,5 @@
 #kontener{
     width: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
     border: 1px solid black;
 }
 #kismenuk{
@@ -24,10 +20,6 @@ li{
 }
 #adminTartalom{
     width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
 }
 #aruTablazat{
     width: 100%;
@@ -61,17 +53,8 @@ table tr th:nth-child(even)
 table tr:hover{
     background-color: rgb(73, 112, 112);
 }
-/*table tr th{
-    white-space: normal;
-    overflow-wrap: break-word;
-    border: 1px solid black;
-}*/
 #tablazatTarolo{
     width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
 }
 #lapozo{
     width: 100%;
@@ -85,19 +68,12 @@ table tr:hover{
 }
 #elozo{
     visibility: hidden;
-} 
-#maxArDiv{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
 }
-#minArDiv{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-}
+#kontener,
+#adminTartalom,
+#tablazatTarolo,
+#maxArDiv,
+#minArDiv,
 #nevErrorDiv{
     display: flex;
     justify-content: center;
@@ -131,8 +107,5 @@ table tr:hover{
     {
          white-space: nowrap;
     }
-    /*table tr th{
-        white-space: nowrap;
-    }*/
 }
 

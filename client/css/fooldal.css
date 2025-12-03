@@ -57,22 +57,17 @@ html{
 margin-left: calc(1%);
 margin-right: calc(1%);
 }
-#maxArDiv{
+#maxArDiv,
+#minArDiv,
+#nevErrorDiv{
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
 }
-#minArDiv{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
+@media screen and (max-width: 768px) {
+    #szuroTarolo{
+        flex-direction: column;
+    }
 }
 
- #nevErrorDiv{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
- }

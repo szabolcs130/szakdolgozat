@@ -42,6 +42,13 @@ export async function SzuroFelepit(param,maximumAr,callback) {
     maxArDiv.appendChild(maxArInput);
     maxArDiv.appendChild(MaxArErtekeP);
     maxArDiv.appendChild(errorMaxArP);
+    
+    maxArInput.addEventListener("input",(e)=>{
+        EllenorizElsoResz(errorMaxArP,maxArInput,true,/^[0-9]{0,8}$/,0,9,true);
+    });
+    minArInput.addEventListener("input",(e)=>{
+        EllenorizElsoResz(errorMinArP,minArInput,true,/^[0-9]{0,8}$/,0,9,true);
+    });
 
     const minArDiv=document.createElement("div");
     minArDiv.id="minArDiv";
