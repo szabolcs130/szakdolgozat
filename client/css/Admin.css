@@ -69,6 +69,35 @@ table tr:hover{
 #elozo{
     visibility: hidden;
 }
+.kepek{
+    width: calc(30%);
+    min-width: 150px;
+    max-width: 500px;
+    border: 1px solid black;
+    margin-left: calc(1.4%);
+    margin-right: calc(1.4%);
+    margin-bottom: calc(3%);
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    word-break: break-word;
+    min-height: 40vh;
+    height: auto;
+}
+.aru_kep{
+    width: calc(80%);
+    min-width: 150px;
+    max-width: 500px;
+}
+#kepTarolo{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    border: 1px solid black;
+    padding-top: calc(3%);
+}
 #kontener,
 #adminTartalom,
 #tablazatTarolo,

@@ -12,9 +12,11 @@ class AdminController{
         return 1;
     }
     public static function AruTorol($id){
-        AruModel::AruTorol($id);
-        self::TermekKezeles();
-        return 1;
+        if ((isset($_SESSION["username"]) && $_SESSION['rang']==3) && is_numeric($id)){
+            AruModel::AruTorol($id);
+            self::TermekKezeles();
+            return 1;
+        }
     }
     public static function AruSzerkeszt(){
         if ((isset($_SESSION["username"]) && $_SESSION['rang']==3) && isset($_POST["idaru"]) && isset($_POST["nev"]) && isset($_POST["ar"]) && isset($_POST["leiras"]) && isset($_POST["mennyiseg"]) && isset($_POST["kep"])) {
@@ -55,5 +57,18 @@ class AdminController{
         }
         return 0;
     }
+    /*public static function Kepek(){
+        $dir = __DIR__.'/../../Client/image/';
+        $realdir=realpath($dir);
+        if (is_dir($realdir)) {
+            $img = glob($dir . "*.{png}", GLOB_BRACE);
+            foreach ($img as $i) {
+                echo basename($i) . "<br>";
+                //echo '<img src="./Client/image/'.basename($i).'">';
+            }
+        }
+        
+
+    }*/
 }
 ?>

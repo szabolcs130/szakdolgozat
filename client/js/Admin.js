@@ -383,6 +383,7 @@ function FormAru(params,actionParam,gombFelirat) {
     const aruKepInput=document.createElement("input");
     aruKepInput.type="text";
     aruKepInput.name="kep";
+    aruKepInput.id="kep";
     aruKepInput.value=params?.cells?.[5]?.textContent || "";
     aruKepInput.placeholder="Aru kep url";
 
@@ -437,7 +438,37 @@ function FormAru(params,actionParam,gombFelirat) {
     aruKepInput.addEventListener("input",()=>{
             EllenorizElsoResz(errorAruKep,aruKepInput,false,aruKepPattern,aruKepMin,aruKepMax,false);
     });
+    aruKepInput.addEventListener("click",()=>{
+        KepekKilistaz();
+    });
     form.appendChild(aruBekuldGomb);
     formTarolo.appendChild(form);
     document.getElementById("adminTartalom").appendChild(formTarolo);
+}
+async function KepekKilistaz() {
+    const response= await fetch("?oldal=Apiadmin/Kepek");
+    const data = await response.json();
+    const kepTarolo=document.createElement('div');
+    kepTarolo.id="kepTarolo";
+    if (data.length) {
+        data.forEach(element=>{
+            const kepek=document.createElement('div');
+            kepek.classList.add("kepek");
+            const aru_kep=document.createElement('img');
+            aru_kep.classList.add('aru_kep');
+            const kepUrl=new URL('../image/'+element, import.meta.url).href;
+            aru_kep.src=kepUrl;
+            aru_kep.alt="Nem sikerult a kep betoltes!";
+            const aru_nev=document.createElement('p');
+            aru_nev.classList.add('aru_nev');
+            aru_nev.textContent=element.split(".png")[0];
+            kepek.appendChild(aru_kep);
+            kepek.appendChild(aru_nev);
+            kepek.addEventListener("click",()=>{
+                document.getElementById("kep").value=kepek.querySelector("p").textContent;
+            });
+            kepTarolo.appendChild(kepek);
+        });
+    }
+    document.getElementById("adminTartalom").appendChild(kepTarolo);
 }
