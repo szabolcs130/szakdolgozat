@@ -15,16 +15,16 @@ async function AruListaz(data) {
 
         const aTagAruUj=document.createElement('a');
         aTagAruUj.href='#';
-        aTagAruUj.textContent="Uj Aru";
+        aTagAruUj.textContent="Új Áru";
         liTagAruUj.appendChild(aTagAruUj);
 
-        liTagAruUj.addEventListener("click",()=>FormAru("","?oldal=Admin/AruUj","Hozzaad"));//AruUjForm()
+        liTagAruUj.addEventListener("click",()=>FormAru("","?oldal=Admin/AruUj","Hozzáad"));//AruUjForm()
 
         //const aruLista=document.createElement('div');//eredeti
         //aruLista.id='tablazatTarolo';//eredeti
-        const aruLista=document.getElementById('tablazatTarolo');//uj
-
-        aruLista.appendChild(liTagAruUj);
+        const aruTablazat=document.createElement('div');//uj
+        aruTablazat.id="aruTablazat";
+        tablazatTarolo.appendChild(liTagAruUj);
 
         const aruTable=document.createElement('table');
         aruTable.id='tablazat';
@@ -40,32 +40,32 @@ async function AruListaz(data) {
 
         const thHNev=document.createElement('th');
         //thHNev.scope="row";
-        thHNev.textContent="Nev";
+        thHNev.textContent="Név";
         thR.appendChild(thHNev);
 
         const thHAr=document.createElement('th');
         //thHAr.scope="row";
-        thHAr.textContent="Ar";
+        thHAr.textContent="Ár";
         thR.appendChild(thHAr);
 
         const thHLeiras=document.createElement('th');
         //thHLeiras.scope="row";
-        thHLeiras.textContent="Leiras";
+        thHLeiras.textContent="Leirás";
         thR.appendChild(thHLeiras);
 
         const thHMennyiseg=document.createElement('th');
         //thHLeiras.scope="row";
-        thHMennyiseg.textContent="Mennyiseg";
+        thHMennyiseg.textContent="Mennyiség";
         thR.appendChild(thHMennyiseg);
 
         const thHKep=document.createElement('th');
         //thHLeiras.scope="row";
-        thHKep.textContent="Kep";
+        thHKep.textContent="Kép";
         thR.appendChild(thHKep);
 
         const thHTorol=document.createElement('th');
         //thHTorol.scope="row";
-        thHTorol.textContent="Torol";
+        thHTorol.textContent="Töröl";
         thR.appendChild(thHTorol);
 
         const thHSzerkeszt=document.createElement('th');
@@ -73,14 +73,15 @@ async function AruListaz(data) {
         thHSzerkeszt.textContent="Szerkeszt";
         thR.appendChild(thHSzerkeszt);
 
-        thead.appendChild(thHId);
+        thead.appendChild(thR);
+        /*thead.appendChild(thHId);
         thead.appendChild(thHNev);
         thead.appendChild(thHAr);
         thead.appendChild(thHLeiras);
         thead.appendChild(thHMennyiseg);
         thead.appendChild(thHKep);
         thead.appendChild(thHTorol);
-        thead.appendChild(thHSzerkeszt);
+        thead.appendChild(thHSzerkeszt);*/
         aruTable.appendChild(thead);
 
         const tbody=document.createElement('tbody');
@@ -123,7 +124,7 @@ async function AruListaz(data) {
 
             const aTagTorol=document.createElement('a');
             aTagTorol.href='?oldal=Admin/AruTorol/'+element.id_aru;
-            aTagTorol.textContent="Torol";
+            aTagTorol.textContent="Töröl";
 
             aTagTorol.addEventListener("click",(e)=>{
                 e.preventDefault();
@@ -144,10 +145,9 @@ async function AruListaz(data) {
 
             const aTagSzerkeszt=document.createElement('a');
             aTagSzerkeszt.href='#';
-            aTagSzerkeszt.textContent="Szerkeszt";
+            //aTagSzerkeszt.textContent="Szerkeszt";
 
             liTagSzerkeszt.textContent="Szerkeszt";
-            //liTagSzerkeszt.appendChild(aTagSzerkeszt);
             tbDSzerkeszt.appendChild(liTagSzerkeszt);
             //Szerkeshzt V E G E
             tbRId.appendChild(tbDId);
@@ -161,11 +161,11 @@ async function AruListaz(data) {
             tbody.appendChild(tbRId);
         });
         aruTable.append(tbody);
-        aruLista.appendChild(aruTable);
-        
+        aruTablazat.appendChild(aruTable);
+        tablazatTarolo.appendChild(aruTablazat);
         const adminTartalma=document.getElementById("adminTartalom");
         
-        adminTartalma.appendChild(aruLista);
+        adminTartalma.appendChild(tablazatTarolo);
         document.querySelectorAll("#tablazat tbody tr td:last-child").forEach(adatsor=>{
         adatsor.addEventListener("click",()=>FormAru(adatsor.parentElement,"?oldal=Admin/AruSzerkeszt","Szerkeszt"));
     })
@@ -192,11 +192,11 @@ async function SzuroAlapok() {
         
         const elozo=document.createElement('li');
         elozo.id="elozo";
-        elozo.textContent="Elozo";
+        elozo.textContent="Előző";
 
         const kovetkezo=document.createElement('li');
         kovetkezo.id="kovetkezo";
-        kovetkezo.textContent="Kovetkezo"
+        kovetkezo.textContent="Következő"
 
         lapozo.appendChild(elozo);
         lapozo.appendChild(oldalValaszto);
@@ -300,9 +300,9 @@ function FormAru(params,actionParam,gombFelirat) {
     const ErrorDivAruNev=document.createElement("div");
     ErrorDivAruNev.classList.add("ErrorDiv");
 
-    const aruNevMin=5;
+    const aruNevMin=2;
     const aruNevMax=20;
-    const aruNevPattern=/^[A-Za-z0-9]+$/;
+    const aruNevPattern=/^[A-Za-z0-9áéíóöőúüűÁÉÍÓÖŐÚÜŰ ]+$/;
     htmlEllenorrzo(aruNevInput,aruNevPattern,aruNevMin,aruNevMax,true);
 
     ErrorDivAruNev.appendChild(aruNevInput);
@@ -335,12 +335,10 @@ function FormAru(params,actionParam,gombFelirat) {
 //ar v e g e
 
 //leiras
-    const aruLeirasInput=document.createElement("input");
-    aruLeirasInput.type="text";
+    const aruLeirasInput=document.createElement("textarea");
     aruLeirasInput.name="leiras";
     aruLeirasInput.value=params?.cells?.[3]?.textContent || "";
     aruLeirasInput.placeholder="Aru leiras";
-    //form.appendChild(aruLeirasInput);
 
     const errorAruLeiras=document.createElement("p");
     errorAruLeiras.style.display="none";
@@ -350,7 +348,7 @@ function FormAru(params,actionParam,gombFelirat) {
 
     const aruLeirasMin=5;
     const aruLeirasMax=254;
-    const aruLeirasPattern=/^[A-Za-z0-9]+$/;
+    const aruLeirasPattern=/^[A-Za-z0-9áéíóöőúüűÁÉÍÓÖŐÚÜŰ .,!?;:]+$/;
     htmlEllenorrzo(aruLeirasInput,aruLeirasPattern,aruLeirasMin,aruLeirasMax,true);
 
     ErrorDivAruLeiras.appendChild(aruLeirasInput);
@@ -364,7 +362,6 @@ function FormAru(params,actionParam,gombFelirat) {
     aruMennyisegInput.name="mennyiseg";
     aruMennyisegInput.value=params?.cells?.[4]?.textContent || "";
     aruMennyisegInput.placeholder="Aru mennyisege";
-    //form.appendChild(aruMennyisegInput);
 
     const errorAruMennyiseg=document.createElement("p");
     errorAruMennyiseg.style.display="none";
@@ -388,7 +385,6 @@ function FormAru(params,actionParam,gombFelirat) {
     aruKepInput.name="kep";
     aruKepInput.value=params?.cells?.[5]?.textContent || "";
     aruKepInput.placeholder="Aru kep url";
-    //form.appendChild(aruKepInput);
 
     const errorAruKep=document.createElement("p");
     errorAruKep.style.display="none";
@@ -396,8 +392,8 @@ function FormAru(params,actionParam,gombFelirat) {
     const ErrorDivAruKep=document.createElement("div");
     ErrorDivAruKep.classList.add("ErrorDiv");
 
-    const aruKepMin=5;
-    const aruKepMax=20;
+    const aruKepMin=1;
+    const aruKepMax=254;
     const aruKepPattern=/^[A-Za-z0-9]+$/;
     htmlEllenorrzo(aruKepInput,aruKepPattern,aruKepMin,aruKepMax,true);
 
@@ -409,12 +405,12 @@ function FormAru(params,actionParam,gombFelirat) {
     aruBekuldGomb.type="submit";
     aruBekuldGomb.textContent=gombFelirat || "Oke" ;
     aruBekuldGomb.addEventListener("click",(e)=>{
-        var aruIdReturn=EllenorizElsoResz(aruBekuldGomb,errorAruId,aruIdInput,false,aruIdPattern,aruIdMin,aruIdMax,true);
-        var aruNevReturn=EllenorizElsoResz(aruBekuldGomb,errorAruNev,aruNevInput,false,aruNevPattern,aruNevMin,aruNevMax,true);
-        var aruArReturn=EllenorizElsoResz(aruBekuldGomb,errorAruAr,aruArInput,false,aruArPattern,aruArMin,aruArMax,true);
-        var aruLeirasReturn=EllenorizElsoResz(aruBekuldGomb,errorAruLeiras,aruLeirasInput,false,aruLeirasPattern,aruLeirasMin,aruLeirasMax,true);
-        var aruMennyisegReturn=EllenorizElsoResz(aruBekuldGomb,errorAruMennyiseg,aruMennyisegInput,false,aruMennyisegPattern,aruMennyisegMin,aruMennyisegMax,true);
-        var aruKepReturn=EllenorizElsoResz(aruBekuldGomb,errorAruKep,aruKepInput,false,aruKepPattern,aruKepMin,aruKepMax,true);
+        var aruIdReturn=EllenorizElsoResz(errorAruId,aruIdInput,false,aruIdPattern,aruIdMin,aruIdMax,true);
+        var aruNevReturn=EllenorizElsoResz(errorAruNev,aruNevInput,false,aruNevPattern,aruNevMin,aruNevMax,true);
+        var aruArReturn=EllenorizElsoResz(errorAruAr,aruArInput,false,aruArPattern,aruArMin,aruArMax,true);
+        var aruLeirasReturn=EllenorizElsoResz(errorAruLeiras,aruLeirasInput,false,aruLeirasPattern,aruLeirasMin,aruLeirasMax,true);
+        var aruMennyisegReturn=EllenorizElsoResz(errorAruMennyiseg,aruMennyisegInput,false,aruMennyisegPattern,aruMennyisegMin,aruMennyisegMax,true);
+        var aruKepReturn=EllenorizElsoResz(errorAruKep,aruKepInput,false,aruKepPattern,aruKepMin,aruKepMax,true);
         if (!aruIdReturn || !aruNevReturn || !aruArReturn || !aruLeirasReturn || !aruMennyisegReturn || !aruKepReturn) {
             e.preventDefault();
         }else{
@@ -424,22 +420,22 @@ function FormAru(params,actionParam,gombFelirat) {
         }
     });
     aruIdInput.addEventListener("input",()=>{
-            EllenorizElsoResz(aruBekuldGomb,errorAruId,aruIdInput,false,aruIdPattern,aruIdMin,aruIdMax,false);
+            EllenorizElsoResz(errorAruId,aruIdInput,false,aruIdPattern,aruIdMin,aruIdMax,false);
     });
     aruNevInput.addEventListener("input",()=>{
-            EllenorizElsoResz(aruBekuldGomb,errorAruNev,aruNevInput,false,aruNevPattern,aruNevMin,aruNevMax,false);
+            EllenorizElsoResz(errorAruNev,aruNevInput,false,aruNevPattern,aruNevMin,aruNevMax,false);
     });
     aruArInput.addEventListener("input",()=>{
-        EllenorizElsoResz(aruBekuldGomb,errorAruAr,aruArInput,false,aruArPattern,aruArMin,aruArMax,false);
+        EllenorizElsoResz(errorAruAr,aruArInput,false,aruArPattern,aruArMin,aruArMax,false);
     });
     aruLeirasInput.addEventListener("input",()=>{
-            EllenorizElsoResz(aruBekuldGomb,errorAruLeiras,aruLeirasInput,false,aruLeirasPattern,aruLeirasMin,aruLeirasMax,false);
+            EllenorizElsoResz(errorAruLeiras,aruLeirasInput,false,aruLeirasPattern,aruLeirasMin,aruLeirasMax,false);
     });
     aruMennyisegInput.addEventListener("input",()=>{
-            EllenorizElsoResz(aruBekuldGomb,errorAruMennyiseg,aruMennyisegInput,false,aruMennyisegPattern,aruMennyisegMin,aruMennyisegMax,false);
+            EllenorizElsoResz(errorAruMennyiseg,aruMennyisegInput,false,aruMennyisegPattern,aruMennyisegMin,aruMennyisegMax,false);
     });
     aruKepInput.addEventListener("input",()=>{
-            EllenorizElsoResz(aruBekuldGomb,errorAruKep,aruKepInput,false,aruKepPattern,aruKepMin,aruKepMax,false);
+            EllenorizElsoResz(errorAruKep,aruKepInput,false,aruKepPattern,aruKepMin,aruKepMax,false);
     });
     form.appendChild(aruBekuldGomb);
     formTarolo.appendChild(form);

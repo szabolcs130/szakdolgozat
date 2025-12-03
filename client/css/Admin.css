@@ -13,12 +13,11 @@
     align-items: center;
 }
 .AruSzerkeszt{
-cursor: pointer;
+    cursor: pointer;
 }
 a{
     text-decoration: none;
     color: black
-
 }
 li{
     list-style: none;
@@ -30,29 +29,37 @@ li{
     align-items: center;
     flex-direction: column;
 }
-#tablazat{
-   width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center; 
-    flex-direction: column;
+#aruTablazat{
+    width: 100%;
+    overflow-x: visible;
 }
+table{
+    width: 100%;
+    table-layout: fixed;
+    border-collapse: collapse;
+}
+table tr td,
+table tr th
+{
+    white-space: normal;
+    overflow-wrap: break-word;
+    border: 1px solid black;
+    padding: 5px;
+    text-align: center;
+}
+/*table tr th{
+    white-space: normal;
+    overflow-wrap: break-word;
+    border: 1px solid black;
+}*/
 #tablazatTarolo{
     width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    border: 1px solid black;
 }
-#szuroTarolo{
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border: 1px solid black;
- }
- #lapozo{
+#lapozo{
     width: 100%;
     display: flex;
     justify-content: space-around;
@@ -64,18 +71,54 @@ li{
 }
 #elozo{
     visibility: hidden;
+} 
+#maxArDiv{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
 }
- #nevErrorDiv{
-   width: 30%;
+#minArDiv{
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
- }
- .ErrorDiv{
-        width: 100%;
+}
+#nevErrorDiv{
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
- }
+}
+#szuroTarolo{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
+#szuroTarolo>*{
+    margin-left: calc(1%);
+    margin-right: calc(1%);
+}
+@media screen and (max-width: 768px) {
+    #szuroTarolo{
+        flex-direction: column;
+    }
+    #aruTablazat{
+    overflow-x: auto;
+    }
+    table{
+        width: max-content;
+        table-layout: fixed;
+    }
+    table tr td,
+    table tr th
+    {
+         white-space: nowrap;
+    }
+    /*table tr th{
+        white-space: nowrap;
+    }*/
+}
+

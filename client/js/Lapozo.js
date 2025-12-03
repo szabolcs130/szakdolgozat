@@ -52,13 +52,13 @@ export async function SzuroFelepit(param,maximumAr,callback) {
     
     const minSzoveg=0;
     const maxSzoveg=50;
-    const patternSzoveg=/^[A-Za-z ]+$/;
+    const patternSzoveg=/^[A-Za-z0-9áéíóöőúüűÁÉÍÓÖŐÚÜŰ ]+$/;
     const nevKeresInput=document.createElement("input");
     nevKeresInput.type="text";
-    nevKeresInput.placeholder="Kulcsszo";
+    nevKeresInput.placeholder="Kulcsszó";
     nevKeresInput.id="nevKeres";
     nevKeresInput.addEventListener("input",(e)=>{
-        EllenorizElsoResz(szuresBekuldGomb,errorP,nevKeresInput,true,patternSzoveg,minSzoveg,maxSzoveg,false);
+        EllenorizElsoResz(errorP,nevKeresInput,true,patternSzoveg,minSzoveg,maxSzoveg,false);
     });
     htmlEllenorrzo(nevKeresInput,patternSzoveg,minSzoveg,maxSzoveg,true);
     const errorP=document.createElement("p");
@@ -87,9 +87,9 @@ export async function SzuroFelepit(param,maximumAr,callback) {
         }
     });
     szuresBekuldGomb.addEventListener("click",async function(){
-        var nevResult=EllenorizElsoResz(szuresBekuldGomb,errorP,nevKeresInput,true,patternSzoveg,minSzoveg,maxSzoveg,true);
-        var minArResult=EllenorizElsoResz(szuresBekuldGomb,errorMinArP,minArInput,true,/^[0-9]{0,8}$/,0,9,true);
-        var maxArResult=EllenorizElsoResz(szuresBekuldGomb,errorMaxArP,maxArInput,true,/^[0-9]{0,8}$/,0,9,true);
+        var nevResult=EllenorizElsoResz(errorP,nevKeresInput,true,patternSzoveg,minSzoveg,maxSzoveg,true);
+        var minArResult=EllenorizElsoResz(errorMinArP,minArInput,true,/^[0-9]{0,8}$/,0,9,true);
+        var maxArResult=EllenorizElsoResz(errorMaxArP,maxArInput,true,/^[0-9]{0,8}$/,0,9,true);
         if (nevResult && minArResult && maxArResult) {
             const data1=await FetchMeghiv(param,0,null,nevKeresInput.value || null,minArInput.value || null,maxArInput.value || null);
             callback(data1);

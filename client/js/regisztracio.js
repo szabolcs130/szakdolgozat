@@ -30,23 +30,23 @@ window.onload=function () {
     const regisztracioBekuldGomb=document.getElementById("regisztracioBekuldGomb");
     
     regisztracioBekuldGomb.addEventListener("click",(e)=>{
-        const emailReturn=EllenorizElsoResz(regisztracioBekuldGomb,erroremailP,email,false,emailPattern,emailMin,emailMax,true);
-        const pReturn=EllenorizElsoResz(regisztracioBekuldGomb,errorPasswordP,p,false,pPattern,pMin,pMax,true);
-        const usernameReturn=EllenorizElsoResz(regisztracioBekuldGomb,errorUsernameP,username,false,usernamePattern,usernameMin,usernameMax,true);
+        const emailReturn=EllenorizElsoResz(erroremailP,email,false,emailPattern,emailMin,emailMax,true);
+        const pReturn=EllenorizElsoResz(errorPasswordP,p,false,pPattern,pMin,pMax,true);
+        const usernameReturn=EllenorizElsoResz(errorUsernameP,username,false,usernamePattern,usernameMin,usernameMax,true);
         if (!emailReturn || !pReturn || !usernameReturn) {
             e.preventDefault();
         }
     });
 
     username.addEventListener("input",()=>{
-        EllenorizElsoResz(regisztracioBekuldGomb,errorUsernameP,username,false,usernamePattern,usernameMin,usernameMax,false);
+        EllenorizElsoResz(errorUsernameP,username,false,usernamePattern,usernameMin,usernameMax,false);
     });
 
     email.addEventListener("input",()=>{
-        EllenorizElsoResz(regisztracioBekuldGomb,erroremailP,email,false,emailPattern,emailMin,emailMax,false);
+        EllenorizElsoResz(erroremailP,email,false,emailPattern,emailMin,emailMax,false);
     });
 
     p.addEventListener("input",()=>{
-        EllenorizElsoResz(regisztracioBekuldGomb,errorPasswordP,p,false,pPattern,pMin,pMax,false);
+        EllenorizElsoResz(errorPasswordP,p,false,pPattern,pMin,pMax,false);
     });
 }

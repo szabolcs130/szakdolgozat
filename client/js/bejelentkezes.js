@@ -21,17 +21,17 @@ window.onload=function () {
 
     const bejelentkezesBekuldGomb=document.getElementById("bejelentkezesBekuldGomb");
     bejelentkezesBekuldGomb.addEventListener("click",(e)=>{
-        const emailReturn=EllenorizElsoResz(bejelentkezesBekuldGomb,erroremailP,email,false,emailPattern,emailMin,emailMax,true);
-        const pReturn=EllenorizElsoResz(bejelentkezesBekuldGomb,errorPasswordP,p,false,pPattern,pMin,pMax,true);
+        const emailReturn=EllenorizElsoResz(erroremailP,email,false,emailPattern,emailMin,emailMax,true);
+        const pReturn=EllenorizElsoResz(errorPasswordP,p,false,pPattern,pMin,pMax,true);
         if (!emailReturn || !pReturn) {
             e.preventDefault();
         }
     });
     email.addEventListener("input",()=>{
-        EllenorizElsoResz(bejelentkezesBekuldGomb,erroremailP,email,false,emailPattern,emailMin,emailMax,false);
+        EllenorizElsoResz(erroremailP,email,false,emailPattern,emailMin,emailMax,false);
     });
 
     p.addEventListener("input",()=>{
-        EllenorizElsoResz(bejelentkezesBekuldGomb,errorPasswordP,p,false,pPattern,pMin,pMax,false);
+        EllenorizElsoResz(errorPasswordP,p,false,pPattern,pMin,pMax,false);
     });
 }
