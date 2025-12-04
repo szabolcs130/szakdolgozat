@@ -1,4 +1,5 @@
 import { EllenorizElsoResz, htmlEllenorrzo} from './Ellenorzo.js';
+
 export async function SzuroFelepit(param,maximumAr,callback) {
     const szuroTarolo=document.getElementById("szuroTarolo");
     const minArLabel=document.createElement("label");
@@ -18,9 +19,10 @@ export async function SzuroFelepit(param,maximumAr,callback) {
 
     const errorMinArP=document.createElement("p");
     errorMinArP.style.display="none";
+    errorMinArP.id="errorMinArP";
     const MinArErtekeP=document.createElement("p");
-    //MinArErtekeP.style.display="none";
     MinArErtekeP.textContent=0+" Forint";
+    
     const maxArInput=document.createElement("input");
     maxArInput.type="range";
     maxArInput.id="maxAr";
@@ -32,8 +34,9 @@ export async function SzuroFelepit(param,maximumAr,callback) {
 
     const errorMaxArP=document.createElement("p");
     errorMaxArP.style.display="none";
+    errorMaxArP.id="errorMaxArP";
     const MaxArErtekeP=document.createElement("p");
-    //MaxArErtekeP.style.display="none";
+
     MaxArErtekeP.textContent=+maximumAr?.[0]?.max+" Forint";
 
     const maxArDiv=document.createElement("div");
@@ -69,6 +72,7 @@ export async function SzuroFelepit(param,maximumAr,callback) {
     });
     htmlEllenorrzo(nevKeresInput,patternSzoveg,minSzoveg,maxSzoveg,true);
     const errorP=document.createElement("p");
+    errorP.id="errorP";
     errorP.style.display="none";
     const nevErrorDiv=document.createElement("div");
     nevErrorDiv.id="nevErrorDiv";
@@ -101,7 +105,7 @@ export async function SzuroFelepit(param,maximumAr,callback) {
             const data1=await FetchMeghiv(param,0,null,nevKeresInput.value || null,minArInput.value || null,maxArInput.value || null);
             callback(data1);
             const data2=await FetchMeghiv(param,null,true,nevKeresInput.value || null,minArInput.value || null, maxArInput.value || null);
-            LapozashozLegorduloMenu(data2);
+            LapozashozLegorduloMenu(data2,"oldalValaszto");
         }
     });
     nevKeresInput.addEventListener("input",(e)=>{
@@ -144,14 +148,22 @@ export function LapozashozSelectEsemeny(url,callback) {
         const minArInput=document.getElementById("minAr");
         const maxArInput=document.getElementById("maxAr");
         const nevKeresInput=document.getElementById("nevKeres");
-        const data1=await FetchMeghiv(url,e.target.value,null,nevKeresInput?.value || null,minArInput?.value || null,maxArInput?.value || null);
-        callback(data1);
+        const errorMaxArP=document.getElementById("errorMaxArP");
+        const errorMinArP=document.getElementById("errorMinArP");
+        const errorP=document.getElementById("errorP");
+        var nevResult=EllenorizElsoResz(errorP,nevKeresInput,true,/^[A-Za-z0-9áéíóöőúüűÁÉÍÓÖŐÚÜŰ ]+$/,0,50,true);
+        var minArResult=EllenorizElsoResz(errorMinArP,minArInput,true,/^[0-9]{0,8}$/,0,9,true);
+        var maxArResult=EllenorizElsoResz(errorMaxArP,maxArInput,true,/^[0-9]{0,8}$/,0,9,true);
+        if (nevResult && minArResult && maxArResult) {
+            const data1=await FetchMeghiv(url,e.target.value,null,nevKeresInput?.value || null,minArInput?.value || null,maxArInput?.value || null);
+            callback(data1);
+        }
     });
 }
-export function LapozashozElozoKovekezoEsemenyek(){
-const elozoLapozo=document.getElementById("elozo");
-    const kovetkezoLapozo=document.getElementById("kovetkezo");
-    const oldalValaszto=document.getElementById("oldalValaszto");
+export function LapozashozElozoKovekezoEsemenyek(elozo,kovetkezo,oldalvalaszto){
+const elozoLapozo=document.getElementById(elozo);
+    const kovetkezoLapozo=document.getElementById(kovetkezo);
+    const oldalValaszto=document.getElementById(oldalvalaszto);
     
     kovetkezoLapozo.addEventListener("click",()=>{
         if ((oldalValaszto.childElementCount-1)>=(oldalValaszto.selectedIndex+1)) {
@@ -167,7 +179,8 @@ const elozoLapozo=document.getElementById("elozo");
         
     });
 }
-export async function LapozashozLegorduloMenu(param){
+export function LapozashozLegorduloMenu(param,oldalvalaszto){
+    const oldalValaszto=document.getElementById(oldalvalaszto);
     const AruOsszOldalSzam=param; 
     const ellenorzottOsszAru=AruOsszOldalSzam?.[0]?.osszes || 0;
     const oldalSzamok=Math.ceil(ellenorzottOsszAru/10)==0 ? 1 : (Math.ceil(ellenorzottOsszAru/10));
@@ -183,9 +196,10 @@ export async function LapozashozLegorduloMenu(param){
         oldalValaszto.dispatchEvent(new Event("change"));
     }
 }
-export function ElozoKovetkezoLapozoMegjelenitese() {
-    const elozoLapozo=document.getElementById("elozo");
-    const kovetkezoLapozo=document.getElementById("kovetkezo");
+export function ElozoKovetkezoLapozoMegjelenitese(elozo,kovetkezo,oldalvalaszto) {
+    const elozoLapozo=document.getElementById(elozo);
+    const kovetkezoLapozo=document.getElementById(kovetkezo);
+    const oldalValaszto=document.getElementById(oldalvalaszto);
     if (oldalValaszto.selectedIndex==0) {
         elozoLapozo.style.visibility="hidden";
     }else{

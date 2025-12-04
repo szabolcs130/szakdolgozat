@@ -4,12 +4,12 @@ window.onload = async function() {
     SzuroFelepit("?oldal=Apitermekek/lekerdezAruSzures",data2,(eredmeny)=>{
         Lapoz(eredmeny);
     });
-    LapozashozElozoKovekezoEsemenyek();
+    LapozashozElozoKovekezoEsemenyek("elozo","kovetkezo","oldalValaszto");
     const a=await LapozashozSelectEsemeny("?oldal=Apitermekek/lekerdezAruSzures",(eredmeny)=>{
         Lapoz(eredmeny)
     });
     const data=await FetchMeghiv("?oldal=Apitermekek/lekerdezAruSzures",null,true);
-    LapozashozLegorduloMenu(data);;
+    LapozashozLegorduloMenu(data,"oldalValaszto");
 }
 async function Lapoz(data) {
     const aruk=document.getElementById('aruk');
@@ -73,5 +73,5 @@ async function Lapoz(data) {
     }
     
     window.scrollTo(0,0);
-    ElozoKovetkezoLapozoMegjelenitese();
+    ElozoKovetkezoLapozoMegjelenitese("elozo","kovetkezo","oldalValaszto");
 }

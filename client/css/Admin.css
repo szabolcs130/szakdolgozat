@@ -56,16 +56,19 @@ table tr:hover{
 #tablazatTarolo{
     width: 100%;
 }
+#kepLapozo,
 #lapozo{
     width: 100%;
     display: flex;
     justify-content: space-around;
     align-items: center;   
 }
+#kepLapozo>li,
 #lapozo>li{
     list-style: none;
     cursor: pointer;
 }
+#kepElozo,
 #elozo{
     visibility: hidden;
 }
@@ -81,13 +84,13 @@ table tr:hover{
     align-items: center;
     flex-direction: column;
     word-break: break-word;
-    min-height: 40vh;
     height: auto;
 }
 .aru_kep{
     width: calc(80%);
     min-width: 150px;
     max-width: 500px;
+    margin-top: calc(5%);
 }
 #kepTarolo{
     width: 100%;
@@ -98,6 +101,7 @@ table tr:hover{
     border: 1px solid black;
     padding-top: calc(3%);
 }
+#nevKepErrorDiv,
 #kontener,
 #adminTartalom,
 #tablazatTarolo,

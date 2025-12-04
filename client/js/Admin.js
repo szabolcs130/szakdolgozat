@@ -20,9 +20,7 @@ async function AruListaz(data) {
 
         liTagAruUj.addEventListener("click",()=>FormAru("","?oldal=Admin/AruUj","Hozzáad"));//AruUjForm()
 
-        //const aruLista=document.createElement('div');//eredeti
-        //aruLista.id='tablazatTarolo';//eredeti
-        const aruTablazat=document.createElement('div');//uj
+        const aruTablazat=document.createElement('div');
         aruTablazat.id="aruTablazat";
         tablazatTarolo.appendChild(liTagAruUj);
 
@@ -34,58 +32,41 @@ async function AruListaz(data) {
         const thR=document.createElement('tr');
         
         const thHId=document.createElement('th');
-        //thHId.scope="row";
         thHId.textContent="Id";
         thR.appendChild(thHId);
 
         const thHNev=document.createElement('th');
-        //thHNev.scope="row";
         thHNev.textContent="Név";
         thR.appendChild(thHNev);
 
         const thHAr=document.createElement('th');
-        //thHAr.scope="row";
         thHAr.textContent="Ár";
         thR.appendChild(thHAr);
 
         const thHLeiras=document.createElement('th');
-        //thHLeiras.scope="row";
         thHLeiras.textContent="Leirás";
         thR.appendChild(thHLeiras);
 
         const thHMennyiseg=document.createElement('th');
-        //thHLeiras.scope="row";
         thHMennyiseg.textContent="Mennyiség";
         thR.appendChild(thHMennyiseg);
 
         const thHKep=document.createElement('th');
-        //thHLeiras.scope="row";
         thHKep.textContent="Kép";
         thR.appendChild(thHKep);
 
         const thHTorol=document.createElement('th');
-        //thHTorol.scope="row";
         thHTorol.textContent="Töröl";
         thR.appendChild(thHTorol);
 
         const thHSzerkeszt=document.createElement('th');
-        //thHSzerkeszt.scope="row";
         thHSzerkeszt.textContent="Szerkeszt";
         thR.appendChild(thHSzerkeszt);
 
         thead.appendChild(thR);
-        /*thead.appendChild(thHId);
-        thead.appendChild(thHNev);
-        thead.appendChild(thHAr);
-        thead.appendChild(thHLeiras);
-        thead.appendChild(thHMennyiseg);
-        thead.appendChild(thHKep);
-        thead.appendChild(thHTorol);
-        thead.appendChild(thHSzerkeszt);*/
         aruTable.appendChild(thead);
 
         const tbody=document.createElement('tbody');
-
 
         document.getElementById("lapozo").style.display="flex";
         data.forEach(element => {
@@ -176,7 +157,7 @@ async function AruListaz(data) {
         document.getElementById("lapozo").style.display="none";
     }
     window.scrollTo(0,0);
-    ElozoKovetkezoLapozoMegjelenitese();
+    ElozoKovetkezoLapozoMegjelenitese("elozo","kovetkezo","oldalValaszto");
 }
 async function SzuroAlapok() {
     const adminTartalom=document.getElementById("adminTartalom");
@@ -209,18 +190,30 @@ async function SzuroAlapok() {
         SzuroFelepit("?oldal=Apitermekek/lekerdezAruSzures",data1,(eredmeny)=>{
             AruListaz(eredmeny);
         });
-        LapozashozElozoKovekezoEsemenyek();
+        LapozashozElozoKovekezoEsemenyek("elozo","kovetkezo","oldalValaszto");
         const a=await LapozashozSelectEsemeny("?oldal=Apitermekek/lekerdezAruSzures",(eredmeny)=>{
             AruListaz(eredmeny)
         });
         const data=await FetchMeghiv("?oldal=Apitermekek/lekerdezAruSzures",null,true);
 
-        LapozashozLegorduloMenu(data);
+        LapozashozLegorduloMenu(data,"oldalValaszto");
 }
 function VisszaAruListahoz() {
     const formTarolo=document.getElementById("formTarolo");
     if (formTarolo) {
         formTarolo.remove();
+    }
+    const kepTarolo=document.getElementById("kepTarolo");
+    if (kepTarolo) {
+        kepTarolo.remove();
+    }
+    const kepLapozo=document.getElementById("kepLapozo");
+    if (kepLapozo) {
+        kepLapozo.remove();
+    }
+    const kepSzuroTarolo=document.getElementById("kepSzuroTarolo");
+    if (kepSzuroTarolo) {
+        kepSzuroTarolo.remove();
     }
     const tablazatTarolo=document.getElementById("tablazatTarolo");
     tablazatTarolo.style.display="flex";
@@ -232,7 +225,7 @@ function VisszaAruListahoz() {
     lapozo.style.display="flex";
 }
 
-function FormAru(params,actionParam,gombFelirat) {
+async function FormAru(params,actionParam,gombFelirat) {
     const tablazatTarolo=document.getElementById("tablazatTarolo");
     tablazatTarolo.style.display="none";
 
@@ -438,18 +431,70 @@ function FormAru(params,actionParam,gombFelirat) {
     aruKepInput.addEventListener("input",()=>{
             EllenorizElsoResz(errorAruKep,aruKepInput,false,aruKepPattern,aruKepMin,aruKepMax,false);
     });
-    aruKepInput.addEventListener("click",()=>{
-        KepekKilistaz();
-    });
     form.appendChild(aruBekuldGomb);
     formTarolo.appendChild(form);
-    document.getElementById("adminTartalom").appendChild(formTarolo);
-}
-async function KepekKilistaz() {
-    const response= await fetch("?oldal=Apiadmin/Kepek");
-    const data = await response.json();
+    
+    const adminTartalma=document.getElementById("adminTartalom");
+    adminTartalma.appendChild(formTarolo);
+    const kepSzuroTarolo=document.createElement('div');
+    kepSzuroTarolo.id="kepSzuroTarolo";
     const kepTarolo=document.createElement('div');
     kepTarolo.id="kepTarolo";
+    const kepLapozo=document.createElement('div');
+    kepLapozo.id="kepLapozo";
+    adminTartalma.appendChild(kepSzuroTarolo);
+    adminTartalma.appendChild(kepTarolo);
+    adminTartalma.appendChild(kepLapozo);
+    FelepitKepSzuresNevAlapjan()
+    KepLapozo();
+    KepLapozasFelepit();
+}
+function FelepitKepSzuresNevAlapjan() {
+    const kepSzuroTarolo=document.getElementById("kepSzuroTarolo");
+    const minSzoveg=0;
+    const maxSzoveg=50;
+    const patternSzoveg=/^[A-Za-z0-9áéíóöőúüűÁÉÍÓÖŐÚÜŰ ]+$/;
+    const nevKeresInput=document.createElement("input");
+    nevKeresInput.type="text";
+    nevKeresInput.placeholder="Kulcsszó";
+    nevKeresInput.id="nevKepKeres";
+    htmlEllenorrzo(nevKeresInput,patternSzoveg,minSzoveg,maxSzoveg,true);
+    nevKeresInput.addEventListener("input",async function() {
+        EllenorizElsoResz(errorP,nevKeresInput,true,patternSzoveg,minSzoveg,maxSzoveg,true);
+        /*const kepOldalValaszto=document.getElementById("kepOldalValaszto");
+        const response= await fetch("?oldal=Apiadmin/Kepek&oldalSzam="+kepOldalValaszto.value+"&nev="+nevKepKeres.value);
+        const data = await response.json();
+        KepekKilistaz(data);*/
+    });
+    const errorP=document.createElement("p");
+    errorP.id="errorKepP";
+    errorP.style.display="none";
+    const nevErrorDiv=document.createElement("div");
+    nevErrorDiv.id="nevKepErrorDiv";
+    nevErrorDiv.appendChild(nevKeresInput);
+    nevErrorDiv.appendChild(errorP);
+
+    const szuresBekuldGomb=document.createElement('button');
+    szuresBekuldGomb.type="submit";
+    szuresBekuldGomb.textContent="Keres";
+    szuresBekuldGomb.addEventListener("click",async function(){
+        var nevResult=EllenorizElsoResz(errorP,nevKeresInput,true,patternSzoveg,minSzoveg,maxSzoveg,true);
+        if (nevResult) {
+            const response= await fetch("?oldal=Apiadmin/Kepek&oldalSzam=0&nev="+nevKepKeres.value);
+            const data = await response.json();
+            KepekKilistaz(data);
+            const response2= await fetch("?oldal=Apiadmin/KepekOsszes&nev="+nevKepKeres.value);
+            const data2 = await response2.json();
+            LapozashozLegorduloMenu(data2,"kepOldalValaszto");
+        }
+    });
+
+    kepSzuroTarolo.appendChild(nevErrorDiv);
+    kepSzuroTarolo.appendChild(szuresBekuldGomb);
+}
+function KepekKilistaz(data) {
+    const kepTarolo=document.getElementById("kepTarolo");
+    kepTarolo.innerHTML="";
     if (data.length) {
         data.forEach(element=>{
             const kepek=document.createElement('div');
@@ -470,5 +515,40 @@ async function KepekKilistaz() {
             kepTarolo.appendChild(kepek);
         });
     }
-    document.getElementById("adminTartalom").appendChild(kepTarolo);
+    ElozoKovetkezoLapozoMegjelenitese("kepElozo","kepKovetkezo","kepOldalValaszto");
+}
+function KepLapozo(){
+        
+    const kepLapozo=document.getElementById("kepLapozo");
+        
+    const kepOldalValaszto=document.createElement('select');
+    kepOldalValaszto.id="kepOldalValaszto";
+        
+    const kepElozo=document.createElement('li');
+    kepElozo.id="kepElozo";
+    kepElozo.textContent="Előző";
+
+    const kepKovetkezo=document.createElement('li');
+    kepKovetkezo.id="kepKovetkezo";
+    kepKovetkezo.textContent="Következő"
+
+    kepLapozo.appendChild(kepElozo);
+    kepLapozo.appendChild(kepOldalValaszto);
+    kepLapozo.appendChild(kepKovetkezo);
+}
+async function KepLapozasFelepit() {
+    LapozashozElozoKovekezoEsemenyek("kepElozo","kepKovetkezo","kepOldalValaszto");
+    KepLapozashozSelectEsemeny("kepOldalValaszto");
+    const response= await fetch("?oldal=Apiadmin/KepekOsszes");
+    const data = await response.json();
+    LapozashozLegorduloMenu(data,"kepOldalValaszto");
+}
+async function KepLapozashozSelectEsemeny(oldalvalaszto) {
+    const oldalValaszto=document.getElementById(oldalvalaszto);
+    oldalValaszto.addEventListener("change",async function(e){
+        const nevKepKeres=document.getElementById("nevKepKeres");
+        const response= await fetch("?oldal=Apiadmin/Kepek&oldalSzam="+oldalValaszto.value+"&nev="+nevKepKeres.value);
+        const data = await response.json();
+        KepekKilistaz(data);
+    });
 }
