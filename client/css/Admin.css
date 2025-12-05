@@ -101,6 +101,9 @@ table tr:hover{
     border: 1px solid black;
     padding-top: calc(3%);
 }
+#formTarolo,
+#aruForm,
+.ErrorDiv,
 #kepSzuroTarolo,
 #nevKepErrorDiv,
 #kontener,

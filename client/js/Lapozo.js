@@ -47,10 +47,10 @@ export async function SzuroFelepit(param,maximumAr,callback) {
     maxArDiv.appendChild(errorMaxArP);
     
     maxArInput.addEventListener("input",(e)=>{
-        EllenorizElsoResz(errorMaxArP,maxArInput,true,/^[0-9]{0,8}$/,0,9,true);
+        EllenorizElsoResz(errorMaxArP,maxArInput,true,/^[0-9]{0,8}$/,0,8,true);
     });
     minArInput.addEventListener("input",(e)=>{
-        EllenorizElsoResz(errorMinArP,minArInput,true,/^[0-9]{0,8}$/,0,9,true);
+        EllenorizElsoResz(errorMinArP,minArInput,true,/^[0-9]{0,8}$/,0,8,true);
     });
 
     const minArDiv=document.createElement("div");
@@ -99,8 +99,8 @@ export async function SzuroFelepit(param,maximumAr,callback) {
     });
     szuresBekuldGomb.addEventListener("click",async function(){
         var nevResult=EllenorizElsoResz(errorP,nevKeresInput,true,patternSzoveg,minSzoveg,maxSzoveg,true);
-        var minArResult=EllenorizElsoResz(errorMinArP,minArInput,true,/^[0-9]{0,8}$/,0,9,true);
-        var maxArResult=EllenorizElsoResz(errorMaxArP,maxArInput,true,/^[0-9]{0,8}$/,0,9,true);
+        var minArResult=EllenorizElsoResz(errorMinArP,minArInput,true,/^[0-9]{0,8}$/,0,8,true);
+        var maxArResult=EllenorizElsoResz(errorMaxArP,maxArInput,true,/^[0-9]{0,8}$/,0,8,true);
         if (nevResult && minArResult && maxArResult) {
             const data1=await FetchMeghiv(param,0,null,nevKeresInput.value || null,minArInput.value || null,maxArInput.value || null);
             callback(data1);
@@ -152,8 +152,8 @@ export function LapozashozSelectEsemeny(url,callback) {
         const errorMinArP=document.getElementById("errorMinArP");
         const errorP=document.getElementById("errorP");
         var nevResult=EllenorizElsoResz(errorP,nevKeresInput,true,/^[A-Za-z0-9áéíóöőúüűÁÉÍÓÖŐÚÜŰ ]+$/,0,50,true);
-        var minArResult=EllenorizElsoResz(errorMinArP,minArInput,true,/^[0-9]{0,8}$/,0,9,true);
-        var maxArResult=EllenorizElsoResz(errorMaxArP,maxArInput,true,/^[0-9]{0,8}$/,0,9,true);
+        var minArResult=EllenorizElsoResz(errorMinArP,minArInput,true,/^[0-9]{0,8}$/,0,8,true);
+        var maxArResult=EllenorizElsoResz(errorMaxArP,maxArInput,true,/^[0-9]{0,8}$/,0,8,true);
         if (nevResult && minArResult && maxArResult) {
             const data1=await FetchMeghiv(url,e.target.value,null,nevKeresInput?.value || null,minArInput?.value || null,maxArInput?.value || null);
             callback(data1);

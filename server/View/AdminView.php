@@ -13,6 +13,7 @@ class AdminView{
         echo '<h1>Üdv az admin oldalon!</h1>';
         echo '</div>';
         echo '</div>';
+        return 1;
     }
 }
 ?>

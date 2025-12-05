@@ -254,6 +254,7 @@ async function FormAru(params,actionParam,gombFelirat) {
     formTarolo.appendChild(liTagVissza);
 
     const form=document.createElement('Form');
+    form.id="aruForm";
     form.method="post";
     form.action=actionParam;
 //id
@@ -270,7 +271,7 @@ async function FormAru(params,actionParam,gombFelirat) {
     ErrorDivAruId.classList.add("ErrorDiv");
 
     const aruIdMin=1;
-    const aruIdMax=9;
+    const aruIdMax=8;
     const aruIdPattern=/^[1-9][0-9]{0,8}$/;
     htmlEllenorrzo(aruIdInput,aruIdPattern,aruIdMin,aruIdMax,true);
 
@@ -318,7 +319,7 @@ async function FormAru(params,actionParam,gombFelirat) {
     ErrorDivAruAr.classList.add("ErrorDiv");
 
     const aruArMin=1;
-    const aruArMax=9;
+    const aruArMax=8;
     const aruArPattern=/^[1-9][0-9]{0,8}$/;
     htmlEllenorrzo(aruArInput,aruArPattern,aruArMin,aruArMax,true);
 
@@ -363,7 +364,7 @@ async function FormAru(params,actionParam,gombFelirat) {
     ErrorDivAruMennyiseg.classList.add("ErrorDiv");
 
     const aruMennyisegMin=1;
-    const aruMennyisegMax=9;
+    const aruMennyisegMax=8;
     const aruMennyisegPattern=/^[1-9][0-9]{0,8}$/;
     htmlEllenorrzo(aruMennyisegInput,aruMennyisegPattern,aruMennyisegMin,aruMennyisegMax,true);
 

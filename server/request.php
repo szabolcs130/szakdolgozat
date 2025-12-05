@@ -18,8 +18,6 @@ class Request{
         $metodus=$darabol[1] ?? "Main";
         $parameter=array($darabol[2] ?? null);
         if (strpos($darabol[0],'api') !==false) {
-            //$adat = $darabol[0]."\n";
-            //file_put_contents('log.txt', $adat, FILE_APPEND); 
             MeghivasEllenorzo::MeghivMVCMetodus(MeghivasEllenorzo::MVCFajlEsMetodusLetezikE($darabol[0],$metodus,"Controller"),$parameter=null,false);
         }
         if (MeghivasEllenorzo::MeghivMVCMetodus(MeghivasEllenorzo::MVCFajlEsMetodusLetezikE("Menu","Main","Controller"),$parameter,true)==0) {
