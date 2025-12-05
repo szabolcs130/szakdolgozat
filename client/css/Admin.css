@@ -136,8 +136,8 @@ table tr:hover{
     overflow-x: auto;
     }
     table{
-        width: max-content;
-        table-layout: fixed;
+        width: 100%;
+        table-layout: auto;
     }
     table tr td,
     table tr th

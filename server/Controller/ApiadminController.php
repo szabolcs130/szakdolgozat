@@ -4,33 +4,30 @@ if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 use Server\Model\TermekekModel;
+use Server\Model\ErtekEllenorzesModel;
 class ApiadminController{
-    public static function Aruklekerdez(){
-        header('Content-Type: application/json; charset=utf-8');
-        ob_clean(); 
-        $aru=FooldalModel::lekerdezAru();
-        if ($aru) {
-            echo json_encode($aru);
-            exit;
-        }
-        echo json_encode([]);
-        exit;
-    }
     public static function Kepek(){
         header('Content-Type: application/json; charset=utf-8');
         ob_clean();
         if ((isset($_SESSION["username"]) && $_SESSION['rang']==3)) {
             $lapozas=10;
-            $oldalSzam=0;
-            if (isset($_GET['oldalSzam']) && is_numeric($oldalSzam=$_GET['oldalSzam'])) {
-                $oldalSzam=$_GET['oldalSzam'];
+            if (isset($_GET['oldalSzam'])) {
+                $oldalSzam=ErtekEllenorzesModel::Szam($_GET['oldalSzam'],0,99999999);
+                if ($oldalSzam===false) {
+                    $oldalSzam=0;
+                }    
             }
             $maxOldal=(int)$oldalSzam+$lapozas;
             $dir = __DIR__.'/../../Client/image/';
             $realdir=realpath($dir);
             $dirIt = new \DirectoryIterator($realdir);
             $i=0;
-            $nev=$_GET['nev'] ?? null;
+            if (isset($_GET['nev'])) {
+                $nev=ErtekEllenorzesModel::Szoveg($_GET["nev"],1,254,"/^[A-Za-z0-9]+$/");
+                if ($nev===false) {
+                    $nev=null;
+                }
+            }
             $imgKuld=array();
             if ($nev==null) {
                 foreach ($dirIt as $file) {
@@ -75,7 +72,13 @@ class ApiadminController{
             $realdir=realpath($dir);
             $dirIt = new \DirectoryIterator($realdir);
             $i=0;
-            $nev=$_GET['nev'] ?? null;
+            $nev=null;
+            if (isset($_GET['nev'])) {
+                $nev=ErtekEllenorzesModel::Szoveg($_GET["nev"],1,254,"/^[A-Za-z0-9]+$/");
+                if ($nev===false) {
+                    $nev=null;
+                }
+            }
             $imgKuld[]=array();
             if ($nev==null) {
                 foreach ($dirIt as $file) {
