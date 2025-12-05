@@ -11,6 +11,7 @@ class ApiadminController{
         ob_clean();
         if ((isset($_SESSION["username"]) && $_SESSION['rang']==3)) {
             $lapozas=10;
+            $oldalSzam=0;
             if (isset($_GET['oldalSzam'])) {
                 $oldalSzam=ErtekEllenorzesModel::Szam($_GET['oldalSzam'],0,99999999);
                 if ($oldalSzam===false) {
