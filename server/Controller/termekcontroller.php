@@ -21,11 +21,13 @@ class TermekController{
         $kosarban=KosarModel::getAruById($aruId);
         if (is_array($aru) && !empty($aru)) {
             TermekView::ShowAru($aru,$kosarban);
-            $megVasaroltE=FizetesEredmenyModel::GetMegvasaroltAruE($aruId,$_SESSION['userId']);
-            if (isset($_SESSION['userId']) && is_array($megVasaroltE) && !empty($megVasaroltE)) {
-                VelemenyView::ShowVelemenyIras($aruId);
+            if (isset($_SESSION['userId'])) {
+                $megVasaroltE=FizetesEredmenyModel::GetMegvasaroltAruE($aruId,$_SESSION['userId']);
+                if (isset($_SESSION['userId']) && is_array($megVasaroltE) && !empty($megVasaroltE)) {
+                    VelemenyView::ShowVelemenyIras($aruId);
+                }
             }
-            VelemenyView::ShowVelemeny();//VelemenyModel::lekerdezVelemenyByAruId($aruId)
+            VelemenyView::ShowVelemeny();
             MeghivasEllenorzo::SetCssFajl("Velemeny");
             MeghivasEllenorzo::SetJsFajl("Velemeny");
             return 1;
