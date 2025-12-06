@@ -19,16 +19,15 @@ class TermekController{
         }
         $aru=TermekekModel::lekerdezAruById($aruId);
         $kosarban=KosarModel::getAruById($aruId);
-        if ($aru) {
+        if (is_array($aru) && !empty($aru)) {
             TermekView::ShowAru($aru,$kosarban);
-            if (isset($_SESSION['userId']) && FizetesEredmenyModel::GetMegvasaroltAruE($aruId,$_SESSION['userId'])) {
+            $megVasaroltE=FizetesEredmenyModel::GetMegvasaroltAruE($aruId,$_SESSION['userId']);
+            if (isset($_SESSION['userId']) && is_array($megVasaroltE) && !empty($megVasaroltE)) {
                 VelemenyView::ShowVelemenyIras($aruId);
             }
-            //if (isset($_SESSION['userId'])) {
-            VelemenyView::ShowVelemeny(VelemenyModel::lekerdezVelemenyByAruId($aruId));
+            VelemenyView::ShowVelemeny();//VelemenyModel::lekerdezVelemenyByAruId($aruId)
             MeghivasEllenorzo::SetCssFajl("Velemeny");
             MeghivasEllenorzo::SetJsFajl("Velemeny");
-            //}
             return 1;
         }
         return 0;

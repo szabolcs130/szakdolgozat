@@ -36,10 +36,10 @@ class TermekView{
                 echo "<p>Kosar hasznalathoz bejelentkezeshez szukseges!</p>";
             }
             
-            echo '</div>';//aru
+            echo '</div>';
        }
        echo '</form>';
-       echo '</div>';//aruk
+       echo '</div>';
     }
     public static function TermekNemTalalhato(){
         echo "<h1>A keresett termek nem talalhato!</h1>";
