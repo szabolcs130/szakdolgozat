@@ -3,7 +3,7 @@ namespace Server\View;
 class MenuView{
 
     public static function ShowMenu($menu){
-        if (is_array($menu)) {
+        if (is_array($menu) && !empty($menu)) {
             echo '<nav id="menuk">';
             echo '<ul id="menuUl">';
             foreach ($menu as $ertek) {

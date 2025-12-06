@@ -12,11 +12,11 @@ class MenuController{
         }else{
             $menu=MenuModel::GetMenuByRang(0);
         }
-        if ($menu) {
+        if (is_array($menu) && !empty($menu)) {
             MenuView::ShowMenu($menu);
             return 1;
         }
-            return 0;
+        return 0;
     }
 }
 ?>
