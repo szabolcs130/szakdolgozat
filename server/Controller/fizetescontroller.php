@@ -63,35 +63,31 @@ class FizetesController{
                 try {
                     $captureResponse = FizetesModel::captureOrder($orderID);
                     if (is_object($order=$captureResponse['jsonResponse'])) {
-                        //adatbazisba ir
-                        $fizetetlenRendelesVanE=FizetesEredmenyModel::GetFizetetlenEredmeny($_SESSION["userId"]);
-                        if ($fizetetlenRendelesVanE===0) {//adatbazis hiba
-                             echo json_encode(['status' => 'error', 'message' => 'Adatbázis hiba történt']);
-                             exit;
-                        }
-                        $ujrendeles=false;
-                        if ($fizetetlenRendelesVanE===false) {//uj rendeles , minden kifizetve elozoleg
-                            RendelesModel::hozzaadRendeles($_SESSION["userId"],date('Y-m-d H:i:s'));
-                            $ujrendeles=true;
-                        }
-                        //vagy epp mar meglevo
+                        RendelesModel::hozzaadRendeles($_SESSION["userId"],date('Y-m-d H:i:s'));
                         $fizetendoOsszeg=0;
+                        $rendelesId=FizetesEredmenyModel::GetFizetetlenEredmeny($_SESSION["userId"])['id_rendeles'];
+                        if ($rendelesId==null) {
+                            echo json_encode(['error' => "Rendeles felvitele hiba!"]);
+                            http_response_code(500);
+                            exit; 
+                        }
                         foreach (KosarModel::getKosar() as $key => $value) {
-                            $rendelesId=FizetesEredmenyModel::GetFizetetlenEredmeny($_SESSION["userId"])['id_rendeles'];
-                            if ($ujrendeles) {//ha uj akkor hoizzaadom
-                                RendelesTartalmaModel::hozzaadRendelesTartalma($rendelesId,$key,$value["ar"],$value["me"]);
-                            }  
+                            if (RendelesTartalmaModel::hozzaadRendelesTartalma($rendelesId,$key,$value["ar"],$value["me"])==0) {
+                                echo json_encode(['error' => "Rendeles felvitele hiba!"]);
+                                http_response_code(500);
+                                exit; 
+                            }
                             $fizetendoOsszeg+=$value["ar"]*$value["me"];
                         }
-                        $ujrendeles=false;
                         $datum=(new \DateTime($order->getPurchaseUnits()[0]->getPayments()->getCaptures()[0]->getCreateTime(), new \DateTimeZone('UTC')));
                         $datum->setTimezone(new \DateTimezone('Europe/Budapest'));
                         $datumKonvertalva=$datum->format('Y-m-d H:i:s');
-                        FizetesEredmenyModel::hozzaadFizetesEredmeny($rendelesId,$datumKonvertalva,$fizetendoOsszeg,$order->getId(),$captureResponse['jsonResponse']->getStatus());//,$captureResponse['jsonResponse']->getId()
-                        //FizetesEredmenyModel::hozzaadFizetesEredmeny($rendelesId,$fizetendoOsszeg,$order->getPurchaseUnits()[0]->getPayments()->getCaptures()[0]->getCreateTime(),$captureResponse['jsonResponse']->getStatus());//,$captureResponse['jsonResponse']->getId()
+                        if (FizetesEredmenyModel::hozzaadFizetesEredmeny($rendelesId,$datumKonvertalva,$fizetendoOsszeg,$order->getId(),$captureResponse['jsonResponse']->getStatus())==0) {
+                            echo json_encode(['error' => "Fizetes felvitele hiba!"]);
+                            http_response_code(500);
+                            exit;
+                        }
                         
-                        //esetleg fizetes utan rakjuk adatbazisba a rendelest
-
                         foreach (KosarModel::getKosar() as $key => $value) {
                             Arumodel::AruSzerkesztMennyiseg($key,$value["me"]);
                         }
@@ -119,10 +115,9 @@ class FizetesController{
                     http_response_code(500);
                     exit;
                 }
-                    return 1;
-                }
-            //return 1;
+            }
         }
+        return 0;
     }
 }
 ?>
