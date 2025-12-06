@@ -17,6 +17,5 @@ class FiokController{
         }
         return 0;
     }
-    
 }
 ?>
