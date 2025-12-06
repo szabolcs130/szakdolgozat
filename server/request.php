@@ -6,6 +6,7 @@ if (session_status() === PHP_SESSION_NONE) {
 }
 use Server\Model\MenuModel;
 use Server\Model\RendelesModel;
+use Server\Model\ErtekEllenorzesModel;
 use Server\Controller\MenuController;
 use Server\MeghivasEllenorzo;
 use Server\AutoLoader;
@@ -16,7 +17,11 @@ class Request{
         $darabol=explode("/",($_GET["oldal"] ?? "Fooldal"));
         $oldal= $darabol[0];
         $metodus=$darabol[1] ?? "Main";
-        $parameter=array($darabol[2] ?? null);
+        $parameter=array(ErtekEllenorzesModel::Szam($darabol[2] ?? "ures",0,99999999));
+        if ($parameter[0]===false) {
+            $parameter=array(null);
+        }    
+        //$parameter=array($darabol[2] ?? null);
         if (strpos($darabol[0],'api') !==false) {
             MeghivasEllenorzo::MeghivMVCMetodus(MeghivasEllenorzo::MVCFajlEsMetodusLetezikE($darabol[0],$metodus,"Controller"),$parameter=null,false);
         }
@@ -28,17 +33,18 @@ class Request{
             foreach ($menu as $ertek) {
                 if (htmlspecialchars($oldal)==$ertek["nev_menu"]) {
                     $meghiv=MeghivasEllenorzo::MeghivMVCMetodus(MeghivasEllenorzo::MVCFajlEsMetodusLetezikE($ertek["nev_menu"],$metodus,"Controller"),$parameter,true);
-                    $_SESSION["teljeskeres"]='?oldal='.$oldal.'/'.$metodus;
-                    $_SESSION['oldal']=$oldal;
-                    $_SESSION['metodus']=$metodus;
-                    if (is_array($parameter) && isset($parameter[0])) {
-                        $_SESSION["teljeskeres"].="/".$parameter[0];
-                        $_SESSION['parameter']=$parameter[0];
-                    }
                     break;
                 }
             }
-            if ($meghiv==0){
+            if ($meghiv!=0){
+                $_SESSION["teljeskeres"]='?oldal='.$oldal.'/'.$metodus;
+                $_SESSION['oldal']=$oldal;
+                $_SESSION['metodus']=$metodus;
+                if (is_array($parameter) && isset($parameter[0])) {
+                    $_SESSION["teljeskeres"].="/".$parameter[0];
+                    $_SESSION['parameter']=$parameter[0];
+                }
+            }else{
                 echo "<h1>Kert tartalom nem elerheto!</h1>";
             }
         }else{
