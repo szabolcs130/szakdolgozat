@@ -7,8 +7,12 @@ use Server\View\BejelentkezesView;
 use Server\Model\BejelentkezesModel;
 use Server\Model\ErtekEllenorzesModel;
 class BejelentkezesController{
-    public static function Main(){
-        BejelentkezesView::ShowBejelentkezes();
+    public static function Main($uzenet=null){
+        $uzenet==ErtekEllenorzesModel::Szam($uzenet,0,99999999);
+        if ($uzenet===false) {
+            $uzenet=null;
+        }
+        BejelentkezesView::ShowBejelentkezes($uzenet);
         return 1;
     }
     public static function EllenorizBejelentkezes(){

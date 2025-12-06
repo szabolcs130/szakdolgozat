@@ -2,11 +2,14 @@
 namespace Server\View;
 class BejelentkezesView{
 //
-    public static function ShowBejelentkezes(){
+    public static function ShowBejelentkezes($uzenet=null){
       $html="";
       if (isset($_SESSION['uzenet'])) {
         $html.='<h3>'.$_SESSION['uzenet'].'</h3>';
         unset($_SESSION['uzenet']);
+      }
+      if ($uzenet!=null) {
+        $html.='<h3>Sikeres Kijelentkezes</h3>';
       }
       $html.= '<div id="bejelentkezesForm">'.
                 '<form method="post" action="?oldal=Bejelentkezes/EllenorizBejelentkezes">'.

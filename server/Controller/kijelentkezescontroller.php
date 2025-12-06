@@ -10,12 +10,12 @@ class KijelentkezesController{
         if (isset($_SESSION["username"])) {
             session_unset();
             session_destroy();
-            //KijelentkezesView::SikeresKijelentkezes();
             $_SESSION["uzenet"]="Sikeres kijelentkezes!";
-            header('Location: ?oldal=Bejelentkezes');
+            header('Location: ?oldal=Bejelentkezes/Main/1');
             exit();
         }else{
             KijelentkezesView::SikertelenKijelentkezes();
+            return 1;
         }
         return 1;
     }
