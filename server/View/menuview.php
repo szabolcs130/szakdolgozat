@@ -18,7 +18,6 @@ class MenuView{
             return 1;
         }
         return 0;
-        //Menu nem elerheto, hiba uzenetet kaptunk
     }
 }
 ?>

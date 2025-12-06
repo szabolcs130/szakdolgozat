@@ -29,7 +29,7 @@ class Request{
             MeghivasEllenorzo::ErrorFajlMeghiv();
         }
         $menu=MeghivasEllenorzo::MeghivMVCMetodus(MeghivasEllenorzo::MVCFajlEsMetodusLetezikE("Menu","GetMenuByRang","Model"),$rang=array($_SESSION["rang"]),false);
-        if ($menu!=0) {
+        if (is_array($menu) && !empty($menu)) {
             foreach ($menu as $ertek) {
                 if (htmlspecialchars($oldal)==$ertek["nev_menu"]) {
                     $meghiv=MeghivasEllenorzo::MeghivMVCMetodus(MeghivasEllenorzo::MVCFajlEsMetodusLetezikE($ertek["nev_menu"],$metodus,"Controller"),$parameter,true);

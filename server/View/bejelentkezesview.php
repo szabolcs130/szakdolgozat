@@ -26,9 +26,6 @@ class BejelentkezesView{
               '</div>';
       echo $html; 
     }
-    public static function SikeresBejelentkezes($nev){
-      echo "<h1>Sikeres bejelentkezes, ".$nev."!</h1>";
-    }
     public static function SikertelenBejelentkezes(){
       echo "<h1>Sikertelen bejelentkezes!</h1>";
     }
