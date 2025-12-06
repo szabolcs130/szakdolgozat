@@ -8,10 +8,9 @@ use Server\Model\BejelentkezesModel;
 class FiokController{
     public static function Main(){
         if (isset($_SESSION["userId"])) {
-            $meghiv=BejelentkezesModel::GetSzemelyById($_SESSION["userId"]);//
-            if ($meghiv){
-               $meghiv=FiokView::ShowFiok($meghiv);
-               if ($meghiv) {
+            $meghiv=BejelentkezesModel::GetSzemelyById($_SESSION["userId"]);
+            if (is_array($meghiv) && !empty($meghiv)){
+               if (FiokView::ShowFiok($meghiv)!=0) {
                     return 1;
                }
             }
