@@ -8,12 +8,13 @@ class KosarView{
                 echo '<form method="POST" action="?oldal=Kosar/MennyisegValtoztat">';
                 echo '<input type="hidden" name="aruId" value='.$key.'>';
                 echo $value["nev"]." ".$value["ar"]." ";
-                echo '<input type="number" id="me" name="me" min="0" value="'.$value["me"].'">';
-                echo '<button type="submit">Valtoztat</button>';  
+                echo '<input class="kosarMennyiseg" type="number" id="me" name="me" min="0" max="'.$value['maxMe'].'" value="'.$value["me"].'">';
+                echo '<button id="kosarBekuldGomb" type="submit">Valtoztat</button>';
+                echo '<p>Raktárban: '.$value['maxMe'].'</p>'; 
                 echo '</form>';
             }
             echo '<div>Összesen: '.$osszAr.' Forint</div>';
-            echo '<li><a href="?oldal=Fizetes/Main">Fizetes</a></li';
+            echo '<li><a id="fizetesMegnyom" href="?oldal=Fizetes/Main">Fizetes</a></li';
             echo '</div>';
            }else{
             echo "Kosar tartalma ures";

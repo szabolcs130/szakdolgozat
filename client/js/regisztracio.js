@@ -1,4 +1,4 @@
-import { EllenorizElsoResz} from './Ellenorzo.js';
+import { EllenorizElsoResz,htmlEllenorrzo} from './Ellenorzo.js';
 window.onload=function () {
     const username=document.getElementById("username");
     const email=document.getElementById("email");
@@ -7,27 +7,17 @@ window.onload=function () {
     const usernameMin=5;
     const usernameMax=20;
     const usernamePattern=/^[A-Za-z0-9]+$/;
-    username.minLength=usernameMin;
-    username.maxLength=usernameMax;
-    username.required=true;
-    username.pattern=usernamePattern.source;
+    htmlEllenorrzo(username,usernamePattern,usernameMin,usernameMax,true);
 
     const emailMin=11;
     const emailMax=254;
-    const emailPattern=/^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$/;
-    email.minLength=emailMin;
-    email.maxLength=emailMax;
-    email.required=true;
-    email.pattern=emailPattern.source;
-
+    const emailPattern=/^[a-z0-9._%+\-]+@[a-z0-9.\-]+\.[a-z]{2,3}$/;
+    htmlEllenorrzo(email,emailPattern,emailMin,emailMax,true);
 
     const pMin=12;
     const pMax=64;
     const pPattern=/^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[^A-Za-z0-9]).{12,64}$/;
-    p.minLength=pMin;
-    p.maxLength=pMax;
-    p.required=true;
-    p.pattern=pPattern.source;
+    htmlEllenorrzo(p,pPattern,pMin,pMax,true);
 
     const errorUsernameP=document.getElementById("errorUsernameP");
     const erroremailP=document.getElementById("errorEmailP");
@@ -39,15 +29,24 @@ window.onload=function () {
 
     const regisztracioBekuldGomb=document.getElementById("regisztracioBekuldGomb");
     
-    username.addEventListener("input",(e)=>{
-        EllenorizElsoResz(regisztracioBekuldGomb,errorUsernameP,username,false,usernamePattern,usernameMin,usernameMax);
+    regisztracioBekuldGomb.addEventListener("click",(e)=>{
+        const emailReturn=EllenorizElsoResz(erroremailP,email,false,emailPattern,emailMin,emailMax,true);
+        const pReturn=EllenorizElsoResz(errorPasswordP,p,false,pPattern,pMin,pMax,true);
+        const usernameReturn=EllenorizElsoResz(errorUsernameP,username,false,usernamePattern,usernameMin,usernameMax,true);
+        if (!emailReturn || !pReturn || !usernameReturn) {
+            e.preventDefault();
+        }
     });
 
-    email.addEventListener("input",(e)=>{
-        EllenorizElsoResz(regisztracioBekuldGomb,erroremailP,email,false,emailPattern,emailMin,usernameMax);
+    username.addEventListener("input",()=>{
+        EllenorizElsoResz(errorUsernameP,username,false,usernamePattern,usernameMin,usernameMax,false);
     });
 
-    p.addEventListener("input",(e)=>{
-        EllenorizElsoResz(regisztracioBekuldGomb,errorPasswordP,p,false,pPattern,pMin,pMax);
+    email.addEventListener("input",()=>{
+        EllenorizElsoResz(erroremailP,email,false,emailPattern,emailMin,emailMax,false);
+    });
+
+    p.addEventListener("input",()=>{
+        EllenorizElsoResz(errorPasswordP,p,false,pPattern,pMin,pMax,false);
     });
 }

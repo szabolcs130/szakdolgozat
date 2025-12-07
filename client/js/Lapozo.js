@@ -1,11 +1,12 @@
-import { EllenorizElsoResz} from './Ellenorzo.js';
+import { EllenorizElsoResz, htmlEllenorrzo} from './Ellenorzo.js';
+
 export async function SzuroFelepit(param,maximumAr,callback) {
     const szuroTarolo=document.getElementById("szuroTarolo");
     const minArLabel=document.createElement("label");
-    minArLabel.textContent="Min: 0";
+    minArLabel.textContent="Min: ";
 
     const maxArLabel=document.createElement("label");
-    maxArLabel.textContent="Max: "+maximumAr?.[0]?.max;
+    maxArLabel.textContent="Max: ";
 
     const minArInput=document.createElement("input");
     minArInput.type="range";
@@ -16,7 +17,13 @@ export async function SzuroFelepit(param,maximumAr,callback) {
     minArInput.type="range";
     minArInput.disabled=true;
 
-    let maxArInput=document.createElement("input");
+    const errorMinArP=document.createElement("p");
+    errorMinArP.style.display="none";
+    errorMinArP.id="errorMinArP";
+    const MinArErtekeP=document.createElement("p");
+    MinArErtekeP.textContent=0+" Forint";
+    
+    const maxArInput=document.createElement("input");
     maxArInput.type="range";
     maxArInput.id="maxAr";
     maxArInput.type="range";
@@ -25,59 +32,81 @@ export async function SzuroFelepit(param,maximumAr,callback) {
     maxArInput.value=maximumAr?.[0]?.max;
     maxArInput.disabled=true;
 
+    const errorMaxArP=document.createElement("p");
+    errorMaxArP.style.display="none";
+    errorMaxArP.id="errorMaxArP";
+    const MaxArErtekeP=document.createElement("p");
+
+    MaxArErtekeP.textContent=+maximumAr?.[0]?.max+" Forint";
+
     const maxArDiv=document.createElement("div");
     maxArDiv.id="maxArDiv";
     maxArDiv.appendChild(maxArLabel);
     maxArDiv.appendChild(maxArInput);
+    maxArDiv.appendChild(MaxArErtekeP);
+    maxArDiv.appendChild(errorMaxArP);
+    
+    maxArInput.addEventListener("input",(e)=>{
+        EllenorizElsoResz(errorMaxArP,maxArInput,true,/^[0-9]{0,8}$/,0,8,true);
+    });
+    minArInput.addEventListener("input",(e)=>{
+        EllenorizElsoResz(errorMinArP,minArInput,true,/^[0-9]{0,8}$/,0,8,true);
+    });
 
     const minArDiv=document.createElement("div");
     minArDiv.id="minArDiv";
     minArDiv.appendChild(minArLabel);
     minArDiv.appendChild(minArInput);
+    minArDiv.appendChild(MinArErtekeP);
+    minArDiv.appendChild(errorMinArP);
     
     const minSzoveg=0;
     const maxSzoveg=50;
-
-    let nevKeresInput=document.createElement("input");
+    const patternSzoveg=/^[A-Za-z0-9áéíóöőúüűÁÉÍÓÖŐÚÜŰ ]+$/;
+    const nevKeresInput=document.createElement("input");
     nevKeresInput.type="text";
-    nevKeresInput.placeholder="Kulcsszo";
+    nevKeresInput.placeholder="Kulcsszó";
     nevKeresInput.id="nevKeres";
-    nevKeresInput.minLength=minSzoveg;
-    nevKeresInput.maxLength=maxSzoveg;
     nevKeresInput.addEventListener("input",(e)=>{
-        EllenorizElsoResz(szuresBekuldGomb,errorP,nevKeresInput,true,/^[A-Za-z ]+$/,minSzoveg,maxSzoveg);
+        EllenorizElsoResz(errorP,nevKeresInput,true,patternSzoveg,minSzoveg,maxSzoveg,false);
     });
-
+    htmlEllenorrzo(nevKeresInput,patternSzoveg,minSzoveg,maxSzoveg,true);
     const errorP=document.createElement("p");
+    errorP.id="errorP";
     errorP.style.display="none";
     const nevErrorDiv=document.createElement("div");
     nevErrorDiv.id="nevErrorDiv";
     nevErrorDiv.appendChild(nevKeresInput);
     nevErrorDiv.appendChild(errorP);
 
-    let szuresBekuldGomb=document.createElement('button');
+    const szuresBekuldGomb=document.createElement('button');
     szuresBekuldGomb.type="submit";
     szuresBekuldGomb.textContent="Keres";
 
     minArInput.addEventListener("input",(e)=>{
-        minArLabel.textContent="Min: "+e.target.value;
+        MinArErtekeP.textContent=e.target.value+" Forint";
         if (parseInt(e.target.value)>=parseInt(maxArInput.value)) {
             maxArInput.value=(parseInt(e.target.value)+100);
-            maxArLabel.textContent="Max: "+maxArInput.value;
+            MaxArErtekeP.textContent=maxArInput.value+" Forint";
         }
     });
     maxArInput.addEventListener("input",(e)=>{
-        maxArLabel.textContent="Max: "+e.target.value;
+        MaxArErtekeP.textContent=e.target.value+" Forint";
         if (parseInt(e.target.value)<=parseInt(minArInput.value)) {
             minArInput.value=(parseInt(e.target.value)-100);
-            minArLabel.textContent="Max: "+minArInput.value;
+            MinArErtekeP.textContent=minArInput.value+" Forint";
         }
     });
     szuresBekuldGomb.addEventListener("click",async function(){
-        const data1=await FetchMeghiv(param,0,null,nevKeresInput.value || null,minArInput.value || null,maxArInput.value || null);
-        callback(data1);
-        const data2=await FetchMeghiv(param,null,true,nevKeresInput.value || null,minArInput.value || null, maxArInput.value || null);
-        LapozashozLegorduloMenu(data2);
+        var nevResult=EllenorizElsoResz(errorP,nevKeresInput,true,patternSzoveg,minSzoveg,maxSzoveg,true);
+        var minArResult=EllenorizElsoResz(errorMinArP,minArInput,true,/^[0-9]{0,8}$/,0,8,true);
+        var maxArResult=EllenorizElsoResz(errorMaxArP,maxArInput,true,/^[0-9]{0,8}$/,0,8,true);
+        if (nevResult && minArResult && maxArResult) {
+            const data1=await FetchMeghiv(param,0,null,nevKeresInput.value || null,minArInput.value || null,maxArInput.value || null);
+            callback(data1);
+            const data2=await FetchMeghiv(param,null,true,nevKeresInput.value || null,minArInput.value || null, maxArInput.value || null);
+            LapozashozLegorduloMenu(data2,"oldalValaszto");
+        }
     });
     nevKeresInput.addEventListener("input",(e)=>{
         if (e.target.value.length==0) {
@@ -119,14 +148,23 @@ export function LapozashozSelectEsemeny(url,callback) {
         const minArInput=document.getElementById("minAr");
         const maxArInput=document.getElementById("maxAr");
         const nevKeresInput=document.getElementById("nevKeres");
-        const data1=await FetchMeghiv(url,e.target.value,null,nevKeresInput?.value || null,minArInput?.value || null,maxArInput?.value || null);
-        callback(data1);
+        const errorMaxArP=document.getElementById("errorMaxArP");
+        const errorMinArP=document.getElementById("errorMinArP");
+        const errorP=document.getElementById("errorP");
+        var nevResult=EllenorizElsoResz(errorP,nevKeresInput,true,/^[A-Za-z0-9áéíóöőúüűÁÉÍÓÖŐÚÜŰ ]+$/,0,50,true);
+        var minArResult=EllenorizElsoResz(errorMinArP,minArInput,true,/^[0-9]{0,7}$/,0,8,true);
+        var maxArResult=EllenorizElsoResz(errorMaxArP,maxArInput,true,/^[0-9]{0,7}$/,0,8,true);
+        var oldalReturn=EllenorizElsoResz(false,oldalValaszto,true,/^[0-9]{0,7}$/,0,8,true);
+        if (nevResult && minArResult && maxArResult && oldalReturn) {
+            const data1=await FetchMeghiv(url,oldalValaszto.value,null,nevKeresInput?.value || null,minArInput?.value || null,maxArInput?.value || null);
+            callback(data1);
+        }
     });
 }
-export function LapozashozElozoKovekezoEsemenyek(){
-const elozoLapozo=document.getElementById("elozo");
-    const kovetkezoLapozo=document.getElementById("kovetkezo");
-    const oldalValaszto=document.getElementById("oldalValaszto");
+export function LapozashozElozoKovekezoEsemenyek(elozo,kovetkezo,oldalvalaszto){
+const elozoLapozo=document.getElementById(elozo);
+    const kovetkezoLapozo=document.getElementById(kovetkezo);
+    const oldalValaszto=document.getElementById(oldalvalaszto);
     
     kovetkezoLapozo.addEventListener("click",()=>{
         if ((oldalValaszto.childElementCount-1)>=(oldalValaszto.selectedIndex+1)) {
@@ -142,7 +180,8 @@ const elozoLapozo=document.getElementById("elozo");
         
     });
 }
-export async function LapozashozLegorduloMenu(param){
+export function LapozashozLegorduloMenu(param,oldalvalaszto){
+    const oldalValaszto=document.getElementById(oldalvalaszto);
     const AruOsszOldalSzam=param; 
     const ellenorzottOsszAru=AruOsszOldalSzam?.[0]?.osszes || 0;
     const oldalSzamok=Math.ceil(ellenorzottOsszAru/10)==0 ? 1 : (Math.ceil(ellenorzottOsszAru/10));
@@ -158,9 +197,10 @@ export async function LapozashozLegorduloMenu(param){
         oldalValaszto.dispatchEvent(new Event("change"));
     }
 }
-export function ElozoKovetkezoLapozoMegjelenitese() {
-    const elozoLapozo=document.getElementById("elozo");
-    const kovetkezoLapozo=document.getElementById("kovetkezo");
+export function ElozoKovetkezoLapozoMegjelenitese(elozo,kovetkezo,oldalvalaszto) {
+    const elozoLapozo=document.getElementById(elozo);
+    const kovetkezoLapozo=document.getElementById(kovetkezo);
+    const oldalValaszto=document.getElementById(oldalvalaszto);
     if (oldalValaszto.selectedIndex==0) {
         elozoLapozo.style.visibility="hidden";
     }else{

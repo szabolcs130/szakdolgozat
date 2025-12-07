@@ -10,9 +10,10 @@ class AdminView{
         echo '</ul>';
         echo '</nav>';
         echo '<div id="adminTartalom">';
-        echo '<h1>Udv az admin oldalon!</h1>';
+        echo '<h1>Üdv az admin oldalon!</h1>';
         echo '</div>';
         echo '</div>';
+        return 1;
     }
 }
 ?>

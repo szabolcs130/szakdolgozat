@@ -1,18 +1,29 @@
 import { SzuroFelepit,FetchMeghiv,LapozashozSelectEsemeny,LapozashozElozoKovekezoEsemenyek,LapozashozLegorduloMenu,ElozoKovetkezoLapozoMegjelenitese } from './Lapozo.js';
+import { EllenorizElsoResz,htmlEllenorrzo} from './Ellenorzo.js';
 window.addEventListener("load",async function() {
     const data2=await FetchMeghiv("?oldal=Apivelemeny/LekerdezVelemenyByAruIdSajat",null,true);
     if (SajatVelemeny(data2)) {
         document.getElementById("VelemenyForm").style.display="none";
     }
 
-    LapozashozElozoKovekezoEsemenyek();
-    const a=await LapozashozSelectEsemeny("?oldal=Apivelemeny/LekerdezVelemenyByAruNemSajat",(eredmeny)=>{
+    LapozashozElozoKovekezoEsemenyek("elozo","kovetkezo","oldalValaszto");
+    const a=await VelemenyLapozashozSelectEsemeny("?oldal=Apivelemeny/LekerdezVelemenyByAruNemSajat",(eredmeny)=>{
             LapozNemSajatVelemeny(eredmeny)
     });
     
     const data1=await FetchMeghiv("?oldal=Apivelemeny/LekerdezVelemenyByAruNemSajatOsszes",null,true);
-    LapozashozLegorduloMenu(data1);
+    LapozashozLegorduloMenu(data1,"oldalValaszto");
 });
+async function VelemenyLapozashozSelectEsemeny(url,callback) {
+    const oldalValaszto=document.getElementById("oldalValaszto");
+    oldalValaszto.addEventListener("change",async function(e){
+        var oldalReturn=EllenorizElsoResz(false,oldalValaszto,true,/^[0-9]{0,7}$/,0,8,true);
+        if (oldalReturn) {
+            const data1=await FetchMeghiv(url,e.target.value,null,null,null,null);
+            callback(data1);
+        }
+    });
+}
 function SajatVelemeny(data) {
     const sajatVelemeny=document.getElementById("sajatVelemeny");
     if (data.length) {
@@ -109,7 +120,7 @@ function LapozNemSajatVelemeny(data) {
             masVelemeny.appendChild(VelemenyEgy);
 
         });
-        ElozoKovetkezoLapozoMegjelenitese();
+        ElozoKovetkezoLapozoMegjelenitese("elozo","kovetkezo","oldalValaszto");
     }else{
         const masVelemenyH3Nincs=document.createElement("h3");
         masVelemenyH3Nincs.textContent="Nincs megjelenitheto velemeny! ";

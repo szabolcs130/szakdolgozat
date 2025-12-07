@@ -4,12 +4,12 @@ window.onload = async function() {
     SzuroFelepit("?oldal=Apitermekek/lekerdezAruSzures",data2,(eredmeny)=>{
         Lapoz(eredmeny);
     });
-    LapozashozElozoKovekezoEsemenyek();
+    LapozashozElozoKovekezoEsemenyek("elozo","kovetkezo","oldalValaszto");
     const a=await LapozashozSelectEsemeny("?oldal=Apitermekek/lekerdezAruSzures",(eredmeny)=>{
         Lapoz(eredmeny)
     });
     const data=await FetchMeghiv("?oldal=Apitermekek/lekerdezAruSzures",null,true);
-    LapozashozLegorduloMenu(data);;
+    LapozashozLegorduloMenu(data,"oldalValaszto");
 }
 async function Lapoz(data) {
     const aruk=document.getElementById('aruk');
@@ -43,9 +43,9 @@ async function Lapoz(data) {
             aru_mennyiseg.classList.add('aru_mennyiseg');
             aru_mennyiseg.textContent=element.mennyiseg ? "Raktáron: "+element.mennyiseg+"db" : "Elfogyott";
 
-            const aru_leiras=document.createElement('div');
+            /*const aru_leiras=document.createElement('div');
             aru_leiras.classList.add('aru_leiras');
-            aru_leiras.textContent=element.leiras;
+            aru_leiras.textContent=element.leiras;*/
             
             const liTag=document.createElement('li');
 
@@ -58,7 +58,7 @@ async function Lapoz(data) {
             aru.appendChild(aru_nev);
             aru.appendChild(aru_kep);
             aru.appendChild(aru_ar);
-            aru.appendChild(aru_leiras);
+            //aru.appendChild(aru_leiras);
             aru.appendChild(aru_mennyiseg);
             aru.appendChild(liTag);
 
@@ -73,5 +73,5 @@ async function Lapoz(data) {
     }
     
     window.scrollTo(0,0);
-    ElozoKovetkezoLapozoMegjelenitese();
+    ElozoKovetkezoLapozoMegjelenitese("elozo","kovetkezo","oldalValaszto");
 }

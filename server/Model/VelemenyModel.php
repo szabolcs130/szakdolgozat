@@ -90,7 +90,11 @@ class VelemenyModel{
                 $sql.=" AND idf_szemely <> :idf_szemely";
             }
             $sth = $db->prepare($sql);
-            $sth->execute(array(':idfAru'=> $aru,':idf_szemely'=>$userId));
+            $sth->bindValue(':idfAru',$aru);
+            if ($userId!=null) {
+                $sth->bindValue(':idf_szemely',$userId);
+            }
+            $sth->execute();
             $eredmeny = $sth->fetchAll(\PDO::FETCH_ASSOC);
             return $eredmeny;
         }catch (\PDOException $e) {

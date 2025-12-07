@@ -27,33 +27,15 @@ class MeghivasEllenorzo{
        return 0;
     }
     public static function MeghivMVCMetodus($array,$param,$include){//meghivja a metodust, de elotte MVCFajlEsMetodusLetezikE fv -vel ellenorizzuk leteznek e, amikkel dolgozni akarunk
-        /*if ($array && $include==true) {//oldalhivasra
-            self::SetCssFajl($array[2]);
-            self::SetJsFajl($array[2]);
-                echo "NINCS PARAMETER";
-            return call_user_func([$array[0],$array[1]]);
-        }else if($array && $include==false){//olyat hivunk meg, amitol varunk adatot
-            if (is_numeric($param)) {
-                echo "PARAMETER";
-                return call_user_func([$array[0],$array[1]],$param);
-            }else{
-                echo "NINCS PARAMETER";
-                return call_user_func([$array[0],$array[1]]);
-            }
-        }else{
-            return 0;
-        }*/
-        if ($array) {
+        if (is_array($array) && !empty($array) && count($array)==3) {
             if ($include==true) {
                 self::SetCssFajl($array[2]);
                 self::SetJsFajl($array[2]);
             }
             $rm=new \ReflectionMethod($array[0],$array[1]);
-            if ($param!=null && count($param)>=$rm->getNumberOfRequiredParameters()) {//esetleg ha tobb parameter kellene akkor $param[0] helyett az egesz tombot kuldjuk, illetve ahol fogadjuk ott $param[0...x] hazsnalata
+            if (/*$param!=null &&*/ is_array($param) && count($param)>=$rm->getNumberOfRequiredParameters()) {//esetleg ha tobb parameter kellene akkor $param[0] helyett az egesz tombot kuldjuk, illetve ahol fogadjuk ott $param[0...x] hazsnalata
                 return call_user_func([$array[0],$array[1]],$param[0]);
-            }/*else{
-                return 0;
-            }*/
+            }
             return call_user_func([$array[0],$array[1]]);
         }
         return 0;
