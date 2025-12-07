@@ -7,9 +7,13 @@ window.onload=function() {
         });
     });
     const kosarGomb=document.getElementById("kosarBekuldGomb");
-    kosarGomb.addEventListener('submit',MennyisegValtoztat);
+    if (kosarGomb) {
+        kosarGomb.addEventListener('submit',MennyisegValtoztat);
+    }
     const fizetesMegnyom=document.getElementById("fizetesMegnyom");
-    fizetesMegnyom.addEventListener('click',FizetesMegkezd);
+    if (fizetesMegnyom) {
+        fizetesMegnyom.addEventListener('click',FizetesMegkezd);
+    }
 }
 function MennyisegValtoztat() {
     const aruk=document.querySelectorAll(".kosarMennyiseg");

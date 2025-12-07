@@ -21,10 +21,11 @@ window.addEventListener("load",async function() {
             aruKepDiv.appendChild(aru_kep);
         
             const kosarInput=document.getElementById("me");
-                const kosarBekuldGomb=document.getElementById("elkuldGomb");
+            if (kosarInput) {
                 kosarInput.addEventListener("input",()=>{
-                EllenorizElsoResz(false,kosarInput,false,/^[1-9][0-9]{0,7}$/,1,8,false);
-            });  
+                    EllenorizElsoResz(false,kosarInput,false,/^[1-9][0-9]{0,7}$/,1,8,false);
+                });
+            }  
         }
     }
 });
