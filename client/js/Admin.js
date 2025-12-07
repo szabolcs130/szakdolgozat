@@ -272,7 +272,7 @@ async function FormAru(params,actionParam,gombFelirat) {
 
     const aruIdMin=1;
     const aruIdMax=8;
-    const aruIdPattern=/^[1-9][0-9]{0,8}$/;
+    const aruIdPattern=/^[1-9][0-9]{0,7}$/;
     htmlEllenorrzo(aruIdInput,aruIdPattern,aruIdMin,aruIdMax,true);
 
     ErrorDivAruId.appendChild(aruIdInput);
@@ -320,7 +320,7 @@ async function FormAru(params,actionParam,gombFelirat) {
 
     const aruArMin=1;
     const aruArMax=8;
-    const aruArPattern=/^[1-9][0-9]{0,8}$/;
+    const aruArPattern=/^[1-9][0-9]{0,7}$/;
     htmlEllenorrzo(aruArInput,aruArPattern,aruArMin,aruArMax,true);
 
     ErrorDivAruAr.appendChild(aruArInput);
@@ -365,7 +365,7 @@ async function FormAru(params,actionParam,gombFelirat) {
 
     const aruMennyisegMin=1;
     const aruMennyisegMax=8;
-    const aruMennyisegPattern=/^[1-9][0-9]{0,8}$/;
+    const aruMennyisegPattern=/^[1-9][0-9]{0,7}$/;
     htmlEllenorrzo(aruMennyisegInput,aruMennyisegPattern,aruMennyisegMin,aruMennyisegMax,true);
 
     ErrorDivAruMennyiseg.appendChild(aruMennyisegInput);
@@ -481,10 +481,10 @@ function FelepitKepSzuresNevAlapjan() {
     szuresBekuldGomb.addEventListener("click",async function(){
         var nevResult=EllenorizElsoResz(errorP,nevKeresInput,true,patternSzoveg,minSzoveg,maxSzoveg,true);
         if (nevResult) {
-            const response= await fetch("?oldal=Apiadmin/Kepek&oldalSzam=0&nev="+nevKepKeres.value);
+            const response= await fetch("?oldal=Apiadmin/Kepek&oldalSzam=0&nev="+nevKeresInput.value);
             const data = await response.json();
             KepekKilistaz(data);
-            const response2= await fetch("?oldal=Apiadmin/KepekOsszes&nev="+nevKepKeres.value);
+            const response2= await fetch("?oldal=Apiadmin/KepekOsszes&nev="+nevKeresInput.value);
             const data2 = await response2.json();
             LapozashozLegorduloMenu(data2,"kepOldalValaszto");
         }
@@ -548,8 +548,12 @@ async function KepLapozashozSelectEsemeny(oldalvalaszto) {
     const oldalValaszto=document.getElementById(oldalvalaszto);
     oldalValaszto.addEventListener("change",async function(e){
         const nevKepKeres=document.getElementById("nevKepKeres");
-        const response= await fetch("?oldal=Apiadmin/Kepek&oldalSzam="+oldalValaszto.value+"&nev="+nevKepKeres.value);
-        const data = await response.json();
-        KepekKilistaz(data);
+        var oldalValasztoReturn=EllenorizElsoResz(false,oldalValaszto,true,/^[0-9]{0,7}$/,0,8,true);
+        var nevKepKeresResult=EllenorizElsoResz(false,nevKepKeres,true,/^[A-Za-z0-9]+$/,1,50,true);
+        if (oldalValasztoReturn && nevKepKeresResult) {
+            const response= await fetch("?oldal=Apiadmin/Kepek&oldalSzam="+oldalValaszto.value+"&nev="+nevKepKeres.value);
+            const data = await response.json();
+            KepekKilistaz(data);
+        }
     });
 }

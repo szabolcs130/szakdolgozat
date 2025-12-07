@@ -62,7 +62,7 @@ class KosarController{
             }   
             $aru=TermekekModel::lekerdezAruById($id);
             if (is_array($aru) && !empty($aru)) {//$aru!=0 && $aru!==[]
-                KosarModel::hozzaadAru($aru[0]['id_aru'],$aru[0]['nev_aru'],$aru[0]['ar'],$me);
+                KosarModel::hozzaadAru($aru[0]['id_aru'],$aru[0]['nev_aru'],$aru[0]['ar'],$me,$aru[0]['mennyiseg']);
                 self::Main();
                 return 1;
             }

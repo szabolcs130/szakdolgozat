@@ -1,4 +1,5 @@
 import { SzuroFelepit,FetchMeghiv,LapozashozSelectEsemeny,LapozashozElozoKovekezoEsemenyek,LapozashozLegorduloMenu,ElozoKovetkezoLapozoMegjelenitese } from './Lapozo.js';
+import { EllenorizElsoResz,htmlEllenorrzo} from './Ellenorzo.js';
 window.addEventListener("load",async function() {
     const data2=await FetchMeghiv("?oldal=Apivelemeny/LekerdezVelemenyByAruIdSajat",null,true);
     if (SajatVelemeny(data2)) {
@@ -16,8 +17,11 @@ window.addEventListener("load",async function() {
 async function VelemenyLapozashozSelectEsemeny(url,callback) {
     const oldalValaszto=document.getElementById("oldalValaszto");
     oldalValaszto.addEventListener("change",async function(e){
+        var oldalReturn=EllenorizElsoResz(false,oldalValaszto,true,/^[0-9]{0,7}$/,0,8,true);
+        if (oldalReturn) {
             const data1=await FetchMeghiv(url,e.target.value,null,null,null,null);
             callback(data1);
+        }
     });
 }
 function SajatVelemeny(data) {

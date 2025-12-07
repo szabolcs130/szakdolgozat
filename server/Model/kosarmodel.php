@@ -7,12 +7,13 @@ class KosarModel{
     public static function getKosar(){
         return $_SESSION['kosar'];
     }
-    public static function hozzaadAru($id,$nev,$ar,$me){
+    public static function hozzaadAru($id,$nev,$ar,$me,$maxMe){
             if ($me>0) {
                 $_SESSION['kosar'][$id]= [
                     'nev' => $nev,
                     'ar' => $ar,
-                    'me' => ($me)
+                    'me' => ($me),
+                    'maxMe'=>$maxMe
                 ];
             }else{
                 self::torolAru($id);

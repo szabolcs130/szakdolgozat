@@ -2,8 +2,10 @@ export function EllenorizElsoResz(error,adat,lehetUres,minta,min,max,visszateres
     if (lehetUres){
         if (adat.value.length==0) {
             adat.style.background='#9f9';
-            error.style.display='none';
-            error.textContent="";
+            if (error!=false) {
+                error.style.display='none';
+                error.textContent="";   
+            }
             if (visszateres) return true;
         }else{
             const eredmeny=szovegEllenorzo(error,adat,min,max,minta,lehetUres);
@@ -16,46 +18,59 @@ export function EllenorizElsoResz(error,adat,lehetUres,minta,min,max,visszateres
 }
 export function szovegEllenorzo(error,adat,min,max,minta,lehetUres) {
     var rendben=true;
-    error.textContent="";
-    error.style.color="red";
-    error.textContent="";
-    error.style.display="none";
+    if (error!=false) {
+        error.textContent="";
+        error.style.color="red";
+        error.textContent="";
+        error.style.display="none";
+    }
     if (!minta.test(adat.value)){
-        error.textContent="Betartandó: "+minta.source.split("{")[0].replace(/[\^\+\$]/g,"");
         rendben=false;
         adat.focus();
         adat.style.background='#f99';
-        error.style.display="inline-block";
+        if (error!=false) {
+            error.style.display="inline-block";
+            error.textContent="Betartandó: "+minta.source.split("{")[0].replace(/[\^\+\$]/g,"");
+        }
         return rendben;
     }
     if (!adat.value.trim() || (adat.value.length>0 && adat.value[0]==" ")) {
-        error.textContent="Szóköz nem megengedett elöl!";
         rendben=false;
         adat.focus();
         adat.style.background='#f99';
-        error.style.display="inline-block";
+        if (error!=false) {
+            error.style.display="inline-block";
+            error.textContent="Szóköz nem megengedett elöl!";
+        }
         return rendben;
     }
     if (adat.value.length==0 && lehetUres==false) {
-        error.textContent="Üres!";
         rendben=false;
         adat.focus();
         adat.style.background='#f99';
-        error.style.display="inline-block";
+        if (error!=false) {
+            error.style.display="inline-block";
+            error.textContent="Üres!";
+        }
         return rendben;
     }
     if (adat.value.length<min || adat.value.length>max) {
-        error.textContent="Hossz nem megfelelő";
+        
         rendben=false;
         adat.focus();
         adat.style.background='#f99';
-        error.style.display="inline-block";
+        if (error!=false) {
+            error.style.display="inline-block";
+            error.textContent="Hossz nem megfelelő";
+        }
         return rendben;
     }
     if (rendben) {
         adat.style.background='#9f9';
-        error.style.display='none';
-        error.textContent="";
+        if (error!=false) {
+            error.style.display='none';
+            error.textContent="";    
+        }
     }
     return rendben;
 }

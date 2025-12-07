@@ -152,10 +152,11 @@ export function LapozashozSelectEsemeny(url,callback) {
         const errorMinArP=document.getElementById("errorMinArP");
         const errorP=document.getElementById("errorP");
         var nevResult=EllenorizElsoResz(errorP,nevKeresInput,true,/^[A-Za-z0-9áéíóöőúüűÁÉÍÓÖŐÚÜŰ ]+$/,0,50,true);
-        var minArResult=EllenorizElsoResz(errorMinArP,minArInput,true,/^[0-9]{0,8}$/,0,8,true);
-        var maxArResult=EllenorizElsoResz(errorMaxArP,maxArInput,true,/^[0-9]{0,8}$/,0,8,true);
-        if (nevResult && minArResult && maxArResult) {
-            const data1=await FetchMeghiv(url,e.target.value,null,nevKeresInput?.value || null,minArInput?.value || null,maxArInput?.value || null);
+        var minArResult=EllenorizElsoResz(errorMinArP,minArInput,true,/^[0-9]{0,7}$/,0,8,true);
+        var maxArResult=EllenorizElsoResz(errorMaxArP,maxArInput,true,/^[0-9]{0,7}$/,0,8,true);
+        var oldalReturn=EllenorizElsoResz(false,oldalValaszto,true,/^[0-9]{0,7}$/,0,8,true);
+        if (nevResult && minArResult && maxArResult && oldalReturn) {
+            const data1=await FetchMeghiv(url,oldalValaszto.value,null,nevKeresInput?.value || null,minArInput?.value || null,maxArInput?.value || null);
             callback(data1);
         }
     });
