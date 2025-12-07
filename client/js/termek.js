@@ -2,7 +2,7 @@ import { EllenorizElsoResz,htmlEllenorrzo} from './Ellenorzo.js';
 window.addEventListener("load",async function() {
     const aruId=document.getElementById("aruId");
     if (aruId) {
-        var aruIdReturn=EllenorizElsoResz(false,aruId,false,/^[1-9][0-9]{0,7}$/,0,8,true);
+        var aruIdReturn=EllenorizElsoResz(false,aruId,false,/^[1-9][0-9]{0,7}$/,1,8,true);
         if (aruIdReturn) {
             const response= await fetch("?oldal=Apitermekek/lekerdezAruById&aruId="+aruId.value);
             const data = await response.json();
@@ -36,7 +36,7 @@ if (termekForm) {
 function Elkuld(e) {
     e.preventDefault();
     const termek = new FormData(this);
-    const minta=/^[1-9]{1,7}$/;
+    const minta=/^[1-9]{1,8}$/;
     if (minta.test(termek.get("me"))) {
         fetch('?oldal=Kosar/MennyisegValtoztat',{
         method: 'POST',
