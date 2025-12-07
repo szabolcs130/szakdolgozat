@@ -9,19 +9,21 @@ class BejelentkezesView{
         unset($_SESSION['uzenet']);
       }
       if ($uzenet!=null) {
-        $html.='<h3>Sikeres Kijelentkezes</h3>';
+        $html.='<h3>Sikeres Kijelentkezés</h3>';
       }
-      $html.= '<div id="bejelentkezesForm">'.
-                '<form method="post" action="?oldal=Bejelentkezes/EllenorizBejelentkezes">'.
+      $html.= '<div id="bejelentkezesFormTarolo">'.
+                '<form id="bejelentkezesForm" method="post" action="?oldal=Bejelentkezes/EllenorizBejelentkezes">'.
                   '<div class="ErrorDiv">'.
-                  '<input type="text" name="email" id="email" placeholder="Email"><br><br>'.
+                  '<br><label for="email">E-mail cím:</label>'.
+                  '<input type="text" name="email" id="email" autocomplete="off" autofocus placeholder="Email">'.
                   '<p id="errorEmailP"></p>'.
                   '</div>'.
                   '<div class="ErrorDiv">'.
-                  '<input type="password" name="p" id="p" placeholder="Jelszo"><br><br>'.
+                  '<br><label for="p">Jelszó: </label>'.
+                  '<input type="password" name="p" id="p" autocomplete="off" placeholder="Jelszo">'.
                   '<p id="errorPasswordP"></p>'.
                   '</div>'.
-                  '<button id="bejelentkezesBekuldGomb" type="submit">Bejelentkezes</button>'.
+                  '<button id="bejelentkezesBekuldGomb" type="submit">Bejelentkezés</button>'.
                 '</form>'.
               '</div>';
       echo $html; 

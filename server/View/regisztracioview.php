@@ -4,21 +4,24 @@ class RegisztracioView{
 //
     public static function ShowRegisztracio(){
       $html="";
-      $html.= '<div id="regisztracioForm">'.
-                '<form method="post" action="?oldal=Regisztracio/EllenorizRegisztracio">'.
+      $html.= '<div id="regisztracioFormTarolo">'.
+                '<form id="regisztracioForm" method="post" action="?oldal=Regisztracio/EllenorizRegisztracio">'.
                   '<div class="ErrorDiv">'.
-                  '<input type="text" name="username" id="username" placeholder="Felhasznalonev"><br><br>'.
+                  '<br><label for="username">Felhasználó név:</label>'.
+                  '<input type="text" name="username" id="username" autocomplete="off" autofocus placeholder="Felhasznalonev">'.
                   '<p id="errorUsernameP"></p>'.
                   '</div>'.
                   '<div class="ErrorDiv">'.
-                  '<input type="text" name="email" id="email" placeholder="Email"><br><br>'.
+                  '<br><label for="email">E-mail cím:</label>'.
+                  '<input type="text" name="email" id="email" autocomplete="off" placeholder="Email">'.
                   '<p id="errorEmailP"></p>'.
                   '</div>'.
                   '<div class="ErrorDiv">'.
-                  '<input type="password" name="p" id="p" placeholder="Jelszo"><br><br>'.
+                  '<br><label for="p">Jelszó:</label>'.
+                  '<input type="password" name="p" id="p" autocomplete="off" placeholder="Jelszo">'.
                   '<p id="errorPasswordP"></p>'.
                   '</div>'.
-                  '<button id="regisztracioBekuldGomb" type="submit">Regisztracio</button>'.
+                  '<button id="regisztracioBekuldGomb" type="submit">Regisztráció</button>'.
                 '</form>'.
               '</div>';
       echo $html; 

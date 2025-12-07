@@ -4,9 +4,11 @@ export async function SzuroFelepit(param,maximumAr,callback) {
     const szuroTarolo=document.getElementById("szuroTarolo");
     const minArLabel=document.createElement("label");
     minArLabel.textContent="Min: ";
+    minArLabel.setAttribute("for","minAr");
 
     const maxArLabel=document.createElement("label");
     maxArLabel.textContent="Max: ";
+    maxArLabel.setAttribute("for","maxAr");
 
     const minArInput=document.createElement("input");
     minArInput.type="range";
