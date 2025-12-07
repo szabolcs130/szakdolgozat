@@ -1,16 +1,18 @@
-#regisztracioForm{
+#regisztracioFormTarolo{
        width: 100%;
-       display: flex;
-       justify-content: center;
-       align-items: center;
-       flex-wrap: wrap;
        border: 1px solid black;
        padding-top: calc(3%);
- }
- /*.ErrorDiv{
-      width: 30%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
- }*/
+}
+#regisztracioFormTarolo,
+#regisztracioForm{
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+}
+.ErrorDiv{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}

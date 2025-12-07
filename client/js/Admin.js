@@ -548,8 +548,8 @@ async function KepLapozashozSelectEsemeny(oldalvalaszto) {
     const oldalValaszto=document.getElementById(oldalvalaszto);
     oldalValaszto.addEventListener("change",async function(e){
         const nevKepKeres=document.getElementById("nevKepKeres");
-        var oldalValasztoReturn=EllenorizElsoResz(false,oldalValaszto,true,/^[0-9]{0,7}$/,0,8,true);
-        var nevKepKeresResult=EllenorizElsoResz(false,nevKepKeres,true,/^[A-Za-z0-9]+$/,1,50,true);
+        var oldalValasztoReturn=EllenorizElsoResz(false,oldalValaszto,true,/^[0-9]{1,8}$/,1,8,true);
+        var nevKepKeresResult=EllenorizElsoResz(false,nevKepKeres,true,/^[A-Za-z0-9]+$/,0,50,true);
         if (oldalValasztoReturn && nevKepKeresResult) {
             const response= await fetch("?oldal=Apiadmin/Kepek&oldalSzam="+oldalValaszto.value+"&nev="+nevKepKeres.value);
             const data = await response.json();

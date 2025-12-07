@@ -3,7 +3,7 @@ window.onload=function() {
     const aruk=document.querySelectorAll(".kosarMennyiseg");
     aruk.forEach(element=>{
         element.addEventListener("input",()=>{
-            EllenorizElsoResz(false,element,false,/^[0-9]{0,7}$/,1,8,false);
+            EllenorizElsoResz(false,element,false,/^[0-9]{1,8}$/,1,8,false);
         });
     });
     const kosarGomb=document.getElementById("kosarBekuldGomb");
@@ -20,7 +20,7 @@ function MennyisegValtoztat() {
     const mehet=true;
     aruk.forEach(element=>{
         element.addEventListener("input",()=>{
-            mehet=EllenorizElsoResz(false,element,false,/^[0-9]{0,7}$/,1,8,true);
+            mehet=EllenorizElsoResz(false,element,false,/^[1-9][0-9]{0,7}$/,1,8,true);
         });
     });
     if (mehet==false) {

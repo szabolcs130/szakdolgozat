@@ -10,7 +10,7 @@ window.onload=function () {
 
     const pMin=12;
     const pMax=64;
-    const pPattern=/^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[^A-Za-z0-9]).{12,64}$/;
+    const pPattern=/^(?=.*[A-ZÁÉÍÓÖŐÚÜŰ])(?=.*[a-záéíóöőúüű])(?=.*\d)(?=.*[^A-Za-z0-9áéíóöőúüűÁÉÍÓÖŐÚÜŰ]).{12,64}$/;
     htmlEllenorrzo(p,pPattern,pMin,pMax,true);
 
     const erroremailP=document.getElementById("errorEmailP");

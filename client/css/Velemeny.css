@@ -58,3 +58,9 @@
 #elozo{
     visibility: hidden;
 }
+.ErrorDiv{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}

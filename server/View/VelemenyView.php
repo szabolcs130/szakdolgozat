@@ -23,8 +23,11 @@ class VelemenyView{
         echo '<form id="VelemenyForm" method="post" action="?oldal=Velemeny/VelemenyBekuld">';
         echo '<h3>Vélemény írása: </h3><br>';
         echo '<input type="hidden" name="aruId" value="'.$aruId.'">';
-        echo '<br><textarea id="velemenyInput" name="velemenyInput" placeholder="Véleményed:" required></textarea>';
-        echo '<br><button type="submit">Beküld</button>';
+        echo '<div class="ErrorDiv">';        
+        echo '<br><textarea id="velemenyInput" minlength="2" maxlength="254" wrap="off" name="velemenyInput" placeholder="Véleményed:" required></textarea>';
+        echo '<p id="errorVelemenyP"></p>';
+        echo '</div>';
+        echo '<br><button id="velemenyBekuld" type="submit">Beküld</button>';
         echo '</form>';
         echo '</div>';
     }

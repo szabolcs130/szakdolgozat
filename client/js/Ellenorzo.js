@@ -19,7 +19,6 @@ export function EllenorizElsoResz(error,adat,lehetUres,minta,min,max,visszateres
 export function szovegEllenorzo(error,adat,min,max,minta,lehetUres) {
     var rendben=true;
     if (error!=false) {
-        error.textContent="";
         error.style.color="red";
         error.textContent="";
         error.style.display="none";
@@ -68,8 +67,8 @@ export function szovegEllenorzo(error,adat,min,max,minta,lehetUres) {
     if (rendben) {
         adat.style.background='#9f9';
         if (error!=false) {
-            error.style.display='none';
-            error.textContent="";    
+            error.textContent="";   
+            error.style.display='none'; 
         }
     }
     return rendben;
