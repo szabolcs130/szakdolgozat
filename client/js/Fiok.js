@@ -26,7 +26,9 @@ async function KepLapozashozSelectEsemeny(oldalvalaszto) {//atirni
 function FizetesekKilistaz(data) {
     const tablazatTarolo=document.getElementById("tablazatTarolo");
     tablazatTarolo.innerHTML="";
-    
+    const h4KifizetettRendelesek=document.createElement('h4');
+    h4KifizetettRendelesek.textContent="Kifizetett rendelések";
+    tablazatTarolo.appendChild(h4KifizetettRendelesek);
     if (data.length) {
         const aruTablazat=document.createElement('div');
         aruTablazat.id="aruTablazat";
@@ -77,15 +79,12 @@ function FizetesekKilistaz(data) {
             lapozo.style.display="flex";
         }
         var uj=null;
-        var osszeg=0;
         var b=false;
         data.forEach(element => {
             if (uj!=element.id_fizetes) {
                 uj=element.id_fizetes;
                 b=true;
-                console.log("uj "+element.id_fizetes);
             }else{
-                console.log("regi");
                 b=false;
             }
             const tbRId=document.createElement('tr');
