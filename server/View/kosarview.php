@@ -7,7 +7,7 @@ class KosarView{
             foreach ($kosar as $key => $value) {
                 echo '<form method="POST" action="?oldal=Kosar/MennyisegValtoztat">';
                 echo '<input type="hidden" name="aruId" value='.$key.'>';
-                echo $value["nev"]." ".$value["ar"]." ";
+                echo '<a href="?oldal=Termek/Main/'.$key.'">'.$value["nev"].'</a> '.$value["ar"].' ';
                 echo '<input class="kosarMennyiseg" type="number" id="me" name="me" min="0" max="'.$value['maxMe'].'" value="'.$value["me"].'">';
                 echo '<button id="kosarBekuldGomb" type="submit">Valtoztat</button>';
                 echo '<p>Raktárban: '.$value['maxMe'].'</p>'; 
