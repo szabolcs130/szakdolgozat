@@ -3,7 +3,11 @@ import { EllenorizElsoResz,htmlEllenorrzo} from './Ellenorzo.js';
 window.addEventListener("load",async function() {
     const data2=await FetchMeghiv("?oldal=Apivelemeny/LekerdezVelemenyByAruIdSajat",null,true);
     if (SajatVelemeny(data2)) {
-        document.getElementById("VelemenyForm").style.display="none";
+
+        const velemenyForm=document.getElementById("VelemenyForm");
+        if (velemenyForm) {
+            velemenyForm.style.display="none";
+        }
     }
 
     LapozashozElozoKovekezoEsemenyek("elozo","kovetkezo","oldalValaszto");
@@ -148,6 +152,9 @@ function LapozNemSajatVelemeny(data) {
         const masVelemenyH3Nincs=document.createElement("h3");
         masVelemenyH3Nincs.textContent="Nincs megjelenitheto velemeny! ";
         masVelemeny.appendChild(masVelemenyH3Nincs);
-        document.getElementById("lapozo").style.display="none";
+        const lapozo=document.getElementById("lapozo");
+        if (lapozo) {
+            lapozo.style.display="none";
+        }
     }
 }

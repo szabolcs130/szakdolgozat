@@ -59,8 +59,18 @@ class KosarController{
             $me=ErtekEllenorzesModel::Szam($_POST["me"],0,99999999);
             if ($me===false) {
                 return 0;
-            }   
+            }
             $aru=TermekekModel::lekerdezAruById($id);
+            echo $id;
+            echo "<br>";
+            echo $me;
+            echo "<br>masik resz: ";
+            echo $aru[0]['id_aru']." :id <br>";
+            echo $aru[0]['nev_aru'].": nev <br>";
+            echo $aru[0]['ar']." : ar<br>";
+            echo $me." :me <br>";
+            echo $aru[0]['mennyiseg']." :mennyiseg <br>";
+
             if (is_array($aru) && !empty($aru)) {//$aru!=0 && $aru!==[]
                 KosarModel::hozzaadAru($aru[0]['id_aru'],$aru[0]['nev_aru'],$aru[0]['ar'],$me,$aru[0]['mennyiseg']);
                 self::Main();

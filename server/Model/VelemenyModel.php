@@ -43,18 +43,6 @@ class VelemenyModel{
             return 0;
         }
     }
-    /*public static function lekerdezVelemenyByAruIdSajatOsszes($aru,$userId){
-        try {
-            $db = self::Connection();
-            $sql = "SELECT COUNT(*) AS osszes FROM velemenyek LEFT JOIN szemely ON velemenyek.idf_szemely=id_szemely WHERE idf_aru=:idfAru AND idf_szemely=:idf_szemely";
-            $sth = $db->prepare($sql);
-            $sth->execute(array(':idfAru'=> $aru,':idf_szemely'=>$userId));
-            $eredmeny = $sth->fetchAll(\PDO::FETCH_ASSOC);
-            return $eredmeny;
-        }catch (\PDOException $e) {
-            return 0;
-        }
-    }*/
     public static function lekerdezVelemenyByAruIdNemSajat($aru,$userId,$oldalSzam=null){
         try {
             $db = self::Connection();

@@ -462,10 +462,6 @@ function FelepitKepSzuresNevAlapjan() {
     htmlEllenorrzo(nevKeresInput,patternSzoveg,minSzoveg,maxSzoveg,true);
     nevKeresInput.addEventListener("input",async function() {
         EllenorizElsoResz(errorP,nevKeresInput,true,patternSzoveg,minSzoveg,maxSzoveg,true);
-        /*const kepOldalValaszto=document.getElementById("kepOldalValaszto");
-        const response= await fetch("?oldal=Apiadmin/Kepek&oldalSzam="+kepOldalValaszto.value+"&nev="+nevKepKeres.value);
-        const data = await response.json();
-        KepekKilistaz(data);*/
     });
     const errorP=document.createElement("p");
     errorP.id="errorKepP";

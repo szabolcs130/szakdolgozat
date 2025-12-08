@@ -72,7 +72,7 @@ class FizetesController{
                             exit; 
                         }
                         foreach (KosarModel::getKosar() as $key => $value) {
-                            if (RendelesTartalmaModel::hozzaadRendelesTartalma($rendelesId,$key,$value["ar"],$value["me"])==0) {
+                            if (RendelesTartalmaModel::hozzaadRendelesTartalma($rendelesId,$key,$value["me"],$value["ar"])==0) {
                                 echo json_encode(['error' => "Rendeles felvitele hiba!"]);
                                 http_response_code(500);
                                 exit; 

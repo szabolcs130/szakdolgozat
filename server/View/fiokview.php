@@ -11,6 +11,12 @@ class FiokView{
             echo $f["nev_szemely"]." ".$f["email"];
         }
         echo '</div>';
+        echo '<div id="tablazatTarolo"></div>';
+        echo '<div id="lapozo">';
+        echo '<li id="elozo">Elöző</li>';
+        echo '<select id="oldalValaszto"></select>';
+        echo '<li id="kovetkezo">Következő</li>';
+        echo '</div>';
         return 1;
     }
 }

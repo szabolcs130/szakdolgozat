@@ -45,8 +45,38 @@ class FizetesEredmenyModel{
             return 0;
         }
     }
-    /*
-    
-    */
+    public static function GetMegvasaroltak($szemely,$oldalSzam=null){
+        try {
+            $db = self::Connection();
+            $sql = "SELECT fizeteseredmeny.fizetesdatum,fizeteseredmeny.id_fizetes, aru.nev_aru, aru.ar, rendelestartalma.me , fizeteseredmeny.osszeg , fizeteseredmeny.allapot FROM fizeteseredmeny INNER JOIN rendeles ON fizeteseredmeny.idf_rendeles=rendeles.id_rendeles INNER JOIN rendelestartalma ON rendelestartalma.idf_rendeles=rendeles.id_rendeles INNER JOIN aru ON aru.id_aru=rendelestartalma.idf_aru WHERE fizeteseredmeny.allapot='COMPLETED' AND rendeles.idf_szemely=:idf_szemely ORDER BY fizeteseredmeny.fizetesdatum";
+            if ($oldalSzam!=null) {
+                $sql.=" LIMIT 10 OFFSET :oldalSzam";
+            }else{
+                $sql.=" LIMIT 10 OFFSET 0";
+            }
+            $sth = $db->prepare($sql);
+            $sth->bindValue(':idf_szemely',$szemely);
+            if ($oldalSzam!=null) {
+                $sth->bindValue(':oldalSzam',(int)$oldalSzam,\PDO::PARAM_INT);
+            }
+            $sth->execute();
+            $eredmeny = $sth->fetchAll(\PDO::FETCH_ASSOC);
+            return $eredmeny;
+        }catch (\PDOException $e) {
+            return 0;
+        }
+    }
+    public static function GetMegvasaroltakOsszes($szemely){
+        try {
+            $db = self::Connection();
+            $sql = "SELECT COUNT(*) AS osszes FROM fizeteseredmeny INNER JOIN rendeles ON fizeteseredmeny.idf_rendeles=rendeles.id_rendeles INNER JOIN rendelestartalma ON rendelestartalma.idf_rendeles=rendeles.id_rendeles INNER JOIN aru ON aru.id_aru=rendelestartalma.idf_aru WHERE fizeteseredmeny.allapot='COMPLETED' AND rendeles.idf_szemely=:idf_szemely ORDER BY fizeteseredmeny.fizetesdatum";
+            $sth = $db->prepare($sql);
+            $sth->execute(array(':idf_szemely'=>$szemely));
+            $eredmeny = $sth->fetchAll(\PDO::FETCH_ASSOC);
+            return $eredmeny;
+        }catch (\PDOException $e) {
+            return 0;
+        }
+    }
 }
 ?>
