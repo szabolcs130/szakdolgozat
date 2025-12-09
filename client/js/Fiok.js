@@ -17,8 +17,6 @@ window.onload=async function() {
     }
 }
 function FormBekuldEllenoriz(e){
-    //e.preventDefault();
-
     const iranyitoszamInput=document.getElementById("iranyitoszam");
     const iranyitoszamInputResult=EllenorizElsoResz(false,iranyitoszamInput,false,/^[1-9][0-9]{3}$/,4,4,true);;
 
@@ -32,23 +30,25 @@ function FormBekuldEllenoriz(e){
     const hazSzamInputResult=EllenorizElsoResz(false,hazszamInput,false,/^[0-9][\-\/A-Za-z0-9]{0,9}$/,1,3,true);
     
     const emeletInput=document.getElementById("emelet");
-    const emeletInputResult=true;
+    var emeletInputResult=true;
     if (emeletInput.value.length!=0) {
-        emeletInputResult=EllenorizElsoResz("false",emeletInput,false,/^[1-9][0-9]{0,3}$/,1,3,true);
+        emeletInputResult=EllenorizElsoResz(false,emeletInput,false,/^[1-9][0-9]{0,3}$/,1,3,true);
     }
 
     const ajtoInput=document.getElementById("ajto");
-    const ajtoInputResult=true;
-        if (ajtoInput.value.length!=0) {
-            EllenorizElsoResz(false,ajtoInput,false,/^[0-9A-Za-z]{1,4}$/,1,4,true);   
-        }
-
-    if (hazSzamInputResult && utcaInputResult && varosInputResult && iranyitoszamInputResult && emeletInputResult && ajtoInputResult) {
-        alert("megfelel");
-    }else{
-        alert("nem");
+    var ajtoInputResult=true;
+    if (ajtoInput.value.length!=0) {
+        ajtoInputResult=EllenorizElsoResz(false,ajtoInput,false,/^[0-9A-Za-z]{1,4}$/,1,4,true);   
     }
-   
+
+    if ((emeletInput.value.length!=0 && ajtoInput.value.length==0) || (emeletInput.value.length==0 && ajtoInput.value.length!=0)) {
+        alert("Emelet és ajtó vagy üresek vagy mindkettő ki van töltve!");
+        e.preventDefault();
+    }
+
+    if (!hazSzamInputResult && !utcaInputResult && !varosInputResult && !iranyitoszamInputResult && !emeletInputResult && !ajtoInputResult) {
+        e.preventDefault();
+    }
 }
 function FormEllenoriz() {
     const iranyitoszamInput=document.getElementById("iranyitoszam");

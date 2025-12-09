@@ -32,12 +32,12 @@ class SzallitasicimModel{
             return 0;
         }
     }
-    public static function szallitasicimSzerkeszt($id_szallitasicim,$iranyitoszam,$varos,$utca,$hazszam,$emelet,$ajto){
+    public static function szallitasicimSzerkeszt($idf_szemely,$iranyitoszam,$varos,$utca,$hazszam,$emelet,$ajto){
         try{
             $db = self::Connection();
-            $sql = "UPDATE `szallitasicim` SET iranyitoszam = :iranyitoszam, varos = :varos, utca = :utca, hazszam = :hazszam, emelet = :emelet, ajto = :ajto WHERE id_szallitasicim = :id_szallitasicim";
+            $sql = "UPDATE `szallitasicim` SET iranyitoszam = :iranyitoszam, varos = :varos, utca = :utca, hazszam = :hazszam, emelet = :emelet, ajto = :ajto WHERE idf_szemely = :idf_szemely";
             $sth = $db->prepare($sql);
-            $sth->execute(array(":id_szallitasicim"=>$id_szallitasicim, ":iranyitoszam"=>$iranyitoszam, ":varos"=>$varos, ":utca"=>$utca, ":hazszam"=>$hazszam, ":emelet"=>$emelet, ":ajto"=>$ajto));
+            $sth->execute(array(":idf_szemely"=>$idf_szemely, ":iranyitoszam"=>$iranyitoszam, ":varos"=>$varos, ":utca"=>$utca, ":hazszam"=>$hazszam, ":emelet"=>$emelet, ":ajto"=>$ajto));
             if ($sth->rowCount()) {
                 return 1;
             }

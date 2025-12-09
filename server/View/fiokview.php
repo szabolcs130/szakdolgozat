@@ -20,12 +20,12 @@ class FiokView{
         echo '<li><a href="?oldal=Fiok/ShowSzallitasicimForm">Szállítási cím megváltoztat</a></li>';
         return 1;
     }
-    public static function ShowSzallitasiCimForm($szallitas){
+    public static function ShowSzallitasiCimForm($szallitas,$metodus){
+        echo "<h4>Szállítási cím kezelő: </h4>";
         if ($szallitas!=null) {
             foreach ($szallitas as $key => $value) {
-            echo "<h4>Szállítási cím: </h4>";
             echo '<div id="szallitasicimFormTarolo">';
-            echo '<form id="szallitasicimForm" method="post" action="?oldal=Fiok/SzallitasicimHozzaad">';
+            echo '<form id="szallitasicimForm" method="post" action="?oldal=Fiok/'.$metodus.'">';//SzallitasicimHozzaad
             echo '<div class="ErrorDiv">';
             echo '<label for="iranyitoszam">Iranyitószám:</label>';
             echo '<input type="number" name="iranyitoszam" id="iranyitoszam" value="'.$value['iranyitoszam'].'" autocomplete="off" autofocus placeholder="Iranyitószám">';
@@ -61,9 +61,8 @@ class FiokView{
             echo '</div>';
             }
         }else{
-            echo "<h4>Szállítási cím: </h4>";
             echo '<div id="szallitasicimFormTarolo">';
-            echo '<form id="szallitasicimForm" method="post" action="?oldal=Fiok/SzallitasicimHozzaad">';
+            echo '<form id="szallitasicimForm" method="post" action="?oldal=Fiok/'.$metodus.'">';//SzallitasicimHozzaad
             echo '<div class="ErrorDiv">';
             echo '<label for="iranyitoszam">Iranyitószám:</label>';
             echo '<input type="number" name="iranyitoszam" id="iranyitoszam" autocomplete="off" autofocus placeholder="Iranyitószám">';
