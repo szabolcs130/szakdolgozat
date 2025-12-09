@@ -17,8 +17,11 @@ class FiokView{
         echo '<select id="oldalValaszto"></select>';
         echo '<li id="kovetkezo">Következő</li>';
         echo '</div>';
-        echo '<li><a href="?oldal=Fiok/ShowSzallitasicimForm">Szállítási cím megváltoztat</a></li>';
+        echo '<li><a href="?oldal=Fiok/ShowSzallitasicimForm">Szállítási cím kezelő</a></li>';
         return 1;
+    }
+    public static function ShowSzallitasiCimTorles(){
+        echo '<li><a id="szallitasiCimTorolA" href="?oldal=Fiok/SzallitasicimTorles">Szállítási cím törlése</a></li>';
     }
     public static function ShowSzallitasiCimForm($szallitas,$metodus){
         echo "<h4>Szállítási cím kezelő: </h4>";
@@ -59,6 +62,7 @@ class FiokView{
             echo '<button id="szallitasicimBekuldGomb" type="submit">Beküld</button>';
             echo '</form>';
             echo '</div>';
+            self::ShowSzallitasiCimTorles();
             }
         }else{
             echo '<div id="szallitasicimFormTarolo">';

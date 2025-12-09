@@ -86,6 +86,18 @@ class FiokController{
         }
         return 0;
     }
+    public static function SzallitasicimTorles(){
+        if (isset($_SESSION['userId'])) {
+            if (SzallitasicimModel::SzallitasicimTorol($_SESSION['userId'])!=0) {
+                $_SESSION['uzenet']="Sikeres szállítási cím törlés!";
+            }else{
+                $_SESSION['uzenet']="Sikertelen szállítási cím törlés!";
+            }
+            header('Location: ?oldal=Fiok');
+            exit();
+        }
+        return 0;
+    }
     public static function SzallitasicimSzerkeszt(){
         if (isset($_SESSION['userId'])){
             $szallitasicim=SzallitasicimModel::lekerdezSzallitasicimBySzemelyId($_SESSION['userId']);

@@ -46,12 +46,12 @@ class SzallitasicimModel{
             return 0;
         }
     }
-    public static function SzallitasicimTorol($id_szallitasicim){
+    public static function SzallitasicimTorol($idf_szemely){
         try{
             $db = self::Connection();
-            $sql = "DELETE FROM  `szallitasicim` WHERE id_szallitasicim=:id_szallitasicim";
+            $sql = "DELETE FROM  `szallitasicim` WHERE idf_szemely=:idf_szemely";
             $sth = $db->prepare($sql);
-            $sth->execute(array(":id_szallitasicim"=>$id_szallitasicim));
+            $sth->execute(array(":idf_szemely"=>$idf_szemely));
             if ($sth->rowCount()) {
                 return 1;
             }

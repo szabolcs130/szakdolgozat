@@ -15,6 +15,15 @@ window.onload=async function() {
         const szallitasicimForm=document.getElementById("szallitasicimForm");
         szallitasicimForm.addEventListener("submit",FormBekuldEllenoriz);
     }
+    const szallitasiCimTorolA=document.getElementById("szallitasiCimTorolA");
+    if (szallitasiCimTorolA) {
+        szallitasiCimTorolA.addEventListener("click",(e)=>{
+            e.preventDefault();
+            if (confirm("Biztosan torlod? Ha van kiszállítatlan csomagod, a kiszállítás meghiúsul!")) {
+                window.location.href=e.target.href;
+            }
+        });
+    }
 }
 function FormBekuldEllenoriz(e){
     const iranyitoszamInput=document.getElementById("iranyitoszam");
