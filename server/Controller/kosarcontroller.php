@@ -6,6 +6,7 @@ if (session_status() === PHP_SESSION_NONE) {
 use Server\Model\KosarModel;
 use Server\Model\TermekekModel;
 use Server\Model\ErtekEllenorzesModel;
+use Server\Model\SzallitasicimModel;
 use Server\View\KosarView;
 class KosarController{
     public static function Main(){
@@ -13,7 +14,12 @@ class KosarController{
             $kosar=KosarModel::getKosar();
             $osszAr=KosarModel::getOsszAr();
             if ($kosar!==[]) {
-                KosarView::ShowKosar($kosar,$osszAr);
+                $szallitasicim=SzallitasicimModel::lekerdezSzallitasicimBySzemelyId($_SESSION['userId']);
+                $szallitasiCimVanE=true;
+                if(is_array($szallitasicim) && empty($szallitasicim)){
+                    $szallitasiCimVanE=false;
+                }
+                KosarView::ShowKosar($kosar,$osszAr,$szallitasiCimVanE);
                 return 1;
             }else{
                 KosarView::ShowKosar("ures",0);
