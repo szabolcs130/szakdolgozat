@@ -17,7 +17,87 @@ class FiokView{
         echo '<select id="oldalValaszto"></select>';
         echo '<li id="kovetkezo">Következő</li>';
         echo '</div>';
+        echo '<li><a href="?oldal=Fiok/ShowSzallitasicimForm">Szállítási cím megváltoztat</a></li>';
         return 1;
+    }
+    public static function ShowSzallitasiCimForm($szallitas){
+        if ($szallitas!=null) {
+            foreach ($szallitas as $key => $value) {
+            echo "<h4>Szállítási cím: </h4>";
+            echo '<div id="szallitasicimFormTarolo">';
+            echo '<form id="szallitasicimForm" method="post" action="?oldal=Fiok/SzallitasicimHozzaad">';
+            echo '<div class="ErrorDiv">';
+            echo '<label for="iranyitoszam">Iranyitószám:</label>';
+            echo '<input type="number" name="iranyitoszam" id="iranyitoszam" value="'.$value['iranyitoszam'].'" autocomplete="off" autofocus placeholder="Iranyitószám">';
+            echo '<p id="errorIranyitoSzamP"></p>';
+            echo '</div>';
+            echo '<div class="ErrorDiv">';
+            echo '<label for="varos">Város:</label>';
+            echo '<input type="text" name="varos" id="varos" value="'.$value['varos'].'" autocomplete="off" placeholder="Város">';
+            echo '<p id="errorVarosP"></p>';
+            echo '</div>';
+            echo '<div class="ErrorDiv">';
+            echo '<label for="utca">Utca:</label>';
+            echo '<input type="text" name="utca" id="utca" value="'.$value['utca'].'" autocomplete="off" placeholder="Utca">';
+            echo '<p id="errorUtcaP"></p>';
+            echo '</div>';
+            echo '<div class="ErrorDiv">';
+            echo '<label for="hazszam">Házszám:</label>';
+            echo '<input type="text" name="hazszam" id="hazszam" value="'.$value['hazszam'].'" autocomplete="off" placeholder="Házszám">';
+            echo '<p id="errorHazSzamP"></p>';
+            echo '</div>';
+            echo '<div class="ErrorDiv">';
+            echo '<label for="emelet">Emelet(Nem kötelező):</label>';
+            echo '<input type="number" name="emelet" id="emelet" value="'.($value['emelet']!=-100 ? $value['emelet'] : "") .'" autocomplete="off" placeholder="Emelet">';
+            echo '<p id="errorEmeletP"></p>';
+            echo '</div>';
+            echo '<div class="ErrorDiv">';
+            echo '<label for="ajto">Ajtó(Nem kötelező):</label>';
+            echo '<input type="text" name="ajto" id="ajto" value="'.($value['ajto']!=null ? $value['ajto'] : "") .'" autocomplete="off" placeholder="Ajtó">';
+            echo '<p id="errorAjtoP"></p>';
+            echo '</div>';
+            echo '<button id="szallitasicimBekuldGomb" type="submit">Beküld</button>';
+            echo '</form>';
+            echo '</div>';
+            }
+        }else{
+            echo "<h4>Szállítási cím: </h4>";
+            echo '<div id="szallitasicimFormTarolo">';
+            echo '<form id="szallitasicimForm" method="post" action="?oldal=Fiok/SzallitasicimHozzaad">';
+            echo '<div class="ErrorDiv">';
+            echo '<label for="iranyitoszam">Iranyitószám:</label>';
+            echo '<input type="number" name="iranyitoszam" id="iranyitoszam" autocomplete="off" autofocus placeholder="Iranyitószám">';
+            echo '<p id="errorIranyitoSzamP"></p>';
+            echo '</div>';
+            echo '<div class="ErrorDiv">';
+            echo '<label for="varos">Város:</label>';
+            echo '<input type="text" name="varos" id="varos" autocomplete="off" placeholder="Város">';
+            echo '<p id="errorVarosP"></p>';
+            echo '</div>';
+            echo '<div class="ErrorDiv">';
+            echo '<label for="utca">Utca:</label>';
+            echo '<input type="text" name="utca" id="utca" autocomplete="off" placeholder="Utca">';
+            echo '<p id="errorUtcaP"></p>';
+            echo '</div>';
+            echo '<div class="ErrorDiv">';
+            echo '<label for="hazszam">Házszám:</label>';
+            echo '<input type="text" name="hazszam" id="hazszam" autocomplete="off" placeholder="Házszám">';
+            echo '<p id="errorHazSzamP"></p>';
+            echo '</div>';
+            echo '<div class="ErrorDiv">';
+            echo '<label for="emelet">Emelet(Nem kötelező):</label>';
+            echo '<input type="number" name="emelet" id="emelet" autocomplete="off" placeholder="Emelet">';
+            echo '<p id="errorEmeletP"></p>';
+            echo '</div>';
+            echo '<div class="ErrorDiv">';
+            echo '<label for="ajto">Ajtó(Nem kötelező):</label>';
+            echo '<input type="text" name="ajto" id="ajto" autocomplete="off" placeholder="Ajtó">';
+            echo '<p id="errorAjtoP"></p>';
+            echo '</div>';
+            echo '<button id="szallitasicimBekuldGomb" type="submit">Beküld</button>';
+            echo '</form>';
+            echo '</div>';
+        }
     }
 }
 ?>

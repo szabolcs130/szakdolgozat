@@ -7,6 +7,7 @@ if (session_status() === PHP_SESSION_NONE) {
 use Server\Model\MenuModel;
 use Server\Model\RendelesModel;
 use Server\Model\ErtekEllenorzesModel;
+use Server\Model\SzallitasicimModel;
 use Server\Controller\MenuController;
 use Server\MeghivasEllenorzo;
 use Server\AutoLoader;

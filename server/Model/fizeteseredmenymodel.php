@@ -48,7 +48,7 @@ class FizetesEredmenyModel{
     public static function GetMegvasaroltak($szemely,$oldalSzam=null){
         try {
             $db = self::Connection();
-            $sql = "SELECT fizeteseredmeny.fizetesdatum,fizeteseredmeny.id_fizetes, aru.nev_aru, aru.ar, rendelestartalma.me , fizeteseredmeny.osszeg , fizeteseredmeny.allapot FROM fizeteseredmeny INNER JOIN rendeles ON fizeteseredmeny.idf_rendeles=rendeles.id_rendeles INNER JOIN rendelestartalma ON rendelestartalma.idf_rendeles=rendeles.id_rendeles INNER JOIN aru ON aru.id_aru=rendelestartalma.idf_aru WHERE fizeteseredmeny.allapot='COMPLETED' AND rendeles.idf_szemely=:idf_szemely ORDER BY fizeteseredmeny.fizetesdatum";
+            $sql = "SELECT fizeteseredmeny.fizetesdatum,fizeteseredmeny.id_fizetes, aru.id_aru, aru.nev_aru, aru.ar, rendelestartalma.me , fizeteseredmeny.osszeg , fizeteseredmeny.allapot FROM fizeteseredmeny INNER JOIN rendeles ON fizeteseredmeny.idf_rendeles=rendeles.id_rendeles INNER JOIN rendelestartalma ON rendelestartalma.idf_rendeles=rendeles.id_rendeles INNER JOIN aru ON aru.id_aru=rendelestartalma.idf_aru WHERE fizeteseredmeny.allapot='COMPLETED' AND rendeles.idf_szemely=:idf_szemely ORDER BY fizeteseredmeny.fizetesdatum";
             if ($oldalSzam!=null) {
                 $sql.=" LIMIT 10 OFFSET :oldalSzam";
             }else{

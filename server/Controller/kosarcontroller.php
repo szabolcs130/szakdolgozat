@@ -7,34 +7,6 @@ use Server\Model\KosarModel;
 use Server\Model\TermekekModel;
 use Server\Model\ErtekEllenorzesModel;
 use Server\View\KosarView;
-/*use PaypalServerSdkLib\PaypalServerSdkClientBuilder;
-use PaypalServerSdkLib\Authentication\ClientCredentialsAuthCredentialsBuilder;
-use PaypalServerSdkLib\Logging\LoggingConfigurationBuilder;
-use PaypalServerSdkLib\Logging\RequestLoggingConfigurationBuilder;
-use PaypalServerSdkLib\Logging\ResponseLoggingConfigurationBuilder;
-use Psr\Log\LogLevel;
-use PaypalServerSdkLib\Models\Builders\OrderRequestBuilder;
-use PaypalServerSdkLib\Models\CheckoutPaymentIntent;
-use PaypalServerSdkLib\Models\Builders\PurchaseUnitRequestBuilder;
-use PaypalServerSdkLib\Models\Builders\AmountWithBreakdownBuilder;
-use PaypalServerSdkLib\Models\Builders\AmountBreakdownBuilder;
-use PaypalServerSdkLib\Models\Builders\MoneyBuilder;
-use PaypalServerSdkLib\Models\Builders\ItemBuilder;
-use PaypalServerSdkLib\Models\ItemCategory;
-use PaypalServerSdkLib\Models\Builders\ShippingDetailsBuilder;
-use PaypalServerSdkLib\Models\Builders\ShippingNameBuilder;
-use PaypalServerSdkLib\Models\Builders\ShippingOptionBuilder;
-use PaypalServerSdkLib\Models\ShippingType;
-use PaypalServerSdkLib\Models\Builders\PaymentSourceBuilder;
-use PaypalServerSdkLib\Models\Builders\CardRequestBuilder;
-use PaypalServerSdkLib\Models\Builders\CardAttributesBuilder;
-use PaypalServerSdkLib\Models\Builders\CardVerificationBuilder;
-use PaypalServerSdkLib\Environment;
-use PaypalServerSdkLib\Models\Builders\PaypalWalletBuilder;
-use PaypalServerSdkLib\Models\Builders\PaypalWalletExperienceContextBuilder;
-use PaypalServerSdkLib\Models\ShippingPreference;
-use PaypalServerSdkLib\Models\PaypalExperienceLandingPage;
-use PaypalServerSdkLib\Models\PaypalExperienceUserAction;*/
 class KosarController{
     public static function Main(){
         if (isset($_SESSION["username"])) {
@@ -61,16 +33,7 @@ class KosarController{
                 return 0;
             }
             $aru=TermekekModel::lekerdezAruById($id);
-            echo $id;
-            echo "<br>";
-            echo $me;
-            echo "<br>masik resz: ";
-            echo $aru[0]['id_aru']." :id <br>";
-            echo $aru[0]['nev_aru'].": nev <br>";
-            echo $aru[0]['ar']." : ar<br>";
-            echo $me." :me <br>";
-            echo $aru[0]['mennyiseg']." :mennyiseg <br>";
-
+           
             if (is_array($aru) && !empty($aru)) {//$aru!=0 && $aru!==[]
                 KosarModel::hozzaadAru($aru[0]['id_aru'],$aru[0]['nev_aru'],$aru[0]['ar'],$me,$aru[0]['mennyiseg']);
                 self::Main();
