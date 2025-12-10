@@ -972,6 +972,9 @@ async function FormFizetettrendeles(params,actionParam,gombFelirat) {
         fizetettAllapotInputOption.value=element;
         fizetettAllapotInputOption.textContent=element;
         fizetettAllapotInput.appendChild(fizetettAllapotInputOption);
+        if (element==params?.cells?.[7]?.textContent) {
+            fizetettAllapotInputOption.selected=true;
+        }
     });
     fizetettAllapotInput.name="fizetettAllapotInput";
     fizetettAllapotInput.id="fizetettAllapotInput";
