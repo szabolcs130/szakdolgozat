@@ -9,9 +9,11 @@ use Server\Model\AruModel;
 use Server\Model\ErtekEllenorzesModel;
 class AdminController{
     public static function Main(){
-        if (AdminView::Main()==0) {
-            return 0;
-        } 
+        if (isset($_SESSION['userId']) && $_SESSION['rang']==3) {
+            if (AdminView::Main()==0) {
+                return 0;
+            }
+        }
         return 1;
     }
     public static function AruTorol($id){
@@ -107,6 +109,19 @@ class AdminController{
                 $uzenet='<h4 style="color: red">Áru hozzáadása sikertelen!</h4>';
             }
             self::TermekKezeles($uzenet);
+            return 1;
+        }
+        return 0;
+    }
+    public static function RendelesKezel($uzenet=null){
+        if (isset($_SESSION['userId']) && $_SESSION['rang']==3) {
+            if ($uzenet!=null) {
+                echo $uzenet;
+            }
+            self::Main();
+            echo '<div id="idSzuro"></div>';
+            echo '<div id="rendelesTablazatTarolo"></div>';
+            echo '<div id="idLapozo"></div>';
             return 1;
         }
         return 0;

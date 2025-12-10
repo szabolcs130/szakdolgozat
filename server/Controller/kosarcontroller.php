@@ -22,7 +22,7 @@ class KosarController{
                 KosarView::ShowKosar($kosar,$osszAr,$szallitasiCimVanE);
                 return 1;
             }else{
-                KosarView::ShowKosar("ures",0);
+                KosarView::ShowKosar("ures",0,false);
                 return 1;  
             }
         }

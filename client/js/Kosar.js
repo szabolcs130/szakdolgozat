@@ -3,10 +3,10 @@ window.onload=function() {
     const aruk=document.querySelectorAll(".kosarMennyiseg");
     aruk.forEach(element=>{
         element.addEventListener("input",()=>{
-            EllenorizElsoResz(false,element,false,/^[0-9]{1,8}$/,1,8,false);
+            EllenorizElsoResz(false,element,false,/^(0|[1-9][0-9]{0,7})$/,1,8,false);
         });
     });
-    const kosarGomb=document.getElementById("kosarBekuldGomb");
+    const kosarGomb=document.getElementById("mennyisegValtoztatForm");
     if (kosarGomb) {
         kosarGomb.addEventListener('submit',MennyisegValtoztat);
     }
@@ -15,17 +15,17 @@ window.onload=function() {
         fizetesMegnyom.addEventListener('click',FizetesMegkezd);
     }
 }
-function MennyisegValtoztat() {
+function MennyisegValtoztat(e) {
     const aruk=document.querySelectorAll(".kosarMennyiseg");
-    const mehet=true;
+    var mehet=true;
     aruk.forEach(element=>{
-        element.addEventListener("input",()=>{
-            mehet=EllenorizElsoResz(false,element,false,/^[1-9][0-9]{0,7}$/,1,8,true);
-        });
+        mehet=EllenorizElsoResz(false,element,false,/^(0|[1-9][0-9]{0,7})$/,1,8,true);
+        if (mehet==false) {
+            alert("Érvénytelen szám!")
+            e.preventDefault();
+            return;
+        }
     });
-    if (mehet==false) {
-        e.preventDefault();
-    }
 }
 function FizetesMegkezd(e) {
 
@@ -35,9 +35,13 @@ function FizetesMegkezd(e) {
             mehet=EllenorizElsoResz(false,element,false,/^[1-9][0-9]{0,7}$/,1,8,true);
             if (mehet==false) {
                 e.preventDefault();
-                const megjegyzes=document.createElement('h3');
-                megjegyzes.textContent='Megvásárolandó áru mennyisége nem lehet nulla!';
-                document.getElementById("aruk").appendChild(megjegyzes);
+                var megjegyzes=document.getElementById("megjegyzesh3");
+                if (!megjegyzes) {
+                    megjegyzes=document.createElement('h3');
+                    megjegyzes.id="megjegyzesh3";
+                    megjegyzes.textContent='Megvásárolandó áru mennyisége csak érvényes szám lehet nem lehet nulla!';
+                    document.getElementById("aruk").appendChild(megjegyzes);
+                }
             }
 
     });

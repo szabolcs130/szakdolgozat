@@ -10,7 +10,7 @@ class RegisztracioController{
     }
     public static function EllenorizRegisztracio(){
         if (!isset($_SESSION["username"]) && isset($_POST["username"]) && isset($_POST["p"]) && isset($_POST["email"])) {//!isset($_SESSION["username"]) && 
-            $username=ErtekEllenorzesModel::Szoveg($_POST["username"],5,20,"/^[A-Za-z0-9]+$/");
+            $username=ErtekEllenorzesModel::Szoveg($_POST["username"],2,254,"/^[A-Za-zÁÉÍÓÖŐÚÜŰáéíóöőúüű ]+$/");
             if ($username===false) {
                 return 0;
             }

@@ -48,7 +48,8 @@ class FizetesEredmenyModel{
     public static function GetMegvasaroltak($szemely,$oldalSzam=null){
         try {
             $db = self::Connection();
-            $sql = "SELECT fizeteseredmeny.fizetesdatum,fizeteseredmeny.id_fizetes, aru.id_aru, aru.nev_aru, aru.ar, rendelestartalma.me , fizeteseredmeny.osszeg , fizeteseredmeny.allapot FROM fizeteseredmeny INNER JOIN rendeles ON fizeteseredmeny.idf_rendeles=rendeles.id_rendeles INNER JOIN rendelestartalma ON rendelestartalma.idf_rendeles=rendeles.id_rendeles INNER JOIN aru ON aru.id_aru=rendelestartalma.idf_aru WHERE fizeteseredmeny.allapot='COMPLETED' AND rendeles.idf_szemely=:idf_szemely ORDER BY fizeteseredmeny.fizetesdatum";
+            $sql = "SELECT szemely.nev_szemely, fizeteseredmeny.fizetesdatum,fizeteseredmeny.id_fizetes, aru.nev_aru, aru.ar, rendelestartalma.me , fizeteseredmeny.osszeg , fizeteseredmeny.allapot FROM szemely RIGHT JOIN rendeles ON szemely.id_szemely=rendeles.idf_szemely RIGHT JOIN fizeteseredmeny ON fizeteseredmeny.idf_rendeles=rendeles.id_rendeles RIGHT JOIN rendelestartalma ON fizeteseredmeny.idf_rendeles=rendelestartalma.idf_rendeles INNER JOIN aru ON rendelestartalma.idf_aru=aru.id_aru WHERE fizeteseredmeny.allapot='COMPLETED' AND rendeles.idf_szemely=:idf_szemely ORDER BY fizeteseredmeny.fizetesdatum DESC";
+            //SELECT fizeteseredmeny.fizetesdatum,fizeteseredmeny.id_fizetes, aru.id_aru, aru.nev_aru, aru.ar, rendelestartalma.me , fizeteseredmeny.osszeg , fizeteseredmeny.allapot FROM fizeteseredmeny INNER JOIN rendeles ON fizeteseredmeny.idf_rendeles=rendeles.id_rendeles INNER JOIN rendelestartalma ON rendelestartalma.idf_rendeles=rendeles.id_rendeles INNER JOIN aru ON aru.id_aru=rendelestartalma.idf_aru WHERE fizeteseredmeny.allapot='COMPLETED' AND rendeles.idf_szemely=:idf_szemely ORDER BY fizeteseredmeny.fizetesdatum DESC";
             if ($oldalSzam!=null) {
                 $sql.=" LIMIT 10 OFFSET :oldalSzam";
             }else{
@@ -72,6 +73,53 @@ class FizetesEredmenyModel{
             $sql = "SELECT COUNT(*) AS osszes FROM fizeteseredmeny INNER JOIN rendeles ON fizeteseredmeny.idf_rendeles=rendeles.id_rendeles INNER JOIN rendelestartalma ON rendelestartalma.idf_rendeles=rendeles.id_rendeles INNER JOIN aru ON aru.id_aru=rendelestartalma.idf_aru WHERE fizeteseredmeny.allapot='COMPLETED' AND rendeles.idf_szemely=:idf_szemely ORDER BY fizeteseredmeny.fizetesdatum";
             $sth = $db->prepare($sql);
             $sth->execute(array(':idf_szemely'=>$szemely));
+            $eredmeny = $sth->fetchAll(\PDO::FETCH_ASSOC);
+            return $eredmeny;
+        }catch (\PDOException $e) {
+            return 0;
+        }
+    }
+    public static function GetMegvasaroltakMindenkitol($oldalSzam=null,$id_fizetes=null){
+        try {
+            $db = self::Connection();
+            $sql = "SELECT szemely.nev_szemely, fizeteseredmeny.fizetesdatum,fizeteseredmeny.id_fizetes, aru.nev_aru, aru.ar, rendelestartalma.me , fizeteseredmeny.osszeg , fizeteseredmeny.allapot FROM szemely RIGHT JOIN rendeles ON szemely.id_szemely=rendeles.idf_szemely RIGHT JOIN fizeteseredmeny ON fizeteseredmeny.idf_rendeles=rendeles.id_rendeles RIGHT JOIN rendelestartalma ON fizeteseredmeny.idf_rendeles=rendelestartalma.idf_rendeles INNER JOIN aru ON rendelestartalma.idf_aru=aru.id_aru WHERE fizeteseredmeny.allapot='COMPLETED'";
+            if($id_fizetes!=null){
+                $sql.=" AND fizeteseredmeny.id_fizetes=:id_fizetes";
+            }
+            $sql.=" ORDER BY fizeteseredmeny.fizetesdatum DESC";
+            if ($oldalSzam!=null) {
+                $sql.=" LIMIT 10 OFFSET :oldalSzam";
+            }else{
+                $sql.=" LIMIT 10 OFFSET 0";
+            }
+            $sth = $db->prepare($sql);
+            if($id_fizetes!=null){
+                $sth->bindValue(':id_fizetes',$id_fizetes);
+            }
+            if ($oldalSzam!=null) {
+                $sth->bindValue(':oldalSzam',(int)$oldalSzam,\PDO::PARAM_INT);
+            }
+            $sth->execute();
+            $eredmeny = $sth->fetchAll(\PDO::FETCH_ASSOC);
+            return $eredmeny;
+        }catch (\PDOException $e) {
+            return 0;
+        }
+    }
+    public static function GetMegvasaroltakMindenkitolOsszes($id_fizetes=null){
+        try {
+            $db = self::Connection();
+            $sql = "SELECT COUNT(*) as osszes FROM szemely RIGHT JOIN rendeles ON szemely.id_szemely=rendeles.idf_szemely RIGHT JOIN fizeteseredmeny ON fizeteseredmeny.idf_rendeles=rendeles.id_rendeles RIGHT JOIN rendelestartalma ON fizeteseredmeny.idf_rendeles=rendelestartalma.idf_rendeles INNER JOIN aru ON rendelestartalma.idf_aru=aru.id_aru WHERE fizeteseredmeny.allapot='COMPLETED'";
+            if($id_fizetes!=null){
+                $sql.=" AND fizeteseredmeny.id_fizetes=:id_fizetes";
+            }
+            
+            $sth = $db->prepare($sql);
+            if($id_fizetes!=null){
+                $sth->bindValue(':id_fizetes',$id_fizetes);
+            }
+            
+            $sth->execute();
             $eredmeny = $sth->fetchAll(\PDO::FETCH_ASSOC);
             return $eredmeny;
         }catch (\PDOException $e) {
