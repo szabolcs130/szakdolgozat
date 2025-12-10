@@ -5,6 +5,8 @@ if (session_status() === PHP_SESSION_NONE) {
 }
 use Server\Model\TermekekModel;
 use Server\Model\ErtekEllenorzesModel;
+use Server\Model\FizetesEredmenyModel;
+use Server\Model\RendelesModel;
 class ApiadminController{
     public static function Kepek(){
         header('Content-Type: application/json; charset=utf-8');
@@ -97,6 +99,67 @@ class ApiadminController{
             }
             echo json_encode(array(array("osszes"=>$i)));
             exit;
+        }
+        echo json_encode([]);
+        exit;
+    }
+    public static function lekerdezFizetesSzures(){
+        header('Content-Type: application/json; charset=utf-8');
+        ob_clean(); 
+        if (isset($_SESSION['userId']) && $_SESSION['rang']==3) {
+            $oldalSzam=null;
+            if (isset($_GET['oldalSzam'])) {
+                $oldalSzam=ErtekEllenorzesModel::Szam($_GET['oldalSzam'],0,99999999);
+                if ($oldalSzam===false) {
+                    $oldalSzam=0;
+                }    
+            }
+            
+            $fizetesId=null;
+            if (isset($_GET['fizetesId'])) {
+                $fizetesId=ErtekEllenorzesModel::Szam($_GET["fizetesId"],0,99999999);
+                if ($fizetesId===false) {
+                    $fizetesId=null;
+                }
+            }
+            $aru=FizetesEredmenyModel::GetMegvasaroltakMindenkitol($oldalSzam,$fizetesId);
+            if (is_array($aru) && !empty($aru)) {
+                echo json_encode($aru);
+                exit;
+            }
+        }
+        echo json_encode([]);
+        exit;
+    }
+    public static function lekerdezFizetesSzuresOsszes(){
+        header('Content-Type: application/json; charset=utf-8');
+        ob_clean(); 
+        if (isset($_SESSION['userId']) && $_SESSION['rang']==3) {
+            $fizetesId=null;
+            if (isset($_GET['fizetesId'])) {
+                $fizetesId=ErtekEllenorzesModel::Szam($_GET['fizetesId'],0,99999999);
+                if ($fizetesId===false) {
+                    $fizetesId=null;
+                }    
+            }
+            $aru=FizetesEredmenyModel::GetMegvasaroltakMindenkitolOsszes($fizetesId);
+            if (is_array($aru) && !empty($aru)) {
+                echo json_encode($aru);
+                exit;
+            }
+        }
+        echo json_encode([]);
+        exit;
+    }
+    public static function lekerdezFizetesRendelesAllpotEnum(){
+        header('Content-Type: application/json; charset=utf-8');
+        ob_clean(); 
+        if (isset($_SESSION['userId']) && $_SESSION['rang']==3) {
+            $rendelesAllapot=RendelesModel::GetRendelesAllapotEnum();
+            if (is_array($rendelesAllapot) && !empty($rendelesAllapot)) {
+                echo json_encode($rendelesAllapot);
+                exit;
+            }
         }
         echo json_encode([]);
         exit;

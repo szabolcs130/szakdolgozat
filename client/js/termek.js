@@ -36,7 +36,7 @@ if (termekForm) {
 function Elkuld(e) {
     e.preventDefault();
     const termek = new FormData(this);
-    const minta=/^[1-9]{1,8}$/;
+    const minta=/^[1-9][0-9]{0,7}$/;
     if (minta.test(termek.get("me"))) {
         fetch('?oldal=Kosar/MennyisegValtoztat',{
         method: 'POST',

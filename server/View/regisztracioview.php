@@ -7,8 +7,8 @@ class RegisztracioView{
       $html.= '<div id="regisztracioFormTarolo">'.
                 '<form id="regisztracioForm" method="post" action="?oldal=Regisztracio/EllenorizRegisztracio">'.
                   '<div class="ErrorDiv">'.
-                  '<br><label for="username">Felhasználó név:</label>'.
-                  '<input type="text" name="username" id="username" autocomplete="off" autofocus placeholder="Felhasznalonev">'.
+                  '<br><label for="username">Teljes Név:</label>'.
+                  '<input type="text" name="username" id="username" autocomplete="off" autofocus placeholder="Teljes Név:">'.
                   '<p id="errorUsernameP"></p>'.
                   '</div>'.
                   '<div class="ErrorDiv">'.

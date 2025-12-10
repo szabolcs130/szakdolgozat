@@ -4,9 +4,9 @@ window.onload=function () {
     const email=document.getElementById("email");
     const p=document.getElementById("p");
 
-    const usernameMin=5;
-    const usernameMax=20;
-    const usernamePattern=/^[A-Za-z0-9]+$/;
+    const usernameMin=2;
+    const usernameMax=254;
+    const usernamePattern=/^[A-Za-zÁÉÍÓÖŐÚÜŰáéíóöőúüű ]+$/;
     htmlEllenorrzo(username,usernamePattern,usernameMin,usernameMax,true);
 
     const emailMin=11;

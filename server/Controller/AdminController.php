@@ -5,13 +5,16 @@ if (session_status() === PHP_SESSION_NONE) {
 }
 use Server\View\AdminView;
 use Server\Model\AdminModel;
+use Server\Model\RendelesModel;
 use Server\Model\AruModel;
 use Server\Model\ErtekEllenorzesModel;
 class AdminController{
     public static function Main(){
-        if (AdminView::Main()==0) {
-            return 0;
-        } 
+        if (isset($_SESSION['userId']) && $_SESSION['rang']==3) {
+            if (AdminView::Main()==0) {
+                return 0;
+            }
+        }
         return 1;
     }
     public static function AruTorol($id){
@@ -108,6 +111,62 @@ class AdminController{
             }
             self::TermekKezeles($uzenet);
             return 1;
+        }
+        return 0;
+    }
+    public static function RendelesKezel($uzenet=null){
+        if (isset($_SESSION['userId']) && $_SESSION['rang']==3) {
+            if ($uzenet!=null) {
+                echo $uzenet;
+            }
+            self::Main();
+            echo '<div id="idSzuro"></div>';
+            echo '<div id="rendelesTablazatTarolo"></div>';
+            echo '<div id="idLapozo"></div>';
+            return 1;
+        }
+        return 0;
+    }
+    public static function RendelesSzerkeszt(){
+        if (isset($_SESSION['userId']) && $_SESSION['rang']==3) {
+            if (isset($_POST['fizetettRendelesIdInput']) && isset($_POST['fizetettAllapotInput']) && isset($_POST['fizetettTeljesitesDatumInput'])) {
+                $id=ErtekEllenorzesModel::Szam($_POST['fizetettRendelesIdInput'],0,99999999);
+                if ($id===false) {
+                    return 0;
+                }
+                $datumKonvertalva=null;
+                if ($_POST['fizetettTeljesitesDatumInput']=="on") {
+                    $datum = new \DateTime('now', new \DateTimeZone('UTC'));
+                    $datum->setTimezone(new \DateTimeZone('Europe/Budapest'));
+                    $datumKonvertalva = $datum->format('Y-m-d H:i:s');
+                }else{
+                    $datumKonvertalva=null;
+                }
+                
+                $allapot=$_POST['fizetettAllapotInput'];
+                $megtalalva=false;
+                $enumTomb=RendelesModel::GetRendelesAllapotEnum();
+                if (is_array($enumTomb) && !empty($enumTomb)) {
+                    foreach ($enumTomb as $key => $value) {
+                        if($value==$allapot){
+                            $allapot=$value;
+                            $megtalalva=true;
+                            break;
+                        }
+                    }
+                    if ($megtalalva!=true) {
+                        return 0;
+                    }
+                }
+                if(RendelesModel::SzerkesztRendeles($id,$allapot,$datumKonvertalva)!=0){
+                    self::RendelesKezel("<h3>Sikeres rendelés szerkesztés!</h3>");
+                    return 1;
+                }else{
+                    self::RendelesKezel("<h3>Sikertelen rendelés szerkesztés!</h3>");
+                    return 1;
+                }
+                return 1;
+            }
         }
         return 0;
     }
