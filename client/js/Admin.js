@@ -610,7 +610,8 @@ function FelepitFizetesSzuresIdAlapjan() {
     
     htmlEllenorrzo(keresIdInput,idPattern,idMin,idMax,false);
     keresIdInput.addEventListener("input",()=>{
-            EllenorizElsoResz(errorP,keresIdInput,true,idPattern,idMin,idMax,false);
+        console.log(keresIdInput.value);
+            EllenorizElsoResz(errorP,keresIdInput,true,idPattern,idMin,idMax,false);            
     });
     const errorP=document.createElement("p");
     errorP.id="errorIdP";

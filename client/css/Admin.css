@@ -53,9 +53,11 @@ table tr th:nth-child(even)
 table tr:hover{
     background-color: rgb(73, 112, 112);
 }
+#rendelesTablazatTarolo,
 #tablazatTarolo{
     width: 100%;
 }
+#idLapozo,
 #kepLapozo,
 #lapozo{
     width: 100%;
@@ -63,11 +65,13 @@ table tr:hover{
     justify-content: space-around;
     align-items: center;   
 }
+#idLapozo>li,
 #kepLapozo>li,
 #lapozo>li{
     list-style: none;
     cursor: pointer;
 }
+#idElozo,
 #kepElozo,
 #elozo{
     visibility: hidden;
@@ -103,11 +107,13 @@ table tr:hover{
 }
 #formTarolo,
 #aruForm,
+#idErrorDiv,
 .ErrorDiv,
 #kepSzuroTarolo,
 #nevKepErrorDiv,
 #kontener,
 #adminTartalom,
+#rendelesTablazatTarolo,
 #tablazatTarolo,
 #maxArDiv,
 #minArDiv,
@@ -117,6 +123,7 @@ table tr:hover{
     align-items: center;
     flex-direction: column;
 }
+#idSzuro,
 #szuroTarolo{
     width: 100%;
     display: flex;
@@ -124,11 +131,13 @@ table tr:hover{
     align-items: center;
     flex-wrap: wrap;
 }
+#idSzuro>*,
 #szuroTarolo>*{
     margin-left: calc(1%);
     margin-right: calc(1%);
 }
 @media screen and (max-width: 768px) {
+    #idSzuro,
     #szuroTarolo{
         flex-direction: column;
     }
