@@ -167,6 +167,14 @@ function FizetesekKilistaz(data) {
         thHRendelesId.textContent="Rendeles id";
         thR.appendChild(thHRendelesId);
 
+        const thHAllapot=document.createElement('th');
+        thHAllapot.textContent="Állapot";
+        thR.appendChild(thHAllapot);
+
+        const thHTeljesitesDatuma=document.createElement('th');
+        thHTeljesitesDatuma.textContent="Teljesítés dátuma";
+        thR.appendChild(thHTeljesitesDatuma);
+
         thead.appendChild(thR);
         aruTable.appendChild(thead);
 
@@ -226,11 +234,23 @@ function FizetesekKilistaz(data) {
             if (b) {
                 tbDOsszeg.textContent=element.osszeg;
             }
-
+            
             const tbDRendelesId=document.createElement('td');
             tbDRendelesId.classList.add('RendelesId');
             if (b) {
                 tbDRendelesId.textContent=element.id_rendeles;
+            }
+
+            const tbDAllapot=document.createElement('td');
+            tbDAllapot.classList.add('Allapot');
+            if (b) {
+                tbDAllapot.textContent=element.rendelesallapot;
+            }
+            
+             const tbDTeljesiteDatuma=document.createElement('td');
+            tbDTeljesiteDatuma.classList.add('TeljesiteDatuma');
+            if (b) {
+                tbDTeljesiteDatuma.textContent=element.teljesitesdatuma;
             }
 
             tbRId.appendChild(tbDId);
@@ -241,6 +261,8 @@ function FizetesekKilistaz(data) {
             tbRId.appendChild(tbDEgyben);
             tbRId.appendChild(tbDOsszeg);
             tbRId.appendChild(tbDRendelesId);
+            tbRId.appendChild(tbDAllapot);
+            tbRId.appendChild(tbDTeljesiteDatuma);
             tbody.appendChild(tbRId);
         });
         aruTable.append(tbody);
