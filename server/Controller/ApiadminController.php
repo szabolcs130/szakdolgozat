@@ -6,6 +6,7 @@ if (session_status() === PHP_SESSION_NONE) {
 use Server\Model\TermekekModel;
 use Server\Model\ErtekEllenorzesModel;
 use Server\Model\FizetesEredmenyModel;
+use Server\Model\RendelesModel;
 class ApiadminController{
     public static function Kepek(){
         header('Content-Type: application/json; charset=utf-8');
@@ -144,6 +145,19 @@ class ApiadminController{
             $aru=FizetesEredmenyModel::GetMegvasaroltakMindenkitolOsszes($fizetesId);
             if (is_array($aru) && !empty($aru)) {
                 echo json_encode($aru);
+                exit;
+            }
+        }
+        echo json_encode([]);
+        exit;
+    }
+    public static function lekerdezFizetesRendelesAllpotEnum(){
+        header('Content-Type: application/json; charset=utf-8');
+        ob_clean(); 
+        if (isset($_SESSION['userId']) && $_SESSION['rang']==3) {
+            $rendelesAllapot=RendelesModel::GetRendelesAllapotEnum();
+            if (is_array($rendelesAllapot) && !empty($rendelesAllapot)) {
+                echo json_encode($rendelesAllapot);
                 exit;
             }
         }

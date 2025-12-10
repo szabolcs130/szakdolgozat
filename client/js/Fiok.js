@@ -163,6 +163,10 @@ function FizetesekKilistaz(data) {
         thHOsszeg.textContent="Összesen";
         thR.appendChild(thHOsszeg);
 
+        const thHRendelesId=document.createElement('th');
+        thHRendelesId.textContent="Rendeles id";
+        thR.appendChild(thHRendelesId);
+
         thead.appendChild(thR);
         aruTable.appendChild(thead);
 
@@ -222,6 +226,13 @@ function FizetesekKilistaz(data) {
             if (b) {
                 tbDOsszeg.textContent=element.osszeg;
             }
+
+            const tbDRendelesId=document.createElement('td');
+            tbDRendelesId.classList.add('RendelesId');
+            if (b) {
+                tbDRendelesId.textContent=element.id_rendeles;
+            }
+
             tbRId.appendChild(tbDId);
             tbRId.appendChild(tbDDatum);
             tbRId.appendChild(tbDNev);
@@ -229,6 +240,7 @@ function FizetesekKilistaz(data) {
             tbRId.appendChild(tbDMe);
             tbRId.appendChild(tbDEgyben);
             tbRId.appendChild(tbDOsszeg);
+            tbRId.appendChild(tbDRendelesId);
             tbody.appendChild(tbRId);
         });
         aruTable.append(tbody);
