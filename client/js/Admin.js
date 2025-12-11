@@ -694,6 +694,30 @@ function FizetesekKilistaz(data) {
         thHNev.textContent="Név";
         thR.appendChild(thHNev);
 
+        const thHIranyitoszam=document.createElement('th');
+        thHIranyitoszam.textContent="Irányítószám";
+        thR.appendChild(thHIranyitoszam);
+        
+        const thHVaros=document.createElement('th');
+        thHVaros.textContent="Város";
+        thR.appendChild(thHVaros);
+
+        const thHUtca=document.createElement('th');
+        thHUtca.textContent="Utca";
+        thR.appendChild(thHUtca);
+
+        const thHHazSzam=document.createElement('th');
+        thHHazSzam.textContent="Házszám";
+        thR.appendChild(thHHazSzam);
+
+        const thHEmelet=document.createElement('th');
+        thHEmelet.textContent="Emelet";
+        thR.appendChild(thHEmelet);
+
+        const thHAjto=document.createElement('th');
+        thHAjto.textContent="Ajtó";
+        thR.appendChild(thHAjto);
+
         const thHAr=document.createElement('th');
         thHAr.textContent="Ár";
         thR.appendChild(thHAr);
@@ -775,6 +799,50 @@ function FizetesekKilistaz(data) {
             const tbDMe=document.createElement('td');
             tbDMe.classList.add('me');
             tbDMe.textContent=element.me;
+            
+            const tbDIranyitoszam=document.createElement('td');
+            tbDIranyitoszam.classList.add('iranyitoszam');
+            if (b) {
+                tbDIranyitoszam.textContent=element.iranyitoszam;
+            }
+
+            const tbDVaros=document.createElement('td');
+            tbDVaros.classList.add('varos');
+            if (b) {
+                tbDVaros.textContent=element.varos;
+            }
+
+            const tbDUtca=document.createElement('td');
+            tbDUtca.classList.add('utca');
+            if (b) {
+                tbDUtca.textContent=element.utca;
+            }
+
+            const tbDHazszam=document.createElement('td');
+            tbDHazszam.classList.add('hazszam');
+            if (b) {
+                tbDHazszam.textContent=element.hazszam;
+            }
+
+            const tbDEmelet=document.createElement('td');
+            tbDEmelet.classList.add('emelet');
+            if (b) {
+                if (element.ajto.length!=0) {
+                    tbDEmelet.textContent=element.emelet;
+                }else{
+                    tbDEmelet.textContent="-";
+                }
+            }
+
+            const tbDAjto=document.createElement('td');
+            tbDAjto.classList.add('ajto');
+            if (b) {
+                if (element.ajto.length!=0) {
+                    tbDAjto.textContent=element.ajto;
+                }else{
+                    tbDAjto.textContent="-";
+                }
+            }
 
             const tbDEgyben=document.createElement('td');
             tbDEgyben.classList.add('egyben');
@@ -811,6 +879,12 @@ function FizetesekKilistaz(data) {
             tbRId.appendChild(tbDId);
             tbRId.appendChild(tbDDatum);
             tbRId.appendChild(tbDNev);
+            tbRId.appendChild(tbDIranyitoszam);
+            tbRId.appendChild(tbDVaros);
+            tbRId.appendChild(tbDUtca);
+            tbRId.appendChild(tbDHazszam);
+            tbRId.appendChild(tbDEmelet);
+            tbRId.appendChild(tbDAjto);
             tbRId.appendChild(tbDAr);
             tbRId.appendChild(tbDMe);
             tbRId.appendChild(tbDEgyben);
