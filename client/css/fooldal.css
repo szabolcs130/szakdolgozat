@@ -1,32 +1,127 @@
 html{
     font-size: 16px;
- }
+}
 #aruk{
     width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-wrap: wrap;
-    border: 1px solid black;
     padding-top: calc(3%);
  }
  .aru{
     width: calc(30%);
-    min-width: 150px;
-    max-width: 500px;
+    min-width: 11rem;
+    /*max-width: 500px;*/
     border: 1px solid black;
-    margin-left: calc(1.4%);
-    margin-right: calc(1.4%);
-    margin-bottom: calc(3%);
+    margin-left: calc(1%);
+    margin-right: calc(1%);
+    margin-bottom: calc(2%);
     display: flex;
     align-items: center;
     flex-direction: column;
     word-break: break-word;
-    min-height: 40vh;
+    /*min-height: 40vh;*/
     height: auto;
- }
-.aru_nev{
+    background: white;
+    padding: 0.5rem;
+    border-radius: 16px;
+    box-shadow: 0 10px 20px rgba(0,0,0,10);
+    transition: 0.25s;
+    row-gap: 1rem;
     font-size: 1.2rem;
+ }
+ .aru:hover{
+    transform: translateY(-5px);
+    /*box-shadow: 0 10px 21px rgba(130, 51, 214, 10);*/
+    box-shadow: 0 10px 21px rgba(32, 99, 176, 10);
+
+}
+.aru_nev{
+    font-size: 1.5rem;
+}
+.aru_leiras{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.aru_leirasP{
+    text-align: center;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+.aru_mennyiseg{
+    margin-bottom: 14px;
+}
+.MegnezGombLi{
+    list-style-type: none;
+    text-decoration: none;
+    margin-bottom: 0.8rem;
+}
+.MegnezGombLi:hover{
+    color: rgb(0, 123, 255);
+}
+#szuresBekuldGomb{
+    background: rgb(0, 123, 255);
+    color: white;
+    padding: 12px 24px;
+
+    font-size: 1rem;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+#szuresBekuldGomb:hover{
+    color:black;
+    box-shadow: 0 6px 10px rgb(23, 148, 125);
+}
+.MegnezGomb{
+  background: rgb(0, 123, 255);
+  color: white;
+  padding: 12px 24px;
+
+  font-size: 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+.MegnezGomb:hover{
+     color:black;
+    box-shadow: 0 6px 10px rgb(23, 148, 125);
+}
+#nevKeres{
+padding: 10px 14px;
+  width: 12rem;
+  font-size: 1rem;
+  border: 2px solid transparent;
+  border-radius: 8px;
+  background: #f0f2f5;
+  outline: none;
+  transition: 0.3s ease;
+}
+#nevKeres:focus{
+    border-color: rgb(0, 123, 255);
+    background: white;
+    box-shadow: 0 10px 21px rgba(32, 99, 176, 10);
+
+}
+#oldalValaszto{
+    appearance: none;           
+    width: 12rem;
+    font-size: 1.4rem;
+    padding: 10px 30px 10px 10px;
+    color: #444;
+    background-color: transparent;  
+    border: 1px solid #000;       
+    border-radius: 0;               
+    cursor: pointer;
+    outline: none;
+}
+#oldalValaszto:hover{
+    color: black;
+    box-shadow: 0 6px 10px rgb(24, 168, 130);
 }
 #lapozo{
     width: 100%;
@@ -37,6 +132,20 @@ html{
 #lapozo>li{
     list-style: none;
     cursor: pointer;
+    background: rgb(0, 123, 255);
+    color: white;
+    padding: 12px 24px;
+
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+#lapozo>li:hover{
+     color:black;
+    box-shadow: 0 6px 10px rgb(23, 148, 125);
+}
+#lapozo>li>a{
+    font-size: 4rem;
 }
 #elozo{
     visibility: hidden;
@@ -45,13 +154,16 @@ html{
     width: calc(80%);
     min-width: 150px;
     max-width: 500px;
+    border-radius: 16px;
+
 }
 #szuroTarolo{
     width: 100%;
     display: flex;
-    justify-content: center;
+    justify-content: space-around;
     align-items: center;
     flex-wrap: wrap;
+    row-gap: 0.5rem;
 }
 #szuroTarolo>*{
 margin-left: calc(1%);
@@ -64,10 +176,23 @@ margin-right: calc(1%);
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    font-size: 1.2rem;
+}
+#maxAr,
+#minAr{
+    width: 14rem;
 }
 @media screen and (max-width: 768px) {
     #szuroTarolo{
         flex-direction: column;
+    }
+    .aru{
+        margin-left: calc(1%);
+        margin-right: calc(1%);
+        margin-bottom: calc(10%);
+    }
+    .aruk{
+        row-gap: 0.5rem;
     }
 }
 

@@ -1,14 +1,16 @@
 #menuk{
-       width: 100%;
-       min-width: auto;
-       display: flex;
-       justify-content: center;
-       align-items: center;
-       /*flex-wrap: wrap;*/
-       flex-direction: row;
-       border: 1px solid black;
-      /* margin-left: auto;
-       margin-right: auto;*/
+    width: 100%;
+    min-width: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /*flex-wrap: wrap;*/
+    flex-direction: row;
+    /* margin-left: auto;
+    margin-right: auto;*/
+    background: white;
+    box-shadow: 0 2px 14px rgba(0,0,0,0.8);
+    margin-bottom: 3rem;
 }
 #menuUl{
     width: 98%;
@@ -18,7 +20,7 @@
     align-items: center;
     justify-content: center;
     padding: 0px;
-    border: 1px solid red;
+    /*border: 1px solid red;*/
 }
 .menuLi{
     width: 96%;
@@ -27,18 +29,29 @@
     align-items: center;
     justify-content: center;
     list-style: none;
-    border: 1px solid black;
+    /*border: 1px solid black;*/
     margin-left: 2px;
     margin-right: 2px;
 }
+.menuLi:hover{
+
+}
 #menuUl .menuLi:nth-child(odd){
-background-color: rgb(230, 211, 184);
+/*background-color: rgb(232, 227, 227);*/
 }
 #menuUl .menuLi:nth-child(even){
-background-color: rgb(206, 198, 187);
+/*background-color: rgb(218, 213, 207);*/
 }
 .menuA{
     text-decoration: none;
+    color: #444;
+    font-size: 1.4rem;
+    transition: 0.3s;
+}
+.menuA:hover{
+    color: rgb(36, 112, 199);
+    box-shadow: 0 1px rgba(32, 99, 176, 10);
+
 }
 
 @media screen and (max-width: 768px) {

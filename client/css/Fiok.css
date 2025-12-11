@@ -33,6 +33,19 @@ table tr:hover{
 #tablazatTarolo{
     width: 100%;
 }
+#oldalValaszto{
+    appearance: none;           
+    width: 12rem;
+    font-size: 1.4rem;
+    padding: 10px 30px 10px 10px;
+    color: #000;
+    background-color: transparent;  
+    border: 1px solid #000;       
+    border-radius: 0;               
+    cursor: pointer;
+    outline: none;
+    margin-top: 0.5rem;
+}
 #lapozo{
     width: 100%;
     display: flex;
@@ -42,6 +55,17 @@ table tr:hover{
 #lapozo>li{
     list-style: none;
     cursor: pointer;
+    background: rgb(0, 123, 255);
+    color: white;
+    padding: 12px 24px;
+
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+#lapozo>li:hover{
+     color:black;
+    box-shadow: 0 6px 10px rgb(23, 148, 125);
 }
 #elozo{
     visibility: hidden;

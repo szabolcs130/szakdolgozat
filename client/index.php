@@ -10,7 +10,7 @@ use Server\Request;
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
-<body style="background-color:gray;">
+<body style="background: f6f7f8; color: #333;"><!--background-color:grays-->
     <!--<div id="eper">-->
     <?php
     Request::GetKeres();
