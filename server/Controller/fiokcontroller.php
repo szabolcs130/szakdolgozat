@@ -126,7 +126,7 @@ class FiokController{
                     }
 
                     if(!empty($emelet)) {
-                        $emelet=ErtekEllenorzesModel::Szam($_POST['emelet'],0,41,"/^[1-9][0-9]{0,3}$/");
+                        $emelet=ErtekEllenorzesModel::Szam($_POST['emelet'],0,40,"/^[1-9][0-9]{0,3}$/");
                         if ($emelet===false) {
                             return 0;
                         }
