@@ -11,7 +11,7 @@ window.onload = async function() {
     
     const rendelesTablazatTarolo=document.getElementById("rendelesTablazatTarolo");
     if (rendelesTablazatTarolo) {
-        const h4KifizetettRendelesek=document.createElement('h4');
+        const h4KifizetettRendelesek=document.createElement('h1');
         h4KifizetettRendelesek.textContent="Kifizetett rendelések";
         const idSzuro=document.getElementById("idSzuro");
         const idLapozo=document.getElementById("idLapozo");
@@ -35,8 +35,10 @@ async function AruListaz(data) {
     
     if (data.length) {
         const liTagAruUj=document.createElement('li');
+        liTagAruUj.id='liTagAruUj';
 
         const aTagAruUj=document.createElement('a');
+        aTagAruUj.id='aTagAruUj';
         aTagAruUj.href='#';
         aTagAruUj.textContent="Új Áru";
         liTagAruUj.appendChild(aTagAruUj);
@@ -169,7 +171,7 @@ async function AruListaz(data) {
         tablazatTarolo.appendChild(aruTablazat);
         const adminTartalma=document.getElementById("adminTartalom");
         
-        adminTartalma.appendChild(tablazatTarolo);
+        //adminTartalma.appendChild(tablazatTarolo);
         document.querySelectorAll("#tablazat tbody tr td:last-child").forEach(adatsor=>{
         adatsor.addEventListener("click",()=>FormAru(adatsor.parentElement,"?oldal=Admin/AruSzerkeszt","Szerkeszt"));
     })
@@ -205,8 +207,9 @@ async function SzuroAlapok() {
         lapozo.appendChild(elozo);
         lapozo.appendChild(oldalValaszto);
         lapozo.appendChild(kovetkezo);
-        
+        const tablazatTarolo=document.getElementById("tablazatTarolo");
         adminTartalom.appendChild(szuroTarolo);
+        adminTartalom.appendChild(tablazatTarolo);
         adminTartalom.appendChild(lapozo);
     }
         const data1=await FetchMeghiv("?oldal=Apitermekek/lekerdezAruMaxAr");

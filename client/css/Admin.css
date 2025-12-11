@@ -29,6 +29,7 @@ table{
     width: 100%;
     table-layout: fixed;
     border-collapse: collapse;
+    font-size: 1.4rem;
 }
 table tr td,
 table tr th
@@ -39,23 +40,29 @@ table tr th
     padding: 5px;
     text-align: center;
 }
-table tr td:nth-child(odd),
-table tr th:nth-child(odd)
-
+table tr td:nth-child(odd)
+/*table tr th:nth-child(odd)*/
 {
     background-color: rgba(32, 31, 31, 0.292);
 }
-table tr td:nth-child(even),
-table tr th:nth-child(even)
+table tr td:nth-child(even)
+/*table tr th:nth-child(even)*/
 {
     background-color: rgba(65, 63, 63, 0.292);
+}
+table tr{
+    background-color: rgb(62, 118, 181,0.6);
+    /*background-color: rgba(108, 142, 151, 0.621);rgb(62, 118, 181);*/
 }
 table tr:hover{
     background-color: rgb(73, 112, 112);
 }
+
 #rendelesTablazatTarolo,
 #tablazatTarolo{
     width: 100%;
+    row-gap: 0.5rem;
+    margin-bottom: 1rem;
 }
 #idLapozo,
 #kepLapozo,
@@ -70,6 +77,19 @@ table tr:hover{
 #lapozo>li{
     list-style: none;
     cursor: pointer;
+    background: rgb(0, 123, 255);
+    color: white;
+    padding: 12px 24px;
+
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+#idLapozo>li,
+#kepLapozo>li,
+#lapozo>li:hover{
+     color:black;
+    box-shadow: 0 6px 10px rgb(23, 148, 125);
 }
 #idElozo,
 #kepElozo,
@@ -114,7 +134,13 @@ table tr:hover{
 #kontener,
 #adminTartalom,
 #rendelesTablazatTarolo,
-#tablazatTarolo,
+#tablazatTarolo
+{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
 #maxArDiv,
 #minArDiv,
 #nevErrorDiv{
@@ -122,6 +148,11 @@ table tr:hover{
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    font-size: 1.2rem;
+}
+#szuroTarolo{
+    margin-top: 1rem;
+    margin-bottom: 1rem;
 }
 #idSzuro,
 #szuroTarolo{
@@ -130,11 +161,86 @@ table tr:hover{
     justify-content: center;
     align-items: center;
     flex-wrap: wrap;
+    row-gap: 0.5rem;
 }
 #idSzuro>*,
 #szuroTarolo>*{
     margin-left: calc(1%);
     margin-right: calc(1%);
+}
+#nevKeres{
+padding: 10px 14px;
+  width: 12rem;
+  font-size: 1rem;
+  border: 2px solid transparent;
+  border-radius: 8px;
+  background: #f0f2f5;
+  outline: none;
+  transition: 0.3s ease;
+}
+#nevKeres:focus{
+    border-color: rgb(0, 123, 255);
+    background: white;
+    box-shadow: 0 10px 21px rgba(32, 99, 176, 10);
+
+}
+#kepOldalValaszto,
+#oldalValaszto{
+    appearance: none;           
+    width: 12rem;
+    font-size: 1.4rem;
+    padding: 10px 30px 10px 10px;
+    color: #444;
+    background-color: transparent;  
+    border: 1px solid #000;       
+    border-radius: 0;               
+    cursor: pointer;
+    outline: none;
+}
+#kepOldalValaszto,
+#oldalValaszto:hover{
+    color: black;
+    box-shadow: 0 6px 10px rgb(24, 168, 130);
+}
+#szuresBekuldGomb{
+    background: rgb(0, 123, 255);
+    color: white;
+    padding: 12px 24px;
+
+    font-size: 1rem;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+#szuresBekuldGomb:hover{
+    color:black;
+    box-shadow: 0 6px 10px rgb(23, 148, 125);
+}
+#maxAr,
+#minAr{
+    width: 14rem;
+}
+#aTagAruUj{
+  background: rgb(0, 123, 255);
+  color: white;
+  padding: 12px 24px;
+
+  font-size: 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+#aTagAruUj:hover{
+     color:black;
+    box-shadow: 0 6px 10px rgb(23, 148, 125);
+}
+#liTagAruUj{
+    list-style-type: none;
+    text-decoration: none;
+    margin-bottom: 0.8rem;
+}
+#liTagAruUj:hover{
+    color: rgb(0, 123, 255);
 }
 @media screen and (max-width: 768px) {
     #idSzuro,
@@ -152,6 +258,18 @@ table tr:hover{
     table tr th
     {
          white-space: nowrap;
+         padding: 10px 10px;
+    }
+    #lapozo{
+        flex-direction: column;
+        row-gap: 1rem;
+    }
+    #maxAr,
+    #minAr{
+        width: 13rem;
+    }
+    #nevKeres{
+        width: 11rem;
     }
 }
 

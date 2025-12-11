@@ -1,6 +1,3 @@
-html{
-    font-size: 16px;
-}
 #aruk{
     width: 100%;
     display: flex;
@@ -194,5 +191,17 @@ margin-right: calc(1%);
     .aruk{
         row-gap: 0.5rem;
     }
+    #lapozo{
+        flex-direction: column;
+        row-gap: 1rem;
+    }
+    #maxAr,
+    #minAr{
+        width: 13rem;
+    }
+    #nevKeres{
+        width: 11rem;
+    }
+
 }
 

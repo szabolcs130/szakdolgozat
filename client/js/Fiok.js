@@ -120,7 +120,7 @@ async function KepLapozashozSelectEsemeny(oldalvalaszto) {
 function FizetesekKilistaz(data) {
     const tablazatTarolo=document.getElementById("tablazatTarolo");
     tablazatTarolo.innerHTML="";
-    const h4KifizetettRendelesek=document.createElement('h4');
+    const h4KifizetettRendelesek=document.createElement('h1');
     h4KifizetettRendelesek.textContent="Kifizetett rendelések";
     tablazatTarolo.appendChild(h4KifizetettRendelesek);
     if (data.length) {

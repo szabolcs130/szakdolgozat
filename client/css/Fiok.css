@@ -6,6 +6,7 @@ table{
     width: 100%;
     table-layout: fixed;
     border-collapse: collapse;
+    font-size: 1.4rem;
 }
 table tr td,
 table tr th
@@ -16,16 +17,19 @@ table tr th
     padding: 5px;
     text-align: center;
 }
-table tr td:nth-child(odd),
-table tr th:nth-child(odd)
-
+table tr td:nth-child(odd)
+/*table tr th:nth-child(odd)*/
 {
     background-color: rgba(32, 31, 31, 0.292);
 }
-table tr td:nth-child(even),
-table tr th:nth-child(even)
+table tr td:nth-child(even)
+/*table tr th:nth-child(even)*/
 {
     background-color: rgba(65, 63, 63, 0.292);
+}
+table tr{
+    background-color: rgb(62, 118, 181,0.6);
+    /*background-color: rgba(108, 142, 151, 0.621);rgb(62, 118, 181);*/
 }
 table tr:hover{
     background-color: rgb(73, 112, 112);
@@ -33,12 +37,13 @@ table tr:hover{
 #tablazatTarolo{
     width: 100%;
 }
+
 #oldalValaszto{
     appearance: none;           
     width: 12rem;
     font-size: 1.4rem;
     padding: 10px 30px 10px 10px;
-    color: #000;
+    color: #444;
     background-color: transparent;  
     border: 1px solid #000;       
     border-radius: 0;               
@@ -46,12 +51,32 @@ table tr:hover{
     outline: none;
     margin-top: 0.5rem;
 }
+#oldalValaszto:hover{
+    color: black;
+    box-shadow: 0 6px 10px rgb(24, 168, 130);
+}
+#ShowSzallitasicimFormLi{
+    list-style: none;
+}
+#ShowSzallitasicimFormA{
+    text-decoration: none;
+}
+#sajatAdatok{
+    background: white;
+    padding: 0.5rem;
+    border-radius: 16px;
+    box-shadow: 0 10px 20px rgba(0,0,0,10);
+    transition: 0.25s;
+    font-size: 1.2rem;
+}
+
 #lapozo{
     width: 100%;
     display: flex;
     justify-content: space-around;
     align-items: center;   
 }
+#ShowSzallitasicimFormA,
 #lapozo>li{
     list-style: none;
     cursor: pointer;
@@ -63,6 +88,7 @@ table tr:hover{
     cursor: pointer;
     transition: 0.2s;
 }
+#ShowSzallitasicimFormA:hover,
 #lapozo>li:hover{
      color:black;
     box-shadow: 0 6px 10px rgb(23, 148, 125);
@@ -75,6 +101,7 @@ table tr:hover{
        border: 1px solid black;
        padding-top: calc(3%);
 }
+#sajatAdatok,
 #szallitasicimFormTarolo,
 #szallitasicimForm{
       display: flex;
@@ -100,5 +127,10 @@ table tr:hover{
     table tr th
     {
          white-space: nowrap;
+         padding: 10px 10px;
+    }
+    #lapozo{
+        flex-direction: column;
+        row-gap: 1rem;
     }
 }

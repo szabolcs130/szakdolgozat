@@ -1,6 +1,15 @@
 import { SzuroFelepit,FetchMeghiv,LapozashozSelectEsemeny,LapozashozElozoKovekezoEsemenyek,LapozashozLegorduloMenu,ElozoKovetkezoLapozoMegjelenitese } from './Lapozo.js';
 import { EllenorizElsoResz,htmlEllenorrzo} from './Ellenorzo.js';
 window.addEventListener("load",async function() {
+    const velemenyIrasaTarolo=document.getElementById("velemenyIrasaTarolo");
+    const velemenyekTarolo=document.getElementById("velemenyekTarolo");
+    const indexKontener=document.getElementById("indexKontener");
+    if (velemenyIrasaTarolo) {
+        indexKontener.appendChild(velemenyIrasaTarolo);
+    }
+    if (velemenyekTarolo) {
+        indexKontener.appendChild(velemenyekTarolo);
+    }
     const data2=await FetchMeghiv("?oldal=Apivelemeny/LekerdezVelemenyByAruIdSajat",null,true);
     if (SajatVelemeny(data2)) {
 

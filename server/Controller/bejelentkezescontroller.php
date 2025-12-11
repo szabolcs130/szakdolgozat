@@ -37,6 +37,7 @@ class BejelentkezesController{
                 $_SESSION["rang"]=$user[0]["rang"];
                 $_SESSION["kosar"]=[];
                 $_SESSION["uzenet"]="Sikeres bejelentkezes!";
+                $_SESSION["lejar"]=time()+(60);
                 header('Location: ?oldal=Fiok');
                 exit();
             }

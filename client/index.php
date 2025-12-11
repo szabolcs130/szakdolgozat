@@ -11,9 +11,10 @@ use Server\Request;
     <title>Document</title>
 </head>
 <body style="background: f6f7f8; color: #333;"><!--background-color:grays-->
-    <!--<div id="eper">-->
+    <div id="indexKontener">
     <?php
     Request::GetKeres();
     ?>
+    </div>
 </body>
 </html>
