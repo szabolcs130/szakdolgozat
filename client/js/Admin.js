@@ -654,6 +654,7 @@ function FelepitFizetesSzuresIdAlapjan() {
     idErrorDiv.appendChild(errorP);
 
     const szuresBekuldGomb=document.createElement('button');
+    szuresBekuldGomb.id="IdFizetesszuresBekuldGomb";
     szuresBekuldGomb.type="submit";
     szuresBekuldGomb.textContent="Keres";
     szuresBekuldGomb.addEventListener("click",async function(){

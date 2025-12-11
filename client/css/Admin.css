@@ -20,6 +20,7 @@ li{
 }
 #adminTartalom{
     width: 100%;
+    row-gap: 1rem;
 }
 #aruTablazat{
     width: 100%;
@@ -154,6 +155,7 @@ table tr:hover{
     margin-top: 1rem;
     margin-bottom: 1rem;
 }
+
 #idSzuro,
 #szuroTarolo{
     width: 100%;
@@ -168,6 +170,7 @@ table tr:hover{
     margin-left: calc(1%);
     margin-right: calc(1%);
 }
+#keresIdInput,
 #nevKeres{
 padding: 10px 14px;
   width: 12rem;
@@ -178,12 +181,14 @@ padding: 10px 14px;
   outline: none;
   transition: 0.3s ease;
 }
+#keresIdInput:focus,
 #nevKeres:focus{
     border-color: rgb(0, 123, 255);
     background: white;
     box-shadow: 0 10px 21px rgba(32, 99, 176, 10);
 
 }
+#idOldalValaszto,
 #kepOldalValaszto,
 #oldalValaszto{
     appearance: none;           
@@ -196,12 +201,15 @@ padding: 10px 14px;
     border-radius: 0;               
     cursor: pointer;
     outline: none;
+    margin-bottom: 1rem;
 }
+#idOldalValaszto,
 #kepOldalValaszto,
 #oldalValaszto:hover{
     color: black;
     box-shadow: 0 6px 10px rgb(24, 168, 130);
 }
+#IdFizetesszuresBekuldGomb,
 #szuresBekuldGomb{
     background: rgb(0, 123, 255);
     color: white;
@@ -212,6 +220,7 @@ padding: 10px 14px;
     cursor: pointer;
     transition: 0.2s;
 }
+#IdFizetesszuresBekuldGomb:hover,
 #szuresBekuldGomb:hover{
     color:black;
     box-shadow: 0 6px 10px rgb(23, 148, 125);
@@ -260,6 +269,7 @@ padding: 10px 14px;
          white-space: nowrap;
          padding: 10px 10px;
     }
+    #idLapozo,
     #lapozo{
         flex-direction: column;
         row-gap: 1rem;
@@ -268,6 +278,7 @@ padding: 10px 14px;
     #minAr{
         width: 13rem;
     }
+    #keresIdInput,
     #nevKeres{
         width: 11rem;
     }

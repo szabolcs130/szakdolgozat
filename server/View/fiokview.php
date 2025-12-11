@@ -9,7 +9,7 @@ class FiokView{
         echo '<div id="fiokAdat">';
         foreach ($fiok as $f) {
             echo '<div id="sajatAdatok">';
-            echo '<p>Saját adatok:</p>';
+            echo '<h3>Saját adatok:</h3>';
             echo '<div id="sajatAdatNev">';
             echo '<p id="sajatAdatNevP">Név: '.$f["nev_szemely"].'</p>';
             echo '</div>';
