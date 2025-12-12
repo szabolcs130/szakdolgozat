@@ -130,18 +130,32 @@ table tr:hover{
     visibility: hidden;
 }
 .kepek{
-    width: calc(30%);
-    min-width: 150px;
-    max-width: 500px;
+   width: calc(30%);
+    min-width: 11rem;
+    /*max-width: 500px;*/
     border: 1px solid black;
-    margin-left: calc(1.4%);
-    margin-right: calc(1.4%);
-    margin-bottom: calc(3%);
+    margin-left: calc(1%);
+    margin-right: calc(1%);
+    margin-bottom: calc(2%);
     display: flex;
     align-items: center;
     flex-direction: column;
     word-break: break-word;
+    /*min-height: 40vh;*/
     height: auto;
+    background: white;
+    padding: 0.5rem;
+    border-radius: 16px;
+    box-shadow: 0 10px 20px rgba(0,0,0,10);
+    transition: 0.25s;
+    row-gap: 1rem;
+    font-size: 1.2rem;
+}
+.kepek:hover{
+    transform: translateY(-5px);
+    /*box-shadow: 0 10px 21px rgba(130, 51, 214, 10);*/
+    box-shadow: 0 10px 21px rgba(32, 99, 176, 10);
+
 }
 .aru_kep{
     width: calc(80%);
@@ -155,14 +169,14 @@ table tr:hover{
     justify-content: center;
     align-items: center;
     flex-wrap: wrap;
-    border: 1px solid black;
-    padding-top: calc(3%);
+    margin-top: 1rem;
 }
+#fizetettFormTarolo,
+#FizetettForm,
 #formTarolo,
 #aruForm,
 #idErrorDiv,
 .ErrorDiv,
-#kepSzuroTarolo,
 #nevKepErrorDiv,
 #kontener,
 #adminTartalom,
@@ -174,6 +188,24 @@ table tr:hover{
     align-items: center;
     flex-direction: column;
 }
+#fizetettFormTarolo,
+#formTarolo{
+    background: white;
+    border-radius: 16px;
+    box-shadow: 0 10px 20px rgba(0,0,0,10);
+    transition: 0.25s;
+    row-gap: 1rem;
+    font-size: 1.2rem;
+    width: 100%;
+    margin-bottom: 1rem;
+    padding-top: 1.5rem;
+}
+#FizetettForm{
+    row-gap: 1rem;
+}
+#aruForm{
+    row-gap: 1rem;
+}
 #maxArDiv,
 #minArDiv,
 #nevErrorDiv{
@@ -183,7 +215,6 @@ table tr:hover{
     flex-direction: column;
     font-size: 1.2rem;
 }
-
 #idSzuro,
 #szuroTarolo{
     width: 100%;
@@ -192,6 +223,15 @@ table tr:hover{
     align-items: center;
     flex-wrap: wrap;
     row-gap: 0.5rem;
+}
+#kepSzuroTarolo{
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-direction: row;
+    row-gap: 0.5rem;
+    margin-top: 1rem;
 }
 #szuroTarolo{
     margin-top: 1rem;
@@ -210,6 +250,7 @@ table tr:hover{
     margin-left: calc(1%);
     margin-right: calc(1%);
 }
+#nevKepKeres,
 #keresIdInput,
 #nevKeres{
 padding: 10px 14px;
@@ -221,6 +262,7 @@ padding: 10px 14px;
   outline: none;
   transition: 0.3s ease;
 }
+#nevKepKeres:focus,
 #keresIdInput:focus,
 #nevKeres:focus{
     border-color: rgb(0, 123, 255);
@@ -243,8 +285,8 @@ padding: 10px 14px;
     outline: none;
     margin-bottom: 1rem;
 }
-#idOldalValaszto,
-#kepOldalValaszto,
+#idOldalValaszto:hover,
+#kepOldalValaszto:hover,
 #oldalValaszto:hover{
     color: black;
     box-shadow: 0 6px 10px rgb(24, 168, 130);
@@ -286,12 +328,147 @@ padding: 10px 14px;
 #liTagAruUj{
     list-style-type: none;
     text-decoration: none;
-    margin-bottom: 0.8rem;
+    margin-bottom: 1.3rem;
 }
 #liTagAruUj:hover{
     color: rgb(0, 123, 255);
 }
+#aTagVissza{
+  background: rgb(0, 123, 255);
+  color: white;
+  padding: 12px 24px;
+
+  font-size: 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+#aTagVissza:hover{
+     color:black;
+    box-shadow: 0 6px 10px rgb(23, 148, 125);
+}
+#liTagVissza{
+    list-style-type: none;
+    text-decoration: none;
+}
+#liTagVissza:hover{
+    color: rgb(0, 123, 255);
+}
+#nev{
+padding: 10px 14px;
+  width: 12rem;
+  font-size: 1rem;
+  border: 2px solid transparent;
+  border-radius: 8px;
+  background: #f0f2f5;
+  outline: none;
+  transition: 0.3s ease;
+}
+#nev:focus{
+    border-color: rgb(0, 123, 255);
+    background: white;
+    box-shadow: 0 10px 21px rgba(32, 99, 176, 10);
+
+}
+#ar{
+padding: 10px 14px;
+  width: 12rem;
+  font-size: 1rem;
+  border: 2px solid transparent;
+  border-radius: 8px;
+  background: #f0f2f5;
+  outline: none;
+  transition: 0.3s ease;
+}
+#ar:focus{
+    border-color: rgb(0, 123, 255);
+    background: white;
+    box-shadow: 0 10px 21px rgba(32, 99, 176, 10);
+
+}
+#leiras{
+padding: 10px 14px;
+  width: 12rem;
+  font-size: 1rem;
+  border: 2px solid transparent;
+  border-radius: 8px;
+  background: #f0f2f5;
+  outline: none;
+  transition: 0.3s ease;
+}
+#leiras:focus{
+    border-color: rgb(0, 123, 255);
+    background: white;
+    box-shadow: 0 10px 21px rgba(32, 99, 176, 10);
+
+}
+#mennyiseg{
+padding: 10px 14px;
+  width: 12rem;
+  font-size: 1rem;
+  border: 2px solid transparent;
+  border-radius: 8px;
+  background: #f0f2f5;
+  outline: none;
+  transition: 0.3s ease;
+}
+#mennyiseg:focus{
+    border-color: rgb(0, 123, 255);
+    background: white;
+    box-shadow: 0 10px 21px rgba(32, 99, 176, 10);
+
+}
+#kep{
+padding: 10px 14px;
+  width: 12rem;
+  font-size: 1rem;
+  border: 2px solid transparent;
+  border-radius: 8px;
+  background: #f0f2f5;
+  outline: none;
+  transition: 0.3s ease;
+}
+#kep:focus{
+    border-color: rgb(0, 123, 255);
+    background: white;
+    box-shadow: 0 10px 21px rgba(32, 99, 176, 10);
+
+}
+#aruBekuldGomb{
+    background: rgb(0, 123, 255);
+    color: white;
+    padding: 12px 24px;
+
+    font-size: 1rem;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.2s;
+    margin-bottom: 1rem;
+}
+#aruBekuldGomb:hover{
+    color:black;
+    box-shadow: 0 6px 10px rgb(23, 148, 125);
+}
+#szuresKepBekuldGomb{
+    background: rgb(0, 123, 255);
+    color: white;
+    padding: 12px 24px;
+
+    font-size: 1rem;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.2s;
+    margin-bottom: 1rem;
+}
+#szuresKepBekuldGomb:hover{
+    color:black;
+    box-shadow: 0 6px 10px rgb(23, 148, 125);
+}
 @media screen and (max-width: 768px) {
+    #kepSzuroTarolo{
+        row-gap: 1rem;
+    }
+    #kepSzuroTarolo,
     #idSzuro,
     #szuroTarolo{
         flex-direction: column;
@@ -309,18 +486,32 @@ padding: 10px 14px;
          white-space: nowrap;
          padding: 10px 10px;
     }
+    #kepLapozo,
     #idLapozo,
     #lapozo{
         flex-direction: column;
         row-gap: 1rem;
+    }
+    #kepLapozo,
+    #lapozo{
+        margin-bottom: 1rem;
     }
     #maxAr,
     #minAr{
         width: 13rem;
     }
     #keresIdInput,
-    #nevKeres{
+    #nevKepKeres,
+    #nevKeres,
+    #nev,
+    #ar,
+    #leiras,
+    #mennyiseg,
+    #kep{
         width: 11rem;
+    }
+    #kepTarolo{
+        row-gap: 1rem;
     }
 }
 
