@@ -31,14 +31,18 @@ class RendelesModel{
             return 0;
         }
     }
-    public static function SzerkesztRendeles($id_rendeles,$rendelesallapot,$teljesitesdatuma){
+    public static function SzerkesztRendeles($id_rendeles,$rendelesallapot,$teljesitesdatuma=null){
        try {
             $db = self::Connection();
-            $sql = "UPDATE `rendeles` SET rendelesallapot=:rendelesallapot,teljesitesdatuma=:teljesitesdatuma WHERE id_rendeles=:id_rendeles";
+            $sql = "UPDATE `rendeles` SET rendelesallapot=:rendelesallapot, teljesitesdatuma=:teljesitesdatuma  WHERE id_rendeles=:id_rendeles";
+            
             $sth = $db->prepare($sql);
-            $sth->execute(array(':id_rendeles'=>$id_rendeles,":rendelesallapot"=>$rendelesallapot, ":teljesitesdatuma"=>$teljesitesdatuma,));
-            $eredmeny = $sth->fetch(\PDO::FETCH_ASSOC);
-            if ($sth->rowCount()) {
+            
+            $sth->bindValue(':id_rendeles',$id_rendeles);
+            $sth->bindValue(':rendelesallapot',$rendelesallapot);
+            $sth->bindValue(':teljesitesdatuma',$teljesitesdatuma,$teljesitesdatuma === null ? \PDO::PARAM_NULL : \PDO::PARAM_STR);
+            $sth->execute();
+           if ($sth->rowCount()) {
                 return 1;
             }
             return 0;

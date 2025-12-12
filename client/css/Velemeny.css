@@ -29,9 +29,21 @@
     flex-direction: row;
 }
 #velemenyInput{
-    display: flex;
+  display: flex;
     width: 70vw;
     height: 20vh;
+  font-size: 1rem;
+  border: 2px solid transparent;
+  border-radius: 8px;
+  background: #f0f2f5;
+  outline: none;
+  transition: 0.3s ease;
+}
+#velemenyInput:focus{
+    border-color: rgb(0, 123, 255);
+    background: white;
+    box-shadow: 0 10px 21px rgba(32, 99, 176, 10);
+
 }
 #lapozo{
     width: 100%;
@@ -68,7 +80,9 @@
     margin-bottom: 1.5rem;
     width: 100%;
 }
-
+#VelemenyEgySzoveg{
+    margin-bottom: 1rem;
+}
 #VelemenyEgyFejlec{
     width: 90%;
     display: flex;

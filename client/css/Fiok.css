@@ -56,20 +56,35 @@ table tr:hover{
     box-shadow: 0 6px 10px rgb(24, 168, 130);
 }
 #ShowSzallitasicimFormLi{
+    margin-top: 2.5rem;
     list-style: none;
 }
 #ShowSzallitasicimFormA{
     text-decoration: none;
 }
+#fiokAdat{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    padding: 0rem;
+}
 #sajatAdatok{
+    width: 100%;
     background: white;
-    padding: 0.5rem;
     border-radius: 16px;
     box-shadow: 0 10px 20px rgba(0,0,0,10);
     transition: 0.25s;
     font-size: 1.2rem;
 }
-
+#szallitasicimFormTarolo{
+    width: 100%;
+ background: white;
+    border-radius: 16px;
+    box-shadow: 0 10px 20px rgba(0,0,0,10);
+    transition: 0.25s;
+    font-size: 1.3rem;
+}
 #lapozo{
     width: 100%;
     display: flex;
@@ -103,8 +118,9 @@ table tr:hover{
 #szallitasicimFormTarolo{
        width: 100%;
        border: 1px solid black;
-       padding-top: calc(3%);
+       padding-top: 1rem;
 }
+#szallitasicimFormTarolo,
 #sajatAdatok,
 #szallitasicimFormTarolo,
 #szallitasicimForm{
@@ -119,6 +135,146 @@ table tr:hover{
     align-items: center;
     flex-direction: column;
  }
+ 
+ #iranyitoszam{
+padding: 10px 14px;
+  width: 12rem;
+  font-size: 1rem;
+  border: 2px solid transparent;
+  border-radius: 8px;
+  background: #f0f2f5;
+  outline: none;
+  transition: 0.3s ease;
+}
+#iranyitoszam:focus{
+    border-color: rgb(0, 123, 255);
+    background: white;
+    box-shadow: 0 10px 21px rgba(32, 99, 176, 10);
+
+}
+#varos{
+padding: 10px 14px;
+  width: 12rem;
+  font-size: 1rem;
+  border: 2px solid transparent;
+  border-radius: 8px;
+  background: #f0f2f5;
+  outline: none;
+  transition: 0.3s ease;
+}
+#varos:focus{
+    border-color: rgb(0, 123, 255);
+    background: white;
+    box-shadow: 0 10px 21px rgba(32, 99, 176, 10);
+
+}
+#utca{
+padding: 10px 14px;
+  width: 12rem;
+  font-size: 1rem;
+  border: 2px solid transparent;
+  border-radius: 8px;
+  background: #f0f2f5;
+  outline: none;
+  transition: 0.3s ease;
+}
+#utca:focus{
+    border-color: rgb(0, 123, 255);
+    background: white;
+    box-shadow: 0 10px 21px rgba(32, 99, 176, 10);
+
+}
+#hazszam{
+padding: 10px 14px;
+  width: 12rem;
+  font-size: 1rem;
+  border: 2px solid transparent;
+  border-radius: 8px;
+  background: #f0f2f5;
+  outline: none;
+  transition: 0.3s ease;
+}
+#hazszam:focus{
+    border-color: rgb(0, 123, 255);
+    background: white;
+    box-shadow: 0 10px 21px rgba(32, 99, 176, 10);
+
+}
+#emelet{
+padding: 10px 14px;
+  width: 12rem;
+  font-size: 1rem;
+  border: 2px solid transparent;
+  border-radius: 8px;
+  background: #f0f2f5;
+  outline: none;
+  transition: 0.3s ease;
+}
+#emelet:focus{
+    border-color: rgb(0, 123, 255);
+    background: white;
+    box-shadow: 0 10px 21px rgba(32, 99, 176, 10);
+
+}
+#ajto{
+padding: 10px 14px;
+  width: 12rem;
+  font-size: 1rem;
+  border: 2px solid transparent;
+  border-radius: 8px;
+  background: #f0f2f5;
+  outline: none;
+  transition: 0.3s ease;
+}
+#ajto:focus{
+    border-color: rgb(0, 123, 255);
+    background: white;
+    box-shadow: 0 10px 21px rgba(32, 99, 176, 10);
+
+}
+#szallitasicimBekuldGomb
+{
+    background: rgb(0, 123, 255);
+    color: white;
+    padding: 12px 24px;
+
+    font-size: 1rem;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.2s;
+    margin-bottom: 1rem;
+}
+#szallitasiCimTorolA{
+  background: rgb(0, 123, 255);
+  color: white;
+  padding: 12px 24px;
+
+  font-size: 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+#szallitasiCimTorolA:hover{
+     color:black;
+    box-shadow: 0 6px 10px rgb(23, 148, 125);
+}
+#szallitasiCimTorolLi{
+    list-style-type: none;
+    text-decoration: none;
+    margin-top: 3rem;
+    margin-bottom: 2rem;
+}
+#szallitasiCimTorolLi:hover{
+    color: rgb(0, 123, 255);
+}
+#sajatAdatEmail,
+#sajatAdatNev{
+display: flex;
+justify-content: space-around;
+align-items: center;
+flex-direction: row;
+column-gap: 1rem;
+}
 @media screen and (max-width: 768px) {
     #aruTablazat{
     overflow-x: auto;
@@ -136,5 +292,17 @@ table tr:hover{
     #lapozo{
         flex-direction: column;
         row-gap: 1rem;
+    }
+    #iranyitoszam,#varos,#utca,#hazszam,#emelet,#ajto{
+        width: 11rem;
+    }
+    #sajatAdatEmail,
+    #sajatAdatNev{
+        flex-direction: column;
+    padding: 0.5rem;
+
+    }
+    #sajatAdatok{
+    font-size: 1rem;
     }
 }

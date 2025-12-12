@@ -195,12 +195,13 @@ table tr:hover{
     box-shadow: 0 10px 20px rgba(0,0,0,10);
     transition: 0.25s;
     row-gap: 1rem;
-    font-size: 1.2rem;
+    font-size: 1.3rem;
     width: 100%;
     margin-bottom: 1rem;
     padding-top: 1.5rem;
 }
 #FizetettForm{
+    font-size: 1.2rem;
     row-gap: 1rem;
 }
 #aruForm{
@@ -270,6 +271,7 @@ padding: 10px 14px;
     box-shadow: 0 10px 21px rgba(32, 99, 176, 10);
 
 }
+#fizetettAllapotInput,
 #idOldalValaszto,
 #kepOldalValaszto,
 #oldalValaszto{
@@ -285,6 +287,7 @@ padding: 10px 14px;
     outline: none;
     margin-bottom: 1rem;
 }
+#fizetettAllapotInput:hover,
 #idOldalValaszto:hover,
 #kepOldalValaszto:hover,
 #oldalValaszto:hover{
@@ -352,6 +355,27 @@ padding: 10px 14px;
     text-decoration: none;
 }
 #liTagVissza:hover{
+    color: rgb(0, 123, 255);
+}
+#aTagVisszaRendelesnel{
+  background: rgb(0, 123, 255);
+  color: white;
+  padding: 12px 24px;
+
+  font-size: 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+#aTagVisszaRendelesnel:hover{
+     color:black;
+    box-shadow: 0 6px 10px rgb(23, 148, 125);
+}
+#liTagVisszaRendelesnel{
+    list-style-type: none;
+    text-decoration: none;
+}
+#liTagVisszaRendelesnel:hover{
     color: rgb(0, 123, 255);
 }
 #nev{
@@ -464,6 +488,136 @@ padding: 10px 14px;
     color:black;
     box-shadow: 0 6px 10px rgb(23, 148, 125);
 }
+#aruBekuldGomb{
+    background: rgb(0, 123, 255);
+    color: white;
+    padding: 12px 24px;
+
+    font-size: 1rem;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.2s;
+    margin-bottom: 1rem;
+}
+#aruBekuldGomb:hover{
+    color:black;
+    box-shadow: 0 6px 10px rgb(23, 148, 125);
+}
+
+#fizetettdatumInput{
+padding: 10px 14px;
+  width: 12rem;
+  font-size: 1rem;
+  border: 2px solid transparent;
+  border-radius: 8px;
+  background: #f0f2f5;
+  outline: none;
+  transition: 0.3s ease;
+}
+#fizetettdatumInput:focus{
+    border-color: rgb(0, 123, 255);
+    background: white;
+    box-shadow: 0 10px 21px rgba(32, 99, 176, 10);
+
+}
+
+#fizetettNevInput{
+padding: 10px 14px;
+  width: 12rem;
+  font-size: 1rem;
+  border: 2px solid transparent;
+  border-radius: 8px;
+  background: #f0f2f5;
+  outline: none;
+  transition: 0.3s ease;
+}
+#fizetettNevInput:focus{
+    border-color: rgb(0, 123, 255);
+    background: white;
+    box-shadow: 0 10px 21px rgba(32, 99, 176, 10);
+
+}
+
+#fizetettArInput{
+padding: 10px 14px;
+  width: 12rem;
+  font-size: 1rem;
+  border: 2px solid transparent;
+  border-radius: 8px;
+  background: #f0f2f5;
+  outline: none;
+  transition: 0.3s ease;
+}
+#fizetettArInput:focus{
+    border-color: rgb(0, 123, 255);
+    background: white;
+    box-shadow: 0 10px 21px rgba(32, 99, 176, 10);
+
+}
+
+#fizetettMennyisegInput{
+padding: 10px 14px;
+  width: 12rem;
+  font-size: 1rem;
+  border: 2px solid transparent;
+  border-radius: 8px;
+  background: #f0f2f5;
+  outline: none;
+  transition: 0.3s ease;
+}
+#fizetettMennyisegInput:focus{
+    border-color: rgb(0, 123, 255);
+    background: white;
+    box-shadow: 0 10px 21px rgba(32, 99, 176, 10);
+
+}
+
+
+#fizetettArMennyisegOsszesenInput{
+padding: 10px 14px;
+  width: 12rem;
+  font-size: 1rem;
+  border: 2px solid transparent;
+  border-radius: 8px;
+  background: #f0f2f5;
+  outline: none;
+  transition: 0.3s ease;
+}
+#fizetettArMennyisegOsszesenInput:focus{
+    border-color: rgb(0, 123, 255);
+    background: white;
+    box-shadow: 0 10px 21px rgba(32, 99, 176, 10);
+
+}
+
+#fizetettosszesInput{
+padding: 10px 14px;
+  width: 12rem;
+  font-size: 1rem;
+  border: 2px solid transparent;
+  border-radius: 8px;
+  background: #f0f2f5;
+  outline: none;
+  transition: 0.3s ease;
+}
+#fizetettosszesInput:focus{
+    border-color: rgb(0, 123, 255);
+    background: white;
+    box-shadow: 0 10px 21px rgba(32, 99, 176, 10);
+
+}
+
+#fizetettTeljesitesDatumInput{
+  width: 2rem;
+  height: 2rem;
+}
+#fizetettTeljesitesDatumInput:focus{
+    border-color: rgb(0, 123, 255);
+    background: white;
+    box-shadow: 0 10px 21px rgba(32, 99, 176, 10);
+
+}
+
 @media screen and (max-width: 768px) {
     #kepSzuroTarolo{
         row-gap: 1rem;

@@ -6,9 +6,11 @@ window.onload=function() {
             EllenorizElsoResz(false,element,false,/^(0|[1-9][0-9]{0,7})$/,1,8,false);
         });
     });
-    const kosarGomb=document.getElementById("mennyisegValtoztatForm");
+    const kosarGomb=document.querySelectorAll(".mennyisegValtoztatForm");
     if (kosarGomb) {
-        kosarGomb.addEventListener('submit',MennyisegValtoztat);
+        kosarGomb.forEach(element => {
+        element.addEventListener('submit',MennyisegValtoztat);
+        });
     }
     const fizetesMegnyom=document.getElementById("fizetesMegnyom");
     if (fizetesMegnyom) {
