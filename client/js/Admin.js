@@ -698,6 +698,10 @@ function FizetesekKilistaz(data) {
         thHNev.textContent="Név";
         thR.appendChild(thHNev);
 
+        const thHRendeloNev=document.createElement('th');
+        thHRendeloNev.textContent="Rendelő Név";
+        thR.appendChild(thHRendeloNev);
+
         const thHIranyitoszam=document.createElement('th');
         thHIranyitoszam.textContent="Irányítószám";
         thR.appendChild(thHIranyitoszam);
@@ -796,6 +800,10 @@ function FizetesekKilistaz(data) {
 
             tbDNev.appendChild(aTag);
 
+            const tbDRendeloNev=document.createElement('td');
+            tbDRendeloNev.classList.add('rendeloNev');
+            tbDRendeloNev.textContent=element.nev_szemely;
+
             const tbDAr=document.createElement('td');
             tbDAr.classList.add('ar');
             tbDAr.textContent=element.ar;
@@ -883,6 +891,7 @@ function FizetesekKilistaz(data) {
             tbRId.appendChild(tbDId);
             tbRId.appendChild(tbDDatum);
             tbRId.appendChild(tbDNev);
+            tbRId.appendChild(tbDRendeloNev);
             tbRId.appendChild(tbDIranyitoszam);
             tbRId.appendChild(tbDVaros);
             tbRId.appendChild(tbDUtca);

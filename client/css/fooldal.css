@@ -144,6 +144,9 @@ padding: 10px 14px;
 #lapozo>li>a{
     font-size: 4rem;
 }
+#lapozo{
+    margin-bottom: 1.2rem;
+}
 #elozo{
     visibility: hidden;
 }

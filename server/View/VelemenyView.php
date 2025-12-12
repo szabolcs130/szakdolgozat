@@ -9,12 +9,12 @@ class VelemenyView{
         echo "<div id='sajatVelemeny'>";
         echo '</div>';
         echo "<div id='masVelemeny'>";
-        echo '<p>Masok velemenye:</p>';
+        echo '<p>Mások vélemenye:</p>';
         echo '</div>';
         echo '<div id="lapozo">';
-        echo '<li id="elozo">Elozo</li>';
+        echo '<li id="elozo">Előző</li>';
         echo '<select id="oldalValaszto"></select>';
-        echo '<li id="kovetkezo">Kovetkezo</li>';
+        echo '<li id="kovetkezo">Következő</li>';
         echo '</div>';
         echo '</div>';
     }

@@ -22,7 +22,7 @@ class VelemenyModel{
     public static function lekerdezVelemenyByAruId($aru){
         try {
             $db = self::Connection();
-            $sql = "SELECT id_szemely,id_velemeny,nev_szemely,velemenyszoveg FROM velemenyek LEFT JOIN szemely ON velemenyek.idf_szemely=id_szemely WHERE idf_aru=:idfAru";
+            $sql = "SELECT id_szemely,id_velemeny,nev_szemely,velemenyszoveg, datum_velemeny FROM velemenyek LEFT JOIN szemely ON velemenyek.idf_szemely=id_szemely WHERE idf_aru=:idfAru";
             $sth = $db->prepare($sql);
             $sth->execute(array(':idfAru'=> $aru));
             $eredmeny = $sth->fetchAll(\PDO::FETCH_ASSOC);
@@ -34,7 +34,7 @@ class VelemenyModel{
     public static function lekerdezVelemenyByAruIdSajat($aru,$userId){
         try {
             $db = self::Connection();
-            $sql = "SELECT id_szemely,id_velemeny,nev_szemely,velemenyszoveg FROM velemenyek LEFT JOIN szemely ON velemenyek.idf_szemely=id_szemely WHERE idf_aru=:idfAru AND idf_szemely=:idf_szemely LIMIT 1";
+            $sql = "SELECT id_szemely,id_velemeny,nev_szemely,velemenyszoveg, datum_velemeny FROM velemenyek LEFT JOIN szemely ON velemenyek.idf_szemely=id_szemely WHERE idf_aru=:idfAru AND idf_szemely=:idf_szemely LIMIT 1";
             $sth = $db->prepare($sql);
             $sth->execute(array(':idfAru'=> $aru,':idf_szemely'=>$userId));
             $eredmeny = $sth->fetchAll(\PDO::FETCH_ASSOC);
@@ -46,7 +46,7 @@ class VelemenyModel{
     public static function lekerdezVelemenyByAruIdNemSajat($aru,$userId,$oldalSzam=null){
         try {
             $db = self::Connection();
-            $sql = "SELECT id_szemely,id_velemeny,nev_szemely,velemenyszoveg FROM velemenyek LEFT JOIN szemely ON velemenyek.idf_szemely=id_szemely WHERE idf_aru=:idfAru";
+            $sql = "SELECT id_szemely,id_velemeny,nev_szemely,velemenyszoveg, datum_velemeny FROM velemenyek LEFT JOIN szemely ON velemenyek.idf_szemely=id_szemely WHERE idf_aru=:idfAru";
             if ($userId!=null) {
                 $sql.=" AND idf_szemely <> :idf_szemely";
             }
