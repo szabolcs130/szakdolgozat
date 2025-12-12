@@ -25,7 +25,9 @@ window.addEventListener("load",async function() {
                 kosarInput.addEventListener("input",()=>{
                     EllenorizElsoResz(false,kosarInput,false,/^[1-9][0-9]{0,7}$/,1,8,false);
                 });
+                htmlEllenorrzo(kosarInput,/^[1-9][0-9]{0,7}$/,1,8,);
             }  
+
         }
     }
 });

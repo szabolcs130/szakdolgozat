@@ -2,22 +2,30 @@ html{
     font-size: 16px;
  }
 #aruk{
-       width: 100%;
+    width: 100%;
        display: flex;
        justify-content: center;
        align-items: center;
-       border: 1px solid red;
+    font-size: 1.2rem;
+    padding: 0.5rem;
 }
 #aru{
-    width: calc(100%);
-    min-width: 150px;
-    max-width: 500px;
-    border: 1px solid black;
-    word-break: break-word;
-    min-height: 40vh;
-    height: auto;
- }
- #aru,
+    background: white;
+    border-radius: 16px;
+    box-shadow: 0 10px 20px rgba(0,0,0,10);
+    transition: 0.25s;
+    row-gap: 1rem;
+    font-size: 1.2rem;
+    margin-top: 1rem;
+    margin-bottom: 1.5rem;
+    width: 100%;
+    padding: 0rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    flex-direction: row;
+}
+#termekAdatok,
  #aru_kep,
  #termekForm{
     display: flex;
@@ -25,6 +33,28 @@ html{
     justify-content: center;
     flex-direction: column;
  }
+ #aru_kep{
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+ }
+#termekForm{
+    width: 100%;
+}
+#aru_leiras{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+    width: 90%;
+}
+ #aru_nev{
+    font-size: 1.5rem;
+
+ }
+
+#termekAdatok{
+    row-gap: 1rem;
+}
 .aru_nev{
     font-size: 1.2rem;
 }
@@ -32,12 +62,56 @@ html{
     width: calc(80%);
     min-width: 150px;
     max-width: 500px;
-    margin-left: auto;
-    margin-right: auto;
+    border-radius: 16px;
 }
 #kosarDiv{
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: space-around;
     flex-direction: row;
+    column-gap: 0.5rem;
+}
+#me{
+padding: 10px 14px;
+  width: 12rem;
+  font-size: 1rem;
+  border: 2px solid transparent;
+  border-radius: 8px;
+  background: #f0f2f5;
+  outline: none;
+  transition: 0.3s ease;
+}
+#me:focus{
+    border-color: rgb(0, 123, 255);
+    background: white;
+    box-shadow: 0 10px 21px rgba(32, 99, 176, 10);
+
+}
+#elkuldGomb{
+    background: rgb(0, 123, 255);
+    color: white;
+    padding: 12px 24px;
+
+    font-size: 1rem;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.2s;
+    margin-bottom: 1rem;
+}
+#elkuldGomb:hover{
+    color:black;
+    box-shadow: 0 6px 10px rgb(23, 148, 125);
+}
+@media screen and (max-width: 768px) {
+    #aru{
+        flex-direction: column;
+        row-gap: 1rem;
+    }
+    #kosarDiv{
+    flex-direction: column;
+    row-gap: 1rem;
+    }
+    #me{
+        width: 11rem;
+    }
 }

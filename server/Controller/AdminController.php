@@ -129,13 +129,13 @@ class AdminController{
     }
     public static function RendelesSzerkeszt(){
         if (isset($_SESSION['userId']) && $_SESSION['rang']==3) {
-            if (isset($_POST['fizetettRendelesIdInput']) && isset($_POST['fizetettAllapotInput']) && isset($_POST['fizetettTeljesitesDatumInput'])) {
+            if (isset($_POST['fizetettRendelesIdInput']) && isset($_POST['fizetettAllapotInput'])) {
                 $id=ErtekEllenorzesModel::Szam($_POST['fizetettRendelesIdInput'],0,99999999);
                 if ($id===false) {
                     return 0;
                 }
                 $datumKonvertalva=null;
-                if ($_POST['fizetettTeljesitesDatumInput']=="on") {
+                if (isset($_POST['fizetettTeljesitesDatumInput'])=="on") {
                     $datum = new \DateTime('now', new \DateTimeZone('UTC'));
                     $datum->setTimezone(new \DateTimeZone('Europe/Budapest'));
                     $datumKonvertalva = $datum->format('Y-m-d H:i:s');

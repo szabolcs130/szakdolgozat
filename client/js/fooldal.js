@@ -43,13 +43,21 @@ async function Lapoz(data) {
             aru_mennyiseg.classList.add('aru_mennyiseg');
             aru_mennyiseg.textContent=element.mennyiseg ? "Raktáron: "+element.mennyiseg+"db" : "Elfogyott";
 
-            /*const aru_leiras=document.createElement('div');
+            const aru_leiras=document.createElement('div');
             aru_leiras.classList.add('aru_leiras');
-            aru_leiras.textContent=element.leiras;*/
+            //aru_leiras.textContent=element.leiras;
             
-            const liTag=document.createElement('li');
+            const aru_leirasP=document.createElement('div');
+            aru_leirasP.classList.add('aru_leirasP');
+            aru_leirasP.textContent=element.leiras;
 
+            aru_leiras.appendChild(aru_leirasP);
+
+
+            const liTag=document.createElement('li');
+            liTag.classList.add("MegnezGombLi");
             const aTag=document.createElement('a');
+            aTag.classList.add("MegnezGomb");
             aTag.href='?oldal=Termek/Main/'+element.id_aru;
             aTag.textContent="Megnéz";
 
@@ -58,7 +66,7 @@ async function Lapoz(data) {
             aru.appendChild(aru_nev);
             aru.appendChild(aru_kep);
             aru.appendChild(aru_ar);
-            //aru.appendChild(aru_leiras);
+            aru.appendChild(aru_leiras);
             aru.appendChild(aru_mennyiseg);
             aru.appendChild(liTag);
 

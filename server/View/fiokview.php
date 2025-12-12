@@ -6,10 +6,22 @@ class FiokView{
             echo '<h3>'.$_SESSION['uzenet'].'</h3>';
             unset($_SESSION['uzenet']);
         }
+        echo '<h1>Fiók</h1>';
         echo '<div id="fiokAdat">';
         foreach ($fiok as $f) {
-            echo $f["nev_szemely"]." ".$f["email"];
+            echo '<div id="sajatAdatok">';
+            echo '<h3>Saját adatok:</h3>';
+            echo '<div id="sajatAdatNev">';
+            echo '<p>Név:</p><p id="sajatAdatNevP">'.$f["nev_szemely"].'</p>';
+            echo '</div>';
+            echo '<div id="sajatAdatEmail">';
+            echo '<p>Email:</p><p id="sajatAdatEmailP">'.$f["email"].'</p>';
+            echo '</div>';
+            echo '</div>';
         }
+        echo '</div>';
+        echo '<div id="ShowSzallitasicimFormDiv">';
+        echo '<li id="ShowSzallitasicimFormLi"><a id="ShowSzallitasicimFormA" href="?oldal=Fiok/ShowSzallitasicimForm">Szállítási cím kezelő</a></li>';
         echo '</div>';
         echo '<div id="tablazatTarolo"></div>';
         echo '<div id="lapozo">';
@@ -17,14 +29,13 @@ class FiokView{
         echo '<select id="oldalValaszto"></select>';
         echo '<li id="kovetkezo">Következő</li>';
         echo '</div>';
-        echo '<li><a href="?oldal=Fiok/ShowSzallitasicimForm">Szállítási cím kezelő</a></li>';
         return 1;
     }
     public static function ShowSzallitasiCimTorles(){
-        echo '<li><a id="szallitasiCimTorolA" href="?oldal=Fiok/SzallitasicimTorles">Szállítási cím törlése</a></li>';
+        echo '<li id="szallitasiCimTorolLi"><a id="szallitasiCimTorolA" href="?oldal=Fiok/SzallitasicimTorles">Szállítási cím törlése</a></li>';
     }
     public static function ShowSzallitasiCimForm($szallitas,$metodus){
-        echo "<h4>Szállítási cím kezelő: </h4>";
+        echo "<h1>Szállítási cím kezelő: </h1>";
         if ($szallitas!=null) {
             foreach ($szallitas as $key => $value) {
             echo '<div id="szallitasicimFormTarolo">';

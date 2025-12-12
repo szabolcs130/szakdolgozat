@@ -82,6 +82,7 @@ export async function SzuroFelepit(param,maximumAr,callback) {
     nevErrorDiv.appendChild(errorP);
 
     const szuresBekuldGomb=document.createElement('button');
+    szuresBekuldGomb.id="szuresBekuldGomb";
     szuresBekuldGomb.type="submit";
     szuresBekuldGomb.textContent="Keres";
 

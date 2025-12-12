@@ -8,12 +8,13 @@ use Server\Request;
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Szakdolgozat</title>
 </head>
-<body style="background-color:gray;">
-    <!--<div id="eper">-->
+<body>
+    <div id="indexKontener">
     <?php
     Request::GetKeres();
     ?>
+    </div>
 </body>
 </html>

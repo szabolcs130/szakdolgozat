@@ -1,7 +1,4 @@
-#velemenyIrasaTarolo{
-    width: 100%;
-    border: 1px solid black;
-}
+#termekForm,
 #VelemenyEgy,
 #sajatVelemeny,
 #masVelemeny,
@@ -13,27 +10,18 @@
     align-items: center;
     flex-direction: column;
 }
-#VelemenyForm{
-    width: 100%;
-}
-#velemenyekTarolo{
-    width: 100%;
-    border: 1px solid black;
-}
-#masVelemeny{
-    width: 100%;
-}
-#sajatVelemeny{
-    width: 100%;
-}
+#termekForm,
+#velemenyIrasaTarolo,
+#VelemenyForm,
+#velemenyekTarolo,
+#masVelemeny,
+#sajatVelemeny,
 #VelemenyEgy{
     width: 100%;
-    border-bottom: 1px solid black;
 }
 #velemenyForm,
-.velemenyegy,
-#VelemenyEgyFejlec,
-#VelemenyEgyTorzs{
+.velemenyegy
+{
     width: 100%;
     display: flex;
     justify-content: left;
@@ -41,9 +29,21 @@
     flex-direction: row;
 }
 #velemenyInput{
-    display: flex;
+  display: flex;
     width: 70vw;
     height: 20vh;
+  font-size: 1rem;
+  border: 2px solid transparent;
+  border-radius: 8px;
+  background: #f0f2f5;
+  outline: none;
+  transition: 0.3s ease;
+}
+#velemenyInput:focus{
+    border-color: rgb(0, 123, 255);
+    background: white;
+    box-shadow: 0 10px 21px rgba(32, 99, 176, 10);
+
 }
 #lapozo{
     width: 100%;
@@ -58,9 +58,116 @@
 #elozo{
     visibility: hidden;
 }
+#sajatVelemeny,
 .ErrorDiv{
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
+}
+#VelemenyEgy{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+     height: auto;
+    background: white;
+    border-radius: 16px;
+    box-shadow: 0 10px 20px rgba(0,0,0,10);
+    transition: 0.25s;
+    row-gap: 1rem;
+    font-size: 1.2rem;
+    margin-top: 1rem;
+    margin-bottom: 1.5rem;
+    width: 100%;
+}
+#VelemenyEgySzoveg{
+    margin-bottom: 1rem;
+}
+#VelemenyEgyFejlec{
+    width: 90%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center; 
+    padding: 1rem;
+    background-color: rgba(121, 158, 203, 0.749);
+    border-radius: 16px;
+    padding: 0.5rem;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    margin-top: -1rem;
+
+}
+#VelemenyEgyTorzs{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 90%;
+}
+#velemenyTorlesBekuldGomb,
+#velemenyBekuld{
+    background: rgb(0, 123, 255);
+    color: white;
+    padding: 12px 24px;
+    font-size: 1rem;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+#velemenyTorlesBekuldGomb{
+    margin-bottom: 1rem;
+}
+#lapozo{
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;   
+}
+#lapozo>li{
+    list-style: none;
+    cursor: pointer;
+    background: rgb(0, 123, 255);
+    color: white;
+    padding: 12px 24px;
+
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+#lapozo>li:hover{
+     color:black;
+    box-shadow: 0 6px 10px rgb(23, 148, 125);
+}
+#lapozo{
+    margin-top: 1.2rem;
+    margin-bottom: 1.2rem;
+}
+#elozo{
+    visibility: hidden;
+}
+#oldalValaszto{
+    appearance: none;           
+    width: 12rem;
+    font-size: 1.4rem;
+    padding: 10px 30px 10px 10px;
+    color: #444;
+    background-color: transparent;  
+    border: 1px solid #000;       
+    border-radius: 0;               
+    cursor: pointer;
+    outline: none;
+    margin-top: 0.5rem;
+}
+#oldalValaszto:hover{
+    color: black;
+    box-shadow: 0 6px 10px rgb(24, 168, 130);
+}
+@media screen and (max-width: 768px) {
+    #VelemenyEgyFejlec{
+        flex-direction: column;
+        row-gap: 1rem;
+    }
+    #lapozo{
+        flex-direction: column;
+        row-gap: 1rem;
+    }
 }

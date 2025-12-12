@@ -11,7 +11,7 @@ window.onload = async function() {
     
     const rendelesTablazatTarolo=document.getElementById("rendelesTablazatTarolo");
     if (rendelesTablazatTarolo) {
-        const h4KifizetettRendelesek=document.createElement('h4');
+        const h4KifizetettRendelesek=document.createElement('h1');
         h4KifizetettRendelesek.textContent="Kifizetett rendelések";
         const idSzuro=document.getElementById("idSzuro");
         const idLapozo=document.getElementById("idLapozo");
@@ -35,8 +35,10 @@ async function AruListaz(data) {
     
     if (data.length) {
         const liTagAruUj=document.createElement('li');
+        liTagAruUj.id='liTagAruUj';
 
         const aTagAruUj=document.createElement('a');
+        aTagAruUj.id='aTagAruUj';
         aTagAruUj.href='#';
         aTagAruUj.textContent="Új Áru";
         liTagAruUj.appendChild(aTagAruUj);
@@ -132,7 +134,7 @@ async function AruListaz(data) {
 
             aTagTorol.addEventListener("click",(e)=>{
                 e.preventDefault();
-                if (confirm("Biztosan torlod?")) {
+                if (confirm("Biztosan törlöd?")) {
                     window.location.href=aTagTorol.href;
                 }
             });
@@ -169,7 +171,7 @@ async function AruListaz(data) {
         tablazatTarolo.appendChild(aruTablazat);
         const adminTartalma=document.getElementById("adminTartalom");
         
-        adminTartalma.appendChild(tablazatTarolo);
+        //adminTartalma.appendChild(tablazatTarolo);
         document.querySelectorAll("#tablazat tbody tr td:last-child").forEach(adatsor=>{
         adatsor.addEventListener("click",()=>FormAru(adatsor.parentElement,"?oldal=Admin/AruSzerkeszt","Szerkeszt"));
     })
@@ -205,8 +207,9 @@ async function SzuroAlapok() {
         lapozo.appendChild(elozo);
         lapozo.appendChild(oldalValaszto);
         lapozo.appendChild(kovetkezo);
-        
+        const tablazatTarolo=document.getElementById("tablazatTarolo");
         adminTartalom.appendChild(szuroTarolo);
+        adminTartalom.appendChild(tablazatTarolo);
         adminTartalom.appendChild(lapozo);
     }
         const data1=await FetchMeghiv("?oldal=Apitermekek/lekerdezAruMaxAr");
@@ -288,9 +291,11 @@ async function FormAru(params,actionParam,gombFelirat) {
     lapozo.style.display="none";
 
     const liTagVissza=document.createElement('li');
+    liTagVissza.id="liTagVissza";
 
     const aTagVissza=document.createElement('a');
     aTagVissza.href='#';
+    aTagVissza.id="aTagVissza";
     aTagVissza.textContent="Vissza";
     liTagVissza.appendChild(aTagVissza);
 
@@ -313,6 +318,7 @@ async function FormAru(params,actionParam,gombFelirat) {
     const aruIdInput=document.createElement("input");
     aruIdInput.type="hidden";
     aruIdInput.name="idaru";
+    aruIdInput.id="idaru";
     aruIdInput.value=params?.cells?.[0]?.textContent || "1";
     //form.appendChild(aruIdInput);
 
@@ -333,9 +339,15 @@ async function FormAru(params,actionParam,gombFelirat) {
 //id v e g e
 
 //nev
+    const aruNevInputLabel=document.createElement("label");
+    aruNevInputLabel.textContent="Név:";
+    aruNevInputLabel.id="aruNevInputLabel";
+    aruNevInputLabel.setAttribute("for","nev");
+
     const aruNevInput=document.createElement("input");
     aruNevInput.type="text";
     aruNevInput.name="nev";
+    aruNevInput.id="nev";
     aruNevInput.value=params?.cells?.[1]?.textContent || "";
     aruNevInput.placeholder="Aru neve";
     //form.appendChild(aruNevInput);
@@ -351,15 +363,22 @@ async function FormAru(params,actionParam,gombFelirat) {
     const aruNevPattern=/^[A-Za-z0-9áéíóöőúüűÁÉÍÓÖŐÚÜŰ ]+$/;
     htmlEllenorrzo(aruNevInput,aruNevPattern,aruNevMin,aruNevMax,true);
 
+    ErrorDivAruNev.appendChild(aruNevInputLabel);
     ErrorDivAruNev.appendChild(aruNevInput);
     ErrorDivAruNev.appendChild(errorAruNev);
     form.appendChild(ErrorDivAruNev);
 //nev v e g e
 
 //ar
+    const aruArInputLabel=document.createElement("label");
+    aruArInputLabel.textContent="Ár:";
+    aruArInputLabel.id="aruArInputLabel";
+    aruArInputLabel.setAttribute("for","ar");
+
     const aruArInput=document.createElement("input");
     aruArInput.type="number";
     aruArInput.name="ar";
+    aruArInput.id="ar";
     aruArInput.value=params?.cells?.[2]?.textContent || "";
     aruArInput.placeholder="Aru ara";
     //form.appendChild(aruArInput);
@@ -375,14 +394,21 @@ async function FormAru(params,actionParam,gombFelirat) {
     const aruArPattern=/^[1-9][0-9]{0,7}$/;
     htmlEllenorrzo(aruArInput,aruArPattern,aruArMin,aruArMax,true);
 
+    ErrorDivAruAr.appendChild(aruArInputLabel);
     ErrorDivAruAr.appendChild(aruArInput);
     ErrorDivAruAr.appendChild(errorAruAr);
     form.appendChild(ErrorDivAruAr);
 //ar v e g e
 
 //leiras
+    const aruLeirasInputLabel=document.createElement("label");
+    aruLeirasInputLabel.textContent="Leírás:";
+    aruLeirasInputLabel.id="aruLeirasInputLabel";
+    aruLeirasInputLabel.setAttribute("for","leiras");
+
     const aruLeirasInput=document.createElement("textarea");
     aruLeirasInput.name="leiras";
+    aruLeirasInput.id="leiras";
     aruLeirasInput.value=params?.cells?.[3]?.textContent || "";
     aruLeirasInput.placeholder="Aru leiras";
 
@@ -397,15 +423,22 @@ async function FormAru(params,actionParam,gombFelirat) {
     const aruLeirasPattern=/^[A-Za-z0-9áéíóöőúüűÁÉÍÓÖŐÚÜŰ .,!?;:]+$/;
     htmlEllenorrzo(aruLeirasInput,aruLeirasPattern,aruLeirasMin,aruLeirasMax,true);
 
+    ErrorDivAruLeiras.appendChild(aruLeirasInputLabel);
     ErrorDivAruLeiras.appendChild(aruLeirasInput);
     ErrorDivAruLeiras.appendChild(errorAruLeiras);
     form.appendChild(ErrorDivAruLeiras);
 //leiras v e g e
 
 //mennyiseg
+    const aruMennyisegInputLabel=document.createElement("label");
+    aruMennyisegInputLabel.textContent="Mennyíség:";
+    aruMennyisegInputLabel.id="aruMennyisegInputLabel";
+    aruMennyisegInputLabel.setAttribute("for","mennyiseg");
+
     const aruMennyisegInput=document.createElement("input");
     aruMennyisegInput.type="number";
     aruMennyisegInput.name="mennyiseg";
+    aruMennyisegInput.id="mennyiseg";
     aruMennyisegInput.value=params?.cells?.[4]?.textContent || "";
     aruMennyisegInput.placeholder="Aru mennyisege";
 
@@ -420,12 +453,18 @@ async function FormAru(params,actionParam,gombFelirat) {
     const aruMennyisegPattern=/^[1-9][0-9]{0,7}$/;
     htmlEllenorrzo(aruMennyisegInput,aruMennyisegPattern,aruMennyisegMin,aruMennyisegMax,true);
 
+    ErrorDivAruMennyiseg.appendChild(aruMennyisegInputLabel);
     ErrorDivAruMennyiseg.appendChild(aruMennyisegInput);
     ErrorDivAruMennyiseg.appendChild(errorAruMennyiseg);
     form.appendChild(ErrorDivAruMennyiseg);
 //mennyiseg v e g e
 
 //kep
+    const aruKepInputLabel=document.createElement("label");
+    aruKepInputLabel.textContent="Mennyíség:";
+    aruKepInputLabel.id="aruKepInputLabel";
+    aruKepInputLabel.setAttribute("for","kep");
+
     const aruKepInput=document.createElement("input");
     aruKepInput.type="text";
     aruKepInput.name="kep";
@@ -444,12 +483,14 @@ async function FormAru(params,actionParam,gombFelirat) {
     const aruKepPattern=/^[A-Za-z0-9]+$/;
     htmlEllenorrzo(aruKepInput,aruKepPattern,aruKepMin,aruKepMax,true);
 
+    ErrorDivAruKep.appendChild(aruKepInputLabel);
     ErrorDivAruKep.appendChild(aruKepInput);
     ErrorDivAruKep.appendChild(errorAruKep);
     form.appendChild(ErrorDivAruKep);
 //kep v e g e
     const aruBekuldGomb=document.createElement('button');
     aruBekuldGomb.type="submit";
+    aruBekuldGomb.id="aruBekuldGomb";
     aruBekuldGomb.textContent=gombFelirat || "Oke" ;
     aruBekuldGomb.addEventListener("click",(e)=>{
         var aruIdReturn=EllenorizElsoResz(errorAruId,aruIdInput,false,aruIdPattern,aruIdMin,aruIdMax,true);
@@ -525,6 +566,7 @@ function FelepitKepSzuresNevAlapjan() {
 
     const szuresBekuldGomb=document.createElement('button');
     szuresBekuldGomb.type="submit";
+    szuresBekuldGomb.id="szuresKepBekuldGomb";
     szuresBekuldGomb.textContent="Keres";
     szuresBekuldGomb.addEventListener("click",async function(){
         var nevResult=EllenorizElsoResz(errorP,nevKeresInput,true,patternSzoveg,minSzoveg,maxSzoveg,true);
@@ -564,6 +606,7 @@ function KepekKilistaz(data) {
             kepTarolo.appendChild(kepek);
         });
     }
+    window.scrollTo(0,0);
     ElozoKovetkezoLapozoMegjelenitese("kepElozo","kepKovetkezo","kepOldalValaszto");
 }
 function FelepitLapozo(lapozoTarolo,oldalValaszto,elozo,kovetkezo){
@@ -608,9 +651,13 @@ async function KepLapozashozSelectEsemeny(oldalvalaszto) {
 async function FizetesLapozasFelepit() {
     LapozashozElozoKovekezoEsemenyek("idElozo","idKovetkezo","idOldalValaszto",);
     FizetesLapozashozSelectEsemeny("idOldalValaszto");
-    const response= await fetch("?oldal=Apiadmin/KepekOsszes");
-    const data = await response.json();
-    LapozashozLegorduloMenu(data,"idOldalValaszto");
+    const keresIdInput=document.getElementById("keresIdInput");
+    var keresIdInputKeresResult=EllenorizElsoResz(false,keresIdInput,true,/^[1-9][0-9]{0,7}$/,0,8,true);
+    if (keresIdInputKeresResult) {
+        const response= await fetch("?oldal=Apiadmin/lekerdezFizetesSzuresOsszes&fizetesId="+keresIdInput.value);
+        const data = await response.json();
+        LapozashozLegorduloMenu(data,"idOldalValaszto");
+    }
 }
 async function FizetesLapozashozSelectEsemeny(oldalvalaszto) {
     const oldalValaszto=document.getElementById(oldalvalaszto);
@@ -651,6 +698,7 @@ function FelepitFizetesSzuresIdAlapjan() {
     idErrorDiv.appendChild(errorP);
 
     const szuresBekuldGomb=document.createElement('button');
+    szuresBekuldGomb.id="IdFizetesszuresBekuldGomb";
     szuresBekuldGomb.type="submit";
     szuresBekuldGomb.textContent="Keres";
     szuresBekuldGomb.addEventListener("click",async function(){
@@ -686,13 +734,17 @@ function FizetesekKilistaz(data) {
         thHId.textContent="Id";
         thR.appendChild(thHId);
         
+        const thHRendelesId=document.createElement('th');
+        thHRendelesId.textContent="Rendelés id";
+        thR.appendChild(thHRendelesId);
+
         const thHDatum=document.createElement('th');
         thHDatum.textContent="Datum";
         thR.appendChild(thHDatum);
 
-        const thHNev=document.createElement('th');
-        thHNev.textContent="Név";
-        thR.appendChild(thHNev);
+        const thHRendeloNev=document.createElement('th');
+        thHRendeloNev.textContent="Rendelő Név";
+        thR.appendChild(thHRendeloNev);
 
         const thHIranyitoszam=document.createElement('th');
         thHIranyitoszam.textContent="Irányítószám";
@@ -718,6 +770,10 @@ function FizetesekKilistaz(data) {
         thHAjto.textContent="Ajtó";
         thR.appendChild(thHAjto);
 
+        const thHNev=document.createElement('th');
+        thHNev.textContent="Név";
+        thR.appendChild(thHNev);
+
         const thHAr=document.createElement('th');
         thHAr.textContent="Ár";
         thR.appendChild(thHAr);
@@ -742,10 +798,6 @@ function FizetesekKilistaz(data) {
         const thHTeljesitDatum=document.createElement('th');
         thHTeljesitDatum.textContent="Teljesítés dátuma";
         thR.appendChild(thHTeljesitDatum);
-
-        const thHRendelesId=document.createElement('th');
-        thHRendelesId.textContent="Rendelés id";
-        thR.appendChild(thHRendelesId);
 
         const thHSzerkeszt=document.createElement('th');
         thHSzerkeszt.textContent="Szerkeszt";
@@ -791,6 +843,10 @@ function FizetesekKilistaz(data) {
             tbDNev.classList.add('nev');
 
             tbDNev.appendChild(aTag);
+
+            const tbDRendeloNev=document.createElement('td');
+            tbDRendeloNev.classList.add('rendeloNev');
+            tbDRendeloNev.textContent=element.nev_szemely;
 
             const tbDAr=document.createElement('td');
             tbDAr.classList.add('ar');
@@ -877,21 +933,22 @@ function FizetesekKilistaz(data) {
             }
             
             tbRId.appendChild(tbDId);
+            tbRId.appendChild(tbDRendelesId);
             tbRId.appendChild(tbDDatum);
-            tbRId.appendChild(tbDNev);
+            tbRId.appendChild(tbDRendeloNev);
             tbRId.appendChild(tbDIranyitoszam);
             tbRId.appendChild(tbDVaros);
             tbRId.appendChild(tbDUtca);
             tbRId.appendChild(tbDHazszam);
             tbRId.appendChild(tbDEmelet);
             tbRId.appendChild(tbDAjto);
+            tbRId.appendChild(tbDNev);
             tbRId.appendChild(tbDAr);
             tbRId.appendChild(tbDMe);
             tbRId.appendChild(tbDEgyben);
             tbRId.appendChild(tbDOsszeg);
             tbRId.appendChild(tbDRendelesAllapot);
             tbRId.appendChild(tbDTeljesitDatum);
-            tbRId.appendChild(tbDRendelesId);
             tbRId.appendChild(tbDSzerkeszt);
             tbody.appendChild(tbRId);
         });
@@ -930,9 +987,10 @@ async function FormFizetettrendeles(params,actionParam,gombFelirat) {
     lapozo.style.display="none";
 
     const liTagVissza=document.createElement('li');
-
+    liTagVissza.id="liTagVisszaRendelesnel";
     const aTagVissza=document.createElement('a');
     aTagVissza.href='#';
+    aTagVissza.id='aTagVisszaRendelesnel';
     aTagVissza.textContent="Vissza";
     liTagVissza.appendChild(aTagVissza);
 
@@ -956,7 +1014,7 @@ async function FormFizetettrendeles(params,actionParam,gombFelirat) {
     fizetettRendelesIdInput.type="hidden";
     fizetettRendelesIdInput.name="fizetettRendelesIdInput";
     fizetettRendelesIdInput.id="fizetettRendelesIdInput";
-    fizetettRendelesIdInput.value=params?.cells?.[9]?.textContent;
+    fizetettRendelesIdInput.value=params?.cells?.[1]?.textContent;
     fizetettRendelesIdInput.setAttribute("readonly",true);
 
     const erroridfizetett=document.createElement("p");
@@ -976,108 +1034,147 @@ async function FormFizetettrendeles(params,actionParam,gombFelirat) {
 //id v e g e
 
 //datum
+    const fizetettdatumInputLabel=document.createElement("label");
+    fizetettdatumInputLabel.textContent="Dátum:";
+    fizetettdatumInputLabel.id="fizetettdatumInputLabel";
+    fizetettdatumInputLabel.setAttribute("for","fizetettdatumInput");
+
     const fizetettdatumInput=document.createElement("input");
     fizetettdatumInput.type="datetime";
     fizetettdatumInput.name="fizetettdatumInput";
     fizetettdatumInput.id="fizetettdatumInput";
-    fizetettdatumInput.value=params?.cells?.[1]?.textContent || "";
+    fizetettdatumInput.value=params?.cells?.[2]?.textContent || "";
     fizetettdatumInput.setAttribute("readonly",true);
+    form.appendChild(fizetettdatumInputLabel);
     form.appendChild(fizetettdatumInput);
 //datum v e g e
 
 //nev
+    const fizetettNevInputLabel=document.createElement("label");
+    fizetettNevInputLabel.textContent="Név:";
+    fizetettNevInputLabel.id="fizetettNevInputLabel";
+    fizetettNevInputLabel.setAttribute("for","fizetettNevInput");
+
     const fizetettNevInput=document.createElement("input");
     fizetettNevInput.type="text";
     fizetettNevInput.name="fizetettNevInput";
     fizetettNevInput.id="fizetettNevInput";
-    fizetettNevInput.value=params?.cells?.[2]?.textContent || "";
+    fizetettNevInput.value=params?.cells?.[10]?.textContent || "";
     fizetettNevInput.setAttribute("readonly",true);
 
+    form.appendChild(fizetettNevInputLabel);
     form.appendChild(fizetettNevInput);
 //nev v e g e
 
 //ar
+    const fizetettArInputLabel=document.createElement("label");
+    fizetettArInputLabel.textContent="Ár:";
+    fizetettArInputLabel.id="fizetettArInputLabel";
+    fizetettArInputLabel.setAttribute("for","fizetettArInput");
+
     const fizetettArInput=document.createElement("input");
     fizetettArInput.name="fizetettArInput";
     fizetettArInput.id="fizetettArInput";
     fizetettArInput.type="number";
-    fizetettArInput.value=params?.cells?.[3]?.textContent || "0";
+    fizetettArInput.value=params?.cells?.[11]?.textContent || "0";
     fizetettArInput.setAttribute("readonly",true);
 
+    form.appendChild(fizetettArInputLabel);
     form.appendChild(fizetettArInput);
 //ar v e g e
 
 //mennyiseg
+    const fizetettMennyisegInputLabel=document.createElement("label");
+    fizetettMennyisegInputLabel.textContent="Mennyiség:";
+    fizetettMennyisegInputLabel.id="fizetettMennyisegInputLabel";
+    fizetettMennyisegInputLabel.setAttribute("for","fizetettMennyisegInput");
+
     const fizetettMennyisegInput=document.createElement("input");
     fizetettMennyisegInput.type="number";
     fizetettMennyisegInput.name="fizetettMennyisegInput";
     fizetettMennyisegInput.id="fizetettMennyisegInput";
-    fizetettMennyisegInput.value=params?.cells?.[4]?.textContent || "";
+    fizetettMennyisegInput.value=params?.cells?.[12]?.textContent || "";
     fizetettMennyisegInput.setAttribute("readonly",true);
 
+    form.appendChild(fizetettMennyisegInputLabel);
     form.appendChild(fizetettMennyisegInput);
 //mennyiseg v e g e
 
 //ar*mennyiseg
+    const fizetettArMennyisegOsszesenInputLabel=document.createElement("label");
+    fizetettArMennyisegOsszesenInputLabel.textContent="(Ár*Mennyiség):";
+    fizetettArMennyisegOsszesenInputLabel.id="fizetettArMennyisegOsszesenInputLabel";
+    fizetettArMennyisegOsszesenInputLabel.setAttribute("for","fizetettArMennyisegOsszesenInput");
+
     const fizetettArMennyisegOsszesenInput=document.createElement("input");
     fizetettArMennyisegOsszesenInput.type="number";
     fizetettArMennyisegOsszesenInput.name="fizetettArMennyisegOsszesenInput";
     fizetettArMennyisegOsszesenInput.id="fizetettArMennyisegOsszesenInput";
-    fizetettArMennyisegOsszesenInput.value=params?.cells?.[5]?.textContent || "";
+    fizetettArMennyisegOsszesenInput.value=params?.cells?.[13]?.textContent || "";
     fizetettArMennyisegOsszesenInput.setAttribute("readonly",true);
 
+    form.appendChild(fizetettArMennyisegOsszesenInputLabel);
     form.appendChild(fizetettArMennyisegOsszesenInput);
 //ar*mennyiseg v e g e
 //osszes
+    const fizetettosszesInputLabel=document.createElement("label");
+    fizetettosszesInputLabel.textContent="Összes:";
+    fizetettosszesInputLabel.id="fizetettosszesInputLabel";
+    fizetettosszesInputLabel.setAttribute("for","fizetettosszesInput");
+
     const fizetettosszesInput=document.createElement("input");
     fizetettosszesInput.type="number";
     fizetettosszesInput.name="fizetettosszesInput";
     fizetettosszesInput.id="fizetettosszesInput";
-    fizetettosszesInput.value=params?.cells?.[6]?.textContent || "";
+    fizetettosszesInput.value=params?.cells?.[14]?.textContent || "";
     fizetettosszesInput.setAttribute("readonly",true);
 
 
+    form.appendChild(fizetettosszesInputLabel);
     form.appendChild(fizetettosszesInput);
 //osszes v e g e
 //allapot
+    const fizetettAllapotInputLabel=document.createElement("label");
+    fizetettAllapotInputLabel.textContent="Állapot:";
+    fizetettAllapotInputLabel.id="fizetettAllapotInputLabel";
+    fizetettAllapotInputLabel.setAttribute("for","fizetettAllapotInput");
+
     const fizetettAllapotInput=document.createElement("select");
     data.forEach(element => {
         const fizetettAllapotInputOption=document.createElement("option");
         fizetettAllapotInputOption.value=element;
         fizetettAllapotInputOption.textContent=element;
         fizetettAllapotInput.appendChild(fizetettAllapotInputOption);
-        if (element==params?.cells?.[7]?.textContent) {
+        if (element==params?.cells?.[15]?.textContent) {
             fizetettAllapotInputOption.selected=true;
         }
     });
     fizetettAllapotInput.name="fizetettAllapotInput";
     fizetettAllapotInput.id="fizetettAllapotInput";
 
+    form.appendChild(fizetettAllapotInputLabel);
     form.appendChild(fizetettAllapotInput);
 //allapot v e g e
 
 //datumteljesit
-
-    const fizetettTeljesitesDatumInputElso=document.createElement("input");
-    fizetettTeljesitesDatumInputElso.type="hidden";
-    fizetettTeljesitesDatumInputElso.name="fizetettTeljesitesDatumInput";
-    fizetettTeljesitesDatumInputElso.id="fizetettTeljesitesDatumInput";
-    fizetettTeljesitesDatumInputElso.value=0;
-    fizetettTeljesitesDatumInputElso.setAttribute("readonly",true);
-
-    form.appendChild(fizetettTeljesitesDatumInputElso);
+    const fizetettTeljesitesDatumInputLabel=document.createElement("label");
+    fizetettTeljesitesDatumInputLabel.textContent="Teljesítve:";
+    fizetettTeljesitesDatumInputLabel.id="fizetettTeljesitesDatumInputLabel";
+    fizetettTeljesitesDatumInputLabel.setAttribute("for","fizetettTeljesitesDatumInput");
 
     const fizetettTeljesitesDatumInput=document.createElement("input");
 
     fizetettTeljesitesDatumInput.type="checkbox";
     fizetettTeljesitesDatumInput.name="fizetettTeljesitesDatumInput";
     fizetettTeljesitesDatumInput.id="fizetettTeljesitesDatumInput";
-    fizetettTeljesitesDatumInput.checked = !!(params?.cells?.[8]?.textContent.trim());
+    fizetettTeljesitesDatumInput.checked = !!(params?.cells?.[16]?.textContent.trim());
 
+    form.appendChild(fizetettTeljesitesDatumInputLabel);
     form.appendChild(fizetettTeljesitesDatumInput);
 //datumteljesit1 v e g e
     const aruBekuldGomb=document.createElement('button');
     aruBekuldGomb.type="submit";
+    aruBekuldGomb.id="aruBekuldGomb";
     aruBekuldGomb.textContent=gombFelirat || "Oke" ;
     aruBekuldGomb.addEventListener("click",(e)=>{
     const fizetettRendelesIdInputReturn=EllenorizElsoResz(erroridfizetett,fizetettRendelesIdInput,false,aruIdPattern,aruIdMin,aruIdMax,true);

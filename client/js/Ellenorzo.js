@@ -1,7 +1,7 @@
 export function EllenorizElsoResz(error,adat,lehetUres,minta,min,max,visszateres) {
     if (lehetUres){
         if (adat.value.length==0) {
-            adat.style.background='#9f9';
+            adat.style.background='#55ff55';
             if (error!=false) {
                 error.style.display='none';
                 error.textContent="";   
@@ -26,7 +26,7 @@ export function szovegEllenorzo(error,adat,min,max,minta,lehetUres) {
     if (!minta.test(adat.value)){
         rendben=false;
         adat.focus();
-        adat.style.background='#f99';
+        adat.style.background='#ff5555ff';
         if (error!=false) {
             error.style.display="inline-block";
             error.textContent="Betartandó: "+minta.source.split("{")[0].replace(/[\^\+\$]/g,"");
@@ -36,7 +36,7 @@ export function szovegEllenorzo(error,adat,min,max,minta,lehetUres) {
     if (!adat.value.trim() || (adat.value.length>0 && adat.value[0]==" ")) {
         rendben=false;
         adat.focus();
-        adat.style.background='#f99';
+        adat.style.background='#ff5555ff';
         if (error!=false) {
             error.style.display="inline-block";
             error.textContent="Szóköz nem megengedett elöl!";
@@ -46,7 +46,7 @@ export function szovegEllenorzo(error,adat,min,max,minta,lehetUres) {
     if (adat.value.length==0 && lehetUres==false) {
         rendben=false;
         adat.focus();
-        adat.style.background='#f99';
+        adat.style.background='#ff5555ff';
         if (error!=false) {
             error.style.display="inline-block";
             error.textContent="Üres!";
@@ -57,7 +57,7 @@ export function szovegEllenorzo(error,adat,min,max,minta,lehetUres) {
         
         rendben=false;
         adat.focus();
-        adat.style.background='#f99';
+        adat.style.background='#ff5555ff';
         if (error!=false) {
             error.style.display="inline-block";
             error.textContent="Hossz nem megfelelő";
@@ -65,7 +65,7 @@ export function szovegEllenorzo(error,adat,min,max,minta,lehetUres) {
         return rendben;
     }
     if (rendben) {
-        adat.style.background='#9f9';
+        adat.style.background='#55ff55';
         if (error!=false) {
             error.textContent="";   
             error.style.display='none'; 

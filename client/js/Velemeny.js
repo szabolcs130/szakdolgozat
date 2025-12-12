@@ -1,6 +1,15 @@
 import { SzuroFelepit,FetchMeghiv,LapozashozSelectEsemeny,LapozashozElozoKovekezoEsemenyek,LapozashozLegorduloMenu,ElozoKovetkezoLapozoMegjelenitese } from './Lapozo.js';
 import { EllenorizElsoResz,htmlEllenorrzo} from './Ellenorzo.js';
 window.addEventListener("load",async function() {
+    const velemenyIrasaTarolo=document.getElementById("velemenyIrasaTarolo");
+    const velemenyekTarolo=document.getElementById("velemenyekTarolo");
+    const indexKontener=document.getElementById("indexKontener");
+    if (velemenyIrasaTarolo) {
+        indexKontener.appendChild(velemenyIrasaTarolo);
+    }
+    if (velemenyekTarolo) {
+        indexKontener.appendChild(velemenyekTarolo);
+    }
     const data2=await FetchMeghiv("?oldal=Apivelemeny/LekerdezVelemenyByAruIdSajat",null,true);
     if (SajatVelemeny(data2)) {
 
@@ -53,8 +62,8 @@ function SajatVelemeny(data) {
     const sajatVelemeny=document.getElementById("sajatVelemeny");
     if (sajatVelemeny){
         if (data.length) {
-            const sajatVelemenyH3=document.createElement("h3");
-            sajatVelemenyH3.textContent="Sajat Velemeny: ";
+            const sajatVelemenyH3=document.createElement("h1");
+            sajatVelemenyH3.textContent="Saját vélemeny: ";
 
             sajatVelemeny.appendChild(sajatVelemenyH3);
 
@@ -75,6 +84,10 @@ function SajatVelemeny(data) {
             VelemenyEgySzoveg.id="VelemenyEgySzoveg";
             VelemenyEgySzoveg.textContent=data[0].velemenyszoveg;
 
+            const VelemenyEgyDatum=document.createElement("div");
+            VelemenyEgyDatum.id="VelemenyEgyDatum";
+            VelemenyEgyDatum.textContent=data[0].datum_velemeny;
+
             const velemenyTorlesFormTarolo=document.createElement('div');
             velemenyTorlesFormTarolo.id="velemenyTorlesFormTarolo";
 
@@ -90,6 +103,7 @@ function SajatVelemeny(data) {
 
             const velemenyTorlesBekuldGomb=document.createElement('button');
             velemenyTorlesBekuldGomb.type="submit";
+            velemenyTorlesBekuldGomb.id="velemenyTorlesBekuldGomb";
             velemenyTorlesBekuldGomb.textContent="Torles" ;
             velemenyTorlesBekuldGomb.addEventListener("click",(e)=>{
                 if (!confirm("Biztosan Torlod?")) {
@@ -100,6 +114,7 @@ function SajatVelemeny(data) {
             velemenyTorlesFormTarolo.appendChild(velemenyTorlesform);
 
             VelemenyEgyFejlec.appendChild(VelemenyEgyFelhasznalo);
+            VelemenyEgyFejlec.appendChild(VelemenyEgyDatum);
             VelemenyEgyTorzs.appendChild(VelemenyEgySzoveg);
             VelemenyEgy.appendChild(VelemenyEgyFejlec);
             VelemenyEgy.appendChild(VelemenyEgyTorzs);
@@ -118,8 +133,8 @@ function LapozNemSajatVelemeny(data) {
     const masVelemeny=document.getElementById("masVelemeny");
     masVelemeny.innerHTML="";
     if (data.length) {
-        const masVelemenyH3=document.createElement("h3");
-        masVelemenyH3.textContent="Masok Velemenye: ";
+        const masVelemenyH3=document.createElement("h1");
+        masVelemenyH3.textContent="Mások vélemenye: ";
 
         masVelemeny.appendChild(masVelemenyH3);
         data.forEach(element => {
@@ -140,13 +155,19 @@ function LapozNemSajatVelemeny(data) {
             VelemenyEgySzoveg.id="VelemenyEgySzoveg";
             VelemenyEgySzoveg.textContent=element.velemenyszoveg;
 
+            const VelemenyEgyDatum=document.createElement("div");
+            VelemenyEgyDatum.id="VelemenyEgyDatum";
+            VelemenyEgyDatum.textContent=element.datum_velemeny;
+
             VelemenyEgyFejlec.appendChild(VelemenyEgyFelhasznalo);
+            VelemenyEgyFejlec.appendChild(VelemenyEgyDatum);
             VelemenyEgyTorzs.appendChild(VelemenyEgySzoveg);
             VelemenyEgy.appendChild(VelemenyEgyFejlec);
             VelemenyEgy.appendChild(VelemenyEgyTorzs);
             masVelemeny.appendChild(VelemenyEgy);
 
         });
+        window.scrollTo(0,0);
         ElozoKovetkezoLapozoMegjelenitese("elozo","kovetkezo","oldalValaszto");
     }else{
         const masVelemenyH3Nincs=document.createElement("h3");
